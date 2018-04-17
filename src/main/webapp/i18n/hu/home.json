@@ -1,7 +1,11 @@
 {
     "home": {
-        "title": "Üdvözöljük, Java Hipster!",
-        "subtitle": "Ez a nyitóképernyőd",
+        "title": "Reserved",
+        "title1": "Üzleti ebéd? Randevú?",
+        "title2": "Baráti összejövetel? Családi vacsora?",
+        "title3": "Hol ennétek?",
+        "search": "Keresés",
+        "searchph":"pl. város, étterem",
         "logged": {
             "message": "Ön \"{{username}}\"-ként lépett be."
         },
