@@ -1,0 +1,37 @@
+
+{
+    "reservedApp": {
+        "restaurant" : {
+            "home": {
+                "title": "Restaurants",
+                "createLabel": "Egy új Restaurant létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Restaurantt",
+                "search": "Restaurant keresése"
+            },
+            "created": "Egy új Restaurant lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Restaurant módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Restaurant törölve lett {{ param }} azonosítóval",
+            "delete": {
+                "question": "Biztos benne, hogy törölni szeretné az Restaurantt {{ id }} azonosítóval?"
+            },
+            "detail": {
+                "title": "Restaurant"
+            },
+            "name": "Name",
+            "created": "Created",
+            "streetAddress": "Street Address",
+            "postalCode": "Postal Code",
+            "info": "Info",
+            "email": "Email",
+            "phone": "Phone",
+            "website": "Website",
+            "facebook": "Facebook",
+            "googlePlaceId": "Google Place Id",
+            "city": "City",
+            "kitchen": "Kitchen",
+            "food": "Food",
+            "picture": "Picture",
+            "user": "User"
+        }
+    }
+}

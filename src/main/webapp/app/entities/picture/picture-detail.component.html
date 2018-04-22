@@ -1,0 +1,39 @@
+
+<div *ngIf="picture">
+    <h2><span jhiTranslate="reservedApp.picture.detail.title">Picture</span> {{picture.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="reservedApp.picture.title">Title</span></dt>
+        <dd>
+            <span>{{picture.title}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.picture.url">Url</span></dt>
+        <dd>
+            <span>{{picture.url}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.picture.img">Img</span></dt>
+        <dd>
+            <div *ngIf="picture.img">
+                <a (click)="openFile(picture.imgContentType, picture.img)">
+                    <img [src]="'data:' + picture.imgContentType + ';base64,' + picture.img" style="max-width: 100%;" alt="picture image"/>
+                </a>
+                {{picture.imgContentType}}, {{byteSize(picture.img)}}
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'picture/'+ picture.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

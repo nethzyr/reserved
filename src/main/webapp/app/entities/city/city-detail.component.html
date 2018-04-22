@@ -1,0 +1,32 @@
+
+<div *ngIf="city">
+    <h2><span jhiTranslate="reservedApp.city.detail.title">City</span> {{city.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="reservedApp.city.name">Name</span></dt>
+        <dd>
+            <span>{{city.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.city.stateCounty">State County</span></dt>
+        <dd>
+            <div *ngIf="city.stateCounty">
+                <a [routerLink]="['/state-county', city.stateCounty?.id]">{{city.stateCounty?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'city/'+ city.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

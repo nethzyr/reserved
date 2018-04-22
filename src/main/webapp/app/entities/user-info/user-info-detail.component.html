@@ -1,0 +1,52 @@
+
+<div *ngIf="userInfo">
+    <h2><span jhiTranslate="reservedApp.userInfo.detail.title">User Info</span> {{userInfo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="reservedApp.userInfo.facebook">Facebook</span></dt>
+        <dd>
+            <span>{{userInfo.facebook}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.userInfo.phone">Phone</span></dt>
+        <dd>
+            <span>{{userInfo.phone}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.userInfo.picture">Picture</span></dt>
+        <dd>
+            <div *ngIf="userInfo.picture">
+                <a [routerLink]="['/picture', userInfo.picture?.id]">{{userInfo.picture?.url}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.userInfo.user">User</span></dt>
+        <dd>
+            {{userInfo.user?.login}}
+        </dd>
+        <dt><span jhiTranslate="reservedApp.userInfo.preferredCity">Preferred City</span></dt>
+        <dd>
+            <span *ngFor="let preferredCity of userInfo.preferredCities; let last = last">
+                <a [routerLink]="['/city', preferredCity?.id ]">{{preferredCity.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.userInfo.favoriteRestaurant">Favorite Restaurant</span></dt>
+        <dd>
+            <span *ngFor="let favoriteRestaurant of userInfo.favoriteRestaurants; let last = last">
+                <a [routerLink]="['/restaurant', favoriteRestaurant?.id ]">{{favoriteRestaurant.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'user-info/'+ userInfo.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

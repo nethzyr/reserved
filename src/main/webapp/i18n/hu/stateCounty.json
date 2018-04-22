@@ -1,0 +1,24 @@
+
+{
+    "reservedApp": {
+        "stateCounty" : {
+            "home": {
+                "title": "StateCounties",
+                "createLabel": "Egy új State County létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson State Countyt",
+                "search": "State County keresése"
+            },
+            "created": "Egy új State County lett létrehozva {{ param }} azonosítóval",
+            "updated": "A State County módosítva lett {{ param }} azonosítóval",
+            "deleted": "A State County törölve lett {{ param }} azonosítóval",
+            "delete": {
+                "question": "Biztos benne, hogy törölni szeretné az State Countyt {{ id }} azonosítóval?"
+            },
+            "detail": {
+                "title": "State County"
+            },
+            "name": "Name",
+            "country": "Country"
+        }
+    }
+}

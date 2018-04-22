@@ -1,0 +1,23 @@
+
+{
+    "reservedApp": {
+        "kitchen" : {
+            "home": {
+                "title": "Kitchens",
+                "createLabel": "Egy új Kitchen létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Kitchent",
+                "search": "Kitchen keresése"
+            },
+            "created": "Egy új Kitchen lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Kitchen módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Kitchen törölve lett {{ param }} azonosítóval",
+            "delete": {
+                "question": "Biztos benne, hogy törölni szeretné az Kitchent {{ id }} azonosítóval?"
+            },
+            "detail": {
+                "title": "Kitchen"
+            },
+            "type": "Type"
+        }
+    }
+}

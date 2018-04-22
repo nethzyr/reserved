@@ -1,0 +1,25 @@
+
+{
+    "reservedApp": {
+        "picture" : {
+            "home": {
+                "title": "Pictures",
+                "createLabel": "Egy új Picture létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Picturet",
+                "search": "Picture keresése"
+            },
+            "created": "Egy új Picture lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Picture módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Picture törölve lett {{ param }} azonosítóval",
+            "delete": {
+                "question": "Biztos benne, hogy törölni szeretné az Picturet {{ id }} azonosítóval?"
+            },
+            "detail": {
+                "title": "Picture"
+            },
+            "title": "Title",
+            "url": "Url",
+            "img": "Img"
+        }
+    }
+}

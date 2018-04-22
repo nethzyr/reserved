@@ -1,0 +1,27 @@
+
+{
+    "reservedApp": {
+        "reservation" : {
+            "home": {
+                "title": "Reservations",
+                "createLabel": "Egy új Reservation létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Reservationt",
+                "search": "Reservation keresése"
+            },
+            "created": "Egy új Reservation lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Reservation módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Reservation törölve lett {{ param }} azonosítóval",
+            "delete": {
+                "question": "Biztos benne, hogy törölni szeretné az Reservationt {{ id }} azonosítóval?"
+            },
+            "detail": {
+                "title": "Reservation"
+            },
+            "time": "Time",
+            "created": "Created",
+            "confirmed": "Confirmed",
+            "restaurant": "Restaurant",
+            "user": "User"
+        }
+    }
+}

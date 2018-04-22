@@ -1,0 +1,24 @@
+
+{
+    "reservedApp": {
+        "stateCounty" : {
+            "home": {
+                "title": "State Counties",
+                "createLabel": "Create a new State County",
+                "createOrEditLabel": "Create or edit a State County",
+                "search": "Search for State County"
+            },
+            "created": "A new State County is created with identifier {{ param }}",
+            "updated": "A State County is updated with identifier {{ param }}",
+            "deleted": "A State County is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete State County {{ id }}?"
+            },
+            "detail": {
+                "title": "State County"
+            },
+            "name": "Name",
+            "country": "Country"
+        }
+    }
+}

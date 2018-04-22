@@ -1,0 +1,92 @@
+
+<div *ngIf="restaurant">
+    <h2><span jhiTranslate="reservedApp.restaurant.detail.title">Restaurant</span> {{restaurant.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="reservedApp.restaurant.name">Name</span></dt>
+        <dd>
+            <span>{{restaurant.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.created">Created</span></dt>
+        <dd>
+            <span>{{restaurant.created | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.streetAddress">Street Address</span></dt>
+        <dd>
+            <span>{{restaurant.streetAddress}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.postalCode">Postal Code</span></dt>
+        <dd>
+            <span>{{restaurant.postalCode}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.info">Info</span></dt>
+        <dd>
+            <span>{{restaurant.info}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.email">Email</span></dt>
+        <dd>
+            <span>{{restaurant.email}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.phone">Phone</span></dt>
+        <dd>
+            <span>{{restaurant.phone}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.website">Website</span></dt>
+        <dd>
+            <span>{{restaurant.website}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.facebook">Facebook</span></dt>
+        <dd>
+            <span>{{restaurant.facebook}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.googlePlaceId">Google Place Id</span></dt>
+        <dd>
+            <span>{{restaurant.googlePlaceId}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.city">City</span></dt>
+        <dd>
+            <div *ngIf="restaurant.city">
+                <a [routerLink]="['/city', restaurant.city?.id]">{{restaurant.city?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.kitchen">Kitchen</span></dt>
+        <dd>
+            <span *ngFor="let kitchen of restaurant.kitchens; let last = last">
+                <a [routerLink]="['/kitchen', kitchen?.id ]">{{kitchen.type}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.food">Food</span></dt>
+        <dd>
+            <span *ngFor="let food of restaurant.foods; let last = last">
+                <a [routerLink]="['/food', food?.id ]">{{food.type}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.picture">Picture</span></dt>
+        <dd>
+            <span *ngFor="let picture of restaurant.pictures; let last = last">
+                <a [routerLink]="['/picture', picture?.id ]">{{picture.url}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.user">User</span></dt>
+        <dd>
+            <span *ngFor="let user of restaurant.users; let last = last">
+                {{user.login}}{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'restaurant/'+ restaurant.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

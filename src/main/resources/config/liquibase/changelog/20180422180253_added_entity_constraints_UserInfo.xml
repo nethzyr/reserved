@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity UserInfo.
+    -->
+    <changeSet id="20180422180253-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="picture_id"
+                                 baseTableName="user_info"
+                                 constraintName="fk_user_info_picture_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="picture"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_info"
+                                 constraintName="fk_user_info_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_infos_id"
+                                 baseTableName="user_info_preferred_city"
+                                 constraintName="fk_user_info_preferred_city_user_infos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_info"/>
+        <addForeignKeyConstraint baseColumnNames="preferred_cities_id"
+                                 baseTableName="user_info_preferred_city"
+                                 constraintName="fk_user_info_preferred_city_preferred_cities_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="city"/>
+        
+        <addForeignKeyConstraint baseColumnNames="user_infos_id"
+                                 baseTableName="user_info_favorite_restaurant"
+                                 constraintName="fk_user_info_favorite_restaurant_user_infos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_info"/>
+        <addForeignKeyConstraint baseColumnNames="favorite_restaurants_id"
+                                 baseTableName="user_info_favorite_restaurant"
+                                 constraintName="fk_user_info_favorite_restaurant_favorite_restaurants_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restaurant"/>
+        
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,44 @@
+
+<div *ngIf="reservation">
+    <h2><span jhiTranslate="reservedApp.reservation.detail.title">Reservation</span> {{reservation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="reservedApp.reservation.time">Time</span></dt>
+        <dd>
+            <span>{{reservation.time | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.reservation.created">Created</span></dt>
+        <dd>
+            <span>{{reservation.created | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.reservation.confirmed">Confirmed</span></dt>
+        <dd>
+            <span>{{reservation.confirmed}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.reservation.restaurant">Restaurant</span></dt>
+        <dd>
+            <div *ngIf="reservation.restaurant">
+                <a [routerLink]="['/restaurant', reservation.restaurant?.id]">{{reservation.restaurant?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.reservation.user">User</span></dt>
+        <dd>
+            {{reservation.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'reservation/'+ reservation.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

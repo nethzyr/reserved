@@ -1,0 +1,103 @@
+<div>
+    <h2>
+        <span jhiTranslate="reservedApp.restaurant.home.title">Restaurants</span>
+        <button class="btn btn-primary float-right jh-create-entity create-restaurant" [routerLink]="['/', { outlets: { popup: ['restaurant-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="reservedApp.restaurant.home.createLabel">
+            Create new Restaurant
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'reservedApp.restaurant.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="restaurants">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="reservedApp.restaurant.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="created"><span jhiTranslate="reservedApp.restaurant.created">Created</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="streetAddress"><span jhiTranslate="reservedApp.restaurant.streetAddress">Street Address</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="postalCode"><span jhiTranslate="reservedApp.restaurant.postalCode">Postal Code</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="info"><span jhiTranslate="reservedApp.restaurant.info">Info</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="email"><span jhiTranslate="reservedApp.restaurant.email">Email</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="phone"><span jhiTranslate="reservedApp.restaurant.phone">Phone</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="website"><span jhiTranslate="reservedApp.restaurant.website">Website</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="facebook"><span jhiTranslate="reservedApp.restaurant.facebook">Facebook</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="googlePlaceId"><span jhiTranslate="reservedApp.restaurant.googlePlaceId">Google Place Id</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="city.name"><span jhiTranslate="reservedApp.restaurant.city">City</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let restaurant of restaurants ;trackBy: trackId">
+                <td><a [routerLink]="['../restaurant', restaurant.id ]">{{restaurant.id}}</a></td>
+                <td>{{restaurant.name}}</td>
+                <td>{{restaurant.created | date:'medium'}}</td>
+                <td>{{restaurant.streetAddress}}</td>
+                <td>{{restaurant.postalCode}}</td>
+                <td>{{restaurant.info}}</td>
+                <td>{{restaurant.email}}</td>
+                <td>{{restaurant.phone}}</td>
+                <td>{{restaurant.website}}</td>
+                <td>{{restaurant.facebook}}</td>
+                <td>{{restaurant.googlePlaceId}}</td>
+                <td>
+                    <div *ngIf="restaurant.city">
+                        <a [routerLink]="['../city', restaurant.city?.id ]" >{{restaurant.city?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../restaurant', restaurant.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'restaurant/'+ restaurant.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'restaurant/'+ restaurant.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="restaurants && restaurants.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+
+{
+    "reservedApp": {
+        "restaurant" : {
+            "home": {
+                "title": "Restaurants",
+                "createLabel": "Create a new Restaurant",
+                "createOrEditLabel": "Create or edit a Restaurant",
+                "search": "Search for Restaurant"
+            },
+            "created": "A new Restaurant is created with identifier {{ param }}",
+            "updated": "A Restaurant is updated with identifier {{ param }}",
+            "deleted": "A Restaurant is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Restaurant {{ id }}?"
+            },
+            "detail": {
+                "title": "Restaurant"
+            },
+            "name": "Name",
+            "created": "Created",
+            "streetAddress": "Street Address",
+            "postalCode": "Postal Code",
+            "info": "Info",
+            "email": "Email",
+            "phone": "Phone",
+            "website": "Website",
+            "facebook": "Facebook",
+            "googlePlaceId": "Google Place Id",
+            "city": "City",
+            "kitchen": "Kitchen",
+            "food": "Food",
+            "picture": "Picture",
+            "user": "User"
+        }
+    }
+}

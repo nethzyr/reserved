@@ -1,0 +1,61 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myUserInfoLabel" jhiTranslate="reservedApp.userInfo.home.createOrEditLabel">Create or edit a User Info</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!userInfo.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="userInfo.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="reservedApp.userInfo.facebook" for="field_facebook">Facebook</label>
+            <input type="text" class="form-control" name="facebook" id="field_facebook"
+                [(ngModel)]="userInfo.facebook" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="reservedApp.userInfo.phone" for="field_phone">Phone</label>
+            <input type="text" class="form-control" name="phone" id="field_phone"
+                [(ngModel)]="userInfo.phone" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="reservedApp.userInfo.picture" for="field_picture">Picture</label>
+            <select class="form-control" id="field_picture" name="picture" [(ngModel)]="userInfo.picture">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="pictureOption.id === userInfo.picture?.id ? userInfo.picture : pictureOption" *ngFor="let pictureOption of pictures; trackBy: trackPictureById">{{pictureOption.url}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="reservedApp.userInfo.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="userInfo.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === userInfo.user?.id ? userInfo.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="reservedApp.userInfo.preferredCity" for="field_preferredCity">Preferred City</label>
+            <select class="form-control" id="field_preferredCity" multiple name="preferredCity" [(ngModel)]="userInfo.preferredCities">
+                <option [ngValue]="getSelected(userInfo.preferredCities, cityOption)" *ngFor="let cityOption of cities; trackBy: trackCityById">{{cityOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="reservedApp.userInfo.favoriteRestaurant" for="field_favoriteRestaurant">Favorite Restaurant</label>
+            <select class="form-control" id="field_favoriteRestaurant" multiple name="favoriteRestaurant" [(ngModel)]="userInfo.favoriteRestaurants">
+                <option [ngValue]="getSelected(userInfo.favoriteRestaurants, restaurantOption)" *ngFor="let restaurantOption of restaurants; trackBy: trackRestaurantById">{{restaurantOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

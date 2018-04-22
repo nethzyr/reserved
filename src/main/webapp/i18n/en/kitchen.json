@@ -1,0 +1,23 @@
+
+{
+    "reservedApp": {
+        "kitchen" : {
+            "home": {
+                "title": "Kitchens",
+                "createLabel": "Create a new Kitchen",
+                "createOrEditLabel": "Create or edit a Kitchen",
+                "search": "Search for Kitchen"
+            },
+            "created": "A new Kitchen is created with identifier {{ param }}",
+            "updated": "A Kitchen is updated with identifier {{ param }}",
+            "deleted": "A Kitchen is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Kitchen {{ id }}?"
+            },
+            "detail": {
+                "title": "Kitchen"
+            },
+            "type": "Type"
+        }
+    }
+}
