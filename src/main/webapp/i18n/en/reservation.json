@@ -18,7 +18,6 @@
                 "title": "Reservation"
             },
             "time": "Time",
-            "created": "Created",
             "confirmed": "Confirmed",
             "restaurant": "Restaurant",
             "user": "User"

@@ -32,8 +32,7 @@ public class UserInfo implements Serializable {
     @Column(name = "phone")
     private String phone;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Picture picture;
 
     @OneToOne

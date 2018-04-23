@@ -31,7 +31,6 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="reservedApp.restaurant.name">Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="created"><span jhiTranslate="reservedApp.restaurant.created">Created</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="streetAddress"><span jhiTranslate="reservedApp.restaurant.streetAddress">Street Address</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="postalCode"><span jhiTranslate="reservedApp.restaurant.postalCode">Postal Code</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="info"><span jhiTranslate="reservedApp.restaurant.info">Info</span> <span class="fa fa-sort"></span></th>
@@ -48,7 +47,6 @@
             <tr *ngFor="let restaurant of restaurants ;trackBy: trackId">
                 <td><a [routerLink]="['../restaurant', restaurant.id ]">{{restaurant.id}}</a></td>
                 <td>{{restaurant.name}}</td>
-                <td>{{restaurant.created | date:'medium'}}</td>
                 <td>{{restaurant.streetAddress}}</td>
                 <td>{{restaurant.postalCode}}</td>
                 <td>{{restaurant.info}}</td>

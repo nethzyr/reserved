@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ReservedSharedModule } from '../shared';
 
 import { HOME_ROUTE, HomeComponent } from './';
+import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
 
 @NgModule({
     imports: [
@@ -12,6 +13,7 @@ import { HOME_ROUTE, HomeComponent } from './';
     ],
     declarations: [
         HomeComponent,
+        RestaurantListComponent,
     ],
     entryComponents: [
     ],

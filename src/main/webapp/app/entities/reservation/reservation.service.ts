@@ -72,8 +72,6 @@ export class ReservationService {
         const copy: Reservation = Object.assign({}, reservation);
         copy.time = this.dateUtils
             .convertDateTimeFromServer(reservation.time);
-        copy.created = this.dateUtils
-            .convertDateTimeFromServer(reservation.created);
         return copy;
     }
 
@@ -84,8 +82,6 @@ export class ReservationService {
         const copy: Reservation = Object.assign({}, reservation);
 
         copy.time = this.dateUtils.toDate(reservation.time);
-
-        copy.created = this.dateUtils.toDate(reservation.created);
         return copy;
     }
 }

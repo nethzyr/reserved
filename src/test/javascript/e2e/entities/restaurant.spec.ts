@@ -35,8 +35,6 @@ describe('Restaurant e2e test', () => {
         restaurantComponentsPage.clickOnCreateButton();
         restaurantDialogPage.setNameInput('name');
         expect(restaurantDialogPage.getNameInput()).toMatch('name');
-        restaurantDialogPage.setCreatedInput(12310020012301);
-        expect(restaurantDialogPage.getCreatedInput()).toMatch('2001-12-31T02:30');
         restaurantDialogPage.setStreetAddressInput('streetAddress');
         expect(restaurantDialogPage.getStreetAddressInput()).toMatch('streetAddress');
         restaurantDialogPage.setPostalCodeInput('postalCode');
@@ -85,7 +83,6 @@ export class RestaurantDialogPage {
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
     nameInput = element(by.css('input#field_name'));
-    createdInput = element(by.css('input#field_created'));
     streetAddressInput = element(by.css('input#field_streetAddress'));
     postalCodeInput = element(by.css('input#field_postalCode'));
     infoInput = element(by.css('textarea#field_info'));
@@ -110,14 +107,6 @@ export class RestaurantDialogPage {
 
     getNameInput = function() {
         return this.nameInput.getAttribute('value');
-    };
-
-    setCreatedInput = function(created) {
-        this.createdInput.sendKeys(created);
-    };
-
-    getCreatedInput = function() {
-        return this.createdInput.getAttribute('value');
     };
 
     setStreetAddressInput = function(streetAddress) {

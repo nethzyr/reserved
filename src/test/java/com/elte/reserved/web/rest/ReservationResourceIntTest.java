@@ -46,9 +46,6 @@ public class ReservationResourceIntTest {
     private static final Instant DEFAULT_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Instant DEFAULT_CREATED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
     private static final Boolean DEFAULT_CONFIRMED = false;
     private static final Boolean UPDATED_CONFIRMED = true;
 
@@ -94,7 +91,6 @@ public class ReservationResourceIntTest {
     public static Reservation createEntity(EntityManager em) {
         Reservation reservation = new Reservation()
             .time(DEFAULT_TIME)
-            .created(DEFAULT_CREATED)
             .confirmed(DEFAULT_CONFIRMED);
         // Add required entity
         Restaurant restaurant = RestaurantResourceIntTest.createEntity(em);
@@ -131,7 +127,6 @@ public class ReservationResourceIntTest {
         assertThat(reservationList).hasSize(databaseSizeBeforeCreate + 1);
         Reservation testReservation = reservationList.get(reservationList.size() - 1);
         assertThat(testReservation.getTime()).isEqualTo(DEFAULT_TIME);
-        assertThat(testReservation.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testReservation.isConfirmed()).isEqualTo(DEFAULT_CONFIRMED);
 
         // Validate the Reservation in Elasticsearch
@@ -188,7 +183,6 @@ public class ReservationResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(reservation.getId().intValue())))
             .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
-            .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].confirmed").value(hasItem(DEFAULT_CONFIRMED.booleanValue())));
     }
 
@@ -204,7 +198,6 @@ public class ReservationResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(reservation.getId().intValue()))
             .andExpect(jsonPath("$.time").value(DEFAULT_TIME.toString()))
-            .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
             .andExpect(jsonPath("$.confirmed").value(DEFAULT_CONFIRMED.booleanValue()));
     }
 
@@ -230,7 +223,6 @@ public class ReservationResourceIntTest {
         em.detach(updatedReservation);
         updatedReservation
             .time(UPDATED_TIME)
-            .created(UPDATED_CREATED)
             .confirmed(UPDATED_CONFIRMED);
 
         restReservationMockMvc.perform(put("/api/reservations")
@@ -243,7 +235,6 @@ public class ReservationResourceIntTest {
         assertThat(reservationList).hasSize(databaseSizeBeforeUpdate);
         Reservation testReservation = reservationList.get(reservationList.size() - 1);
         assertThat(testReservation.getTime()).isEqualTo(UPDATED_TIME);
-        assertThat(testReservation.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testReservation.isConfirmed()).isEqualTo(UPDATED_CONFIRMED);
 
         // Validate the Reservation in Elasticsearch
@@ -304,7 +295,6 @@ public class ReservationResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(reservation.getId().intValue())))
             .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
-            .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].confirmed").value(hasItem(DEFAULT_CONFIRMED.booleanValue())));
     }
 

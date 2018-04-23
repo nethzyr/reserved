@@ -30,9 +30,6 @@ public class Reservation implements Serializable {
     @Column(name = "jhi_time", nullable = false)
     private Instant time;
 
-    @Column(name = "created")
-    private Instant created;
-
     @Column(name = "confirmed")
     private Boolean confirmed;
 
@@ -64,19 +61,6 @@ public class Reservation implements Serializable {
 
     public void setTime(Instant time) {
         this.time = time;
-    }
-
-    public Instant getCreated() {
-        return created;
-    }
-
-    public Reservation created(Instant created) {
-        this.created = created;
-        return this;
-    }
-
-    public void setCreated(Instant created) {
-        this.created = created;
     }
 
     public Boolean isConfirmed() {
@@ -144,7 +128,6 @@ public class Reservation implements Serializable {
         return "Reservation{" +
             "id=" + getId() +
             ", time='" + getTime() + "'" +
-            ", created='" + getCreated() + "'" +
             ", confirmed='" + isConfirmed() + "'" +
             "}";
     }

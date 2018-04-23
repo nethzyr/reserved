@@ -26,10 +26,6 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="created" type="timestamp">
-                <constraints nullable="true" />
-            </column>
-
             <column name="street_address" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -68,7 +64,6 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="restaurant" columnName="created" columnDataType="datetime"/>
         
         <createTable tableName="restaurant_kitchen">
             <column name="kitchens_id" type="bigint">

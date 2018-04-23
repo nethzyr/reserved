@@ -2,7 +2,6 @@ import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HttpResponse } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { Restaurant } from './restaurant.model';
 import { RestaurantService } from './restaurant.service';
 
@@ -11,7 +10,6 @@ export class RestaurantPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
-        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private restaurantService: RestaurantService
@@ -31,8 +29,6 @@ export class RestaurantPopupService {
                 this.restaurantService.find(id)
                     .subscribe((restaurantResponse: HttpResponse<Restaurant>) => {
                         const restaurant: Restaurant = restaurantResponse.body;
-                        restaurant.created = this.datePipe
-                            .transform(restaurant.created, 'yyyy-MM-ddTHH:mm:ss');
                         this.ngbModalRef = this.restaurantModalRef(component, restaurant);
                         resolve(this.ngbModalRef);
                     });

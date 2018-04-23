@@ -18,7 +18,6 @@
                 "title": "Restaurant"
             },
             "name": "Name",
-            "created": "Created",
             "streetAddress": "Street Address",
             "postalCode": "Postal Code",
             "info": "Info",

@@ -4,7 +4,6 @@ export class Restaurant implements BaseEntity {
     constructor(
         public id?: number,
         public name?: string,
-        public created?: any,
         public streetAddress?: string,
         public postalCode?: string,
         public info?: any,

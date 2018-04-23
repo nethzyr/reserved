@@ -3,8 +3,6 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from '../../app.constants';
 
-import { JhiDateUtils } from 'ng-jhipster';
-
 import { Restaurant } from './restaurant.model';
 import { createRequestOption } from '../../shared';
 
@@ -16,7 +14,7 @@ export class RestaurantService {
     private resourceUrl =  SERVER_API_URL + 'api/restaurants';
     private resourceSearchUrl = SERVER_API_URL + 'api/_search/restaurants';
 
-    constructor(private http: HttpClient, private dateUtils: JhiDateUtils) { }
+    constructor(private http: HttpClient) { }
 
     create(restaurant: Restaurant): Observable<EntityResponseType> {
         const copy = this.convert(restaurant);
@@ -70,8 +68,6 @@ export class RestaurantService {
      */
     private convertItemFromServer(restaurant: Restaurant): Restaurant {
         const copy: Restaurant = Object.assign({}, restaurant);
-        copy.created = this.dateUtils
-            .convertDateTimeFromServer(restaurant.created);
         return copy;
     }
 
@@ -80,8 +76,6 @@ export class RestaurantService {
      */
     private convert(restaurant: Restaurant): Restaurant {
         const copy: Restaurant = Object.assign({}, restaurant);
-
-        copy.created = this.dateUtils.toDate(restaurant.created);
         return copy;
     }
 }

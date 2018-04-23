@@ -25,7 +25,7 @@
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.userInfo.picture" for="field_picture">Picture</label>
-            <select class="form-control" id="field_picture" name="picture" [(ngModel)]="userInfo.picture">
+            <select class="form-control" id="field_picture" name="picture" [(ngModel)]="userInfo.picture" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="pictureOption.id === userInfo.picture?.id ? userInfo.picture : pictureOption" *ngFor="let pictureOption of pictures; trackBy: trackPictureById">{{pictureOption.url}}</option>
             </select>

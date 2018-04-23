@@ -25,8 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.elte.reserved.web.rest.TestUtil.createFormattingConversionService;
@@ -46,9 +44,6 @@ public class RestaurantResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
-
-    private static final Instant DEFAULT_CREATED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_STREET_ADDRESS = "AAAAAAAAAA";
     private static final String UPDATED_STREET_ADDRESS = "BBBBBBBBBB";
@@ -116,7 +111,6 @@ public class RestaurantResourceIntTest {
     public static Restaurant createEntity(EntityManager em) {
         Restaurant restaurant = new Restaurant()
             .name(DEFAULT_NAME)
-            .created(DEFAULT_CREATED)
             .streetAddress(DEFAULT_STREET_ADDRESS)
             .postalCode(DEFAULT_POSTAL_CODE)
             .info(DEFAULT_INFO)
@@ -160,7 +154,6 @@ public class RestaurantResourceIntTest {
         assertThat(restaurantList).hasSize(databaseSizeBeforeCreate + 1);
         Restaurant testRestaurant = restaurantList.get(restaurantList.size() - 1);
         assertThat(testRestaurant.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testRestaurant.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testRestaurant.getStreetAddress()).isEqualTo(DEFAULT_STREET_ADDRESS);
         assertThat(testRestaurant.getPostalCode()).isEqualTo(DEFAULT_POSTAL_CODE);
         assertThat(testRestaurant.getInfo()).isEqualTo(DEFAULT_INFO);
@@ -224,7 +217,6 @@ public class RestaurantResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(restaurant.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].streetAddress").value(hasItem(DEFAULT_STREET_ADDRESS.toString())))
             .andExpect(jsonPath("$.[*].postalCode").value(hasItem(DEFAULT_POSTAL_CODE.toString())))
             .andExpect(jsonPath("$.[*].info").value(hasItem(DEFAULT_INFO.toString())))
@@ -247,7 +239,6 @@ public class RestaurantResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(restaurant.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
             .andExpect(jsonPath("$.streetAddress").value(DEFAULT_STREET_ADDRESS.toString()))
             .andExpect(jsonPath("$.postalCode").value(DEFAULT_POSTAL_CODE.toString()))
             .andExpect(jsonPath("$.info").value(DEFAULT_INFO.toString()))
@@ -280,7 +271,6 @@ public class RestaurantResourceIntTest {
         em.detach(updatedRestaurant);
         updatedRestaurant
             .name(UPDATED_NAME)
-            .created(UPDATED_CREATED)
             .streetAddress(UPDATED_STREET_ADDRESS)
             .postalCode(UPDATED_POSTAL_CODE)
             .info(UPDATED_INFO)
@@ -300,7 +290,6 @@ public class RestaurantResourceIntTest {
         assertThat(restaurantList).hasSize(databaseSizeBeforeUpdate);
         Restaurant testRestaurant = restaurantList.get(restaurantList.size() - 1);
         assertThat(testRestaurant.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testRestaurant.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testRestaurant.getStreetAddress()).isEqualTo(UPDATED_STREET_ADDRESS);
         assertThat(testRestaurant.getPostalCode()).isEqualTo(UPDATED_POSTAL_CODE);
         assertThat(testRestaurant.getInfo()).isEqualTo(UPDATED_INFO);
@@ -368,7 +357,6 @@ public class RestaurantResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(restaurant.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].streetAddress").value(hasItem(DEFAULT_STREET_ADDRESS.toString())))
             .andExpect(jsonPath("$.[*].postalCode").value(hasItem(DEFAULT_POSTAL_CODE.toString())))
             .andExpect(jsonPath("$.[*].info").value(hasItem(DEFAULT_INFO.toString())))

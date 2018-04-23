@@ -51,10 +51,6 @@
             ]
         },
         {
-            "fieldName": "created",
-            "fieldType": "Instant"
-        },
-        {
             "fieldName": "streetAddress",
             "fieldType": "String"
         },
@@ -89,9 +85,9 @@
         }
     ],
     "changelogDate": "20180422180249",
-    "entityTableName": "restaurant",
     "dto": "no",
-    "pagination": "pagination",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "restaurant",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
 }

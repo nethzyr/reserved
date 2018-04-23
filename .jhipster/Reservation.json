@@ -25,18 +25,14 @@
             ]
         },
         {
-            "fieldName": "created",
-            "fieldType": "Instant"
-        },
-        {
             "fieldName": "confirmed",
             "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20180422180254",
-    "entityTableName": "reservation",
     "dto": "no",
-    "pagination": "infinite-scroll",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "reservation",
+    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll"
 }

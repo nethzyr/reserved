@@ -45,19 +45,8 @@ export class UserInfoDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.pictureService
-            .query({filter: 'userinfo-is-null'})
-            .subscribe((res: HttpResponse<Picture[]>) => {
-                if (!this.userInfo.picture || !this.userInfo.picture.id) {
-                    this.pictures = res.body;
-                } else {
-                    this.pictureService
-                        .find(this.userInfo.picture.id)
-                        .subscribe((subRes: HttpResponse<Picture>) => {
-                            this.pictures = [subRes.body].concat(res.body);
-                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
-                }
-            }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.pictureService.query()
+            .subscribe((res: HttpResponse<Picture[]>) => { this.pictures = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.userService.query()
             .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.cityService.query()

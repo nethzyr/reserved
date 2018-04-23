@@ -8,7 +8,6 @@ import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -31,9 +30,6 @@ public class Restaurant implements Serializable {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "created")
-    private Instant created;
 
     @Column(name = "street_address")
     private String streetAddress;
@@ -113,19 +109,6 @@ public class Restaurant implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Instant getCreated() {
-        return created;
-    }
-
-    public Restaurant created(Instant created) {
-        this.created = created;
-        return this;
-    }
-
-    public void setCreated(Instant created) {
-        this.created = created;
     }
 
     public String getStreetAddress() {
@@ -363,7 +346,6 @@ public class Restaurant implements Serializable {
         return "Restaurant{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", created='" + getCreated() + "'" +
             ", streetAddress='" + getStreetAddress() + "'" +
             ", postalCode='" + getPostalCode() + "'" +
             ", info='" + getInfo() + "'" +

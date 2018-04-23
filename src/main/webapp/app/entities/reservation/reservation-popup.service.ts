@@ -33,8 +33,6 @@ export class ReservationPopupService {
                         const reservation: Reservation = reservationResponse.body;
                         reservation.time = this.datePipe
                             .transform(reservation.time, 'yyyy-MM-ddTHH:mm:ss');
-                        reservation.created = this.datePipe
-                            .transform(reservation.created, 'yyyy-MM-ddTHH:mm:ss');
                         this.ngbModalRef = this.reservationModalRef(component, reservation);
                         resolve(this.ngbModalRef);
                     });

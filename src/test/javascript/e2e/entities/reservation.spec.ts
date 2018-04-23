@@ -35,8 +35,6 @@ describe('Reservation e2e test', () => {
         reservationComponentsPage.clickOnCreateButton();
         reservationDialogPage.setTimeInput(12310020012301);
         expect(reservationDialogPage.getTimeInput()).toMatch('2001-12-31T02:30');
-        reservationDialogPage.setCreatedInput(12310020012301);
-        expect(reservationDialogPage.getCreatedInput()).toMatch('2001-12-31T02:30');
         reservationDialogPage.getConfirmedInput().isSelected().then((selected) => {
             if (selected) {
                 reservationDialogPage.getConfirmedInput().click();
@@ -75,7 +73,6 @@ export class ReservationDialogPage {
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
     timeInput = element(by.css('input#field_time'));
-    createdInput = element(by.css('input#field_created'));
     confirmedInput = element(by.css('input#field_confirmed'));
     restaurantSelect = element(by.css('select#field_restaurant'));
     userSelect = element(by.css('select#field_user'));
@@ -90,14 +87,6 @@ export class ReservationDialogPage {
 
     getTimeInput = function() {
         return this.timeInput.getAttribute('value');
-    };
-
-    setCreatedInput = function(created) {
-        this.createdInput.sendKeys(created);
-    };
-
-    getCreatedInput = function() {
-        return this.createdInput.getAttribute('value');
     };
 
     getConfirmedInput = function() {
