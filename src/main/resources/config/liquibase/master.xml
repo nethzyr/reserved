@@ -21,4 +21,6 @@
     <include file="config/liquibase/changelog/20180422180253_added_entity_constraints_UserInfo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422180254_added_entity_constraints_Reservation.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <include file="config/liquibase/changelog/20180422205100_load_default_data.xml" relativeToChangelogFile="false"/>
+    <!-- remove previous line for empty tables on init -->
 </databaseChangeLog>
