@@ -11,10 +11,10 @@
                 <input type="text" class="form-control form-control-lg" placeholder="{{'home.searchph' | translate}}">
             </div>
             <div class="col">
-                <button class="btn btn-primary btn-lg" jhiTranslate="home.search">Keresés</button>
+                <button type="submit" class="btn btn-primary btn-lg" jhiTranslate="home.search">Keresés</button>
             </div>
         </div>
-        <jhi-restaurant-list></jhi-restaurant-list>
+
         <!-- <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span *ngIf="account" jhiTranslate="home.logged.message"
@@ -48,3 +48,5 @@
         </p> -->
     </div>
 </div>
+
+<jhi-restaurant-list></jhi-restaurant-list>

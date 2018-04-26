@@ -1,0 +1,7 @@
+<div class="row restaurant-list">
+    <div class="col-md-4">
+        <div *ngFor="let restaurant of restaurants; trackBy: trackId">
+            {{ restaurant.name }}
+        </div>
+    </div>
+</div>
