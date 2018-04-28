@@ -3,21 +3,21 @@
     "reservedApp": {
         "food" : {
             "home": {
-                "title": "Foods",
-                "createLabel": "Egy új Food létrehozása",
-                "createOrEditLabel": "Hozzon létre, vagy módosítson Foodt",
-                "search": "Food keresése"
+                "title": "Ételek",
+                "createLabel": "Egy új Étel létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Ételt",
+                "search": "Étel keresése"
             },
-            "created": "Egy új Food lett létrehozva {{ param }} azonosítóval",
-            "updated": "A Food módosítva lett {{ param }} azonosítóval",
-            "deleted": "A Food törölve lett {{ param }} azonosítóval",
+            "created": "Egy új Étel lett létrehozva {{ param }} azonosítóval",
+            "updated": "Az Étel módosítva lett {{ param }} azonosítóval",
+            "deleted": "Az Étel törölve lett {{ param }} azonosítóval",
             "delete": {
-                "question": "Biztos benne, hogy törölni szeretné az Foodt {{ id }} azonosítóval?"
+                "question": "Biztos benne, hogy törölni szeretné az Ételt {{ id }} azonosítóval?"
             },
             "detail": {
-                "title": "Food"
+                "title": "Étel"
             },
-            "type": "Type"
+            "type": "Étel"
         }
     }
 }

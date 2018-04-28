@@ -3,21 +3,21 @@
     "reservedApp": {
         "kitchen" : {
             "home": {
-                "title": "Kitchens",
-                "createLabel": "Egy új Kitchen létrehozása",
-                "createOrEditLabel": "Hozzon létre, vagy módosítson Kitchent",
-                "search": "Kitchen keresése"
+                "title": "Konyhák",
+                "createLabel": "Egy új Konyha létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Konyhát",
+                "search": "Konyha keresése"
             },
-            "created": "Egy új Kitchen lett létrehozva {{ param }} azonosítóval",
-            "updated": "A Kitchen módosítva lett {{ param }} azonosítóval",
-            "deleted": "A Kitchen törölve lett {{ param }} azonosítóval",
+            "created": "Egy új Konyha lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Konyha módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Konyha törölve lett {{ param }} azonosítóval",
             "delete": {
-                "question": "Biztos benne, hogy törölni szeretné az Kitchent {{ id }} azonosítóval?"
+                "question": "Biztos benne, hogy törölni szeretné a Konyhát {{ id }} azonosítóval?"
             },
             "detail": {
-                "title": "Kitchen"
+                "title": "Konyha"
             },
-            "type": "Type"
+            "type": "Konyha"
         }
     }
 }

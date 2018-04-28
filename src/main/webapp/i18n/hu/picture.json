@@ -3,23 +3,23 @@
     "reservedApp": {
         "picture" : {
             "home": {
-                "title": "Pictures",
-                "createLabel": "Egy új Picture létrehozása",
-                "createOrEditLabel": "Hozzon létre, vagy módosítson Picturet",
-                "search": "Picture keresése"
+                "title": "Képek",
+                "createLabel": "Egy új Kép létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Képet",
+                "search": "Kép keresése"
             },
-            "created": "Egy új Picture lett létrehozva {{ param }} azonosítóval",
-            "updated": "A Picture módosítva lett {{ param }} azonosítóval",
-            "deleted": "A Picture törölve lett {{ param }} azonosítóval",
+            "created": "Egy új Kép lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Kép módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Kép törölve lett {{ param }} azonosítóval",
             "delete": {
-                "question": "Biztos benne, hogy törölni szeretné az Picturet {{ id }} azonosítóval?"
+                "question": "Biztos benne, hogy törölni szeretné a Képet {{ id }} azonosítóval?"
             },
             "detail": {
-                "title": "Picture"
+                "title": "Kép"
             },
-            "title": "Title",
+            "title": "Cím",
             "url": "Url",
-            "img": "Img"
+            "img": "Kép"
         }
     }
 }

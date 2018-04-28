@@ -3,22 +3,22 @@
     "reservedApp": {
         "city" : {
             "home": {
-                "title": "Cities",
-                "createLabel": "Egy új City létrehozása",
-                "createOrEditLabel": "Hozzon létre, vagy módosítson Cityt",
-                "search": "City keresése"
+                "title": "Várorosok",
+                "createLabel": "Egy új Város létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson egy Várost",
+                "search": "Város keresése"
             },
-            "created": "Egy új City lett létrehozva {{ param }} azonosítóval",
-            "updated": "A City módosítva lett {{ param }} azonosítóval",
-            "deleted": "A City törölve lett {{ param }} azonosítóval",
+            "created": "Egy új Város lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Város módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Város törölve lett {{ param }} azonosítóval",
             "delete": {
-                "question": "Biztos benne, hogy törölni szeretné az Cityt {{ id }} azonosítóval?"
+                "question": "Biztos benne, hogy törölni szeretné a Város {{ id }} azonosítóval?"
             },
             "detail": {
-                "title": "City"
+                "title": "Város"
             },
-            "name": "Name",
-            "stateCounty": "State County"
+            "name": "Városnév",
+            "stateCounty": "Megye"
         }
     }
 }

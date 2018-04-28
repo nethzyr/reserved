@@ -3,7 +3,7 @@
     "reservedApp": {
         "userInfo" : {
             "home": {
-                "title": "UserInfos",
+                "title": "UserInfo",
                 "createLabel": "Egy új User Info létrehozása",
                 "createOrEditLabel": "Hozzon létre, vagy módosítson User Infot",
                 "search": "User Info keresése"

@@ -3,21 +3,21 @@
     "reservedApp": {
         "country" : {
             "home": {
-                "title": "Countries",
-                "createLabel": "Egy új Country létrehozása",
-                "createOrEditLabel": "Hozzon létre, vagy módosítson Countryt",
-                "search": "Country keresése"
+                "title": "Országok",
+                "createLabel": "Egy új Ország létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson egy Országot",
+                "search": "Ország keresése"
             },
-            "created": "Egy új Country lett létrehozva {{ param }} azonosítóval",
-            "updated": "A Country módosítva lett {{ param }} azonosítóval",
-            "deleted": "A Country törölve lett {{ param }} azonosítóval",
+            "created": "Egy új Ország lett létrehozva {{ param }} azonosítóval",
+            "updated": "Az Ország módosítva lett {{ param }} azonosítóval",
+            "deleted": "Az Ország törölve lett {{ param }} azonosítóval",
             "delete": {
-                "question": "Biztos benne, hogy törölni szeretné az Countryt {{ id }} azonosítóval?"
+                "question": "Biztos benne, hogy törölni szeretné az Országot {{ id }} azonosítóval?"
             },
             "detail": {
-                "title": "Country"
+                "title": "Ország"
             },
-            "name": "Name"
+            "name": "Országnév"
         }
     }
 }

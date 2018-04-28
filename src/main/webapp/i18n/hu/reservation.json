@@ -3,24 +3,24 @@
     "reservedApp": {
         "reservation" : {
             "home": {
-                "title": "Reservations",
-                "createLabel": "Egy új Reservation létrehozása",
-                "createOrEditLabel": "Hozzon létre, vagy módosítson Reservationt",
-                "search": "Reservation keresése"
+                "title": "Fogalások",
+                "createLabel": "Egy új Fogalás létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Fogalást",
+                "search": "Fogalás keresése"
             },
-            "created": "Egy új Reservation lett létrehozva {{ param }} azonosítóval",
-            "updated": "A Reservation módosítva lett {{ param }} azonosítóval",
-            "deleted": "A Reservation törölve lett {{ param }} azonosítóval",
+            "created": "Egy új Fogalás lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Fogalás módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Fogalás törölve lett {{ param }} azonosítóval",
             "delete": {
-                "question": "Biztos benne, hogy törölni szeretné az Reservationt {{ id }} azonosítóval?"
+                "question": "Biztos benne, hogy törölni szeretné az Fogalást {{ id }} azonosítóval?"
             },
             "detail": {
-                "title": "Reservation"
+                "title": "Fogalás"
             },
-            "time": "Time",
-            "confirmed": "Confirmed",
-            "restaurant": "Restaurant",
-            "user": "User"
+            "time": "Időpont",
+            "confirmed": "Visszaigazolva",
+            "restaurant": "Étterem",
+            "user": "Felhasználó"
         }
     }
 }

@@ -3,22 +3,22 @@
     "reservedApp": {
         "stateCounty" : {
             "home": {
-                "title": "StateCounties",
-                "createLabel": "Egy új State County létrehozása",
-                "createOrEditLabel": "Hozzon létre, vagy módosítson State Countyt",
-                "search": "State County keresése"
+                "title": "Megyék",
+                "createLabel": "Egy új Megye létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Megyét",
+                "search": "Megye keresése"
             },
-            "created": "Egy új State County lett létrehozva {{ param }} azonosítóval",
-            "updated": "A State County módosítva lett {{ param }} azonosítóval",
-            "deleted": "A State County törölve lett {{ param }} azonosítóval",
+            "created": "Egy új Megye lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Megye módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Megye törölve lett {{ param }} azonosítóval",
             "delete": {
-                "question": "Biztos benne, hogy törölni szeretné az State Countyt {{ id }} azonosítóval?"
+                "question": "Biztos benne, hogy törölni szeretné a Megyét {{ id }} azonosítóval?"
             },
             "detail": {
-                "title": "State County"
+                "title": "Megye"
             },
-            "name": "Name",
-            "country": "Country"
+            "name": "Megyenév",
+            "country": "Ország"
         }
     }
 }
