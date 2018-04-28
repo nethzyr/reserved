@@ -1,8 +1,8 @@
 package com.elte.reserved.config;
 
-import com.elte.reserved.security.*;
-import com.elte.reserved.security.jwt.*;
-
+import com.elte.reserved.security.AuthoritiesConstants;
+import com.elte.reserved.security.jwt.JWTConfigurer;
+import com.elte.reserved.security.jwt.TokenProvider;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -94,6 +94,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
             .authorizeRequests()
+            .antMatchers(HttpMethod.GET,"/api/restaurants").permitAll()
+            .antMatchers(HttpMethod.GET,"/api/_search/restaurants").permitAll()
             .antMatchers("/api/register").permitAll()
             .antMatchers("/api/activate").permitAll()
             .antMatchers("/api/authenticate").permitAll()
