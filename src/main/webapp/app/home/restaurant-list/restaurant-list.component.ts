@@ -1,7 +1,7 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {RestaurantService} from '../../entities/restaurant/restaurant.service';
-import {Restaurant} from '../../entities/restaurant/restaurant.model';
+import {RestaurantService} from '../../entities/restaurant';
+import {Restaurant} from '../../entities/restaurant';
 import {JhiParseLinks, JhiAlertService} from 'ng-jhipster';
 
 @Component({
@@ -9,9 +9,8 @@ import {JhiParseLinks, JhiAlertService} from 'ng-jhipster';
     templateUrl: './restaurant-list.component.html',
     styles: []
 })
-export class RestaurantListComponent implements OnInit, OnDestroy {
+export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
     @Input() currentSearch: string;
-
     restaurants: Restaurant[];
     totalItems: any;
     links: any;
@@ -29,7 +28,20 @@ export class RestaurantListComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {}
 
+    ngOnChanges(changes) {
+        this.loadAll();
+    }
+
     loadAll() {
+        if (this.currentSearch) {
+            this.restaurantService.search({
+                query: this.currentSearch,
+            }).subscribe(
+                (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+            return;
+        }
         this.restaurantService.query({
         }).subscribe(
             (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),

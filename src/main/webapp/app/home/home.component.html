@@ -6,14 +6,14 @@
         <h1 class="display-8" jhiTranslate="home.title1">Üzleti ebéd? Randevú?</h1>
         <h1 class="display-8" jhiTranslate="home.title2">Baráti összejövetel? Családi vacsora?</h1>
         <h1 class="display-8 subtitle" jhiTranslate="home.title3">Hol ennétek?</h1>
-        <div class="form-row">
+        <form class="form-row" (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="col">
-                <input type="text" class="form-control form-control-lg" placeholder="{{'home.searchph' | translate}}">
+                <input type="text" name="search" class="form-control form-control-lg" placeholder="{{'home.searchph' | translate}}" ngModel>
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-primary btn-lg" jhiTranslate="home.search">Keresés</button>
             </div>
-        </div>
+        </form>
 
         <!-- <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
@@ -49,4 +49,4 @@
     </div>
 </div>
 
-<jhi-restaurant-list></jhi-restaurant-list>
+<jhi-restaurant-list [currentSearch]="currentSearch"></jhi-restaurant-list>

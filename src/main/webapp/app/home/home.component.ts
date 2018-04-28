@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgForm } from '@angular/forms';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { Account, LoginModalService, Principal } from '../shared';
@@ -15,6 +16,7 @@ import { Account, LoginModalService, Principal } from '../shared';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
+    currentSearch: string;
 
     constructor(
         private principal: Principal,
@@ -46,7 +48,7 @@ export class HomeComponent implements OnInit {
         this.modalRef = this.loginModalService.open();
     }
 
-    onSubmit() {
-        console.log('fasz');
+    onSubmit(form: NgForm) {
+        this.currentSearch = form.value.search;
     }
 }
