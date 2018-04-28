@@ -1,0 +1,11 @@
+<div class="card">
+    <div class="wrapper">
+        <img class="card-img img-fluid" [src]="restaurant.pictures[0]?.url || 'https://www.emyspot.com/medias/images/page404.png'" alt="asd">
+    </div>
+    <div class="card-body line-clamp">
+        <h4>{{restaurant.name}}</h4>
+        <div class="card-text">
+            <p>{{restaurant.info}}</p>
+        </div>
+    </div>
+</div>

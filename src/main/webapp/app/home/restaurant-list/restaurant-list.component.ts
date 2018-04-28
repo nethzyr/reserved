@@ -1,13 +1,14 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {RestaurantService} from '../../entities/restaurant';
-import {Restaurant} from '../../entities/restaurant';
-import {JhiParseLinks, JhiAlertService} from 'ng-jhipster';
+import {Restaurant, RestaurantService} from '../../entities/restaurant';
+import {JhiAlertService, JhiParseLinks} from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-restaurant-list',
     templateUrl: './restaurant-list.component.html',
-    styles: []
+    styleUrls: [
+        'restaurant-list.scss'
+    ]
 })
 export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
     @Input() currentSearch: string;
@@ -35,14 +36,15 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
     loadAll() {
         if (this.currentSearch) {
             this.restaurantService.search({
-                query: this.currentSearch,
+                query: this.currentSearch
             }).subscribe(
                 (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
             return;
         }
-        this.restaurantService.query({
+        this.restaurantService.search({
+            query: '*'
         }).subscribe(
             (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
             (res: HttpErrorResponse) => this.onError(res.message)

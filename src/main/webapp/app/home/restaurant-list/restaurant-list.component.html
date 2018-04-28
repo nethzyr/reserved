@@ -1,7 +1,5 @@
-<div class="row restaurant-list">
-    <div class="col-md-4">
-        <div *ngFor="let restaurant of restaurants;">
-            {{ restaurant.name }}
-        </div>
+<div class="row">
+    <div class="col-md-12 col-lg-6 cards" *ngFor="let restaurant of restaurants; trackById">
+        <jhi-restaurant-card [restaurant]="restaurant"></jhi-restaurant-card>
     </div>
 </div>

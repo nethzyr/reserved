@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { NgForm } from '@angular/forms';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {NgForm} from '@angular/forms';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Account, LoginModalService, Principal } from '../shared';
+import {Account, LoginModalService, Principal} from '../shared';
 
 @Component({
     selector: 'jhi-home',
@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
     currentSearch: string;
+    isShowWelcome = true;
 
     constructor(
         private principal: Principal,
@@ -50,5 +51,6 @@ export class HomeComponent implements OnInit {
 
     onSubmit(form: NgForm) {
         this.currentSearch = form.value.search;
+        this.isShowWelcome = false;
     }
 }

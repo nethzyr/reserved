@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-5" *ngIf="isShowWelcome">
         <span class="imgLeft img-fluid rounded"></span>
     </div>
     <div class="col-md-7">
-        <h1 class="display-8" jhiTranslate="home.title1">Üzleti ebéd? Randevú?</h1>
-        <h1 class="display-8" jhiTranslate="home.title2">Baráti összejövetel? Családi vacsora?</h1>
-        <h1 class="display-8 subtitle" jhiTranslate="home.title3">Hol ennétek?</h1>
+        <h1 class="display-8" jhiTranslate="home.title1" *ngIf="isShowWelcome">Üzleti ebéd? Randevú?</h1>
+        <h1 class="display-8" jhiTranslate="home.title2" *ngIf="isShowWelcome">Baráti összejövetel? Családi vacsora?</h1>
+        <h1 class="display-8 subtitle" jhiTranslate="home.title3" *ngIf="isShowWelcome">Hol ennétek?</h1>
         <form class="form-row" (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="col">
                 <input type="text" name="search" class="form-control form-control-lg" placeholder="{{'home.searchph' | translate}}" ngModel>
@@ -49,4 +49,6 @@
     </div>
 </div>
 
-<jhi-restaurant-list [currentSearch]="currentSearch"></jhi-restaurant-list>
+<div class="container">
+    <jhi-restaurant-list [currentSearch]="currentSearch"></jhi-restaurant-list>
+</div>
