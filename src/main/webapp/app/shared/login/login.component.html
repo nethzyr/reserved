@@ -31,19 +31,19 @@
                 <button type="submit" class="btn btn-primary" jhiTranslate="login.form.button">Sign in</button>
             </form>
             <p></p>
-            <div class="alert alert-warning">
-                <a class="alert-link" (click)="requestResetPassword()" jhiTranslate="login.password.forgot">Did you forget your password?</a>
+            <div class="alert alert-warning" (click)="requestResetPassword()" style="cursor: pointer">
+                <a class="alert-link" jhiTranslate="login.password.forgot">Did you forget your password?</a>
             </div>
-            <div class="alert alert-warning">
+            <div class="alert alert-warning" (click)="register()" style="cursor: pointer">
                 <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
-                <a class="alert-link" (click)="register()" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+                <a class="alert-link" jhiTranslate="global.messages.info.register.link">Register a new account</a>
             </div>
         </div>
         <div class="col-md-6">
             <br/>
             <jhi-social provider="google"></jhi-social>
-            <jhi-social provider="facebook"></jhi-social>
-            <jhi-social provider="twitter"></jhi-social>
+            <!--jhi-social provider="facebook"></jhi-social-->
+            <!--jhi-social provider="twitter"></jhi-social-->
             <!-- jhipster-needle-add-social-button -->
         </div>
     </div>
