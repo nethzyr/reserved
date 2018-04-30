@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <property name="now" value="now()" dbms="h2"/>
 
@@ -29,16 +27,16 @@
             <column name="phone" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-
-            <column name="picture_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="user_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
+            <column name="picture_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
         <createTable tableName="user_info_preferred_city">
             <column name="preferred_cities_id" type="bigint">
                 <constraints nullable="false"/>
@@ -49,7 +47,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="user_infos_id, preferred_cities_id" tableName="user_info_preferred_city"/>
-        
+
         <createTable tableName="user_info_favorite_restaurant">
             <column name="favorite_restaurants_id" type="bigint">
                 <constraints nullable="false"/>
@@ -60,7 +58,29 @@
         </createTable>
 
         <addPrimaryKey columnNames="user_infos_id, favorite_restaurants_id" tableName="user_info_favorite_restaurant"/>
-        
+
+        <createTable tableName="user_info_favorite_kitchen">
+            <column name="favorite_kitchens_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_infos_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="user_infos_id, favorite_kitchens_id" tableName="user_info_favorite_kitchen"/>
+
+        <createTable tableName="user_info_favorite_food">
+            <column name="favorite_foods_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_infos_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="user_infos_id, favorite_foods_id" tableName="user_info_favorite_food"/>
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

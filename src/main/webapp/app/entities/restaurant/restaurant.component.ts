@@ -1,8 +1,8 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils} from 'ng-jhipster';
+import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
 
 import {Restaurant} from './restaurant.model';
 import {RestaurantService} from './restaurant.service';
@@ -14,7 +14,7 @@ import {ITEMS_PER_PAGE, Principal} from '../../shared';
 })
 export class RestaurantComponent implements OnInit, OnDestroy {
 
-    currentAccount: any;
+currentAccount: any;
     restaurants: Restaurant[];
     error: any;
     success: any;
@@ -36,7 +36,6 @@ export class RestaurantComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
-        private dataUtils: JhiDataUtils,
         private router: Router,
         private eventManager: JhiEventManager
     ) {
@@ -57,39 +56,34 @@ export class RestaurantComponent implements OnInit, OnDestroy {
                 page: this.page - 1,
                 query: this.currentSearch,
                 size: this.itemsPerPage,
-                sort: this.sort()
-            }).subscribe(
-                (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+                sort: this.sort()}).subscribe(
+                    (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
             return;
         }
         this.restaurantService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
-            sort: this.sort()
-        }).subscribe(
-            (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res.message)
+            sort: this.sort()}).subscribe(
+                (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
             this.transition();
         }
     }
-
     transition() {
-        this.router.navigate(['/restaurant'], {
-            queryParams:
-                {
-                    page: this.page,
-                    size: this.itemsPerPage,
-                    search: this.currentSearch,
-                    sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-                }
+        this.router.navigate(['/restaurant'], {queryParams:
+            {
+                page: this.page,
+                size: this.itemsPerPage,
+                search: this.currentSearch,
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            }
         });
         this.loadAll();
     }
@@ -103,7 +97,6 @@ export class RestaurantComponent implements OnInit, OnDestroy {
         }]);
         this.loadAll();
     }
-
     search(query) {
         if (!query) {
             return this.clear();
@@ -117,7 +110,6 @@ export class RestaurantComponent implements OnInit, OnDestroy {
         }]);
         this.loadAll();
     }
-
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then((account) => {
@@ -133,15 +125,6 @@ export class RestaurantComponent implements OnInit, OnDestroy {
     trackId(index: number, item: Restaurant) {
         return item.id;
     }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
     registerChangeInRestaurants() {
         this.eventSubscriber = this.eventManager.subscribe('restaurantListModification', (response) => this.loadAll());
     }
@@ -161,7 +144,6 @@ export class RestaurantComponent implements OnInit, OnDestroy {
         // this.page = pagingParams.page;
         this.restaurants = data;
     }
-
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }

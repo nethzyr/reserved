@@ -1,19 +1,19 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs/Observable';
-import { JhiEventManager } from 'ng-jhipster';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs/Observable';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ReservedTestModule } from '../../../test.module';
-import { RestaurantDialogComponent } from '../../../../../../main/webapp/app/entities/restaurant/restaurant-dialog.component';
-import { RestaurantService } from '../../../../../../main/webapp/app/entities/restaurant/restaurant.service';
-import { Restaurant } from '../../../../../../main/webapp/app/entities/restaurant/restaurant.model';
-import { CityService } from '../../../../../../main/webapp/app/entities/city';
-import { KitchenService } from '../../../../../../main/webapp/app/entities/kitchen';
-import { FoodService } from '../../../../../../main/webapp/app/entities/food';
-import { PictureService } from '../../../../../../main/webapp/app/entities/picture';
-import { UserService } from '../../../../../../main/webapp/app/shared';
+import {ReservedTestModule} from '../../../test.module';
+import {RestaurantDialogComponent} from '../../../../../../main/webapp/app/entities/restaurant/restaurant-dialog.component';
+import {RestaurantService} from '../../../../../../main/webapp/app/entities/restaurant/restaurant.service';
+import {Restaurant} from '../../../../../../main/webapp/app/entities/restaurant/restaurant.model';
+import {CityService} from '../../../../../../main/webapp/app/entities/city';
+import {KitchenService} from '../../../../../../main/webapp/app/entities/kitchen';
+import {FoodService} from '../../../../../../main/webapp/app/entities/food';
+import {PictureService} from '../../../../../../main/webapp/app/entities/picture';
+import {UserService} from '../../../../../../main/webapp/app/shared';
 
 describe('Component Tests', () => {
 

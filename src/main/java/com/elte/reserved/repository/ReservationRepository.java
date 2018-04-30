@@ -1,9 +1,10 @@
 package com.elte.reserved.repository;
 
 import com.elte.reserved.domain.Reservation;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.data.jpa.repository.*;
 import java.util.List;
 
 /**

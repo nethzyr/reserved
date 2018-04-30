@@ -1,14 +1,12 @@
 package com.elte.reserved.web.rest;
 
 import com.elte.reserved.ReservedApp;
-
-import com.elte.reserved.domain.Restaurant;
 import com.elte.reserved.domain.City;
+import com.elte.reserved.domain.Restaurant;
 import com.elte.reserved.domain.User;
 import com.elte.reserved.repository.RestaurantRepository;
 import com.elte.reserved.repository.search.RestaurantSearchRepository;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +20,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.util.List;

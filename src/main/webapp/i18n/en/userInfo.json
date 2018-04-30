@@ -19,10 +19,12 @@
             },
             "facebook": "Facebook",
             "phone": "Phone",
-            "picture": "Picture",
             "user": "User",
+            "picture": "Picture",
             "preferredCity": "Preferred City",
-            "favoriteRestaurant": "Favorite Restaurant"
+            "favoriteRestaurant": "Favorite Restaurant",
+            "favoriteKitchen": "Favorite Kitchen",
+            "favoriteFood": "Favorite Food"
         }
     }
 }

@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { UserInfo } from './user-info.model';
-import { UserInfoPopupService } from './user-info-popup.service';
-import { UserInfoService } from './user-info.service';
+import {UserInfo} from './user-info.model';
+import {UserInfoPopupService} from './user-info-popup.service';
+import {UserInfoService} from './user-info.service';
 
 @Component({
     selector: 'jhi-user-info-delete-dialog',

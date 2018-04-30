@@ -1,19 +1,19 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { ReservedSharedModule } from '../../shared';
-import { ReservedAdminModule } from '../../admin/admin.module';
+import {ReservedSharedModule} from '../../shared';
+import {ReservedAdminModule} from '../../admin/admin.module';
 import {
-    ReservationService,
-    ReservationPopupService,
     ReservationComponent,
+    ReservationDeleteDialogComponent,
+    ReservationDeletePopupComponent,
     ReservationDetailComponent,
     ReservationDialogComponent,
     ReservationPopupComponent,
-    ReservationDeletePopupComponent,
-    ReservationDeleteDialogComponent,
-    reservationRoute,
     reservationPopupRoute,
+    ReservationPopupService,
+    reservationRoute,
+    ReservationService,
 } from './';
 
 const ENTITY_STATES = [

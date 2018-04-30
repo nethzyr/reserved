@@ -1,4 +1,4 @@
-import { BaseEntity, User } from './../../shared';
+import {BaseEntity, User} from './../../shared';
 
 export class Restaurant implements BaseEntity {
     constructor(
@@ -6,7 +6,7 @@ export class Restaurant implements BaseEntity {
         public name?: string,
         public streetAddress?: string,
         public postalCode?: string,
-        public info?: any,
+        public info?: string,
         public email?: string,
         public phone?: string,
         public website?: string,

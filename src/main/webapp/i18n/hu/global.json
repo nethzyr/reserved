@@ -16,6 +16,8 @@
                 "food": "Ételek",
                 "userInfo": "User Info",
                 "reservation": "Foglalások",
+                "restaurant": "Restaurant",
+                "reservation": "Reservation",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

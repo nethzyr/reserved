@@ -1,18 +1,20 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs/Observable';
-import { JhiEventManager } from 'ng-jhipster';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs/Observable';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ReservedTestModule } from '../../../test.module';
-import { UserInfoDialogComponent } from '../../../../../../main/webapp/app/entities/user-info/user-info-dialog.component';
-import { UserInfoService } from '../../../../../../main/webapp/app/entities/user-info/user-info.service';
-import { UserInfo } from '../../../../../../main/webapp/app/entities/user-info/user-info.model';
-import { PictureService } from '../../../../../../main/webapp/app/entities/picture';
-import { UserService } from '../../../../../../main/webapp/app/shared';
-import { CityService } from '../../../../../../main/webapp/app/entities/city';
-import { RestaurantService } from '../../../../../../main/webapp/app/entities/restaurant';
+import {ReservedTestModule} from '../../../test.module';
+import {UserInfoDialogComponent} from '../../../../../../main/webapp/app/entities/user-info/user-info-dialog.component';
+import {UserInfoService} from '../../../../../../main/webapp/app/entities/user-info/user-info.service';
+import {UserInfo} from '../../../../../../main/webapp/app/entities/user-info/user-info.model';
+import {UserService} from '../../../../../../main/webapp/app/shared';
+import {PictureService} from '../../../../../../main/webapp/app/entities/picture';
+import {CityService} from '../../../../../../main/webapp/app/entities/city';
+import {RestaurantService} from '../../../../../../main/webapp/app/entities/restaurant';
+import {KitchenService} from '../../../../../../main/webapp/app/entities/kitchen';
+import {FoodService} from '../../../../../../main/webapp/app/entities/food';
 
 describe('Component Tests', () => {
 
@@ -28,10 +30,12 @@ describe('Component Tests', () => {
                 imports: [ReservedTestModule],
                 declarations: [UserInfoDialogComponent],
                 providers: [
-                    PictureService,
                     UserService,
+                    PictureService,
                     CityService,
                     RestaurantService,
+                    KitchenService,
+                    FoodService,
                     UserInfoService
                 ]
             })

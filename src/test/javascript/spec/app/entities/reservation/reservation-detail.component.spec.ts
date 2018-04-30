@@ -1,12 +1,12 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
-import { ReservedTestModule } from '../../../test.module';
-import { ReservationDetailComponent } from '../../../../../../main/webapp/app/entities/reservation/reservation-detail.component';
-import { ReservationService } from '../../../../../../main/webapp/app/entities/reservation/reservation.service';
-import { Reservation } from '../../../../../../main/webapp/app/entities/reservation/reservation.model';
+import {ReservedTestModule} from '../../../test.module';
+import {ReservationDetailComponent} from '../../../../../../main/webapp/app/entities/reservation/reservation-detail.component';
+import {ReservationService} from '../../../../../../main/webapp/app/entities/reservation/reservation.service';
+import {Reservation} from '../../../../../../main/webapp/app/entities/reservation/reservation.model';
 
 describe('Component Tests', () => {
 

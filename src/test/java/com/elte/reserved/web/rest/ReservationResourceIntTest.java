@@ -1,14 +1,12 @@
 package com.elte.reserved.web.rest;
 
 import com.elte.reserved.ReservedApp;
-
 import com.elte.reserved.domain.Reservation;
 import com.elte.reserved.domain.Restaurant;
 import com.elte.reserved.domain.User;
 import com.elte.reserved.repository.ReservationRepository;
 import com.elte.reserved.repository.search.ReservationSearchRepository;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,6 +43,9 @@ public class ReservationResourceIntTest {
 
     private static final Instant DEFAULT_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Integer DEFAULT_PEOPLE = 1;
+    private static final Integer UPDATED_PEOPLE = 2;
 
     private static final Boolean DEFAULT_CONFIRMED = false;
     private static final Boolean UPDATED_CONFIRMED = true;
@@ -91,6 +92,7 @@ public class ReservationResourceIntTest {
     public static Reservation createEntity(EntityManager em) {
         Reservation reservation = new Reservation()
             .time(DEFAULT_TIME)
+            .people(DEFAULT_PEOPLE)
             .confirmed(DEFAULT_CONFIRMED);
         // Add required entity
         Restaurant restaurant = RestaurantResourceIntTest.createEntity(em);
@@ -127,6 +129,7 @@ public class ReservationResourceIntTest {
         assertThat(reservationList).hasSize(databaseSizeBeforeCreate + 1);
         Reservation testReservation = reservationList.get(reservationList.size() - 1);
         assertThat(testReservation.getTime()).isEqualTo(DEFAULT_TIME);
+        assertThat(testReservation.getPeople()).isEqualTo(DEFAULT_PEOPLE);
         assertThat(testReservation.isConfirmed()).isEqualTo(DEFAULT_CONFIRMED);
 
         // Validate the Reservation in Elasticsearch
@@ -173,6 +176,24 @@ public class ReservationResourceIntTest {
 
     @Test
     @Transactional
+    public void checkPeopleIsRequired() throws Exception {
+        int databaseSizeBeforeTest = reservationRepository.findAll().size();
+        // set the field null
+        reservation.setPeople(null);
+
+        // Create the Reservation, which fails.
+
+        restReservationMockMvc.perform(post("/api/reservations")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(reservation)))
+            .andExpect(status().isBadRequest());
+
+        List<Reservation> reservationList = reservationRepository.findAll();
+        assertThat(reservationList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllReservations() throws Exception {
         // Initialize the database
         reservationRepository.saveAndFlush(reservation);
@@ -183,6 +204,7 @@ public class ReservationResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(reservation.getId().intValue())))
             .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
+            .andExpect(jsonPath("$.[*].people").value(hasItem(DEFAULT_PEOPLE)))
             .andExpect(jsonPath("$.[*].confirmed").value(hasItem(DEFAULT_CONFIRMED.booleanValue())));
     }
 
@@ -198,6 +220,7 @@ public class ReservationResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(reservation.getId().intValue()))
             .andExpect(jsonPath("$.time").value(DEFAULT_TIME.toString()))
+            .andExpect(jsonPath("$.people").value(DEFAULT_PEOPLE))
             .andExpect(jsonPath("$.confirmed").value(DEFAULT_CONFIRMED.booleanValue()));
     }
 
@@ -223,6 +246,7 @@ public class ReservationResourceIntTest {
         em.detach(updatedReservation);
         updatedReservation
             .time(UPDATED_TIME)
+            .people(UPDATED_PEOPLE)
             .confirmed(UPDATED_CONFIRMED);
 
         restReservationMockMvc.perform(put("/api/reservations")
@@ -235,6 +259,7 @@ public class ReservationResourceIntTest {
         assertThat(reservationList).hasSize(databaseSizeBeforeUpdate);
         Reservation testReservation = reservationList.get(reservationList.size() - 1);
         assertThat(testReservation.getTime()).isEqualTo(UPDATED_TIME);
+        assertThat(testReservation.getPeople()).isEqualTo(UPDATED_PEOPLE);
         assertThat(testReservation.isConfirmed()).isEqualTo(UPDATED_CONFIRMED);
 
         // Validate the Reservation in Elasticsearch
@@ -295,6 +320,7 @@ public class ReservationResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(reservation.getId().intValue())))
             .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
+            .andExpect(jsonPath("$.[*].people").value(hasItem(DEFAULT_PEOPLE)))
             .andExpect(jsonPath("$.[*].confirmed").value(hasItem(DEFAULT_CONFIRMED.booleanValue())));
     }
 

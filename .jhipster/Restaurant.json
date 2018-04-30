@@ -29,7 +29,7 @@
             "otherEntityRelationshipName": "",
             "relationshipName": "picture",
             "otherEntityName": "picture",
-            "otherEntityField": "url",
+            "otherEntityField": "title",
             "ownerSide": true
         },
         {
@@ -60,8 +60,7 @@
         },
         {
             "fieldName": "info",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "text"
+            "fieldType": "String"
         },
         {
             "fieldName": "email",
@@ -85,9 +84,9 @@
         }
     ],
     "changelogDate": "20180422180249",
-    "dto": "no",
-    "service": "no",
     "entityTableName": "restaurant",
-    "jpaMetamodelFiltering": false,
-    "pagination": "pagination"
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false
 }

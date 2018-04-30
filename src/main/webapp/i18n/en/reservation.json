@@ -18,6 +18,7 @@
                 "title": "Reservation"
             },
             "time": "Time",
+            "people": "People",
             "confirmed": "Confirmed",
             "restaurant": "Restaurant",
             "user": "User"

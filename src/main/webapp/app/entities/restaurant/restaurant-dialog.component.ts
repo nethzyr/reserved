@@ -1,19 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
-import { Restaurant } from './restaurant.model';
-import { RestaurantPopupService } from './restaurant-popup.service';
-import { RestaurantService } from './restaurant.service';
-import { City, CityService } from '../city';
-import { Kitchen, KitchenService } from '../kitchen';
-import { Food, FoodService } from '../food';
-import { Picture, PictureService } from '../picture';
-import { User, UserService } from '../../shared';
+import {Restaurant} from './restaurant.model';
+import {RestaurantPopupService} from './restaurant-popup.service';
+import {RestaurantService} from './restaurant.service';
+import {City, CityService} from '../city';
+import {Kitchen, KitchenService} from '../kitchen';
+import {Food, FoodService} from '../food';
+import {Picture, PictureService} from '../picture';
+import {User, UserService} from '../../shared';
 
 @Component({
     selector: 'jhi-restaurant-dialog',
@@ -36,7 +36,6 @@ export class RestaurantDialogComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
-        private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private restaurantService: RestaurantService,
         private cityService: CityService,
@@ -60,18 +59,6 @@ export class RestaurantDialogComponent implements OnInit {
             .subscribe((res: HttpResponse<Picture[]>) => { this.pictures = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.userService.query()
             .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     clear() {

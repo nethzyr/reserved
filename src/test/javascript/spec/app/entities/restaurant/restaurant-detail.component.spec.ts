@@ -1,12 +1,12 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
-import { ReservedTestModule } from '../../../test.module';
-import { RestaurantDetailComponent } from '../../../../../../main/webapp/app/entities/restaurant/restaurant-detail.component';
-import { RestaurantService } from '../../../../../../main/webapp/app/entities/restaurant/restaurant.service';
-import { Restaurant } from '../../../../../../main/webapp/app/entities/restaurant/restaurant.model';
+import {ReservedTestModule} from '../../../test.module';
+import {RestaurantDetailComponent} from '../../../../../../main/webapp/app/entities/restaurant/restaurant-detail.component';
+import {RestaurantService} from '../../../../../../main/webapp/app/entities/restaurant/restaurant.service';
+import {Restaurant} from '../../../../../../main/webapp/app/entities/restaurant/restaurant.model';
 
 describe('Component Tests', () => {
 

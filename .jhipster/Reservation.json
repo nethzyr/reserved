@@ -25,14 +25,21 @@
             ]
         },
         {
+            "fieldName": "people",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "confirmed",
             "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20180422180254",
-    "dto": "no",
-    "service": "no",
     "entityTableName": "reservation",
-    "jpaMetamodelFiltering": false,
-    "pagination": "infinite-scroll"
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false
 }

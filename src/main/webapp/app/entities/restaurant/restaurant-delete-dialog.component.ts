@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Restaurant } from './restaurant.model';
-import { RestaurantPopupService } from './restaurant-popup.service';
-import { RestaurantService } from './restaurant.service';
+import {Restaurant} from './restaurant.model';
+import {RestaurantPopupService} from './restaurant-popup.service';
+import {RestaurantService} from './restaurant.service';
 
 @Component({
     selector: 'jhi-restaurant-delete-dialog',

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <property name="now" value="now()" dbms="h2"/>
 
@@ -34,7 +32,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="info" type="clob">
+            <column name="info" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -64,7 +62,7 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
         <createTable tableName="restaurant_kitchen">
             <column name="kitchens_id" type="bigint">
                 <constraints nullable="false"/>
@@ -75,7 +73,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="restaurants_id, kitchens_id" tableName="restaurant_kitchen"/>
-        
+
         <createTable tableName="restaurant_food">
             <column name="foods_id" type="bigint">
                 <constraints nullable="false"/>
@@ -86,7 +84,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="restaurants_id, foods_id" tableName="restaurant_food"/>
-        
+
         <createTable tableName="restaurant_picture">
             <column name="pictures_id" type="bigint">
                 <constraints nullable="false"/>
@@ -97,7 +95,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="restaurants_id, pictures_id" tableName="restaurant_picture"/>
-        
+
         <createTable tableName="restaurant_user">
             <column name="users_id" type="bigint">
                 <constraints nullable="false"/>
@@ -108,7 +106,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="restaurants_id, users_id" tableName="restaurant_user"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

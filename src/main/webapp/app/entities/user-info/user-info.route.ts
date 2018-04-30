@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../shared';
-import { UserInfoComponent } from './user-info.component';
-import { UserInfoDetailComponent } from './user-info-detail.component';
-import { UserInfoPopupComponent } from './user-info-dialog.component';
-import { UserInfoDeletePopupComponent } from './user-info-delete-dialog.component';
+import {UserRouteAccessService} from '../../shared';
+import {UserInfoComponent} from './user-info.component';
+import {UserInfoDetailComponent} from './user-info-detail.component';
+import {UserInfoPopupComponent} from './user-info-dialog.component';
+import {UserInfoDeletePopupComponent} from './user-info-delete-dialog.component';
 
 @Injectable()
 export class UserInfoResolvePagingParams implements Resolve<any> {

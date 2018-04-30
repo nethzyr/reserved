@@ -1,5 +1,5 @@
-import { browser, element, by } from 'protractor';
-import { NavBarPage } from './../page-objects/jhi-page-objects';
+import {browser, by, element} from 'protractor';
+import {NavBarPage} from './../page-objects/jhi-page-objects';
 
 describe('UserInfo e2e test', () => {
 
@@ -37,10 +37,12 @@ describe('UserInfo e2e test', () => {
         expect(userInfoDialogPage.getFacebookInput()).toMatch('facebook');
         userInfoDialogPage.setPhoneInput('phone');
         expect(userInfoDialogPage.getPhoneInput()).toMatch('phone');
-        userInfoDialogPage.pictureSelectLastOption();
         userInfoDialogPage.userSelectLastOption();
+        userInfoDialogPage.pictureSelectLastOption();
         // userInfoDialogPage.preferredCitySelectLastOption();
         // userInfoDialogPage.favoriteRestaurantSelectLastOption();
+        // userInfoDialogPage.favoriteKitchenSelectLastOption();
+        // userInfoDialogPage.favoriteFoodSelectLastOption();
         userInfoDialogPage.save();
         expect(userInfoDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -69,10 +71,12 @@ export class UserInfoDialogPage {
     closeButton = element(by.css('button.close'));
     facebookInput = element(by.css('input#field_facebook'));
     phoneInput = element(by.css('input#field_phone'));
-    pictureSelect = element(by.css('select#field_picture'));
     userSelect = element(by.css('select#field_user'));
+    pictureSelect = element(by.css('select#field_picture'));
     preferredCitySelect = element(by.css('select#field_preferredCity'));
     favoriteRestaurantSelect = element(by.css('select#field_favoriteRestaurant'));
+    favoriteKitchenSelect = element(by.css('select#field_favoriteKitchen'));
+    favoriteFoodSelect = element(by.css('select#field_favoriteFood'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -94,22 +98,6 @@ export class UserInfoDialogPage {
         return this.phoneInput.getAttribute('value');
     };
 
-    pictureSelectLastOption = function() {
-        this.pictureSelect.all(by.tagName('option')).last().click();
-    };
-
-    pictureSelectOption = function(option) {
-        this.pictureSelect.sendKeys(option);
-    };
-
-    getPictureSelect = function() {
-        return this.pictureSelect;
-    };
-
-    getPictureSelectedOption = function() {
-        return this.pictureSelect.element(by.css('option:checked')).getText();
-    };
-
     userSelectLastOption = function() {
         this.userSelect.all(by.tagName('option')).last().click();
     };
@@ -124,6 +112,22 @@ export class UserInfoDialogPage {
 
     getUserSelectedOption = function() {
         return this.userSelect.element(by.css('option:checked')).getText();
+    };
+
+    pictureSelectLastOption = function() {
+        this.pictureSelect.all(by.tagName('option')).last().click();
+    };
+
+    pictureSelectOption = function(option) {
+        this.pictureSelect.sendKeys(option);
+    };
+
+    getPictureSelect = function() {
+        return this.pictureSelect;
+    };
+
+    getPictureSelectedOption = function() {
+        return this.pictureSelect.element(by.css('option:checked')).getText();
     };
 
     preferredCitySelectLastOption = function() {
@@ -156,6 +160,38 @@ export class UserInfoDialogPage {
 
     getFavoriteRestaurantSelectedOption = function() {
         return this.favoriteRestaurantSelect.element(by.css('option:checked')).getText();
+    };
+
+    favoriteKitchenSelectLastOption = function() {
+        this.favoriteKitchenSelect.all(by.tagName('option')).last().click();
+    };
+
+    favoriteKitchenSelectOption = function(option) {
+        this.favoriteKitchenSelect.sendKeys(option);
+    };
+
+    getFavoriteKitchenSelect = function() {
+        return this.favoriteKitchenSelect;
+    };
+
+    getFavoriteKitchenSelectedOption = function() {
+        return this.favoriteKitchenSelect.element(by.css('option:checked')).getText();
+    };
+
+    favoriteFoodSelectLastOption = function() {
+        this.favoriteFoodSelect.all(by.tagName('option')).last().click();
+    };
+
+    favoriteFoodSelectOption = function(option) {
+        this.favoriteFoodSelect.sendKeys(option);
+    };
+
+    getFavoriteFoodSelect = function() {
+        return this.favoriteFoodSelect;
+    };
+
+    getFavoriteFoodSelectedOption = function() {
+        return this.favoriteFoodSelect.element(by.css('option:checked')).getText();
     };
 
     save() {

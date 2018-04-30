@@ -32,8 +32,8 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="facebook"><span jhiTranslate="reservedApp.userInfo.facebook">Facebook</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="phone"><span jhiTranslate="reservedApp.userInfo.phone">Phone</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="picture.url"><span jhiTranslate="reservedApp.userInfo.picture">Picture</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="user.login"><span jhiTranslate="reservedApp.userInfo.user">User</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="picture.title"><span jhiTranslate="reservedApp.userInfo.picture">Picture</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -43,18 +43,18 @@
                 <td>{{userInfo.facebook}}</td>
                 <td>{{userInfo.phone}}</td>
                 <td>
-                    <div *ngIf="userInfo.picture">
-                        <a [routerLink]="['../picture', userInfo.picture?.id ]" >{{userInfo.picture?.url}}</a>
-                    </div>
+                    {{userInfo.user?.login}}
                 </td>
                 <td>
-                    {{userInfo.user?.login}}
+                    <div *ngIf="userInfo.picture">
+                        <a [routerLink]="['../picture', userInfo.picture?.id ]" >{{userInfo.picture?.title}}</a>
+                    </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../user-info', userInfo.id ]"
-                                class="btn btn-info ">
+                                class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
@@ -62,7 +62,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'user-info/'+ userInfo.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-primary ">
+                                class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
@@ -70,7 +70,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'user-info/'+ userInfo.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger ">
+                                class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>

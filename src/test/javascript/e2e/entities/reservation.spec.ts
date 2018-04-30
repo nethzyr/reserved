@@ -1,5 +1,5 @@
-import { browser, element, by } from 'protractor';
-import { NavBarPage } from './../page-objects/jhi-page-objects';
+import {browser, by, element} from 'protractor';
+import {NavBarPage} from './../page-objects/jhi-page-objects';
 
 describe('Reservation e2e test', () => {
 
@@ -35,6 +35,8 @@ describe('Reservation e2e test', () => {
         reservationComponentsPage.clickOnCreateButton();
         reservationDialogPage.setTimeInput(12310020012301);
         expect(reservationDialogPage.getTimeInput()).toMatch('2001-12-31T02:30');
+        reservationDialogPage.setPeopleInput('5');
+        expect(reservationDialogPage.getPeopleInput()).toMatch('5');
         reservationDialogPage.getConfirmedInput().isSelected().then((selected) => {
             if (selected) {
                 reservationDialogPage.getConfirmedInput().click();
@@ -73,6 +75,7 @@ export class ReservationDialogPage {
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
     timeInput = element(by.css('input#field_time'));
+    peopleInput = element(by.css('input#field_people'));
     confirmedInput = element(by.css('input#field_confirmed'));
     restaurantSelect = element(by.css('select#field_restaurant'));
     userSelect = element(by.css('select#field_user'));
@@ -87,6 +90,14 @@ export class ReservationDialogPage {
 
     getTimeInput = function() {
         return this.timeInput.getAttribute('value');
+    };
+
+    setPeopleInput = function(people) {
+        this.peopleInput.sendKeys(people);
+    };
+
+    getPeopleInput = function() {
+        return this.peopleInput.getAttribute('value');
     };
 
     getConfirmedInput = function() {

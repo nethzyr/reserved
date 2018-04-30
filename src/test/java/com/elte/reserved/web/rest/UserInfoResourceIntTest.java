@@ -1,12 +1,10 @@
 package com.elte.reserved.web.rest;
 
 import com.elte.reserved.ReservedApp;
-
 import com.elte.reserved.domain.UserInfo;
 import com.elte.reserved.repository.UserInfoRepository;
 import com.elte.reserved.repository.search.UserInfoSearchRepository;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

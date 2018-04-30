@@ -2,20 +2,18 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "many-to-one",
-            "relationshipName": "picture",
-            "otherEntityName": "picture",
-            "otherEntityField": "url",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "userInfo"
-        },
-        {
             "relationshipType": "one-to-one",
             "relationshipName": "user",
             "otherEntityName": "user",
             "otherEntityField": "login",
             "ownerSide": true,
             "otherEntityRelationshipName": "userInfo"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "picture",
+            "otherEntityName": "picture",
+            "otherEntityField": "title"
         },
         {
             "relationshipType": "many-to-many",
@@ -31,6 +29,22 @@
             "relationshipName": "favoriteRestaurant",
             "otherEntityName": "restaurant",
             "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "favoriteKitchen",
+            "otherEntityName": "kitchen",
+            "otherEntityField": "type",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "favoriteFood",
+            "otherEntityName": "food",
+            "otherEntityField": "type",
             "ownerSide": true
         }
     ],

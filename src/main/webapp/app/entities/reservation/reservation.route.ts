@@ -1,10 +1,10 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
-import { UserRouteAccessService } from '../../shared';
-import { ReservationComponent } from './reservation.component';
-import { ReservationDetailComponent } from './reservation-detail.component';
-import { ReservationPopupComponent } from './reservation-dialog.component';
-import { ReservationDeletePopupComponent } from './reservation-delete-dialog.component';
+import {UserRouteAccessService} from '../../shared';
+import {ReservationComponent} from './reservation.component';
+import {ReservationDetailComponent} from './reservation-detail.component';
+import {ReservationPopupComponent} from './reservation-dialog.component';
+import {ReservationDeletePopupComponent} from './reservation-delete-dialog.component';
 
 export const reservationRoute: Routes = [
     {

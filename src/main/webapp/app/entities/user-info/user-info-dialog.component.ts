@@ -1,18 +1,20 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
-import { UserInfo } from './user-info.model';
-import { UserInfoPopupService } from './user-info-popup.service';
-import { UserInfoService } from './user-info.service';
-import { Picture, PictureService } from '../picture';
-import { User, UserService } from '../../shared';
-import { City, CityService } from '../city';
-import { Restaurant, RestaurantService } from '../restaurant';
+import {UserInfo} from './user-info.model';
+import {UserInfoPopupService} from './user-info-popup.service';
+import {UserInfoService} from './user-info.service';
+import {User, UserService} from '../../shared';
+import {Picture, PictureService} from '../picture';
+import {City, CityService} from '../city';
+import {Restaurant, RestaurantService} from '../restaurant';
+import {Kitchen, KitchenService} from '../kitchen';
+import {Food, FoodService} from '../food';
 
 @Component({
     selector: 'jhi-user-info-dialog',
@@ -23,36 +25,46 @@ export class UserInfoDialogComponent implements OnInit {
     userInfo: UserInfo;
     isSaving: boolean;
 
-    pictures: Picture[];
-
     users: User[];
+
+    pictures: Picture[];
 
     cities: City[];
 
     restaurants: Restaurant[];
 
+    kitchens: Kitchen[];
+
+    foods: Food[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private userInfoService: UserInfoService,
-        private pictureService: PictureService,
         private userService: UserService,
+        private pictureService: PictureService,
         private cityService: CityService,
         private restaurantService: RestaurantService,
+        private kitchenService: KitchenService,
+        private foodService: FoodService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.pictureService.query()
-            .subscribe((res: HttpResponse<Picture[]>) => { this.pictures = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.userService.query()
             .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.pictureService.query()
+            .subscribe((res: HttpResponse<Picture[]>) => { this.pictures = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.cityService.query()
             .subscribe((res: HttpResponse<City[]>) => { this.cities = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.restaurantService.query()
             .subscribe((res: HttpResponse<Restaurant[]>) => { this.restaurants = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.kitchenService.query()
+            .subscribe((res: HttpResponse<Kitchen[]>) => { this.kitchens = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.foodService.query()
+            .subscribe((res: HttpResponse<Food[]>) => { this.foods = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -89,11 +101,11 @@ export class UserInfoDialogComponent implements OnInit {
         this.jhiAlertService.error(error.message, null, null);
     }
 
-    trackPictureById(index: number, item: Picture) {
+    trackUserById(index: number, item: User) {
         return item.id;
     }
 
-    trackUserById(index: number, item: User) {
+    trackPictureById(index: number, item: Picture) {
         return item.id;
     }
 
@@ -102,6 +114,14 @@ export class UserInfoDialogComponent implements OnInit {
     }
 
     trackRestaurantById(index: number, item: Restaurant) {
+        return item.id;
+    }
+
+    trackKitchenById(index: number, item: Kitchen) {
+        return item.id;
+    }
+
+    trackFoodById(index: number, item: Food) {
         return item.id;
     }
 

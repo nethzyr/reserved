@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../shared';
-import { RestaurantComponent } from './restaurant.component';
-import { RestaurantDetailComponent } from './restaurant-detail.component';
-import { RestaurantPopupComponent } from './restaurant-dialog.component';
-import { RestaurantDeletePopupComponent } from './restaurant-delete-dialog.component';
+import {UserRouteAccessService} from '../../shared';
+import {RestaurantComponent} from './restaurant.component';
+import {RestaurantDetailComponent} from './restaurant-detail.component';
+import {RestaurantPopupComponent} from './restaurant-dialog.component';
+import {RestaurantDeletePopupComponent} from './restaurant-delete-dialog.component';
 
 @Injectable()
 export class RestaurantResolvePagingParams implements Resolve<any> {

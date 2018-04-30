@@ -3,7 +3,7 @@
     "reservedApp": {
         "userInfo" : {
             "home": {
-                "title": "UserInfo",
+                "title": "UserInfos",
                 "createLabel": "Egy új User Info létrehozása",
                 "createOrEditLabel": "Hozzon létre, vagy módosítson User Infot",
                 "search": "User Info keresése"
@@ -19,10 +19,12 @@
             },
             "facebook": "Facebook",
             "phone": "Phone",
-            "picture": "Picture",
             "user": "User",
+            "picture": "Picture",
             "preferredCity": "Preferred City",
-            "favoriteRestaurant": "Favorite Restaurant"
+            "favoriteRestaurant": "Favorite Restaurant",
+            "favoriteKitchen": "Favorite Kitchen",
+            "favoriteFood": "Favorite Food"
         }
     }
 }

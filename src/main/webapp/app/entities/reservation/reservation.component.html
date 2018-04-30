@@ -31,6 +31,7 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="time"><span jhiTranslate="reservedApp.reservation.time">Time</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="people"><span jhiTranslate="reservedApp.reservation.people">People</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="confirmed"><span jhiTranslate="reservedApp.reservation.confirmed">Confirmed</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="restaurant.name"><span jhiTranslate="reservedApp.reservation.restaurant">Restaurant</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="user.login"><span jhiTranslate="reservedApp.reservation.user">User</span> <span class="fa fa-sort"></span></th>
@@ -41,6 +42,7 @@
             <tr *ngFor="let reservation of reservations ;trackBy: trackId">
                 <td><a [routerLink]="['../reservation', reservation.id ]">{{reservation.id}}</a></td>
                 <td>{{reservation.time | date:'medium'}}</td>
+                <td>{{reservation.people}}</td>
                 <td>{{reservation.confirmed}}</td>
                 <td>
                     <div *ngIf="reservation.restaurant">
@@ -54,7 +56,7 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../reservation', reservation.id ]"
-                                class="btn btn-info ">
+                                class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
@@ -62,7 +64,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'reservation/'+ reservation.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-primary ">
+                                class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
@@ -70,7 +72,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'reservation/'+ reservation.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger ">
+                                class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>

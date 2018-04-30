@@ -12,15 +12,15 @@
         <dd>
             <span>{{userInfo.phone}}</span>
         </dd>
-        <dt><span jhiTranslate="reservedApp.userInfo.picture">Picture</span></dt>
-        <dd>
-            <div *ngIf="userInfo.picture">
-                <a [routerLink]="['/picture', userInfo.picture?.id]">{{userInfo.picture?.url}}</a>
-            </div>
-        </dd>
         <dt><span jhiTranslate="reservedApp.userInfo.user">User</span></dt>
         <dd>
             {{userInfo.user?.login}}
+        </dd>
+        <dt><span jhiTranslate="reservedApp.userInfo.picture">Picture</span></dt>
+        <dd>
+            <div *ngIf="userInfo.picture">
+                <a [routerLink]="['/picture', userInfo.picture?.id]">{{userInfo.picture?.title}}</a>
+            </div>
         </dd>
         <dt><span jhiTranslate="reservedApp.userInfo.preferredCity">Preferred City</span></dt>
         <dd>
@@ -32,6 +32,18 @@
         <dd>
             <span *ngFor="let favoriteRestaurant of userInfo.favoriteRestaurants; let last = last">
                 <a [routerLink]="['/restaurant', favoriteRestaurant?.id ]">{{favoriteRestaurant.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.userInfo.favoriteKitchen">Favorite Kitchen</span></dt>
+        <dd>
+            <span *ngFor="let favoriteKitchen of userInfo.favoriteKitchens; let last = last">
+                <a [routerLink]="['/kitchen', favoriteKitchen?.id ]">{{favoriteKitchen.type}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.userInfo.favoriteFood">Favorite Food</span></dt>
+        <dd>
+            <span *ngFor="let favoriteFood of userInfo.favoriteFoods; let last = last">
+                <a [routerLink]="['/food', favoriteFood?.id ]">{{favoriteFood.type}}</a>{{last ? '' : ', '}}
             </span>
         </dd>
     </dl>

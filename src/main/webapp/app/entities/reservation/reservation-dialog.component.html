@@ -30,6 +30,21 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="form-control-label" jhiTranslate="reservedApp.reservation.people" for="field_people">People</label>
+            <input type="number" class="form-control" name="people" id="field_people"
+                [(ngModel)]="reservation.people" required/>
+            <div [hidden]="!(editForm.controls.people?.dirty && editForm.controls.people?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.people?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.people?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.reservation.confirmed" for="field_confirmed">Confirmed</label>
             <input type="checkbox" class="form-control" name="confirmed" id="field_confirmed"
                 [(ngModel)]="reservation.confirmed" />

@@ -2,14 +2,13 @@ package com.elte.reserved.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A UserInfo.
@@ -32,12 +31,12 @@ public class UserInfo implements Serializable {
     @Column(name = "phone")
     private String phone;
 
-    @ManyToOne
-    private Picture picture;
-
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
+
+    @ManyToOne
+    private Picture picture;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -52,6 +51,20 @@ public class UserInfo implements Serializable {
                joinColumns = @JoinColumn(name="user_infos_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="favorite_restaurants_id", referencedColumnName="id"))
     private Set<Restaurant> favoriteRestaurants = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "user_info_favorite_kitchen",
+               joinColumns = @JoinColumn(name="user_infos_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="favorite_kitchens_id", referencedColumnName="id"))
+    private Set<Kitchen> favoriteKitchens = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "user_info_favorite_food",
+               joinColumns = @JoinColumn(name="user_infos_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="favorite_foods_id", referencedColumnName="id"))
+    private Set<Food> favoriteFoods = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -88,19 +101,6 @@ public class UserInfo implements Serializable {
         this.phone = phone;
     }
 
-    public Picture getPicture() {
-        return picture;
-    }
-
-    public UserInfo picture(Picture picture) {
-        this.picture = picture;
-        return this;
-    }
-
-    public void setPicture(Picture picture) {
-        this.picture = picture;
-    }
-
     public User getUser() {
         return user;
     }
@@ -112,6 +112,19 @@ public class UserInfo implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public UserInfo picture(Picture picture) {
+        this.picture = picture;
+        return this;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 
     public Set<City> getPreferredCities() {
@@ -158,6 +171,52 @@ public class UserInfo implements Serializable {
 
     public void setFavoriteRestaurants(Set<Restaurant> restaurants) {
         this.favoriteRestaurants = restaurants;
+    }
+
+    public Set<Kitchen> getFavoriteKitchens() {
+        return favoriteKitchens;
+    }
+
+    public UserInfo favoriteKitchens(Set<Kitchen> kitchens) {
+        this.favoriteKitchens = kitchens;
+        return this;
+    }
+
+    public UserInfo addFavoriteKitchen(Kitchen kitchen) {
+        this.favoriteKitchens.add(kitchen);
+        return this;
+    }
+
+    public UserInfo removeFavoriteKitchen(Kitchen kitchen) {
+        this.favoriteKitchens.remove(kitchen);
+        return this;
+    }
+
+    public void setFavoriteKitchens(Set<Kitchen> kitchens) {
+        this.favoriteKitchens = kitchens;
+    }
+
+    public Set<Food> getFavoriteFoods() {
+        return favoriteFoods;
+    }
+
+    public UserInfo favoriteFoods(Set<Food> foods) {
+        this.favoriteFoods = foods;
+        return this;
+    }
+
+    public UserInfo addFavoriteFood(Food food) {
+        this.favoriteFoods.add(food);
+        return this;
+    }
+
+    public UserInfo removeFavoriteFood(Food food) {
+        this.favoriteFoods.remove(food);
+        return this;
+    }
+
+    public void setFavoriteFoods(Set<Food> foods) {
+        this.favoriteFoods = foods;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

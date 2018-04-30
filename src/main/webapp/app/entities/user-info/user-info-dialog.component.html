@@ -24,17 +24,17 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.userInfo.picture" for="field_picture">Picture</label>
-            <select class="form-control" id="field_picture" name="picture" [(ngModel)]="userInfo.picture" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="pictureOption.id === userInfo.picture?.id ? userInfo.picture : pictureOption" *ngFor="let pictureOption of pictures; trackBy: trackPictureById">{{pictureOption.url}}</option>
-            </select>
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.userInfo.user" for="field_user">User</label>
             <select class="form-control" id="field_user" name="user" [(ngModel)]="userInfo.user" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="userOption.id === userInfo.user?.id ? userInfo.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="reservedApp.userInfo.picture" for="field_picture">Picture</label>
+            <select class="form-control" id="field_picture" name="picture" [(ngModel)]="userInfo.picture" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="pictureOption.id === userInfo.picture?.id ? userInfo.picture : pictureOption" *ngFor="let pictureOption of pictures; trackBy: trackPictureById">{{pictureOption.title}}</option>
             </select>
         </div>
         <div class="form-group">
@@ -47,6 +47,18 @@
             <label jhiTranslate="reservedApp.userInfo.favoriteRestaurant" for="field_favoriteRestaurant">Favorite Restaurant</label>
             <select class="form-control" id="field_favoriteRestaurant" multiple name="favoriteRestaurant" [(ngModel)]="userInfo.favoriteRestaurants">
                 <option [ngValue]="getSelected(userInfo.favoriteRestaurants, restaurantOption)" *ngFor="let restaurantOption of restaurants; trackBy: trackRestaurantById">{{restaurantOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="reservedApp.userInfo.favoriteKitchen" for="field_favoriteKitchen">Favorite Kitchen</label>
+            <select class="form-control" id="field_favoriteKitchen" multiple name="favoriteKitchen" [(ngModel)]="userInfo.favoriteKitchens">
+                <option [ngValue]="getSelected(userInfo.favoriteKitchens, kitchenOption)" *ngFor="let kitchenOption of kitchens; trackBy: trackKitchenById">{{kitchenOption.type}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="reservedApp.userInfo.favoriteFood" for="field_favoriteFood">Favorite Food</label>
+            <select class="form-control" id="field_favoriteFood" multiple name="favoriteFood" [(ngModel)]="userInfo.favoriteFoods">
+                <option [ngValue]="getSelected(userInfo.favoriteFoods, foodOption)" *ngFor="let foodOption of foods; trackBy: trackFoodById">{{foodOption.type}}</option>
             </select>
         </div>
     </div>

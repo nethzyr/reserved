@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <property name="now" value="now()" dbms="h2"/>
 
@@ -16,61 +14,92 @@
 
     <changeSet id="20180422205100-1" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/country.csv"
+                  file="config/liquibase/demo_fixtures/country.csv"
                   separator=";"
                   tableName="Country"/>
+    </changeSet>
+    <changeSet id="20180422205100-2" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/state_county.csv"
+                  file="config/liquibase/demo_fixtures/state_county.csv"
                   separator=";"
                   tableName="state_county"/>
+    </changeSet>
+    <changeSet id="20180422205100-3" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/city.csv"
+                  file="config/liquibase/demo_fixtures/city.csv"
                   separator=";"
                   tableName="city"/>
+    </changeSet>
+    <changeSet id="20180422205100-4" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/food.csv"
+                  file="config/liquibase/demo_fixtures/food.csv"
                   separator=";"
                   tableName="food"/>
+    </changeSet>
+    <changeSet id="20180422205100-5" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/kitchen.csv"
+                  file="config/liquibase/demo_fixtures/kitchen.csv"
                   separator=";"
                   tableName="kitchen"/>
+    </changeSet>
+    <changeSet id="20180422205100-6" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/picture.csv"
+                  file="config/liquibase/demo_fixtures/picture.csv"
                   separator=";"
                   tableName="picture"/>
+    </changeSet>
+    <changeSet id="20180422205100-7" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/restaurant.csv"
+                  file="config/liquibase/demo_fixtures/restaurant.csv"
                   separator=";"
                   tableName="restaurant"/>
+    </changeSet>
+    <changeSet id="20180422205100-8" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/restaurant_food.csv"
+                  file="config/liquibase/demo_fixtures/restaurant_food.csv"
                   separator=";"
                   tableName="restaurant_food"/>
+    </changeSet>
+    <changeSet id="20180422205100-9" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/restaurant_kitchen.csv"
+                  file="config/liquibase/demo_fixtures/restaurant_kitchen.csv"
                   separator=";"
                   tableName="restaurant_kitchen"/>
+    </changeSet>
+    <changeSet id="20180422205100-10" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/restaurant_user.csv"
+                  file="config/liquibase/demo_fixtures/restaurant_user.csv"
                   separator=";"
                   tableName="restaurant_user"/>
+    </changeSet>
+    <changeSet id="20180422205100-11" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/user_info.csv"
+                  file="config/liquibase/demo_fixtures/user_info.csv"
                   separator=";"
                   tableName="user_info"/>
+    </changeSet>
+    <changeSet id="20180422205100-12" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/user_info_favorite_restaurant.csv"
+                  file="config/liquibase/demo_fixtures/user_info_favorite_restaurant.csv"
                   separator=";"
                   tableName="user_info_favorite_restaurant"/>
+    </changeSet>
+    <changeSet id="20180422205100-13" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/user_info_preferred_city.csv"
+                  file="config/liquibase/demo_fixtures/user_info_preferred_city.csv"
                   separator=";"
                   tableName="user_info_preferred_city"/>
+    </changeSet>
+    <changeSet id="20180422205100-14" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/reservation.csv"
+                  file="config/liquibase/demo_fixtures/reservation.csv"
                   separator=";"
                   tableName="reservation"/>
     </changeSet>
+    <changeSet id="20180422205100-15" author="rob">
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/demo_fixtures/restaurant_picture.csv"
+                  separator=";"
+                  tableName="restaurant_picture"/>
+    </changeSet>
 </databaseChangeLog>
-

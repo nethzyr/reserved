@@ -8,17 +8,17 @@
     -->
     <changeSet id="20180422180253-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="picture_id"
-                                 baseTableName="user_info"
-                                 constraintName="fk_user_info_picture_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="picture"/>
-
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="user_info"
                                  constraintName="fk_user_info_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="picture_id"
+                                 baseTableName="user_info"
+                                 constraintName="fk_user_info_picture_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="picture"/>
 
         <addForeignKeyConstraint baseColumnNames="user_infos_id"
                                  baseTableName="user_info_preferred_city"
@@ -41,6 +41,28 @@
                                  constraintName="fk_user_info_favorite_restaurant_favorite_restaurants_id"
                                  referencedColumnNames="id"
                                  referencedTableName="restaurant"/>
+        
+        <addForeignKeyConstraint baseColumnNames="user_infos_id"
+                                 baseTableName="user_info_favorite_kitchen"
+                                 constraintName="fk_user_info_favorite_kitchen_user_infos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_info"/>
+        <addForeignKeyConstraint baseColumnNames="favorite_kitchens_id"
+                                 baseTableName="user_info_favorite_kitchen"
+                                 constraintName="fk_user_info_favorite_kitchen_favorite_kitchens_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="kitchen"/>
+        
+        <addForeignKeyConstraint baseColumnNames="user_infos_id"
+                                 baseTableName="user_info_favorite_food"
+                                 constraintName="fk_user_info_favorite_food_user_infos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_info"/>
+        <addForeignKeyConstraint baseColumnNames="favorite_foods_id"
+                                 baseTableName="user_info_favorite_food"
+                                 constraintName="fk_user_info_favorite_food_favorite_foods_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="food"/>
         
     </changeSet>
 </databaseChangeLog>

@@ -1,9 +1,10 @@
-import { BaseEntity, User } from './../../shared';
+import {BaseEntity, User} from './../../shared';
 
 export class Reservation implements BaseEntity {
     constructor(
         public id?: number,
         public time?: any,
+        public people?: number,
         public confirmed?: boolean,
         public restaurant?: BaseEntity,
         public user?: User,

@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Restaurant } from './restaurant.model';
-import { RestaurantService } from './restaurant.service';
+import {Restaurant} from './restaurant.model';
+import {RestaurantService} from './restaurant.service';
 
 @Component({
     selector: 'jhi-restaurant-detail',
@@ -19,7 +19,6 @@ export class RestaurantDetailComponent implements OnInit, OnDestroy {
 
     constructor(
         private eventManager: JhiEventManager,
-        private dataUtils: JhiDataUtils,
         private restaurantService: RestaurantService,
         private route: ActivatedRoute
     ) {
@@ -37,13 +36,6 @@ export class RestaurantDetailComponent implements OnInit, OnDestroy {
             .subscribe((restaurantResponse: HttpResponse<Restaurant>) => {
                 this.restaurant = restaurantResponse.body;
             });
-    }
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
     }
     previousState() {
         window.history.back();

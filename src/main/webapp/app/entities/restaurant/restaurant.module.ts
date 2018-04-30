@@ -1,20 +1,20 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { ReservedSharedModule } from '../../shared';
-import { ReservedAdminModule } from '../../admin/admin.module';
+import {ReservedSharedModule} from '../../shared';
+import {ReservedAdminModule} from '../../admin/admin.module';
 import {
-    RestaurantService,
-    RestaurantPopupService,
     RestaurantComponent,
+    RestaurantDeleteDialogComponent,
+    RestaurantDeletePopupComponent,
     RestaurantDetailComponent,
     RestaurantDialogComponent,
     RestaurantPopupComponent,
-    RestaurantDeletePopupComponent,
-    RestaurantDeleteDialogComponent,
-    restaurantRoute,
     restaurantPopupRoute,
+    RestaurantPopupService,
     RestaurantResolvePagingParams,
+    restaurantRoute,
+    RestaurantService,
 } from './';
 
 const ENTITY_STATES = [

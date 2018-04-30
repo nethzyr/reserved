@@ -3,34 +3,34 @@
     "reservedApp": {
         "restaurant" : {
             "home": {
-                "title": "Éttermek",
-                "createLabel": "Egy új Étterem létrehozása",
-                "createOrEditLabel": "Hozzon létre, vagy módosítson Éttermet",
-                "search": "Étterem keresése"
+                "title": "Restaurants",
+                "createLabel": "Egy új Restaurant létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Restaurantt",
+                "search": "Restaurant keresése"
             },
-            "created": "Egy új Étterem lett létrehozva {{ param }} azonosítóval",
-            "updated": "Az Étterem módosítva lett {{ param }} azonosítóval",
-            "deleted": "Az Étterem törölve lett {{ param }} azonosítóval",
+            "created": "Egy új Restaurant lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Restaurant módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Restaurant törölve lett {{ param }} azonosítóval",
             "delete": {
-                "question": "Biztos benne, hogy törölni szeretné az Éttermet {{ id }} azonosítóval?"
+                "question": "Biztos benne, hogy törölni szeretné az Restaurantt {{ id }} azonosítóval?"
             },
             "detail": {
-                "title": "Étterem"
+                "title": "Restaurant"
             },
-            "name": "Név",
-            "streetAddress": "Cím",
-            "postalCode": "Irányítószám",
+            "name": "Name",
+            "streetAddress": "Street Address",
+            "postalCode": "Postal Code",
             "info": "Info",
             "email": "Email",
-            "phone": "Telefon",
-            "website": "Weboldal",
+            "phone": "Phone",
+            "website": "Website",
             "facebook": "Facebook",
             "googlePlaceId": "Google Place Id",
-            "city": "Város",
-            "kitchen": "Konyha",
-            "food": "Étel",
-            "picture": "Kép",
-            "user": "Felhasználó"
+            "city": "City",
+            "kitchen": "Kitchen",
+            "food": "Food",
+            "picture": "Picture",
+            "user": "User"
         }
     }
 }

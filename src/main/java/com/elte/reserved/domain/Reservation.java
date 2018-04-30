@@ -2,11 +2,10 @@ package com.elte.reserved.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import org.springframework.data.elasticsearch.annotations.Document;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -29,6 +28,10 @@ public class Reservation implements Serializable {
     @NotNull
     @Column(name = "jhi_time", nullable = false)
     private Instant time;
+
+    @NotNull
+    @Column(name = "people", nullable = false)
+    private Integer people;
 
     @Column(name = "confirmed")
     private Boolean confirmed;
@@ -61,6 +64,19 @@ public class Reservation implements Serializable {
 
     public void setTime(Instant time) {
         this.time = time;
+    }
+
+    public Integer getPeople() {
+        return people;
+    }
+
+    public Reservation people(Integer people) {
+        this.people = people;
+        return this;
+    }
+
+    public void setPeople(Integer people) {
+        this.people = people;
     }
 
     public Boolean isConfirmed() {
@@ -128,6 +144,7 @@ public class Reservation implements Serializable {
         return "Reservation{" +
             "id=" + getId() +
             ", time='" + getTime() + "'" +
+            ", people=" + getPeople() +
             ", confirmed='" + isConfirmed() + "'" +
             "}";
     }

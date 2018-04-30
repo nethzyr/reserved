@@ -1,5 +1,5 @@
-import { browser, element, by } from 'protractor';
-import { NavBarPage } from './../page-objects/jhi-page-objects';
+import {browser, by, element} from 'protractor';
+import {NavBarPage} from './../page-objects/jhi-page-objects';
 
 describe('Restaurant e2e test', () => {
 
@@ -85,7 +85,7 @@ export class RestaurantDialogPage {
     nameInput = element(by.css('input#field_name'));
     streetAddressInput = element(by.css('input#field_streetAddress'));
     postalCodeInput = element(by.css('input#field_postalCode'));
-    infoInput = element(by.css('textarea#field_info'));
+    infoInput = element(by.css('input#field_info'));
     emailInput = element(by.css('input#field_email'));
     phoneInput = element(by.css('input#field_phone'));
     websiteInput = element(by.css('input#field_website'));

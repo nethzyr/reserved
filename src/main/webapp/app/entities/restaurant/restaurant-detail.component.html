@@ -61,7 +61,7 @@
         <dt><span jhiTranslate="reservedApp.restaurant.picture">Picture</span></dt>
         <dd>
             <span *ngFor="let picture of restaurant.pictures; let last = last">
-                <a [routerLink]="['/picture', picture?.id ]">{{picture.url}}</a>{{last ? '' : ', '}}
+                <a [routerLink]="['/picture', picture?.id ]">{{picture.title}}</a>{{last ? '' : ', '}}
             </span>
         </dd>
         <dt><span jhiTranslate="reservedApp.restaurant.user">User</span></dt>
