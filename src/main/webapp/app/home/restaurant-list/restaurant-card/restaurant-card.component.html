@@ -1,11 +1,22 @@
-<div class="card">
-    <div class="wrapper">
-        <img class="card-img img-fluid" [src]="restaurant.pictures[0]?.url || 'https://www.emyspot.com/medias/images/page404.png'" alt="asd">
-    </div>
-    <div class="card-body line-clamp">
-        <h4>{{restaurant.name}}</h4>
-        <div class="card-text">
-            <p>{{restaurant.info}}</p>
+<section class="wrapper">
+    <div class="container-fostrap">
+        <div class="content">
+            <div class="card">
+                <div class="img-card">
+                    <img class="card-img img-fluid" [src]="restaurant.pictures[0]?.url || 'https://www.emyspot.com/medias/images/page404.png'" alt="picture">
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">
+                        {{restaurant.name}}
+                    </h4>
+                    <span class="btn btn-primary" *ngFor="let kitchen of restaurant.kitchens">
+                        {{kitchen.type}}
+                    </span>
+                </div>
+                <div class="card-read-more">
+                    <span>{{restaurant.postalCode}} {{restaurant.city.name}} {{restaurant.streetAddress}}</span>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
