@@ -1,23 +1,34 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ReservationService} from '../../entities/reservation';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbDateStruct, NgbModal, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import {Restaurant} from '../../entities/restaurant';
 import {Principal} from '../../shared';
+
+const now = new Date();
 
 @Component({
   selector: 'jhi-reservation-modal',
   templateUrl: './reservation.component.html',
-  styles: []
+    styleUrls: [
+        'reservation.scss'
+    ]
 })
-export class ReservationComponent {
+export class ReservationComponent implements OnInit {
     @Input() restaurant: Restaurant;
     closeResult: string;
+    dateModel: NgbDateStruct;
+    timeModel: NgbTimeStruct;
 
     constructor(
       private reservationService: ReservationService,
       private modalService: NgbModal,
       private principal: Principal
     ) { }
+
+    selectToday() {
+        this.dateModel = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+        this.timeModel = {hour: now.getHours(), minute: Math.ceil(now.getMinutes() / 30) * 30, second: now.getSeconds()};
+    }
 
     open(content) {
         console.log(this.restaurant);
@@ -40,6 +51,10 @@ export class ReservationComponent {
 
     isAuthenticated() {
         return this.principal.isAuthenticated();
+    }
+
+    ngOnInit(): void {
+        this.selectToday();
     }
 
 }
