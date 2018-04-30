@@ -7,6 +7,7 @@ import {HOME_ROUTE, HomeComponent} from './';
 import {RestaurantListComponent} from './restaurant-list/restaurant-list.component';
 import {RestaurantCardComponent} from './restaurant-list/restaurant-card/restaurant-card.component';
 import {RestaurantDetailComponent} from './restaurant-detail/restaurant-detail.component';
+import {ReservationComponent} from './reservation/reservation.component';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import {RestaurantDetailComponent} from './restaurant-detail/restaurant-detail.c
         HomeComponent,
         RestaurantListComponent,
         RestaurantCardComponent,
-        RestaurantDetailComponent
+        RestaurantDetailComponent,
+        ReservationComponent
     ],
     entryComponents: [
     ],

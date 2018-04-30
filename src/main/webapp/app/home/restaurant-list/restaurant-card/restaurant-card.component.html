@@ -9,9 +9,11 @@
                     <h4 class="card-title">
                         {{restaurant.name}}
                     </h4>
-                    <span class="btn btn-primary" *ngFor="let kitchen of restaurant.kitchens">
+                    <span class="btn btn-outline-" *ngFor="let kitchen of restaurant.kitchens">
                         {{kitchen.type}}
                     </span>
+                    <br>
+                    <jhi-reservation-modal [restaurant]="restaurant"></jhi-reservation-modal>
                 </div>
                 <div class="card-read-more">
                     <span>{{restaurant.postalCode}} {{restaurant.city.name}} {{restaurant.streetAddress}}</span>
