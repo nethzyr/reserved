@@ -1,6 +1,7 @@
+
 {
     "reservedApp": {
-        "restaurant": {
+        "restaurant" : {
             "home": {
                 "title": "Restaurants",
                 "createLabel": "Create a new Restaurant",
@@ -26,10 +27,10 @@
             "facebook": "Facebook",
             "googlePlaceId": "Google Place Id",
             "city": "City",
+            "user": "User",
             "kitchen": "Kitchen",
             "food": "Food",
-            "picture": "Picture",
-            "user": "User"
+            "picture": "Picture"
         }
     }
 }

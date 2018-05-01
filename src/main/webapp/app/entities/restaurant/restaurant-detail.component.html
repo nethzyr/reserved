@@ -1,3 +1,4 @@
+
 <div *ngIf="restaurant">
     <h2><span jhiTranslate="reservedApp.restaurant.detail.title">Restaurant</span> {{restaurant.id}}</h2>
     <hr>
@@ -45,6 +46,10 @@
                 <a [routerLink]="['/city', restaurant.city?.id]">{{restaurant.city?.name}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="reservedApp.restaurant.user">User</span></dt>
+        <dd>
+            {{restaurant.user?.login}}
+        </dd>
         <dt><span jhiTranslate="reservedApp.restaurant.kitchen">Kitchen</span></dt>
         <dd>
             <span *ngFor="let kitchen of restaurant.kitchens; let last = last">
@@ -61,12 +66,6 @@
         <dd>
             <span *ngFor="let picture of restaurant.pictures; let last = last">
                 <a [routerLink]="['/picture', picture?.id ]">{{picture.title}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span jhiTranslate="reservedApp.restaurant.user">User</span></dt>
-        <dd>
-            <span *ngFor="let user of restaurant.users; let last = last">
-                {{user.login}}{{last ? '' : ', '}}
             </span>
         </dd>
     </dl>

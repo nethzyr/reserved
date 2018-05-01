@@ -88,9 +88,20 @@ public class RestaurantResourceIntTest {
 
     private Restaurant restaurant;
 
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        final RestaurantResource restaurantResource = new RestaurantResource(restaurantRepository, restaurantSearchRepository);
+        this.restRestaurantMockMvc = MockMvcBuilders.standaloneSetup(restaurantResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+    }
+
     /**
      * Create an entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -114,19 +125,8 @@ public class RestaurantResourceIntTest {
         User user = UserResourceIntTest.createEntity(em);
         em.persist(user);
         em.flush();
-        restaurant.getUsers().add(user);
+        restaurant.setUser(user);
         return restaurant;
-    }
-
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final RestaurantResource restaurantResource = new RestaurantResource(restaurantRepository, restaurantSearchRepository);
-        this.restRestaurantMockMvc = MockMvcBuilders.standaloneSetup(restaurantResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
     }
 
     @Before

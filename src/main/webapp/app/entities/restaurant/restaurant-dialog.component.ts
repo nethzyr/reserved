@@ -10,10 +10,10 @@ import {Restaurant} from './restaurant.model';
 import {RestaurantPopupService} from './restaurant-popup.service';
 import {RestaurantService} from './restaurant.service';
 import {City, CityService} from '../city';
+import {User, UserService} from '../../shared';
 import {Kitchen, KitchenService} from '../kitchen';
 import {Food, FoodService} from '../food';
 import {Picture, PictureService} from '../picture';
-import {User, UserService} from '../../shared';
 
 @Component({
     selector: 'jhi-restaurant-dialog',
@@ -26,23 +26,23 @@ export class RestaurantDialogComponent implements OnInit {
 
     cities: City[];
 
+    users: User[];
+
     kitchens: Kitchen[];
 
     foods: Food[];
 
     pictures: Picture[];
 
-    users: User[];
-
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private restaurantService: RestaurantService,
         private cityService: CityService,
+        private userService: UserService,
         private kitchenService: KitchenService,
         private foodService: FoodService,
         private pictureService: PictureService,
-        private userService: UserService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -50,25 +50,15 @@ export class RestaurantDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.cityService.query()
-            .subscribe((res: HttpResponse<City[]>) => {
-                this.cities = res.body;
-            }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.kitchenService.query()
-            .subscribe((res: HttpResponse<Kitchen[]>) => {
-                this.kitchens = res.body;
-            }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.foodService.query()
-            .subscribe((res: HttpResponse<Food[]>) => {
-                this.foods = res.body;
-            }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.pictureService.query()
-            .subscribe((res: HttpResponse<Picture[]>) => {
-                this.pictures = res.body;
-            }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<City[]>) => { this.cities = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.userService.query()
-            .subscribe((res: HttpResponse<User[]>) => {
-                this.users = res.body;
-            }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.kitchenService.query()
+            .subscribe((res: HttpResponse<Kitchen[]>) => { this.kitchens = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.foodService.query()
+            .subscribe((res: HttpResponse<Food[]>) => { this.foods = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.pictureService.query()
+            .subscribe((res: HttpResponse<Picture[]>) => { this.pictures = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -86,7 +76,30 @@ export class RestaurantDialogComponent implements OnInit {
         }
     }
 
+    private subscribeToSaveResponse(result: Observable<HttpResponse<Restaurant>>) {
+        result.subscribe((res: HttpResponse<Restaurant>) =>
+            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
+    }
+
+    private onSaveSuccess(result: Restaurant) {
+        this.eventManager.broadcast({ name: 'restaurantListModification', content: 'OK'});
+        this.isSaving = false;
+        this.activeModal.dismiss(result);
+    }
+
+    private onSaveError() {
+        this.isSaving = false;
+    }
+
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
     trackCityById(index: number, item: City) {
+        return item.id;
+    }
+
+    trackUserById(index: number, item: User) {
         return item.id;
     }
 
@@ -102,10 +115,6 @@ export class RestaurantDialogComponent implements OnInit {
         return item.id;
     }
 
-    trackUserById(index: number, item: User) {
-        return item.id;
-    }
-
     getSelected(selectedVals: Array<any>, option: any) {
         if (selectedVals) {
             for (let i = 0; i < selectedVals.length; i++) {
@@ -115,25 +124,6 @@ export class RestaurantDialogComponent implements OnInit {
             }
         }
         return option;
-    }
-
-    private subscribeToSaveResponse(result: Observable<HttpResponse<Restaurant>>) {
-        result.subscribe((res: HttpResponse<Restaurant>) =>
-            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
-    }
-
-    private onSaveSuccess(result: Restaurant) {
-        this.eventManager.broadcast({name: 'restaurantListModification', content: 'OK'});
-        this.isSaving = false;
-        this.activeModal.dismiss(result);
-    }
-
-    private onSaveError() {
-        this.isSaving = false;
-    }
-
-    private onError(error: any) {
-        this.jhiAlertService.error(error.message, null, null);
     }
 }
 
@@ -148,12 +138,11 @@ export class RestaurantPopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private restaurantPopupService: RestaurantPopupService
-    ) {
-    }
+    ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if (params['id']) {
+            if ( params['id'] ) {
                 this.restaurantPopupService
                     .open(RestaurantDialogComponent as Component, params['id']);
             } else {

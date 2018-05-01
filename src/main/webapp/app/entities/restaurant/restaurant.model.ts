@@ -13,10 +13,10 @@ export class Restaurant implements BaseEntity {
         public facebook?: string,
         public googlePlaceId?: string,
         public city?: BaseEntity,
+        public user?: User,
         public kitchens?: BaseEntity[],
         public foods?: BaseEntity[],
         public pictures?: BaseEntity[],
-        public users?: User[],
     ) {
     }
 }

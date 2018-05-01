@@ -11,42 +11,41 @@ export type EntityResponseType = HttpResponse<Restaurant>;
 @Injectable()
 export class RestaurantService {
 
-    private resourceUrl = SERVER_API_URL + 'api/restaurants';
+    private resourceUrl =  SERVER_API_URL + 'api/restaurants';
     private resourceSearchUrl = SERVER_API_URL + 'api/_search/restaurants';
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) { }
 
     create(restaurant: Restaurant): Observable<EntityResponseType> {
         const copy = this.convert(restaurant);
-        return this.http.post<Restaurant>(this.resourceUrl, copy, {observe: 'response'})
+        return this.http.post<Restaurant>(this.resourceUrl, copy, { observe: 'response' })
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
     update(restaurant: Restaurant): Observable<EntityResponseType> {
         const copy = this.convert(restaurant);
-        return this.http.put<Restaurant>(this.resourceUrl, copy, {observe: 'response'})
+        return this.http.put<Restaurant>(this.resourceUrl, copy, { observe: 'response' })
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
     find(id: number): Observable<EntityResponseType> {
-        return this.http.get<Restaurant>(`${this.resourceUrl}/${id}`, {observe: 'response'})
+        return this.http.get<Restaurant>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<Restaurant[]>> {
         const options = createRequestOption(req);
-        return this.http.get<Restaurant[]>(this.resourceUrl, {params: options, observe: 'response'})
+        return this.http.get<Restaurant[]>(this.resourceUrl, { params: options, observe: 'response' })
             .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
-        return this.http.delete<any>(`${this.resourceUrl}/${id}`, {observe: 'response'});
+        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }
 
     search(req?: any): Observable<HttpResponse<Restaurant[]>> {
         const options = createRequestOption(req);
-        return this.http.get<Restaurant[]>(this.resourceSearchUrl, {params: options, observe: 'response'})
+        return this.http.get<Restaurant[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
             .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
     }
 

@@ -49,8 +49,7 @@ export class RestaurantDeletePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private restaurantPopupService: RestaurantPopupService
-    ) {
-    }
+    ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {

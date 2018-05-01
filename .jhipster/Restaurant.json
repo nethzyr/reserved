@@ -9,6 +9,13 @@
             "otherEntityField": "name"
         },
         {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "login"
+        },
+        {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "",
             "relationshipName": "kitchen",
@@ -30,15 +37,6 @@
             "relationshipName": "picture",
             "otherEntityName": "picture",
             "otherEntityField": "title",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-many",
-            "relationshipValidateRules": "required",
-            "otherEntityRelationshipName": "",
-            "relationshipName": "user",
-            "otherEntityName": "user",
-            "otherEntityField": "login",
             "ownerSide": true
         }
     ],

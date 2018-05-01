@@ -58,34 +58,30 @@ public class Restaurant implements Serializable {
     @NotNull
     private City city;
 
+    @ManyToOne(optional = false)
+    @NotNull
+    private User user;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "restaurant_kitchen",
-        joinColumns = @JoinColumn(name = "restaurants_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "kitchens_id", referencedColumnName = "id"))
+               joinColumns = @JoinColumn(name="restaurants_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="kitchens_id", referencedColumnName="id"))
     private Set<Kitchen> kitchens = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "restaurant_food",
-        joinColumns = @JoinColumn(name = "restaurants_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "foods_id", referencedColumnName = "id"))
+               joinColumns = @JoinColumn(name="restaurants_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="foods_id", referencedColumnName="id"))
     private Set<Food> foods = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "restaurant_picture",
-        joinColumns = @JoinColumn(name = "restaurants_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "pictures_id", referencedColumnName = "id"))
+               joinColumns = @JoinColumn(name="restaurants_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="pictures_id", referencedColumnName="id"))
     private Set<Picture> pictures = new HashSet<>();
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NotNull
-    @JoinTable(name = "restaurant_user",
-        joinColumns = @JoinColumn(name = "restaurants_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"))
-    private Set<User> users = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -100,21 +96,17 @@ public class Restaurant implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Restaurant name(String name) {
         this.name = name;
         return this;
     }
 
-    public String getStreetAddress() {
-        return streetAddress;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
+    public String getStreetAddress() {
+        return streetAddress;
     }
 
     public Restaurant streetAddress(String streetAddress) {
@@ -122,12 +114,12 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public String getPostalCode() {
-        return postalCode;
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
+    public String getPostalCode() {
+        return postalCode;
     }
 
     public Restaurant postalCode(String postalCode) {
@@ -135,12 +127,12 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public String getInfo() {
-        return info;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public String getInfo() {
+        return info;
     }
 
     public Restaurant info(String info) {
@@ -148,12 +140,12 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public String getEmail() {
-        return email;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getEmail() {
+        return email;
     }
 
     public Restaurant email(String email) {
@@ -161,12 +153,12 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public String getPhone() {
-        return phone;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String getPhone() {
+        return phone;
     }
 
     public Restaurant phone(String phone) {
@@ -174,12 +166,12 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public String getWebsite() {
-        return website;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setWebsite(String website) {
-        this.website = website;
+    public String getWebsite() {
+        return website;
     }
 
     public Restaurant website(String website) {
@@ -187,12 +179,12 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public String getFacebook() {
-        return facebook;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
-    public void setFacebook(String facebook) {
-        this.facebook = facebook;
+    public String getFacebook() {
+        return facebook;
     }
 
     public Restaurant facebook(String facebook) {
@@ -200,12 +192,12 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public String getGooglePlaceId() {
-        return googlePlaceId;
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
     }
 
-    public void setGooglePlaceId(String googlePlaceId) {
-        this.googlePlaceId = googlePlaceId;
+    public String getGooglePlaceId() {
+        return googlePlaceId;
     }
 
     public Restaurant googlePlaceId(String googlePlaceId) {
@@ -213,12 +205,12 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public City getCity() {
-        return city;
+    public void setGooglePlaceId(String googlePlaceId) {
+        this.googlePlaceId = googlePlaceId;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public City getCity() {
+        return city;
     }
 
     public Restaurant city(City city) {
@@ -226,12 +218,25 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public Set<Kitchen> getKitchens() {
-        return kitchens;
+    public void setCity(City city) {
+        this.city = city;
     }
 
-    public void setKitchens(Set<Kitchen> kitchens) {
-        this.kitchens = kitchens;
+    public User getUser() {
+        return user;
+    }
+
+    public Restaurant user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Kitchen> getKitchens() {
+        return kitchens;
     }
 
     public Restaurant kitchens(Set<Kitchen> kitchens) {
@@ -249,12 +254,12 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public Set<Food> getFoods() {
-        return foods;
+    public void setKitchens(Set<Kitchen> kitchens) {
+        this.kitchens = kitchens;
     }
 
-    public void setFoods(Set<Food> foods) {
-        this.foods = foods;
+    public Set<Food> getFoods() {
+        return foods;
     }
 
     public Restaurant foods(Set<Food> foods) {
@@ -272,12 +277,12 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public Set<Picture> getPictures() {
-        return pictures;
+    public void setFoods(Set<Food> foods) {
+        this.foods = foods;
     }
 
-    public void setPictures(Set<Picture> pictures) {
-        this.pictures = pictures;
+    public Set<Picture> getPictures() {
+        return pictures;
     }
 
     public Restaurant pictures(Set<Picture> pictures) {
@@ -295,27 +300,8 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public Restaurant users(Set<User> users) {
-        this.users = users;
-        return this;
-    }
-
-    public Restaurant addUser(User user) {
-        this.users.add(user);
-        return this;
-    }
-
-    public Restaurant removeUser(User user) {
-        this.users.remove(user);
-        return this;
+    public void setPictures(Set<Picture> pictures) {
+        this.pictures = pictures;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

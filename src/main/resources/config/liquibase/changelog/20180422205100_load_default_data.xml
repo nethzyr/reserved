@@ -68,35 +68,29 @@
     </changeSet>
     <changeSet id="20180422205100-10" author="rob">
         <loadData encoding="UTF-8"
-                  file="config/liquibase/demo_fixtures/restaurant_user.csv"
-                  separator=";"
-                  tableName="restaurant_user"/>
-    </changeSet>
-    <changeSet id="20180422205100-11" author="rob">
-        <loadData encoding="UTF-8"
                   file="config/liquibase/demo_fixtures/user_info.csv"
                   separator=";"
                   tableName="user_info"/>
     </changeSet>
-    <changeSet id="20180422205100-12" author="rob">
+    <changeSet id="20180422205100-11" author="rob">
         <loadData encoding="UTF-8"
                   file="config/liquibase/demo_fixtures/user_info_favorite_restaurant.csv"
                   separator=";"
                   tableName="user_info_favorite_restaurant"/>
     </changeSet>
-    <changeSet id="20180422205100-13" author="rob">
+    <changeSet id="20180422205100-12" author="rob">
         <loadData encoding="UTF-8"
                   file="config/liquibase/demo_fixtures/user_info_preferred_city.csv"
                   separator=";"
                   tableName="user_info_preferred_city"/>
     </changeSet>
-    <changeSet id="20180422205100-14" author="rob">
+    <changeSet id="20180422205100-13" author="rob">
         <loadData encoding="UTF-8"
                   file="config/liquibase/demo_fixtures/reservation.csv"
                   separator=";"
                   tableName="reservation"/>
     </changeSet>
-    <changeSet id="20180422205100-15" author="rob">
+    <changeSet id="20180422205100-14" author="rob">
         <loadData encoding="UTF-8"
                   file="config/liquibase/demo_fixtures/restaurant_picture.csv"
                   separator=";"

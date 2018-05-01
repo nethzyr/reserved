@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.elte.reserved.domain.Restaurant;
 import com.elte.reserved.repository.RestaurantRepository;
 import com.elte.reserved.repository.search.RestaurantSearchRepository;
+import com.elte.reserved.security.SecurityUtils;
 import com.elte.reserved.web.rest.errors.BadRequestAlertException;
 import com.elte.reserved.web.rest.util.HeaderUtil;
 import com.elte.reserved.web.rest.util.PaginationUtil;
@@ -23,6 +24,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import static com.elte.reserved.security.AuthoritiesConstants.ADMIN;
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
@@ -32,8 +34,10 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 @RequestMapping("/api")
 public class RestaurantResource {
 
-    private static final String ENTITY_NAME = "restaurant";
     private final Logger log = LoggerFactory.getLogger(RestaurantResource.class);
+
+    private static final String ENTITY_NAME = "restaurant";
+
     private final RestaurantRepository restaurantRepository;
 
     private final RestaurantSearchRepository restaurantSearchRepository;
@@ -96,10 +100,17 @@ public class RestaurantResource {
     @GetMapping("/restaurants")
     @Timed
     public ResponseEntity<List<Restaurant>> getAllRestaurants(Pageable pageable) {
-        log.debug("REST request to get a page of Restaurants");
-        Page<Restaurant> page = restaurantRepository.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        if (SecurityUtils.isCurrentUserInRole(ADMIN)) {
+            log.debug("REST request to get a page of Restaurants");
+            Page<Restaurant> page = restaurantRepository.findAll(pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants");
+            return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        } else {
+            log.debug("REST request to get a page of Restaurants");
+            Page<Restaurant> page = restaurantRepository.findByUserIsCurrentUser(pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants");
+            return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        }
     }
 
     /**
@@ -135,7 +146,7 @@ public class RestaurantResource {
      * SEARCH  /_search/restaurants?query=:query : search for the restaurant corresponding
      * to the query.
      *
-     * @param query    the query of the restaurant search
+     * @param query the query of the restaurant search
      * @param pageable the pagination information
      * @return the result of the search
      */

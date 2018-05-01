@@ -10,10 +10,10 @@ import {RestaurantDialogComponent} from '../../../../../../main/webapp/app/entit
 import {RestaurantService} from '../../../../../../main/webapp/app/entities/restaurant/restaurant.service';
 import {Restaurant} from '../../../../../../main/webapp/app/entities/restaurant/restaurant.model';
 import {CityService} from '../../../../../../main/webapp/app/entities/city';
+import {UserService} from '../../../../../../main/webapp/app/shared';
 import {KitchenService} from '../../../../../../main/webapp/app/entities/kitchen';
 import {FoodService} from '../../../../../../main/webapp/app/entities/food';
 import {PictureService} from '../../../../../../main/webapp/app/entities/picture';
-import {UserService} from '../../../../../../main/webapp/app/shared';
 
 describe('Component Tests', () => {
 
@@ -30,15 +30,15 @@ describe('Component Tests', () => {
                 declarations: [RestaurantDialogComponent],
                 providers: [
                     CityService,
+                    UserService,
                     KitchenService,
                     FoodService,
                     PictureService,
-                    UserService,
                     RestaurantService
                 ]
             })
-                .overrideTemplate(RestaurantDialogComponent, '')
-                .compileComponents();
+            .overrideTemplate(RestaurantDialogComponent, '')
+            .compileComponents();
         }));
 
         beforeEach(() => {
@@ -64,10 +64,7 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.update).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({
-                            name: 'restaurantListModification',
-                            content: 'OK'
-                        });
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'restaurantListModification', content: 'OK'});
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )
@@ -87,10 +84,7 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.create).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({
-                            name: 'restaurantListModification',
-                            content: 'OK'
-                        });
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'restaurantListModification', content: 'OK'});
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )

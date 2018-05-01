@@ -51,6 +51,7 @@ relationship ManyToOne {
 	Restaurant{city(name) required} to City
     City{stateCounty(name) required} to StateCounty
     StateCounty{country(name) required} to Country
+    Restaurant{user(login) required} to User
     
     Reservation{restaurant(name) required} to Restaurant
     Reservation{user(login) required} to User
@@ -62,7 +63,6 @@ relationship ManyToMany {
     Restaurant{kitchen(type)} to Kitchen
     Restaurant{food(type)} to Food
     Restaurant{picture(title)} to Picture
-    Restaurant{user(login) required} to User
     
     UserInfo{preferredCity(name)} to City
     UserInfo{favoriteRestaurant(name)} to Restaurant

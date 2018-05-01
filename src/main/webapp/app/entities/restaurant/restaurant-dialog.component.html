@@ -1,129 +1,112 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
     <div class="modal-header">
-        <h4 class="modal-title" id="myRestaurantLabel" jhiTranslate="reservedApp.restaurant.home.createOrEditLabel">
-            Create or edit a Restaurant</h4>
+        <h4 class="modal-title" id="myRestaurantLabel" jhiTranslate="reservedApp.restaurant.home.createOrEditLabel">Create or edit a Restaurant</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                (click)="clear()">&times;
-        </button>
+                (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <div class="form-group" [hidden]="!restaurant.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
-                   [(ngModel)]="restaurant.id" readonly/>
+                   [(ngModel)]="restaurant.id" readonly />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.name" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                   [(ngModel)]="restaurant.name" required/>
+                [(ngModel)]="restaurant.name" required/>
             <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
                 <small class="form-text text-danger"
-                       [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                    This field is required.
+                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
                 </small>
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.streetAddress"
-                   for="field_streetAddress">Street Address</label>
+            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.streetAddress" for="field_streetAddress">Street Address</label>
             <input type="text" class="form-control" name="streetAddress" id="field_streetAddress"
-                   [(ngModel)]="restaurant.streetAddress"/>
+                [(ngModel)]="restaurant.streetAddress" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.postalCode" for="field_postalCode">Postal
-                Code</label>
+            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.postalCode" for="field_postalCode">Postal Code</label>
             <input type="text" class="form-control" name="postalCode" id="field_postalCode"
-                   [(ngModel)]="restaurant.postalCode"/>
+                [(ngModel)]="restaurant.postalCode" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.info" for="field_info">Info</label>
             <input type="text" class="form-control" name="info" id="field_info"
-                   [(ngModel)]="restaurant.info"/>
+                [(ngModel)]="restaurant.info" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.email"
-                   for="field_email">Email</label>
+            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.email" for="field_email">Email</label>
             <input type="text" class="form-control" name="email" id="field_email"
-                   [(ngModel)]="restaurant.email"/>
+                [(ngModel)]="restaurant.email" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.phone"
-                   for="field_phone">Phone</label>
+            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.phone" for="field_phone">Phone</label>
             <input type="text" class="form-control" name="phone" id="field_phone"
-                   [(ngModel)]="restaurant.phone"/>
+                [(ngModel)]="restaurant.phone" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.website"
-                   for="field_website">Website</label>
+            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.website" for="field_website">Website</label>
             <input type="text" class="form-control" name="website" id="field_website"
-                   [(ngModel)]="restaurant.website"/>
+                [(ngModel)]="restaurant.website" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.facebook" for="field_facebook">Facebook</label>
             <input type="text" class="form-control" name="facebook" id="field_facebook"
-                   [(ngModel)]="restaurant.facebook"/>
+                [(ngModel)]="restaurant.facebook" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.googlePlaceId"
-                   for="field_googlePlaceId">Google Place Id</label>
+            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.googlePlaceId" for="field_googlePlaceId">Google Place Id</label>
             <input type="text" class="form-control" name="googlePlaceId" id="field_googlePlaceId"
-                   [(ngModel)]="restaurant.googlePlaceId"/>
+                [(ngModel)]="restaurant.googlePlaceId" />
         </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.city" for="field_city">City</label>
-            <select class="form-control" id="field_city" name="city" [(ngModel)]="restaurant.city" required>
+            <select class="form-control" id="field_city" name="city" [(ngModel)]="restaurant.city"  required>
                 <option *ngIf="!editForm.value.city" [ngValue]="null" selected></option>
-                <option [ngValue]="cityOption.id === restaurant.city?.id ? restaurant.city : cityOption"
-                        *ngFor="let cityOption of cities; trackBy: trackCityById">{{cityOption.name}}
-                </option>
+                <option [ngValue]="cityOption.id === restaurant.city?.id ? restaurant.city : cityOption" *ngFor="let cityOption of cities; trackBy: trackCityById">{{cityOption.name}}</option>
             </select>
         </div>
         <div [hidden]="!(editForm.controls.city?.dirty && editForm.controls.city?.invalid)">
             <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.city?.errors?.required" jhiTranslate="entity.validation.required">
+                [hidden]="!editForm.controls.city?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="restaurant.user"  required>
+                <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>
+                <option [ngValue]="userOption.id === restaurant.user?.id ? restaurant.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.user?.errors?.required" jhiTranslate="entity.validation.required">
                 This field is required.
             </small>
         </div>
         <div class="form-group">
             <label jhiTranslate="reservedApp.restaurant.kitchen" for="field_kitchen">Kitchen</label>
             <select class="form-control" id="field_kitchen" multiple name="kitchen" [(ngModel)]="restaurant.kitchens">
-                <option [ngValue]="getSelected(restaurant.kitchens, kitchenOption)"
-                        *ngFor="let kitchenOption of kitchens; trackBy: trackKitchenById">{{kitchenOption.type}}
-                </option>
+                <option [ngValue]="getSelected(restaurant.kitchens, kitchenOption)" *ngFor="let kitchenOption of kitchens; trackBy: trackKitchenById">{{kitchenOption.type}}</option>
             </select>
         </div>
         <div class="form-group">
             <label jhiTranslate="reservedApp.restaurant.food" for="field_food">Food</label>
             <select class="form-control" id="field_food" multiple name="food" [(ngModel)]="restaurant.foods">
-                <option [ngValue]="getSelected(restaurant.foods, foodOption)"
-                        *ngFor="let foodOption of foods; trackBy: trackFoodById">{{foodOption.type}}
-                </option>
+                <option [ngValue]="getSelected(restaurant.foods, foodOption)" *ngFor="let foodOption of foods; trackBy: trackFoodById">{{foodOption.type}}</option>
             </select>
         </div>
         <div class="form-group">
             <label jhiTranslate="reservedApp.restaurant.picture" for="field_picture">Picture</label>
             <select class="form-control" id="field_picture" multiple name="picture" [(ngModel)]="restaurant.pictures">
-                <option [ngValue]="getSelected(restaurant.pictures, pictureOption)"
-                        *ngFor="let pictureOption of pictures; trackBy: trackPictureById">{{pictureOption.title}}
-                </option>
+                <option [ngValue]="getSelected(restaurant.pictures, pictureOption)" *ngFor="let pictureOption of pictures; trackBy: trackPictureById">{{pictureOption.title}}</option>
             </select>
-        </div>
-        <div class="form-group">
-            <label jhiTranslate="reservedApp.restaurant.user" for="field_user">User</label>
-            <select class="form-control" id="field_user" multiple name="user" [(ngModel)]="restaurant.users" required>
-                <option [ngValue]="getSelected(restaurant.users, userOption)"
-                        *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}
-                </option>
-            </select>
-        </div>
-        <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
-            <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.user?.errors?.required" jhiTranslate="entity.validation.required">
-                This field is required.
-            </small>
         </div>
     </div>
     <div class="modal-footer">
