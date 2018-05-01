@@ -31,6 +31,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []);
+        window.scroll(0, 0);
     }
 
     cancel() {
