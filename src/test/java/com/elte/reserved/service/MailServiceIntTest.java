@@ -1,7 +1,7 @@
 package com.elte.reserved.service;
-import com.elte.reserved.config.Constants;
 
 import com.elte.reserved.ReservedApp;
+import com.elte.reserved.config.Constants;
 import com.elte.reserved.domain.User;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.Before;

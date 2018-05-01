@@ -1,12 +1,10 @@
 package com.elte.reserved.web.rest;
 
 import com.elte.reserved.ReservedApp;
-
 import com.elte.reserved.domain.Picture;
 import com.elte.reserved.repository.PictureRepository;
 import com.elte.reserved.repository.search.PictureSearchRepository;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -73,20 +71,9 @@ public class PictureResourceIntTest {
 
     private Picture picture;
 
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final PictureResource pictureResource = new PictureResource(pictureRepository, pictureSearchRepository);
-        this.restPictureMockMvc = MockMvcBuilders.standaloneSetup(pictureResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
-
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -97,6 +84,17 @@ public class PictureResourceIntTest {
             .img(DEFAULT_IMG)
             .imgContentType(DEFAULT_IMG_CONTENT_TYPE);
         return picture;
+    }
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        final PictureResource pictureResource = new PictureResource(pictureRepository, pictureSearchRepository);
+        this.restPictureMockMvc = MockMvcBuilders.standaloneSetup(pictureResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
     }
 
     @Before

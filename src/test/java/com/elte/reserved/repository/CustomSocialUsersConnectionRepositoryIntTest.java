@@ -2,7 +2,6 @@ package com.elte.reserved.repository;
 
 import com.elte.reserved.ReservedApp;
 import com.elte.reserved.domain.SocialUserConnection;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +46,7 @@ public class CustomSocialUsersConnectionRepositoryIntTest {
 
     @Before
     public void setUp() {
-		socialUserConnectionRepository.deleteAll();
+        socialUserConnectionRepository.deleteAll();
 
         connectionFactoryRegistry = new ConnectionFactoryRegistry();
         connectionFactory = new TestFacebookConnectionFactory();
@@ -170,8 +169,8 @@ public class CustomSocialUsersConnectionRepositoryIntTest {
         providerUsers.add("twitter", "1");
         MultiValueMap<String, Connection<?>> connectionsForUsers = connectionRepository.findConnectionsToUsers(providerUsers);
         assertEquals(2, connectionsForUsers.size());
-        String providerId=connectionsForUsers.getFirst("facebook").getKey().getProviderUserId();
-        assertTrue("10".equals(providerId) || "9".equals(providerId) );
+        String providerId = connectionsForUsers.getFirst("facebook").getKey().getProviderUserId();
+        assertTrue("10".equals(providerId) || "9".equals(providerId));
         assertFacebookConnection((Connection<TestFacebookApi>) connectionRepository.getConnection(new ConnectionKey("facebook", "9")));
         assertTwitterConnection((Connection<TestTwitterApi>) connectionsForUsers.getFirst("twitter"));
     }
@@ -452,6 +451,20 @@ public class CustomSocialUsersConnectionRepositoryIntTest {
         assertEquals("http://facebook.com/keith.donald/picture", facebook.getImageUrl());
     }
 
+    public interface TestFacebookApi {
+
+        String getAccessToken();
+
+    }
+
+    public interface TestTwitterApi {
+
+        String getAccessToken();
+
+        String getSecret();
+
+    }
+
     // test facebook provider
     private static class TestFacebookConnectionFactory extends OAuth2ConnectionFactory<TestFacebookApi> {
 
@@ -513,12 +526,6 @@ public class CustomSocialUsersConnectionRepositoryIntTest {
 
     }
 
-    public interface TestFacebookApi {
-
-        String getAccessToken();
-
-    }
-
     private static class TestFacebookApiAdapter implements ApiAdapter<TestFacebookApi> {
 
         private String accountId = "9";
@@ -574,14 +581,6 @@ public class CustomSocialUsersConnectionRepositoryIntTest {
                 }
             };
         }
-
-    }
-
-    public interface TestTwitterApi {
-
-        String getAccessToken();
-
-        String getSecret();
 
     }
 

@@ -1,10 +1,10 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
-import { UserRouteAccessService } from '../../shared';
-import { CityComponent } from './city.component';
-import { CityDetailComponent } from './city-detail.component';
-import { CityPopupComponent } from './city-dialog.component';
-import { CityDeletePopupComponent } from './city-delete-dialog.component';
+import {UserRouteAccessService} from '../../shared';
+import {CityComponent} from './city.component';
+import {CityDetailComponent} from './city-detail.component';
+import {CityPopupComponent} from './city-dialog.component';
+import {CityDeletePopupComponent} from './city-delete-dialog.component';
 
 export const cityRoute: Routes = [
     {

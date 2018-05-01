@@ -1,10 +1,10 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
-import { UserRouteAccessService } from '../../shared';
-import { CountryComponent } from './country.component';
-import { CountryDetailComponent } from './country-detail.component';
-import { CountryPopupComponent } from './country-dialog.component';
-import { CountryDeletePopupComponent } from './country-delete-dialog.component';
+import {UserRouteAccessService} from '../../shared';
+import {CountryComponent} from './country.component';
+import {CountryDetailComponent} from './country-detail.component';
+import {CountryPopupComponent} from './country-dialog.component';
+import {CountryDeletePopupComponent} from './country-delete-dialog.component';
 
 export const countryRoute: Routes = [
     {

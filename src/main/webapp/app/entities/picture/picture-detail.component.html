@@ -1,4 +1,3 @@
-
 <div *ngIf="picture">
     <h2><span jhiTranslate="reservedApp.picture.detail.title">Picture</span> {{picture.id}}</h2>
     <hr>
@@ -16,7 +15,8 @@
         <dd>
             <div *ngIf="picture.img">
                 <a (click)="openFile(picture.imgContentType, picture.img)">
-                    <img [src]="'data:' + picture.imgContentType + ';base64,' + picture.img" style="max-width: 100%;" alt="picture image"/>
+                    <img [src]="'data:' + picture.imgContentType + ';base64,' + picture.img" style="max-width: 100%;"
+                         alt="picture image"/>
                 </a>
                 {{picture.imgContentType}}, {{byteSize(picture.img)}}
             </div>

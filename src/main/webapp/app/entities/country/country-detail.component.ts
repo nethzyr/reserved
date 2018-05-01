@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Country } from './country.model';
-import { CountryService } from './country.service';
+import {Country} from './country.model';
+import {CountryService} from './country.service';
 
 @Component({
     selector: 'jhi-country-detail',
@@ -37,6 +37,7 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
                 this.country = countryResponse.body;
             });
     }
+
     previousState() {
         window.history.back();
     }

@@ -1,14 +1,13 @@
 package com.elte.reserved.service.dto;
 
 import com.elte.reserved.config.Constants;
-
 import com.elte.reserved.domain.Authority;
 import com.elte.reserved.domain.User;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;

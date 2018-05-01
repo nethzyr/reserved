@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
 
-import { Food } from './food.model';
-import { FoodService } from './food.service';
-import { ITEMS_PER_PAGE, Principal } from '../../shared';
+import {Food} from './food.model';
+import {FoodService} from './food.service';
+import {ITEMS_PER_PAGE, Principal} from '../../shared';
 
 @Component({
     selector: 'jhi-food',
@@ -106,6 +106,7 @@ export class FoodComponent implements OnInit, OnDestroy {
         this.currentSearch = query;
         this.loadAll();
     }
+
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then((account) => {
@@ -121,6 +122,7 @@ export class FoodComponent implements OnInit, OnDestroy {
     trackId(index: number, item: Food) {
         return item.id;
     }
+
     registerChangeInFoods() {
         this.eventSubscriber = this.eventManager.subscribe('foodListModification', (response) => this.reset());
     }

@@ -1,7 +1,6 @@
 package com.elte.reserved.repository;
 
 import com.elte.reserved.domain.Authority;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

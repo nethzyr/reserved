@@ -14,7 +14,7 @@ import {ITEMS_PER_PAGE, Principal} from '../../shared';
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    currentAccount: any;
     userInfos: UserInfo[];
     error: any;
     success: any;
@@ -56,34 +56,39 @@ currentAccount: any;
                 page: this.page - 1,
                 query: this.currentSearch,
                 size: this.itemsPerPage,
-                sort: this.sort()}).subscribe(
-                    (res: HttpResponse<UserInfo[]>) => this.onSuccess(res.body, res.headers),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
+                sort: this.sort()
+            }).subscribe(
+                (res: HttpResponse<UserInfo[]>) => this.onSuccess(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
             return;
         }
         this.userInfoService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
-                (res: HttpResponse<UserInfo[]>) => this.onSuccess(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+            sort: this.sort()
+        }).subscribe(
+            (res: HttpResponse<UserInfo[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
             this.transition();
         }
     }
+
     transition() {
-        this.router.navigate(['/user-info'], {queryParams:
-            {
-                page: this.page,
-                size: this.itemsPerPage,
-                search: this.currentSearch,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
+        this.router.navigate(['/user-info'], {
+            queryParams:
+                {
+                    page: this.page,
+                    size: this.itemsPerPage,
+                    search: this.currentSearch,
+                    sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+                }
         });
         this.loadAll();
     }
@@ -97,6 +102,7 @@ currentAccount: any;
         }]);
         this.loadAll();
     }
+
     search(query) {
         if (!query) {
             return this.clear();
@@ -110,6 +116,7 @@ currentAccount: any;
         }]);
         this.loadAll();
     }
+
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then((account) => {
@@ -125,6 +132,7 @@ currentAccount: any;
     trackId(index: number, item: UserInfo) {
         return item.id;
     }
+
     registerChangeInUserInfos() {
         this.eventSubscriber = this.eventManager.subscribe('userInfoListModification', (response) => this.loadAll());
     }
@@ -144,6 +152,7 @@ currentAccount: any;
         // this.page = pagingParams.page;
         this.userInfos = data;
     }
+
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }

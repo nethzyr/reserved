@@ -1,18 +1,18 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { ReservedSharedModule } from '../../shared';
+import {ReservedSharedModule} from '../../shared';
 import {
-    CityService,
-    CityPopupService,
     CityComponent,
+    CityDeleteDialogComponent,
+    CityDeletePopupComponent,
     CityDetailComponent,
     CityDialogComponent,
     CityPopupComponent,
-    CityDeletePopupComponent,
-    CityDeleteDialogComponent,
-    cityRoute,
     cityPopupRoute,
+    CityPopupService,
+    cityRoute,
+    CityService,
 } from './';
 
 const ENTITY_STATES = [
@@ -46,4 +46,5 @@ const ENTITY_STATES = [
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ReservedCityModule {}
+export class ReservedCityModule {
+}

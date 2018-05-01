@@ -1,21 +1,21 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {DatePipe} from '@angular/common';
 
 import {
-    ReservedSharedLibsModule,
-    ReservedSharedCommonModule,
-    CSRFService,
-    AuthServerProvider,
     AccountService,
-    UserService,
-    StateStorageService,
-    LoginService,
-    LoginModalService,
-    JhiLoginModalComponent,
-    Principal,
+    AuthServerProvider,
+    CSRFService,
     HasAnyAuthorityDirective,
+    JhiLoginModalComponent,
     JhiSocialComponent,
+    LoginModalService,
+    LoginService,
+    Principal,
+    ReservedSharedCommonModule,
+    ReservedSharedLibsModule,
     SocialService,
+    StateStorageService,
+    UserService,
 } from './';
 
 @NgModule({
@@ -51,4 +51,5 @@ import {
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
-export class ReservedSharedModule {}
+export class ReservedSharedModule {
+}

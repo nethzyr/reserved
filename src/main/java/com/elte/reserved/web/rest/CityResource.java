@@ -2,7 +2,6 @@ package com.elte.reserved.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.elte.reserved.domain.City;
-
 import com.elte.reserved.repository.CityRepository;
 import com.elte.reserved.repository.search.CitySearchRepository;
 import com.elte.reserved.web.rest.errors.BadRequestAlertException;
@@ -21,13 +20,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * REST controller for managing City.
@@ -36,10 +32,8 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @RequestMapping("/api")
 public class CityResource {
 
-    private final Logger log = LoggerFactory.getLogger(CityResource.class);
-
     private static final String ENTITY_NAME = "city";
-
+    private final Logger log = LoggerFactory.getLogger(CityResource.class);
     private final CityRepository cityRepository;
 
     private final CitySearchRepository citySearchRepository;
@@ -141,7 +135,7 @@ public class CityResource {
      * SEARCH  /_search/cities?query=:query : search for the city corresponding
      * to the query.
      *
-     * @param query the query of the city search
+     * @param query    the query of the city search
      * @param pageable the pagination information
      * @return the result of the search
      */

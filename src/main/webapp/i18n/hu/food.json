@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "food" : {
+        "food": {
             "home": {
                 "title": "Ételek",
                 "createLabel": "Egy új Étel létrehozása",

@@ -1,14 +1,14 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs/Observable';
-import { JhiEventManager } from 'ng-jhipster';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs/Observable';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ReservedTestModule } from '../../../test.module';
-import { KitchenDialogComponent } from '../../../../../../main/webapp/app/entities/kitchen/kitchen-dialog.component';
-import { KitchenService } from '../../../../../../main/webapp/app/entities/kitchen/kitchen.service';
-import { Kitchen } from '../../../../../../main/webapp/app/entities/kitchen/kitchen.model';
+import {ReservedTestModule} from '../../../test.module';
+import {KitchenDialogComponent} from '../../../../../../main/webapp/app/entities/kitchen/kitchen-dialog.component';
+import {KitchenService} from '../../../../../../main/webapp/app/entities/kitchen/kitchen.service';
+import {Kitchen} from '../../../../../../main/webapp/app/entities/kitchen/kitchen.model';
 
 describe('Component Tests', () => {
 
@@ -27,8 +27,8 @@ describe('Component Tests', () => {
                     KitchenService
                 ]
             })
-            .overrideTemplate(KitchenDialogComponent, '')
-            .compileComponents();
+                .overrideTemplate(KitchenDialogComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {
@@ -54,7 +54,10 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.update).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'kitchenListModification', content: 'OK'});
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({
+                            name: 'kitchenListModification',
+                            content: 'OK'
+                        });
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )
@@ -74,7 +77,10 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.create).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'kitchenListModification', content: 'OK'});
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({
+                            name: 'kitchenListModification',
+                            content: 'OK'
+                        });
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )

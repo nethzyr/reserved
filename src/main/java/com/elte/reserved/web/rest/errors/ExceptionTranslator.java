@@ -1,7 +1,6 @@
 package com.elte.reserved.web.rest.errors;
 
 import com.elte.reserved.web.rest.util.HeaderUtil;
-
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

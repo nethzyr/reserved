@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed, inject, tick, fakeAsync } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
-import { Renderer, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {Observable} from 'rxjs/Observable';
+import {ElementRef, Renderer} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { ReservedTestModule } from '../../../../test.module';
-import { PasswordResetFinishComponent } from '../../../../../../../main/webapp/app/account/password-reset/finish/password-reset-finish.component';
-import { PasswordResetFinishService } from '../../../../../../../main/webapp/app/account/password-reset/finish/password-reset-finish.service';
-import { MockActivatedRoute } from '../../../../helpers/mock-route.service';
+import {ReservedTestModule} from '../../../../test.module';
+import {PasswordResetFinishComponent} from '../../../../../../../main/webapp/app/account/password-reset/finish/password-reset-finish.component';
+import {PasswordResetFinishService} from '../../../../../../../main/webapp/app/account/password-reset/finish/password-reset-finish.service';
+import {MockActivatedRoute} from '../../../../helpers/mock-route.service';
 
 describe('Component Tests', () => {
 
@@ -28,7 +28,8 @@ describe('Component Tests', () => {
                     {
                         provide: Renderer,
                         useValue: {
-                            invokeElementMethod(renderElement: any, methodName: string, args?: any[]) {}
+                            invokeElementMethod(renderElement: any, methodName: string, args?: any[]) {
+                            }
                         }
                     },
                     {
@@ -37,8 +38,8 @@ describe('Component Tests', () => {
                     }
                 ]
             })
-            .overrideTemplate(PasswordResetFinishComponent, '')
-            .createComponent(PasswordResetFinishComponent);
+                .overrideTemplate(PasswordResetFinishComponent, '')
+                .createComponent(PasswordResetFinishComponent);
         });
 
         beforeEach(() => {
@@ -59,7 +60,8 @@ describe('Component Tests', () => {
             inject([ElementRef], (elementRef: ElementRef) => {
                 const element = fixture.nativeElement;
                 const node = {
-                    focus() {}
+                    focus() {
+                    }
                 };
 
                 elementRef.nativeElement = element;

@@ -1,5 +1,5 @@
-import { browser, element, by } from 'protractor';
-import { NavBarPage } from './../page-objects/jhi-page-objects';
+import {browser, by, element} from 'protractor';
+import {NavBarPage} from './../page-objects/jhi-page-objects';
 
 describe('Food e2e test', () => {
 
@@ -62,18 +62,16 @@ export class FoodDialogPage {
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
     typeInput = element(by.css('input#field_type'));
+    setTypeInput = function (type) {
+        this.typeInput.sendKeys(type);
+    };
+    getTypeInput = function () {
+        return this.typeInput.getAttribute('value');
+    };
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
-
-    setTypeInput = function(type) {
-        this.typeInput.sendKeys(type);
-    };
-
-    getTypeInput = function() {
-        return this.typeInput.getAttribute('value');
-    };
 
     save() {
         this.saveButton.click();

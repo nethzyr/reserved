@@ -1,8 +1,8 @@
 package com.elte.reserved.repository;
 
 import com.elte.reserved.domain.SocialUserConnection;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.List;
 import java.util.Set;
 

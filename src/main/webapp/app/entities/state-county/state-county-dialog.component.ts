@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
-import { StateCounty } from './state-county.model';
-import { StateCountyPopupService } from './state-county-popup.service';
-import { StateCountyService } from './state-county.service';
-import { Country, CountryService } from '../country';
+import {StateCounty} from './state-county.model';
+import {StateCountyPopupService} from './state-county-popup.service';
+import {StateCountyService} from './state-county.service';
+import {Country, CountryService} from '../country';
 
 @Component({
     selector: 'jhi-state-county-dialog',
@@ -34,7 +34,9 @@ export class StateCountyDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.countryService.query()
-            .subscribe((res: HttpResponse<Country[]>) => { this.countries = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<Country[]>) => {
+                this.countries = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -52,13 +54,17 @@ export class StateCountyDialogComponent implements OnInit {
         }
     }
 
+    trackCountryById(index: number, item: Country) {
+        return item.id;
+    }
+
     private subscribeToSaveResponse(result: Observable<HttpResponse<StateCounty>>) {
         result.subscribe((res: HttpResponse<StateCounty>) =>
             this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
     private onSaveSuccess(result: StateCounty) {
-        this.eventManager.broadcast({ name: 'stateCountyListModification', content: 'OK'});
+        this.eventManager.broadcast({name: 'stateCountyListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -69,10 +75,6 @@ export class StateCountyDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackCountryById(index: number, item: Country) {
-        return item.id;
     }
 }
 
@@ -87,11 +89,12 @@ export class StateCountyPopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private stateCountyPopupService: StateCountyPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            if (params['id']) {
                 this.stateCountyPopupService
                     .open(StateCountyDialogComponent as Component, params['id']);
             } else {

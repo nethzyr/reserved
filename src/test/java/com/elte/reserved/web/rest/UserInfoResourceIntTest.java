@@ -65,6 +65,19 @@ public class UserInfoResourceIntTest {
 
     private UserInfo userInfo;
 
+    /**
+     * Create an entity for this test.
+     * <p>
+     * This is a static method, as tests for other entities might also need it,
+     * if they test an entity which requires the current entity.
+     */
+    public static UserInfo createEntity(EntityManager em) {
+        UserInfo userInfo = new UserInfo()
+            .facebook(DEFAULT_FACEBOOK)
+            .phone(DEFAULT_PHONE);
+        return userInfo;
+    }
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -74,19 +87,6 @@ public class UserInfoResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
-    }
-
-    /**
-     * Create an entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static UserInfo createEntity(EntityManager em) {
-        UserInfo userInfo = new UserInfo()
-            .facebook(DEFAULT_FACEBOOK)
-            .phone(DEFAULT_PHONE);
-        return userInfo;
     }
 
     @Before

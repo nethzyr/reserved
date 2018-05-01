@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs/Observable';
-import { JhiEventManager } from 'ng-jhipster';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs/Observable';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ReservedTestModule } from '../../../test.module';
-import { UserMgmtDeleteDialogComponent } from '../../../../../../main/webapp/app/admin/user-management/user-management-delete-dialog.component';
-import { UserService } from '../../../../../../main/webapp/app/shared';
+import {ReservedTestModule} from '../../../test.module';
+import {UserMgmtDeleteDialogComponent} from '../../../../../../main/webapp/app/admin/user-management/user-management-delete-dialog.component';
+import {UserService} from '../../../../../../main/webapp/app/shared';
 
 describe('Component Tests', () => {
 
@@ -24,8 +24,8 @@ describe('Component Tests', () => {
                     UserService
                 ]
             })
-            .overrideTemplate(UserMgmtDeleteDialogComponent, '')
-            .compileComponents();
+                .overrideTemplate(UserMgmtDeleteDialogComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

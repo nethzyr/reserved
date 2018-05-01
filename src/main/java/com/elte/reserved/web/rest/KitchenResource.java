@@ -2,7 +2,6 @@ package com.elte.reserved.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.elte.reserved.domain.Kitchen;
-
 import com.elte.reserved.repository.KitchenRepository;
 import com.elte.reserved.repository.search.KitchenSearchRepository;
 import com.elte.reserved.web.rest.errors.BadRequestAlertException;
@@ -21,13 +20,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * REST controller for managing Kitchen.
@@ -36,10 +32,8 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @RequestMapping("/api")
 public class KitchenResource {
 
-    private final Logger log = LoggerFactory.getLogger(KitchenResource.class);
-
     private static final String ENTITY_NAME = "kitchen";
-
+    private final Logger log = LoggerFactory.getLogger(KitchenResource.class);
     private final KitchenRepository kitchenRepository;
 
     private final KitchenSearchRepository kitchenSearchRepository;
@@ -141,7 +135,7 @@ public class KitchenResource {
      * SEARCH  /_search/kitchens?query=:query : search for the kitchen corresponding
      * to the query.
      *
-     * @param query the query of the kitchen search
+     * @param query    the query of the kitchen search
      * @param pageable the pagination information
      * @return the result of the search
      */

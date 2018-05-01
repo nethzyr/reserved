@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "country" : {
+        "country": {
             "home": {
                 "title": "Országok",
                 "createLabel": "Egy új Ország létrehozása",

@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Country } from './country.model';
-import { CountryPopupService } from './country-popup.service';
-import { CountryService } from './country.service';
+import {Country} from './country.model';
+import {CountryPopupService} from './country-popup.service';
+import {CountryService} from './country.service';
 
 @Component({
     selector: 'jhi-country-dialog',
@@ -51,7 +51,7 @@ export class CountryDialogComponent implements OnInit {
     }
 
     private onSaveSuccess(result: Country) {
-        this.eventManager.broadcast({ name: 'countryListModification', content: 'OK'});
+        this.eventManager.broadcast({name: 'countryListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -72,11 +72,12 @@ export class CountryPopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private countryPopupService: CountryPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            if (params['id']) {
                 this.countryPopupService
                     .open(CountryDialogComponent as Component, params['id']);
             } else {

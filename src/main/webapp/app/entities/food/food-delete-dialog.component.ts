@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Food } from './food.model';
-import { FoodPopupService } from './food-popup.service';
-import { FoodService } from './food.service';
+import {Food} from './food.model';
+import {FoodPopupService} from './food-popup.service';
+import {FoodService} from './food.service';
 
 @Component({
     selector: 'jhi-food-delete-dialog',
@@ -49,7 +49,8 @@ export class FoodDeletePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private foodPopupService: FoodPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {

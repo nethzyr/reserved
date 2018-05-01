@@ -77,122 +77,94 @@ export class UserInfoDialogPage {
     favoriteRestaurantSelect = element(by.css('select#field_favoriteRestaurant'));
     favoriteKitchenSelect = element(by.css('select#field_favoriteKitchen'));
     favoriteFoodSelect = element(by.css('select#field_favoriteFood'));
+    setFacebookInput = function (facebook) {
+        this.facebookInput.sendKeys(facebook);
+    };
+    getFacebookInput = function () {
+        return this.facebookInput.getAttribute('value');
+    };
+    setPhoneInput = function (phone) {
+        this.phoneInput.sendKeys(phone);
+    };
+    getPhoneInput = function () {
+        return this.phoneInput.getAttribute('value');
+    };
+    userSelectLastOption = function () {
+        this.userSelect.all(by.tagName('option')).last().click();
+    };
+    userSelectOption = function (option) {
+        this.userSelect.sendKeys(option);
+    };
+    getUserSelect = function () {
+        return this.userSelect;
+    };
+    getUserSelectedOption = function () {
+        return this.userSelect.element(by.css('option:checked')).getText();
+    };
+    pictureSelectLastOption = function () {
+        this.pictureSelect.all(by.tagName('option')).last().click();
+    };
+    pictureSelectOption = function (option) {
+        this.pictureSelect.sendKeys(option);
+    };
+    getPictureSelect = function () {
+        return this.pictureSelect;
+    };
+    getPictureSelectedOption = function () {
+        return this.pictureSelect.element(by.css('option:checked')).getText();
+    };
+    preferredCitySelectLastOption = function () {
+        this.preferredCitySelect.all(by.tagName('option')).last().click();
+    };
+    preferredCitySelectOption = function (option) {
+        this.preferredCitySelect.sendKeys(option);
+    };
+    getPreferredCitySelect = function () {
+        return this.preferredCitySelect;
+    };
+    getPreferredCitySelectedOption = function () {
+        return this.preferredCitySelect.element(by.css('option:checked')).getText();
+    };
+    favoriteRestaurantSelectLastOption = function () {
+        this.favoriteRestaurantSelect.all(by.tagName('option')).last().click();
+    };
+    favoriteRestaurantSelectOption = function (option) {
+        this.favoriteRestaurantSelect.sendKeys(option);
+    };
+    getFavoriteRestaurantSelect = function () {
+        return this.favoriteRestaurantSelect;
+    };
+    getFavoriteRestaurantSelectedOption = function () {
+        return this.favoriteRestaurantSelect.element(by.css('option:checked')).getText();
+    };
+    favoriteKitchenSelectLastOption = function () {
+        this.favoriteKitchenSelect.all(by.tagName('option')).last().click();
+    };
+    favoriteKitchenSelectOption = function (option) {
+        this.favoriteKitchenSelect.sendKeys(option);
+    };
+    getFavoriteKitchenSelect = function () {
+        return this.favoriteKitchenSelect;
+    };
+    getFavoriteKitchenSelectedOption = function () {
+        return this.favoriteKitchenSelect.element(by.css('option:checked')).getText();
+    };
+    favoriteFoodSelectLastOption = function () {
+        this.favoriteFoodSelect.all(by.tagName('option')).last().click();
+    };
+    favoriteFoodSelectOption = function (option) {
+        this.favoriteFoodSelect.sendKeys(option);
+    };
+    getFavoriteFoodSelect = function () {
+        return this.favoriteFoodSelect;
+    };
+    getFavoriteFoodSelectedOption = function () {
+        return this.favoriteFoodSelect.element(by.css('option:checked')).getText();
+    };
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
-
-    setFacebookInput = function(facebook) {
-        this.facebookInput.sendKeys(facebook);
-    };
-
-    getFacebookInput = function() {
-        return this.facebookInput.getAttribute('value');
-    };
-
-    setPhoneInput = function(phone) {
-        this.phoneInput.sendKeys(phone);
-    };
-
-    getPhoneInput = function() {
-        return this.phoneInput.getAttribute('value');
-    };
-
-    userSelectLastOption = function() {
-        this.userSelect.all(by.tagName('option')).last().click();
-    };
-
-    userSelectOption = function(option) {
-        this.userSelect.sendKeys(option);
-    };
-
-    getUserSelect = function() {
-        return this.userSelect;
-    };
-
-    getUserSelectedOption = function() {
-        return this.userSelect.element(by.css('option:checked')).getText();
-    };
-
-    pictureSelectLastOption = function() {
-        this.pictureSelect.all(by.tagName('option')).last().click();
-    };
-
-    pictureSelectOption = function(option) {
-        this.pictureSelect.sendKeys(option);
-    };
-
-    getPictureSelect = function() {
-        return this.pictureSelect;
-    };
-
-    getPictureSelectedOption = function() {
-        return this.pictureSelect.element(by.css('option:checked')).getText();
-    };
-
-    preferredCitySelectLastOption = function() {
-        this.preferredCitySelect.all(by.tagName('option')).last().click();
-    };
-
-    preferredCitySelectOption = function(option) {
-        this.preferredCitySelect.sendKeys(option);
-    };
-
-    getPreferredCitySelect = function() {
-        return this.preferredCitySelect;
-    };
-
-    getPreferredCitySelectedOption = function() {
-        return this.preferredCitySelect.element(by.css('option:checked')).getText();
-    };
-
-    favoriteRestaurantSelectLastOption = function() {
-        this.favoriteRestaurantSelect.all(by.tagName('option')).last().click();
-    };
-
-    favoriteRestaurantSelectOption = function(option) {
-        this.favoriteRestaurantSelect.sendKeys(option);
-    };
-
-    getFavoriteRestaurantSelect = function() {
-        return this.favoriteRestaurantSelect;
-    };
-
-    getFavoriteRestaurantSelectedOption = function() {
-        return this.favoriteRestaurantSelect.element(by.css('option:checked')).getText();
-    };
-
-    favoriteKitchenSelectLastOption = function() {
-        this.favoriteKitchenSelect.all(by.tagName('option')).last().click();
-    };
-
-    favoriteKitchenSelectOption = function(option) {
-        this.favoriteKitchenSelect.sendKeys(option);
-    };
-
-    getFavoriteKitchenSelect = function() {
-        return this.favoriteKitchenSelect;
-    };
-
-    getFavoriteKitchenSelectedOption = function() {
-        return this.favoriteKitchenSelect.element(by.css('option:checked')).getText();
-    };
-
-    favoriteFoodSelectLastOption = function() {
-        this.favoriteFoodSelect.all(by.tagName('option')).last().click();
-    };
-
-    favoriteFoodSelectOption = function(option) {
-        this.favoriteFoodSelect.sendKeys(option);
-    };
-
-    getFavoriteFoodSelect = function() {
-        return this.favoriteFoodSelect;
-    };
-
-    getFavoriteFoodSelectedOption = function() {
-        return this.favoriteFoodSelect.element(by.css('option:checked')).getText();
-    };
 
     save() {
         this.saveButton.click();

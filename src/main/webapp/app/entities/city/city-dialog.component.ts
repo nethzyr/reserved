@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
-import { City } from './city.model';
-import { CityPopupService } from './city-popup.service';
-import { CityService } from './city.service';
-import { StateCounty, StateCountyService } from '../state-county';
+import {City} from './city.model';
+import {CityPopupService} from './city-popup.service';
+import {CityService} from './city.service';
+import {StateCounty, StateCountyService} from '../state-county';
 
 @Component({
     selector: 'jhi-city-dialog',
@@ -34,7 +34,9 @@ export class CityDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.stateCountyService.query()
-            .subscribe((res: HttpResponse<StateCounty[]>) => { this.statecounties = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<StateCounty[]>) => {
+                this.statecounties = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -52,13 +54,17 @@ export class CityDialogComponent implements OnInit {
         }
     }
 
+    trackStateCountyById(index: number, item: StateCounty) {
+        return item.id;
+    }
+
     private subscribeToSaveResponse(result: Observable<HttpResponse<City>>) {
         result.subscribe((res: HttpResponse<City>) =>
             this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
     private onSaveSuccess(result: City) {
-        this.eventManager.broadcast({ name: 'cityListModification', content: 'OK'});
+        this.eventManager.broadcast({name: 'cityListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -69,10 +75,6 @@ export class CityDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackStateCountyById(index: number, item: StateCounty) {
-        return item.id;
     }
 }
 
@@ -87,11 +89,12 @@ export class CityPopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private cityPopupService: CityPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            if (params['id']) {
                 this.cityPopupService
                     .open(CityDialogComponent as Component, params['id']);
             } else {

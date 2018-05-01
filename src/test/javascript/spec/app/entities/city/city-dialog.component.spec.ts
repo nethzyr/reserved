@@ -1,15 +1,15 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs/Observable';
-import { JhiEventManager } from 'ng-jhipster';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs/Observable';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ReservedTestModule } from '../../../test.module';
-import { CityDialogComponent } from '../../../../../../main/webapp/app/entities/city/city-dialog.component';
-import { CityService } from '../../../../../../main/webapp/app/entities/city/city.service';
-import { City } from '../../../../../../main/webapp/app/entities/city/city.model';
-import { StateCountyService } from '../../../../../../main/webapp/app/entities/state-county';
+import {ReservedTestModule} from '../../../test.module';
+import {CityDialogComponent} from '../../../../../../main/webapp/app/entities/city/city-dialog.component';
+import {CityService} from '../../../../../../main/webapp/app/entities/city/city.service';
+import {City} from '../../../../../../main/webapp/app/entities/city/city.model';
+import {StateCountyService} from '../../../../../../main/webapp/app/entities/state-county';
 
 describe('Component Tests', () => {
 
@@ -29,8 +29,8 @@ describe('Component Tests', () => {
                     CityService
                 ]
             })
-            .overrideTemplate(CityDialogComponent, '')
-            .compileComponents();
+                .overrideTemplate(CityDialogComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {
@@ -56,7 +56,10 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.update).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'cityListModification', content: 'OK'});
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({
+                            name: 'cityListModification',
+                            content: 'OK'
+                        });
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )
@@ -76,7 +79,10 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.create).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'cityListModification', content: 'OK'});
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({
+                            name: 'cityListModification',
+                            content: 'OK'
+                        });
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )

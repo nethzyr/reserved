@@ -1,18 +1,18 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { ReservedSharedModule } from '../../shared';
+import {ReservedSharedModule} from '../../shared';
 import {
-    KitchenService,
-    KitchenPopupService,
     KitchenComponent,
+    KitchenDeleteDialogComponent,
+    KitchenDeletePopupComponent,
     KitchenDetailComponent,
     KitchenDialogComponent,
     KitchenPopupComponent,
-    KitchenDeletePopupComponent,
-    KitchenDeleteDialogComponent,
-    kitchenRoute,
     kitchenPopupRoute,
+    KitchenPopupService,
+    kitchenRoute,
+    KitchenService,
 } from './';
 
 const ENTITY_STATES = [
@@ -46,4 +46,5 @@ const ENTITY_STATES = [
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ReservedKitchenModule {}
+export class ReservedKitchenModule {
+}

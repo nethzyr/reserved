@@ -4,11 +4,13 @@
     </div>
     <div class="col-md-6">
         <h1 class="display-8" jhiTranslate="home.title1" *ngIf="isShowWelcome">Üzleti ebéd? Randevú?</h1>
-        <h1 class="display-8" jhiTranslate="home.title2" *ngIf="isShowWelcome">Baráti összejövetel? Családi vacsora?</h1>
+        <h1 class="display-8" jhiTranslate="home.title2" *ngIf="isShowWelcome">Baráti összejövetel? Családi
+            vacsora?</h1>
         <h1 class="display-8 subtitle" jhiTranslate="home.title3" *ngIf="isShowWelcome">Hol ennétek?</h1>
         <form class="form-row" (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="col">
-                <input type="text" name="search" class="form-control form-control-lg" placeholder="{{'home.searchph' | translate}}" ngModel>
+                <input type="text" name="search" class="form-control form-control-lg"
+                       placeholder="{{'home.searchph' | translate}}" ngModel>
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-primary btn-lg" jhiTranslate="home.search">Keresés</button>

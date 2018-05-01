@@ -1,12 +1,12 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs/Observable';
-import { JhiEventManager } from 'ng-jhipster';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs/Observable';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ReservedTestModule } from '../../../test.module';
-import { CityDeleteDialogComponent } from '../../../../../../main/webapp/app/entities/city/city-delete-dialog.component';
-import { CityService } from '../../../../../../main/webapp/app/entities/city/city.service';
+import {ReservedTestModule} from '../../../test.module';
+import {CityDeleteDialogComponent} from '../../../../../../main/webapp/app/entities/city/city-delete-dialog.component';
+import {CityService} from '../../../../../../main/webapp/app/entities/city/city.service';
 
 describe('Component Tests', () => {
 
@@ -25,8 +25,8 @@ describe('Component Tests', () => {
                     CityService
                 ]
             })
-            .overrideTemplate(CityDeleteDialogComponent, '')
-            .compileComponents();
+                .overrideTemplate(CityDeleteDialogComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

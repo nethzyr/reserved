@@ -1,9 +1,10 @@
 <div>
     <h2>
         <span jhiTranslate="reservedApp.restaurant.home.title">Restaurants</span>
-        <button class="btn btn-primary float-right jh-create-entity create-restaurant" [routerLink]="['/', { outlets: { popup: ['restaurant-new'] } }]">
+        <button class="btn btn-primary float-right jh-create-entity create-restaurant"
+                [routerLink]="['/', { outlets: { popup: ['restaurant-new'] } }]">
             <span class="fa fa-plus"></span>
-            <span class="hidden-sm-down"  jhiTranslate="reservedApp.restaurant.home.createLabel">
+            <span class="hidden-sm-down" jhiTranslate="reservedApp.restaurant.home.createLabel">
             Create new Restaurant
             </span>
         </button>
@@ -13,7 +14,8 @@
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'reservedApp.restaurant.home.search' | translate }}">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                           name="currentSearch" placeholder="{{ 'reservedApp.restaurant.home.search' | translate }}">
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                         <span class="fa fa-search"></span>
                     </button>
@@ -29,18 +31,30 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="name"><span jhiTranslate="reservedApp.restaurant.name">Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="streetAddress"><span jhiTranslate="reservedApp.restaurant.streetAddress">Street Address</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="postalCode"><span jhiTranslate="reservedApp.restaurant.postalCode">Postal Code</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="info"><span jhiTranslate="reservedApp.restaurant.info">Info</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="email"><span jhiTranslate="reservedApp.restaurant.email">Email</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="phone"><span jhiTranslate="reservedApp.restaurant.phone">Phone</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="website"><span jhiTranslate="reservedApp.restaurant.website">Website</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="facebook"><span jhiTranslate="reservedApp.restaurant.facebook">Facebook</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="googlePlaceId"><span jhiTranslate="reservedApp.restaurant.googlePlaceId">Google Place Id</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="city.name"><span jhiTranslate="reservedApp.restaurant.city">City</span> <span class="fa fa-sort"></span></th>
-            <th></th>
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="name"><span jhiTranslate="reservedApp.restaurant.name">Name</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="streetAddress"><span
+                    jhiTranslate="reservedApp.restaurant.streetAddress">Street Address</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="postalCode"><span jhiTranslate="reservedApp.restaurant.postalCode">Postal Code</span>
+                    <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="info"><span jhiTranslate="reservedApp.restaurant.info">Info</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="email"><span jhiTranslate="reservedApp.restaurant.email">Email</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="phone"><span jhiTranslate="reservedApp.restaurant.phone">Phone</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="website"><span jhiTranslate="reservedApp.restaurant.website">Website</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="facebook"><span jhiTranslate="reservedApp.restaurant.facebook">Facebook</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="googlePlaceId"><span
+                    jhiTranslate="reservedApp.restaurant.googlePlaceId">Google Place Id</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="city.name"><span jhiTranslate="reservedApp.restaurant.city">City</span> <span
+                    class="fa fa-sort"></span></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -57,7 +71,7 @@
                 <td>{{restaurant.googlePlaceId}}</td>
                 <td>
                     <div *ngIf="restaurant.city">
-                        <a [routerLink]="['../city', restaurant.city?.id ]" >{{restaurant.city?.name}}</a>
+                        <a [routerLink]="['../city', restaurant.city?.id ]">{{restaurant.city?.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -92,10 +106,12 @@
     </div>
     <div *ngIf="restaurants && restaurants.length">
         <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5"
+                            [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                            [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

@@ -1,9 +1,10 @@
 <div>
     <h2>
         <span jhiTranslate="reservedApp.stateCounty.home.title">State Counties</span>
-        <button class="btn btn-primary float-right jh-create-entity create-state-county" [routerLink]="['/', { outlets: { popup: ['state-county-new'] } }]">
+        <button class="btn btn-primary float-right jh-create-entity create-state-county"
+                [routerLink]="['/', { outlets: { popup: ['state-county-new'] } }]">
             <span class="fa fa-plus"></span>
-            <span class="hidden-sm-down"  jhiTranslate="reservedApp.stateCounty.home.createLabel">
+            <span class="hidden-sm-down" jhiTranslate="reservedApp.stateCounty.home.createLabel">
             Create new State County
             </span>
         </button>
@@ -13,7 +14,8 @@
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'reservedApp.stateCounty.home.search' | translate }}">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                           name="currentSearch" placeholder="{{ 'reservedApp.stateCounty.home.search' | translate }}">
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                         <span class="fa fa-search"></span>
                     </button>
@@ -29,19 +31,22 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="name"><span jhiTranslate="reservedApp.stateCounty.name">Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="country.name"><span jhiTranslate="reservedApp.stateCounty.country">Country</span> <span class="fa fa-sort"></span></th>
-            <th></th>
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="name"><span jhiTranslate="reservedApp.stateCounty.name">Name</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="country.name"><span jhiTranslate="reservedApp.stateCounty.country">Country</span> <span
+                    class="fa fa-sort"></span></th>
+                <th></th>
             </tr>
             </thead>
-            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
+                   [infiniteScrollDistance]="0">
             <tr *ngFor="let stateCounty of stateCounties ;trackBy: trackId">
                 <td><a [routerLink]="['../state-county', stateCounty.id ]">{{stateCounty.id}}</a></td>
                 <td>{{stateCounty.name}}</td>
                 <td>
                     <div *ngIf="stateCounty.country">
-                        <a [routerLink]="['../country', stateCounty.country?.id ]" >{{stateCounty.country?.name}}</a>
+                        <a [routerLink]="['../country', stateCounty.country?.id ]">{{stateCounty.country?.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -2,7 +2,9 @@ const webpackConfig = require('../../../webpack/webpack.test.js');
 
 const WATCH = process.argv.includes('--watch');
 
-module.exports = (config) => {
+module.exports = (config) =
+>
+{
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -71,11 +73,12 @@ module.exports = (config) => {
 
         // Ensure all browsers can run tests written in .ts files
         mime: {
-            'text/x-typescript': ['ts','tsx']
+            'text/x-typescript': ['ts', 'tsx']
         },
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
         singleRun: !WATCH
     });
-};
+}
+;

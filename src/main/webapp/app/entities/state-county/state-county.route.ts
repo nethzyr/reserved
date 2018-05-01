@@ -1,10 +1,10 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
-import { UserRouteAccessService } from '../../shared';
-import { StateCountyComponent } from './state-county.component';
-import { StateCountyDetailComponent } from './state-county-detail.component';
-import { StateCountyPopupComponent } from './state-county-dialog.component';
-import { StateCountyDeletePopupComponent } from './state-county-delete-dialog.component';
+import {UserRouteAccessService} from '../../shared';
+import {StateCountyComponent} from './state-county.component';
+import {StateCountyDetailComponent} from './state-county-detail.component';
+import {StateCountyPopupComponent} from './state-county-dialog.component';
+import {StateCountyDeletePopupComponent} from './state-county-delete-dialog.component';
 
 export const stateCountyRoute: Routes = [
     {

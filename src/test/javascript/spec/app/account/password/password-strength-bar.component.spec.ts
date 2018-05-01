@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PasswordStrengthBarComponent } from '../../../../../../main/webapp/app/account/password/password-strength-bar.component';
+import {PasswordStrengthBarComponent} from '../../../../../../main/webapp/app/account/password/password-strength-bar.component';
 
 describe('Component Tests', () => {
 
@@ -13,8 +13,8 @@ describe('Component Tests', () => {
             TestBed.configureTestingModule({
                 declarations: [PasswordStrengthBarComponent]
             })
-            .overrideTemplate(PasswordStrengthBarComponent, '')
-            .compileComponents();
+                .overrideTemplate(PasswordStrengthBarComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {
@@ -38,7 +38,7 @@ describe('Component Tests', () => {
                 expect(comp.measureStrength('Aa090(**)+-07365')).toBeGreaterThanOrEqual(comp.measureStrength('Aa090(**)'));
             });
 
-             it('should change the color based on strength', () => {
+            it('should change the color based on strength', () => {
                 expect(comp.getColor(0).col).toBe(comp.colors[0]);
                 expect(comp.getColor(11).col).toBe(comp.colors[1]);
                 expect(comp.getColor(22).col).toBe(comp.colors[2]);

@@ -7,8 +7,8 @@ import {Principal} from '../../shared';
 const now = new Date();
 
 @Component({
-  selector: 'jhi-reservation-modal',
-  templateUrl: './reservation.component.html',
+    selector: 'jhi-reservation-modal',
+    templateUrl: './reservation.component.html',
     styleUrls: [
         'reservation.scss'
     ]
@@ -20,14 +20,19 @@ export class ReservationComponent implements OnInit {
     timeModel: NgbTimeStruct;
 
     constructor(
-      private reservationService: ReservationService,
-      private modalService: NgbModal,
-      private principal: Principal
-    ) { }
+        private reservationService: ReservationService,
+        private modalService: NgbModal,
+        private principal: Principal
+    ) {
+    }
 
     selectToday() {
         this.dateModel = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
-        this.timeModel = {hour: now.getHours(), minute: Math.ceil(now.getMinutes() / 30) * 30, second: now.getSeconds()};
+        this.timeModel = {
+            hour: now.getHours(),
+            minute: Math.ceil(now.getMinutes() / 30) * 30,
+            second: now.getSeconds()
+        };
     }
 
     open(content) {
@@ -39,22 +44,22 @@ export class ReservationComponent implements OnInit {
         });
     }
 
-    private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-            return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        } else {
-            return  `with: ${reason}`;
-        }
-    }
-
     isAuthenticated() {
         return this.principal.isAuthenticated();
     }
 
     ngOnInit(): void {
         this.selectToday();
+    }
+
+    private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        } else {
+            return `with: ${reason}`;
+        }
     }
 
 }

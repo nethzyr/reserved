@@ -50,4 +50,5 @@ const ENTITY_STATES = [
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ReservedRestaurantModule {}
+export class ReservedRestaurantModule {
+}

@@ -13,7 +13,6 @@ export class RestaurantPopupService {
         private modalService: NgbModal,
         private router: Router,
         private restaurantService: RestaurantService
-
     ) {
         this.ngbModalRef = null;
     }
@@ -43,13 +42,13 @@ export class RestaurantPopupService {
     }
 
     restaurantModalRef(component: Component, restaurant: Restaurant): NgbModalRef {
-        const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static'});
+        const modalRef = this.modalService.open(component, {size: 'lg', backdrop: 'static'});
         modalRef.componentInstance.restaurant = restaurant;
         modalRef.result.then((result) => {
-            this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true, queryParamsHandling: 'merge' });
+            this.router.navigate([{outlets: {popup: null}}], {replaceUrl: true, queryParamsHandling: 'merge'});
             this.ngbModalRef = null;
         }, (reason) => {
-            this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true, queryParamsHandling: 'merge' });
+            this.router.navigate([{outlets: {popup: null}}], {replaceUrl: true, queryParamsHandling: 'merge'});
             this.ngbModalRef = null;
         });
         return modalRef;

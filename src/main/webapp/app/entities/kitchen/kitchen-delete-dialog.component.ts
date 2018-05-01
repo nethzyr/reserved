@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Kitchen } from './kitchen.model';
-import { KitchenPopupService } from './kitchen-popup.service';
-import { KitchenService } from './kitchen.service';
+import {Kitchen} from './kitchen.model';
+import {KitchenPopupService} from './kitchen-popup.service';
+import {KitchenService} from './kitchen.service';
 
 @Component({
     selector: 'jhi-kitchen-delete-dialog',
@@ -49,7 +49,8 @@ export class KitchenDeletePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private kitchenPopupService: KitchenPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {

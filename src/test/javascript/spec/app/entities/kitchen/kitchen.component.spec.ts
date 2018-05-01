@@ -1,12 +1,12 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Observable} from 'rxjs/Observable';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
 
-import { ReservedTestModule } from '../../../test.module';
-import { KitchenComponent } from '../../../../../../main/webapp/app/entities/kitchen/kitchen.component';
-import { KitchenService } from '../../../../../../main/webapp/app/entities/kitchen/kitchen.service';
-import { Kitchen } from '../../../../../../main/webapp/app/entities/kitchen/kitchen.model';
+import {ReservedTestModule} from '../../../test.module';
+import {KitchenComponent} from '../../../../../../main/webapp/app/entities/kitchen/kitchen.component';
+import {KitchenService} from '../../../../../../main/webapp/app/entities/kitchen/kitchen.service';
+import {Kitchen} from '../../../../../../main/webapp/app/entities/kitchen/kitchen.model';
 
 describe('Component Tests', () => {
 
@@ -23,8 +23,8 @@ describe('Component Tests', () => {
                     KitchenService
                 ]
             })
-            .overrideTemplate(KitchenComponent, '')
-            .compileComponents();
+                .overrideTemplate(KitchenComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

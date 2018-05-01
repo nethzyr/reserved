@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <!--
         Added the constraints for entity Restaurant.
     -->
     <changeSet id="20180422180249-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="city_id"
                                  baseTableName="restaurant"
                                  constraintName="fk_restaurant_city_id"
@@ -24,7 +24,7 @@
                                  constraintName="fk_restaurant_kitchen_kitchens_id"
                                  referencedColumnNames="id"
                                  referencedTableName="kitchen"/>
-        
+
         <addForeignKeyConstraint baseColumnNames="restaurants_id"
                                  baseTableName="restaurant_food"
                                  constraintName="fk_restaurant_food_restaurants_id"
@@ -35,7 +35,7 @@
                                  constraintName="fk_restaurant_food_foods_id"
                                  referencedColumnNames="id"
                                  referencedTableName="food"/>
-        
+
         <addForeignKeyConstraint baseColumnNames="restaurants_id"
                                  baseTableName="restaurant_picture"
                                  constraintName="fk_restaurant_picture_restaurants_id"
@@ -46,7 +46,7 @@
                                  constraintName="fk_restaurant_picture_pictures_id"
                                  referencedColumnNames="id"
                                  referencedTableName="picture"/>
-        
+
         <addForeignKeyConstraint baseColumnNames="restaurants_id"
                                  baseTableName="restaurant_user"
                                  constraintName="fk_restaurant_user_restaurants_id"
@@ -57,6 +57,6 @@
                                  constraintName="fk_restaurant_user_users_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
-        
+
     </changeSet>
 </databaseChangeLog>

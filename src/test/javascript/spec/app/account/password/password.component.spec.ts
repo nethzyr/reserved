@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
-import { ReservedTestModule } from '../../../test.module';
-import { PasswordComponent } from '../../../../../../main/webapp/app/account/password/password.component';
-import { PasswordService } from '../../../../../../main/webapp/app/account/password/password.service';
-import { Principal } from '../../../../../../main/webapp/app/shared/auth/principal.service';
-import { AccountService } from '../../../../../../main/webapp/app/shared/auth/account.service';
+import {ReservedTestModule} from '../../../test.module';
+import {PasswordComponent} from '../../../../../../main/webapp/app/account/password/password.component';
+import {PasswordService} from '../../../../../../main/webapp/app/account/password/password.service';
+import {Principal} from '../../../../../../main/webapp/app/shared/auth/principal.service';
+import {AccountService} from '../../../../../../main/webapp/app/shared/auth/account.service';
 
 describe('Component Tests', () => {
 
@@ -26,8 +26,8 @@ describe('Component Tests', () => {
                     PasswordService
                 ]
             })
-            .overrideTemplate(PasswordComponent, '')
-            .compileComponents();
+                .overrideTemplate(PasswordComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
             expect(service.save).toHaveBeenCalledWith('myPassword');
         });
 
-        it('should set success to OK upon success', function() {
+        it('should set success to OK upon success', function () {
             // GIVEN
             spyOn(service, 'save').and.returnValue(Observable.of(new HttpResponse({body: true})));
             comp.password = comp.confirmPassword = 'myPassword';
@@ -74,7 +74,7 @@ describe('Component Tests', () => {
             expect(comp.success).toBe('OK');
         });
 
-        it('should notify of error if change password fails', function() {
+        it('should notify of error if change password fails', function () {
             // GIVEN
             spyOn(service, 'save').and.returnValue(Observable.throw('ERROR'));
             comp.password = comp.confirmPassword = 'myPassword';

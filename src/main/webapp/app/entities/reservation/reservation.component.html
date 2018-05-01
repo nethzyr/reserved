@@ -1,9 +1,10 @@
 <div>
     <h2>
         <span jhiTranslate="reservedApp.reservation.home.title">Reservations</span>
-        <button class="btn btn-primary float-right jh-create-entity create-reservation" [routerLink]="['/', { outlets: { popup: ['reservation-new'] } }]">
+        <button class="btn btn-primary float-right jh-create-entity create-reservation"
+                [routerLink]="['/', { outlets: { popup: ['reservation-new'] } }]">
             <span class="fa fa-plus"></span>
-            <span class="hidden-sm-down"  jhiTranslate="reservedApp.reservation.home.createLabel">
+            <span class="hidden-sm-down" jhiTranslate="reservedApp.reservation.home.createLabel">
             Create new Reservation
             </span>
         </button>
@@ -13,7 +14,8 @@
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'reservedApp.reservation.home.search' | translate }}">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                           name="currentSearch" placeholder="{{ 'reservedApp.reservation.home.search' | translate }}">
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                         <span class="fa fa-search"></span>
                     </button>
@@ -29,16 +31,23 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="time"><span jhiTranslate="reservedApp.reservation.time">Time</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="people"><span jhiTranslate="reservedApp.reservation.people">People</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="confirmed"><span jhiTranslate="reservedApp.reservation.confirmed">Confirmed</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="restaurant.name"><span jhiTranslate="reservedApp.reservation.restaurant">Restaurant</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="user.login"><span jhiTranslate="reservedApp.reservation.user">User</span> <span class="fa fa-sort"></span></th>
-            <th></th>
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="time"><span jhiTranslate="reservedApp.reservation.time">Time</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="people"><span jhiTranslate="reservedApp.reservation.people">People</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="confirmed"><span jhiTranslate="reservedApp.reservation.confirmed">Confirmed</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="restaurant.name"><span
+                    jhiTranslate="reservedApp.reservation.restaurant">Restaurant</span> <span class="fa fa-sort"></span>
+                </th>
+                <th jhiSortBy="user.login"><span jhiTranslate="reservedApp.reservation.user">User</span> <span
+                    class="fa fa-sort"></span></th>
+                <th></th>
             </tr>
             </thead>
-            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
+                   [infiniteScrollDistance]="0">
             <tr *ngFor="let reservation of reservations ;trackBy: trackId">
                 <td><a [routerLink]="['../reservation', reservation.id ]">{{reservation.id}}</a></td>
                 <td>{{reservation.time | date:'medium'}}</td>
@@ -46,7 +55,7 @@
                 <td>{{reservation.confirmed}}</td>
                 <td>
                     <div *ngIf="reservation.restaurant">
-                        <a [routerLink]="['../restaurant', reservation.restaurant?.id ]" >{{reservation.restaurant?.name}}</a>
+                        <a [routerLink]="['../restaurant', reservation.restaurant?.id ]">{{reservation.restaurant?.name}}</a>
                     </div>
                 </td>
                 <td>

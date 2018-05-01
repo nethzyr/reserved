@@ -1,5 +1,5 @@
-import { browser, element, by } from 'protractor';
-import { NavBarPage } from './../page-objects/jhi-page-objects';
+import {browser, by, element} from 'protractor';
+import {NavBarPage} from './../page-objects/jhi-page-objects';
 
 describe('Country e2e test', () => {
 
@@ -62,18 +62,16 @@ export class CountryDialogPage {
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
     nameInput = element(by.css('input#field_name'));
+    setNameInput = function (name) {
+        this.nameInput.sendKeys(name);
+    };
+    getNameInput = function () {
+        return this.nameInput.getAttribute('value');
+    };
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
-
-    setNameInput = function(name) {
-        this.nameInput.sendKeys(name);
-    };
-
-    getNameInput = function() {
-        return this.nameInput.getAttribute('value');
-    };
 
     save() {
         this.saveButton.click();

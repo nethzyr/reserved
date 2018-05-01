@@ -32,10 +32,8 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 @RequestMapping("/api")
 public class ReservationResource {
 
-    private final Logger log = LoggerFactory.getLogger(ReservationResource.class);
-
     private static final String ENTITY_NAME = "reservation";
-
+    private final Logger log = LoggerFactory.getLogger(ReservationResource.class);
     private final ReservationRepository reservationRepository;
 
     private final ReservationSearchRepository reservationSearchRepository;
@@ -137,7 +135,7 @@ public class ReservationResource {
      * SEARCH  /_search/reservations?query=:query : search for the reservation corresponding
      * to the query.
      *
-     * @param query the query of the reservation search
+     * @param query    the query of the reservation search
      * @param pageable the pagination information
      * @return the result of the search
      */

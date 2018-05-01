@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, Renderer } from '@angular/core';
+import {Component, ElementRef, Input, Renderer} from '@angular/core';
 
 @Component({
     selector: 'jhi-password-strength-bar',
@@ -21,7 +21,27 @@ export class PasswordStrengthBarComponent {
 
     colors = ['#F00', '#F90', '#FF0', '#9F0', '#0F0'];
 
-    constructor(private renderer: Renderer, private elementRef: ElementRef) { }
+    constructor(private renderer: Renderer, private elementRef: ElementRef) {
+    }
+
+    @Input()
+    set passwordToCheck(password: string) {
+        if (password) {
+            const c = this.getColor(this.measureStrength(password));
+            const element = this.elementRef.nativeElement;
+            if (element.className) {
+                this.renderer.setElementClass(element, element.className, false);
+            }
+            const lis = element.getElementsByTagName('li');
+            for (let i = 0; i < lis.length; i++) {
+                if (i < c.idx) {
+                    this.renderer.setElementStyle(lis[i], 'backgroundColor', c.col);
+                } else {
+                    this.renderer.setElementStyle(lis[i], 'backgroundColor', '#DDD');
+                }
+            }
+        }
+    }
 
     measureStrength(p: string): number {
 
@@ -33,7 +53,7 @@ export class PasswordStrengthBarComponent {
         const symbols = regex.test(p);
 
         const flags = [lowerLetters, upperLetters, numbers, symbols];
-        const passedMatches = flags.filter( (isMatchedFlag: boolean) => {
+        const passedMatches = flags.filter((isMatchedFlag: boolean) => {
             return isMatchedFlag === true;
         }).length;
 
@@ -65,24 +85,5 @@ export class PasswordStrengthBarComponent {
             idx = 4;
         }
         return {idx: idx + 1, col: this.colors[idx]};
-    }
-
-    @Input()
-    set passwordToCheck(password: string) {
-        if (password) {
-            const c = this.getColor(this.measureStrength(password));
-            const element = this.elementRef.nativeElement;
-            if ( element.className ) {
-                this.renderer.setElementClass(element, element.className , false);
-            }
-            const lis = element.getElementsByTagName('li');
-            for (let i = 0; i < lis.length; i++) {
-                if (i < c.idx) {
-                    this.renderer.setElementStyle(lis[i], 'backgroundColor', c.col);
-                } else {
-                    this.renderer.setElementStyle(lis[i], 'backgroundColor', '#DDD');
-                }
-            }
-        }
     }
 }

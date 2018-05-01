@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "city" : {
+        "city": {
             "home": {
                 "title": "Cities",
                 "createLabel": "Create a new City",

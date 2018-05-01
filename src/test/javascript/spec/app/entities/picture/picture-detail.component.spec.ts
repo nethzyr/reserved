@@ -1,12 +1,12 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
-import { ReservedTestModule } from '../../../test.module';
-import { PictureDetailComponent } from '../../../../../../main/webapp/app/entities/picture/picture-detail.component';
-import { PictureService } from '../../../../../../main/webapp/app/entities/picture/picture.service';
-import { Picture } from '../../../../../../main/webapp/app/entities/picture/picture.model';
+import {ReservedTestModule} from '../../../test.module';
+import {PictureDetailComponent} from '../../../../../../main/webapp/app/entities/picture/picture-detail.component';
+import {PictureService} from '../../../../../../main/webapp/app/entities/picture/picture.service';
+import {Picture} from '../../../../../../main/webapp/app/entities/picture/picture.model';
 
 describe('Component Tests', () => {
 
@@ -23,8 +23,8 @@ describe('Component Tests', () => {
                     PictureService
                 ]
             })
-            .overrideTemplate(PictureDetailComponent, '')
-            .compileComponents();
+                .overrideTemplate(PictureDetailComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

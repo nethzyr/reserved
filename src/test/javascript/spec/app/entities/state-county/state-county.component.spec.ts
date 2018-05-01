@@ -1,12 +1,12 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Observable} from 'rxjs/Observable';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
 
-import { ReservedTestModule } from '../../../test.module';
-import { StateCountyComponent } from '../../../../../../main/webapp/app/entities/state-county/state-county.component';
-import { StateCountyService } from '../../../../../../main/webapp/app/entities/state-county/state-county.service';
-import { StateCounty } from '../../../../../../main/webapp/app/entities/state-county/state-county.model';
+import {ReservedTestModule} from '../../../test.module';
+import {StateCountyComponent} from '../../../../../../main/webapp/app/entities/state-county/state-county.component';
+import {StateCountyService} from '../../../../../../main/webapp/app/entities/state-county/state-county.service';
+import {StateCounty} from '../../../../../../main/webapp/app/entities/state-county/state-county.model';
 
 describe('Component Tests', () => {
 
@@ -23,8 +23,8 @@ describe('Component Tests', () => {
                     StateCountyService
                 ]
             })
-            .overrideTemplate(StateCountyComponent, '')
-            .compileComponents();
+                .overrideTemplate(StateCountyComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

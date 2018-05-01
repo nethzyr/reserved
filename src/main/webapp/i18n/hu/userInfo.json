@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "userInfo" : {
+        "userInfo": {
             "home": {
                 "title": "UserInfos",
                 "createLabel": "Egy új User Info létrehozása",

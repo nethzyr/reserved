@@ -1,12 +1,10 @@
 package com.elte.reserved.web.rest;
 
 import com.elte.reserved.ReservedApp;
-
 import com.elte.reserved.domain.Kitchen;
 import com.elte.reserved.repository.KitchenRepository;
 import com.elte.reserved.repository.search.KitchenSearchRepository;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,6 +62,18 @@ public class KitchenResourceIntTest {
 
     private Kitchen kitchen;
 
+    /**
+     * Create an entity for this test.
+     * <p>
+     * This is a static method, as tests for other entities might also need it,
+     * if they test an entity which requires the current entity.
+     */
+    public static Kitchen createEntity(EntityManager em) {
+        Kitchen kitchen = new Kitchen()
+            .type(DEFAULT_TYPE);
+        return kitchen;
+    }
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -73,18 +83,6 @@ public class KitchenResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
-    }
-
-    /**
-     * Create an entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Kitchen createEntity(EntityManager em) {
-        Kitchen kitchen = new Kitchen()
-            .type(DEFAULT_TYPE);
-        return kitchen;
     }
 
     @Before

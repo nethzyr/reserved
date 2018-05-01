@@ -38,9 +38,13 @@ export class ReservationDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.restaurantService.query()
-            .subscribe((res: HttpResponse<Restaurant[]>) => { this.restaurants = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<Restaurant[]>) => {
+                this.restaurants = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
         this.userService.query()
-            .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<User[]>) => {
+                this.users = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -58,13 +62,21 @@ export class ReservationDialogComponent implements OnInit {
         }
     }
 
+    trackRestaurantById(index: number, item: Restaurant) {
+        return item.id;
+    }
+
+    trackUserById(index: number, item: User) {
+        return item.id;
+    }
+
     private subscribeToSaveResponse(result: Observable<HttpResponse<Reservation>>) {
         result.subscribe((res: HttpResponse<Reservation>) =>
             this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
     private onSaveSuccess(result: Reservation) {
-        this.eventManager.broadcast({ name: 'reservationListModification', content: 'OK'});
+        this.eventManager.broadcast({name: 'reservationListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -75,14 +87,6 @@ export class ReservationDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackRestaurantById(index: number, item: Restaurant) {
-        return item.id;
-    }
-
-    trackUserById(index: number, item: User) {
-        return item.id;
     }
 }
 
@@ -97,11 +101,12 @@ export class ReservationPopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private reservationPopupService: ReservationPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            if (params['id']) {
                 this.reservationPopupService
                     .open(ReservationDialogComponent as Component, params['id']);
             } else {

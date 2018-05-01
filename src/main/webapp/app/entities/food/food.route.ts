@@ -1,10 +1,10 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
-import { UserRouteAccessService } from '../../shared';
-import { FoodComponent } from './food.component';
-import { FoodDetailComponent } from './food-detail.component';
-import { FoodPopupComponent } from './food-dialog.component';
-import { FoodDeletePopupComponent } from './food-delete-dialog.component';
+import {UserRouteAccessService} from '../../shared';
+import {FoodComponent} from './food.component';
+import {FoodDetailComponent} from './food-detail.component';
+import {FoodPopupComponent} from './food-dialog.component';
+import {FoodDeletePopupComponent} from './food-delete-dialog.component';
 
 export const foodRoute: Routes = [
     {

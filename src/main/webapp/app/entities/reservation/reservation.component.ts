@@ -106,6 +106,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
         this.currentSearch = query;
         this.loadAll();
     }
+
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then((account) => {
@@ -121,6 +122,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     trackId(index: number, item: Reservation) {
         return item.id;
     }
+
     registerChangeInReservations() {
         this.eventSubscriber = this.eventManager.subscribe('reservationListModification', (response) => this.reset());
     }

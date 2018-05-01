@@ -2,7 +2,6 @@ package com.elte.reserved.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.elte.reserved.domain.StateCounty;
-
 import com.elte.reserved.repository.StateCountyRepository;
 import com.elte.reserved.repository.search.StateCountySearchRepository;
 import com.elte.reserved.web.rest.errors.BadRequestAlertException;
@@ -21,13 +20,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * REST controller for managing StateCounty.
@@ -36,10 +32,8 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @RequestMapping("/api")
 public class StateCountyResource {
 
-    private final Logger log = LoggerFactory.getLogger(StateCountyResource.class);
-
     private static final String ENTITY_NAME = "stateCounty";
-
+    private final Logger log = LoggerFactory.getLogger(StateCountyResource.class);
     private final StateCountyRepository stateCountyRepository;
 
     private final StateCountySearchRepository stateCountySearchRepository;
@@ -141,7 +135,7 @@ public class StateCountyResource {
      * SEARCH  /_search/state-counties?query=:query : search for the stateCounty corresponding
      * to the query.
      *
-     * @param query the query of the stateCounty search
+     * @param query    the query of the stateCounty search
      * @param pageable the pagination information
      * @return the result of the search
      */

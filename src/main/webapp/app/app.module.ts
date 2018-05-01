@@ -34,7 +34,7 @@ import {FormsModule} from '@angular/forms';
         FormsModule,
         BrowserModule,
         ReservedAppRoutingModule,
-        Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
+        Ng2Webstorage.forRoot({prefix: 'jhi', separator: '-'}),
         ReservedSharedModule,
         ReservedHomeModule,
         ReservedAdminModule,
@@ -88,6 +88,7 @@ import {FormsModule} from '@angular/forms';
             ]
         }
     ],
-    bootstrap: [ JhiMainComponent ]
+    bootstrap: [JhiMainComponent]
 })
-export class ReservedAppModule {}
+export class ReservedAppModule {
+}

@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "reservation" : {
+        "reservation": {
             "home": {
                 "title": "Reservations",
                 "createLabel": "Egy új Reservation létrehozása",

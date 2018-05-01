@@ -1,12 +1,12 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs/Observable';
-import { JhiEventManager } from 'ng-jhipster';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs/Observable';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ReservedTestModule } from '../../../test.module';
-import { FoodDeleteDialogComponent } from '../../../../../../main/webapp/app/entities/food/food-delete-dialog.component';
-import { FoodService } from '../../../../../../main/webapp/app/entities/food/food.service';
+import {ReservedTestModule} from '../../../test.module';
+import {FoodDeleteDialogComponent} from '../../../../../../main/webapp/app/entities/food/food-delete-dialog.component';
+import {FoodService} from '../../../../../../main/webapp/app/entities/food/food.service';
 
 describe('Component Tests', () => {
 
@@ -25,8 +25,8 @@ describe('Component Tests', () => {
                     FoodService
                 ]
             })
-            .overrideTemplate(FoodDeleteDialogComponent, '')
-            .compileComponents();
+                .overrideTemplate(FoodDeleteDialogComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

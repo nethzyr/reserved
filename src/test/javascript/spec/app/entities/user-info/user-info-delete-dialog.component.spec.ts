@@ -25,8 +25,8 @@ describe('Component Tests', () => {
                     UserInfoService
                 ]
             })
-            .overrideTemplate(UserInfoDeleteDialogComponent, '')
-            .compileComponents();
+                .overrideTemplate(UserInfoDeleteDialogComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

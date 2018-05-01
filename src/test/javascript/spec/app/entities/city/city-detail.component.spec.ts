@@ -1,12 +1,12 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
-import { ReservedTestModule } from '../../../test.module';
-import { CityDetailComponent } from '../../../../../../main/webapp/app/entities/city/city-detail.component';
-import { CityService } from '../../../../../../main/webapp/app/entities/city/city.service';
-import { City } from '../../../../../../main/webapp/app/entities/city/city.model';
+import {ReservedTestModule} from '../../../test.module';
+import {CityDetailComponent} from '../../../../../../main/webapp/app/entities/city/city-detail.component';
+import {CityService} from '../../../../../../main/webapp/app/entities/city/city.service';
+import {City} from '../../../../../../main/webapp/app/entities/city/city.model';
 
 describe('Component Tests', () => {
 
@@ -23,8 +23,8 @@ describe('Component Tests', () => {
                     CityService
                 ]
             })
-            .overrideTemplate(CityDetailComponent, '')
-            .compileComponents();
+                .overrideTemplate(CityDetailComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

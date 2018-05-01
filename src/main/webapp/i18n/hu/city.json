@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "city" : {
+        "city": {
             "home": {
                 "title": "Várorosok",
                 "createLabel": "Egy új Város létrehozása",

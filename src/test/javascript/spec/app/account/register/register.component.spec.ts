@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed, async, inject, tick, fakeAsync } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {Observable} from 'rxjs/Observable';
 
-import { JhiLanguageService } from 'ng-jhipster';
-import { MockLanguageService } from '../../../helpers/mock-language.service';
-import { ReservedTestModule } from '../../../test.module';
-import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from '../../../../../../main/webapp/app/shared';
-import { Register } from '../../../../../../main/webapp/app/account/register/register.service';
-import { RegisterComponent } from '../../../../../../main/webapp/app/account/register/register.component';
+import {JhiLanguageService} from 'ng-jhipster';
+import {MockLanguageService} from '../../../helpers/mock-language.service';
+import {ReservedTestModule} from '../../../test.module';
+import {EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE} from '../../../../../../main/webapp/app/shared';
+import {Register} from '../../../../../../main/webapp/app/account/register/register.service';
+import {RegisterComponent} from '../../../../../../main/webapp/app/account/register/register.component';
 
 describe('Component Tests', () => {
 
@@ -22,8 +22,8 @@ describe('Component Tests', () => {
                     Register
                 ]
             })
-            .overrideTemplate(RegisterComponent, '')
-            .compileComponents();
+                .overrideTemplate(RegisterComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {
@@ -69,7 +69,7 @@ describe('Component Tests', () => {
                 fakeAsync((service: Register) => {
                     spyOn(service, 'save').and.returnValue(Observable.throw({
                         status: 400,
-                        error: { type: LOGIN_ALREADY_USED_TYPE }
+                        error: {type: LOGIN_ALREADY_USED_TYPE}
                     }));
                     comp.registerAccount.password = comp.confirmPassword = 'password';
 
@@ -88,7 +88,7 @@ describe('Component Tests', () => {
                 fakeAsync((service: Register) => {
                     spyOn(service, 'save').and.returnValue(Observable.throw({
                         status: 400,
-                        error: { type: EMAIL_ALREADY_USED_TYPE }
+                        error: {type: EMAIL_ALREADY_USED_TYPE}
                     }));
                     comp.registerAccount.password = comp.confirmPassword = 'password';
 

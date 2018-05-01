@@ -1,13 +1,11 @@
 package com.elte.reserved.web.rest;
 
 import com.elte.reserved.ReservedApp;
-
 import com.elte.reserved.domain.City;
 import com.elte.reserved.domain.StateCounty;
 import com.elte.reserved.repository.CityRepository;
 import com.elte.reserved.repository.search.CitySearchRepository;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,20 +63,9 @@ public class CityResourceIntTest {
 
     private City city;
 
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final CityResource cityResource = new CityResource(cityRepository, citySearchRepository);
-        this.restCityMockMvc = MockMvcBuilders.standaloneSetup(cityResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
-
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -91,6 +78,17 @@ public class CityResourceIntTest {
         em.flush();
         city.setStateCounty(stateCounty);
         return city;
+    }
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        final CityResource cityResource = new CityResource(cityRepository, citySearchRepository);
+        this.restCityMockMvc = MockMvcBuilders.standaloneSetup(cityResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
     }
 
     @Before

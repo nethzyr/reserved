@@ -41,29 +41,29 @@ public class UserInfo implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "user_info_preferred_city",
-               joinColumns = @JoinColumn(name="user_infos_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="preferred_cities_id", referencedColumnName="id"))
+        joinColumns = @JoinColumn(name = "user_infos_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "preferred_cities_id", referencedColumnName = "id"))
     private Set<City> preferredCities = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "user_info_favorite_restaurant",
-               joinColumns = @JoinColumn(name="user_infos_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="favorite_restaurants_id", referencedColumnName="id"))
+        joinColumns = @JoinColumn(name = "user_infos_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "favorite_restaurants_id", referencedColumnName = "id"))
     private Set<Restaurant> favoriteRestaurants = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "user_info_favorite_kitchen",
-               joinColumns = @JoinColumn(name="user_infos_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="favorite_kitchens_id", referencedColumnName="id"))
+        joinColumns = @JoinColumn(name = "user_infos_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "favorite_kitchens_id", referencedColumnName = "id"))
     private Set<Kitchen> favoriteKitchens = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "user_info_favorite_food",
-               joinColumns = @JoinColumn(name="user_infos_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="favorite_foods_id", referencedColumnName="id"))
+        joinColumns = @JoinColumn(name = "user_infos_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "favorite_foods_id", referencedColumnName = "id"))
     private Set<Food> favoriteFoods = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -79,17 +79,21 @@ public class UserInfo implements Serializable {
         return facebook;
     }
 
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
     public UserInfo facebook(String facebook) {
         this.facebook = facebook;
         return this;
     }
 
-    public void setFacebook(String facebook) {
-        this.facebook = facebook;
-    }
-
     public String getPhone() {
         return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public UserInfo phone(String phone) {
@@ -97,12 +101,12 @@ public class UserInfo implements Serializable {
         return this;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public UserInfo user(User user) {
@@ -110,12 +114,12 @@ public class UserInfo implements Serializable {
         return this;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Picture getPicture() {
         return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 
     public UserInfo picture(Picture picture) {
@@ -123,12 +127,12 @@ public class UserInfo implements Serializable {
         return this;
     }
 
-    public void setPicture(Picture picture) {
-        this.picture = picture;
-    }
-
     public Set<City> getPreferredCities() {
         return preferredCities;
+    }
+
+    public void setPreferredCities(Set<City> cities) {
+        this.preferredCities = cities;
     }
 
     public UserInfo preferredCities(Set<City> cities) {
@@ -146,12 +150,12 @@ public class UserInfo implements Serializable {
         return this;
     }
 
-    public void setPreferredCities(Set<City> cities) {
-        this.preferredCities = cities;
-    }
-
     public Set<Restaurant> getFavoriteRestaurants() {
         return favoriteRestaurants;
+    }
+
+    public void setFavoriteRestaurants(Set<Restaurant> restaurants) {
+        this.favoriteRestaurants = restaurants;
     }
 
     public UserInfo favoriteRestaurants(Set<Restaurant> restaurants) {
@@ -169,12 +173,12 @@ public class UserInfo implements Serializable {
         return this;
     }
 
-    public void setFavoriteRestaurants(Set<Restaurant> restaurants) {
-        this.favoriteRestaurants = restaurants;
-    }
-
     public Set<Kitchen> getFavoriteKitchens() {
         return favoriteKitchens;
+    }
+
+    public void setFavoriteKitchens(Set<Kitchen> kitchens) {
+        this.favoriteKitchens = kitchens;
     }
 
     public UserInfo favoriteKitchens(Set<Kitchen> kitchens) {
@@ -192,12 +196,12 @@ public class UserInfo implements Serializable {
         return this;
     }
 
-    public void setFavoriteKitchens(Set<Kitchen> kitchens) {
-        this.favoriteKitchens = kitchens;
-    }
-
     public Set<Food> getFavoriteFoods() {
         return favoriteFoods;
+    }
+
+    public void setFavoriteFoods(Set<Food> foods) {
+        this.favoriteFoods = foods;
     }
 
     public UserInfo favoriteFoods(Set<Food> foods) {
@@ -213,10 +217,6 @@ public class UserInfo implements Serializable {
     public UserInfo removeFavoriteFood(Food food) {
         this.favoriteFoods.remove(food);
         return this;
-    }
-
-    public void setFavoriteFoods(Set<Food> foods) {
-        this.favoriteFoods = foods;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

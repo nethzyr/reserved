@@ -1,5 +1,5 @@
-import { browser, element, by } from 'protractor';
-import { NavBarPage } from './../page-objects/jhi-page-objects';
+import {browser, by, element} from 'protractor';
+import {NavBarPage} from './../page-objects/jhi-page-objects';
 
 describe('StateCounty e2e test', () => {
 
@@ -31,14 +31,14 @@ describe('StateCounty e2e test', () => {
         stateCountyDialogPage.close();
     });
 
-   /* it('should create and save StateCounties', () => {
-        stateCountyComponentsPage.clickOnCreateButton();
-        stateCountyDialogPage.setNameInput('name');
-        expect(stateCountyDialogPage.getNameInput()).toMatch('name');
-        stateCountyDialogPage.countrySelectLastOption();
-        stateCountyDialogPage.save();
-        expect(stateCountyDialogPage.getSaveButton().isPresent()).toBeFalsy();
-    });*/
+    /* it('should create and save StateCounties', () => {
+         stateCountyComponentsPage.clickOnCreateButton();
+         stateCountyDialogPage.setNameInput('name');
+         expect(stateCountyDialogPage.getNameInput()).toMatch('name');
+         stateCountyDialogPage.countrySelectLastOption();
+         stateCountyDialogPage.save();
+         expect(stateCountyDialogPage.getSaveButton().isPresent()).toBeFalsy();
+     });*/
 
     afterAll(() => {
         navBarPage.autoSignOut();
@@ -64,34 +64,28 @@ export class StateCountyDialogPage {
     closeButton = element(by.css('button.close'));
     nameInput = element(by.css('input#field_name'));
     countrySelect = element(by.css('select#field_country'));
+    setNameInput = function (name) {
+        this.nameInput.sendKeys(name);
+    };
+    getNameInput = function () {
+        return this.nameInput.getAttribute('value');
+    };
+    countrySelectLastOption = function () {
+        this.countrySelect.all(by.tagName('option')).last().click();
+    };
+    countrySelectOption = function (option) {
+        this.countrySelect.sendKeys(option);
+    };
+    getCountrySelect = function () {
+        return this.countrySelect;
+    };
+    getCountrySelectedOption = function () {
+        return this.countrySelect.element(by.css('option:checked')).getText();
+    };
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
-
-    setNameInput = function(name) {
-        this.nameInput.sendKeys(name);
-    };
-
-    getNameInput = function() {
-        return this.nameInput.getAttribute('value');
-    };
-
-    countrySelectLastOption = function() {
-        this.countrySelect.all(by.tagName('option')).last().click();
-    };
-
-    countrySelectOption = function(option) {
-        this.countrySelect.sendKeys(option);
-    };
-
-    getCountrySelect = function() {
-        return this.countrySelect;
-    };
-
-    getCountrySelectedOption = function() {
-        return this.countrySelect.element(by.css('option:checked')).getText();
-    };
 
     save() {
         this.saveButton.click();

@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "restaurant" : {
+        "restaurant": {
             "home": {
                 "title": "Restaurants",
                 "createLabel": "Create a new Restaurant",

@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "stateCounty" : {
+        "stateCounty": {
             "home": {
                 "title": "State Counties",
                 "createLabel": "Create a new State County",

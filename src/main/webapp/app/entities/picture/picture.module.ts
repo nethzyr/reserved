@@ -1,19 +1,19 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { ReservedSharedModule } from '../../shared';
+import {ReservedSharedModule} from '../../shared';
 import {
-    PictureService,
-    PicturePopupService,
     PictureComponent,
+    PictureDeleteDialogComponent,
+    PictureDeletePopupComponent,
     PictureDetailComponent,
     PictureDialogComponent,
     PicturePopupComponent,
-    PictureDeletePopupComponent,
-    PictureDeleteDialogComponent,
-    pictureRoute,
     picturePopupRoute,
+    PicturePopupService,
     PictureResolvePagingParams,
+    pictureRoute,
+    PictureService,
 } from './';
 
 const ENTITY_STATES = [
@@ -48,4 +48,5 @@ const ENTITY_STATES = [
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ReservedPictureModule {}
+export class ReservedPictureModule {
+}

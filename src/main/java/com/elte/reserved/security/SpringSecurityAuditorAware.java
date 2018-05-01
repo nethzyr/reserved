@@ -1,7 +1,6 @@
 package com.elte.reserved.security;
 
 import com.elte.reserved.config.Constants;
-
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 

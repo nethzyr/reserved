@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { SocialService } from './social.service';
-import { CSRFService } from '../auth/csrf.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {SocialService} from './social.service';
+import {CSRFService} from '../auth/csrf.service';
 
 @Component({
     selector: 'jhi-social',
@@ -16,7 +16,8 @@ export class JhiSocialComponent implements OnInit {
     constructor(
         private csrfService: CSRFService,
         private socialService: SocialService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.label = this.provider.charAt(0).toUpperCase() + this.provider.slice(1);

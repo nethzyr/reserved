@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "reservation" : {
+        "reservation": {
             "home": {
                 "title": "Reservations",
                 "createLabel": "Create a new Reservation",

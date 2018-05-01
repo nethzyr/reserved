@@ -1,12 +1,12 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
-import { ReservedTestModule } from '../../../test.module';
-import { FoodDetailComponent } from '../../../../../../main/webapp/app/entities/food/food-detail.component';
-import { FoodService } from '../../../../../../main/webapp/app/entities/food/food.service';
-import { Food } from '../../../../../../main/webapp/app/entities/food/food.model';
+import {ReservedTestModule} from '../../../test.module';
+import {FoodDetailComponent} from '../../../../../../main/webapp/app/entities/food/food-detail.component';
+import {FoodService} from '../../../../../../main/webapp/app/entities/food/food.service';
+import {Food} from '../../../../../../main/webapp/app/entities/food/food.model';
 
 describe('Component Tests', () => {
 
@@ -23,8 +23,8 @@ describe('Component Tests', () => {
                     FoodService
                 ]
             })
-            .overrideTemplate(FoodDetailComponent, '')
-            .compileComponents();
+                .overrideTemplate(FoodDetailComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

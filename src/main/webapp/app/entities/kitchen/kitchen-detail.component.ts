@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Kitchen } from './kitchen.model';
-import { KitchenService } from './kitchen.service';
+import {Kitchen} from './kitchen.model';
+import {KitchenService} from './kitchen.service';
 
 @Component({
     selector: 'jhi-kitchen-detail',
@@ -37,6 +37,7 @@ export class KitchenDetailComponent implements OnInit, OnDestroy {
                 this.kitchen = kitchenResponse.body;
             });
     }
+
     previousState() {
         window.history.back();
     }

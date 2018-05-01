@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Country } from './country.model';
-import { CountryPopupService } from './country-popup.service';
-import { CountryService } from './country.service';
+import {Country} from './country.model';
+import {CountryPopupService} from './country-popup.service';
+import {CountryService} from './country.service';
 
 @Component({
     selector: 'jhi-country-delete-dialog',
@@ -49,7 +49,8 @@ export class CountryDeletePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private countryPopupService: CountryPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {

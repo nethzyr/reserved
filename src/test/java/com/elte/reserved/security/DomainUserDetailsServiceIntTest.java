@@ -3,7 +3,6 @@ package com.elte.reserved.security;
 import com.elte.reserved.ReservedApp;
 import com.elte.reserved.domain.User;
 import com.elte.reserved.repository.UserRepository;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;

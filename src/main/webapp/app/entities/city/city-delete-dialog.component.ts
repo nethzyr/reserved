@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { City } from './city.model';
-import { CityPopupService } from './city-popup.service';
-import { CityService } from './city.service';
+import {City} from './city.model';
+import {CityPopupService} from './city-popup.service';
+import {CityService} from './city.service';
 
 @Component({
     selector: 'jhi-city-delete-dialog',
@@ -49,7 +49,8 @@ export class CityDeletePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private cityPopupService: CityPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {

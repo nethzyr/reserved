@@ -37,6 +37,7 @@ export class RestaurantDetailComponent implements OnInit, OnDestroy {
                 this.restaurant = restaurantResponse.body;
             });
     }
+
     previousState() {
         window.history.back();
     }

@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "stateCounty" : {
+        "stateCounty": {
             "home": {
                 "title": "Megyék",
                 "createLabel": "Egy új Megye létrehozása",

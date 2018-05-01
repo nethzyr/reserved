@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Picture } from './picture.model';
-import { PicturePopupService } from './picture-popup.service';
-import { PictureService } from './picture.service';
+import {Picture} from './picture.model';
+import {PicturePopupService} from './picture-popup.service';
+import {PictureService} from './picture.service';
 
 @Component({
     selector: 'jhi-picture-delete-dialog',
@@ -49,7 +49,8 @@ export class PictureDeletePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private picturePopupService: PicturePopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {

@@ -2,11 +2,10 @@ package com.elte.reserved.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import org.springframework.data.elasticsearch.annotations.Document;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -52,17 +51,21 @@ public class Picture implements Serializable {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Picture title(String title) {
         this.title = title;
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getUrl() {
         return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Picture url(String url) {
@@ -70,12 +73,12 @@ public class Picture implements Serializable {
         return this;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public byte[] getImg() {
         return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
     }
 
     public Picture img(byte[] img) {
@@ -83,21 +86,17 @@ public class Picture implements Serializable {
         return this;
     }
 
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
-
     public String getImgContentType() {
         return imgContentType;
+    }
+
+    public void setImgContentType(String imgContentType) {
+        this.imgContentType = imgContentType;
     }
 
     public Picture imgContentType(String imgContentType) {
         this.imgContentType = imgContentType;
         return this;
-    }
-
-    public void setImgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

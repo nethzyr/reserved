@@ -2,11 +2,10 @@ package com.elte.reserved.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import org.springframework.data.elasticsearch.annotations.Document;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -46,26 +45,26 @@ public class StateCounty implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public StateCounty name(String name) {
         this.name = name;
         return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Country getCountry() {
         return country;
     }
 
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
     public StateCounty country(Country country) {
         this.country = country;
         return this;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

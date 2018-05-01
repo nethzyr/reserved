@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Kitchen } from './kitchen.model';
-import { KitchenPopupService } from './kitchen-popup.service';
-import { KitchenService } from './kitchen.service';
+import {Kitchen} from './kitchen.model';
+import {KitchenPopupService} from './kitchen-popup.service';
+import {KitchenService} from './kitchen.service';
 
 @Component({
     selector: 'jhi-kitchen-dialog',
@@ -51,7 +51,7 @@ export class KitchenDialogComponent implements OnInit {
     }
 
     private onSaveSuccess(result: Kitchen) {
-        this.eventManager.broadcast({ name: 'kitchenListModification', content: 'OK'});
+        this.eventManager.broadcast({name: 'kitchenListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -72,11 +72,12 @@ export class KitchenPopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private kitchenPopupService: KitchenPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            if (params['id']) {
                 this.kitchenPopupService
                     .open(KitchenDialogComponent as Component, params['id']);
             } else {

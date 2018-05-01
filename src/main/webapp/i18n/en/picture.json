@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "picture" : {
+        "picture": {
             "home": {
                 "title": "Pictures",
                 "createLabel": "Create a new Picture",

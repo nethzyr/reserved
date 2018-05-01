@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "kitchen" : {
+        "kitchen": {
             "home": {
                 "title": "Kitchens",
                 "createLabel": "Create a new Kitchen",

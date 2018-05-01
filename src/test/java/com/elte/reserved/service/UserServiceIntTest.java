@@ -6,7 +6,6 @@ import com.elte.reserved.domain.User;
 import com.elte.reserved.repository.UserRepository;
 import com.elte.reserved.service.dto.UserDTO;
 import com.elte.reserved.service.util.RandomUtil;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;

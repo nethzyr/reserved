@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "kitchen" : {
+        "kitchen": {
             "home": {
                 "title": "Konyhák",
                 "createLabel": "Egy új Konyha létrehozása",

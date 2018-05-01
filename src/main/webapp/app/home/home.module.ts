@@ -12,7 +12,7 @@ import {ReservationComponent} from './reservation/reservation.component';
 @NgModule({
     imports: [
         ReservedSharedModule,
-        RouterModule.forChild([ HOME_ROUTE ])
+        RouterModule.forChild([HOME_ROUTE])
     ],
     declarations: [
         HomeComponent,
@@ -21,10 +21,9 @@ import {ReservationComponent} from './reservation/reservation.component';
         RestaurantDetailComponent,
         ReservationComponent
     ],
-    entryComponents: [
-    ],
-    providers: [
-    ],
+    entryComponents: [],
+    providers: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ReservedHomeModule {}
+export class ReservedHomeModule {
+}

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { ElasticsearchReindexModalComponent } from './elasticsearch-reindex-modal.component';
+import {ElasticsearchReindexModalComponent} from './elasticsearch-reindex-modal.component';
 
 @Component({
     selector: 'jhi-elasticsearch-reindex',
@@ -11,7 +11,8 @@ export class ElasticsearchReindexComponent {
 
     constructor(
         private modalService: NgbModal
-    ) { }
+    ) {
+    }
 
     showConfirm() {
         this.modalService.open(ElasticsearchReindexModalComponent);

@@ -37,6 +37,7 @@ export class ReservationDetailComponent implements OnInit, OnDestroy {
                 this.reservation = reservationResponse.body;
             });
     }
+
     previousState() {
         window.history.back();
     }

@@ -25,8 +25,8 @@ describe('Component Tests', () => {
                     RestaurantService
                 ]
             })
-            .overrideTemplate(RestaurantDeleteDialogComponent, '')
-            .compileComponents();
+                .overrideTemplate(RestaurantDeleteDialogComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

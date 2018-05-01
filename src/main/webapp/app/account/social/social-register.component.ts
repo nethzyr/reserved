@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-import { LoginModalService } from '../../shared';
+import {LoginModalService} from '../../shared';
 
 @Component({
     selector: 'jhi-register',
     templateUrl: './social-register.component.html'
 })
-export class SocialRegisterComponent implements OnInit  {
+export class SocialRegisterComponent implements OnInit {
     success: boolean;
     error: boolean;
     provider: string;

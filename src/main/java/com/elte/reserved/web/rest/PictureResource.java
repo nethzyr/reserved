@@ -2,7 +2,6 @@ package com.elte.reserved.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.elte.reserved.domain.Picture;
-
 import com.elte.reserved.repository.PictureRepository;
 import com.elte.reserved.repository.search.PictureSearchRepository;
 import com.elte.reserved.web.rest.errors.BadRequestAlertException;
@@ -21,13 +20,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * REST controller for managing Picture.
@@ -36,10 +32,8 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @RequestMapping("/api")
 public class PictureResource {
 
-    private final Logger log = LoggerFactory.getLogger(PictureResource.class);
-
     private static final String ENTITY_NAME = "picture";
-
+    private final Logger log = LoggerFactory.getLogger(PictureResource.class);
     private final PictureRepository pictureRepository;
 
     private final PictureSearchRepository pictureSearchRepository;
@@ -141,7 +135,7 @@ public class PictureResource {
      * SEARCH  /_search/pictures?query=:query : search for the picture corresponding
      * to the query.
      *
-     * @param query the query of the picture search
+     * @param query    the query of the picture search
      * @param pageable the pagination information
      * @return the result of the search
      */

@@ -1,12 +1,12 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
-import { ReservedTestModule } from '../../../test.module';
-import { CountryDetailComponent } from '../../../../../../main/webapp/app/entities/country/country-detail.component';
-import { CountryService } from '../../../../../../main/webapp/app/entities/country/country.service';
-import { Country } from '../../../../../../main/webapp/app/entities/country/country.model';
+import {ReservedTestModule} from '../../../test.module';
+import {CountryDetailComponent} from '../../../../../../main/webapp/app/entities/country/country-detail.component';
+import {CountryService} from '../../../../../../main/webapp/app/entities/country/country.service';
+import {Country} from '../../../../../../main/webapp/app/entities/country/country.model';
 
 describe('Component Tests', () => {
 
@@ -23,8 +23,8 @@ describe('Component Tests', () => {
                     CountryService
                 ]
             })
-            .overrideTemplate(CountryDetailComponent, '')
-            .compileComponents();
+                .overrideTemplate(CountryDetailComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

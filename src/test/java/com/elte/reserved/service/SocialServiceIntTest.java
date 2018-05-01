@@ -5,10 +5,8 @@ import com.elte.reserved.domain.Authority;
 import com.elte.reserved.domain.User;
 import com.elte.reserved.repository.AuthorityRepository;
 import com.elte.reserved.repository.UserRepository;
-import com.elte.reserved.security.AuthoritiesConstants;
 import com.elte.reserved.repository.search.UserSearchRepository;
-import com.elte.reserved.service.MailService;
-
+import com.elte.reserved.security.AuthoritiesConstants;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,7 +62,7 @@ public class SocialServiceIntTest {
         when(mockUsersConnectionRepository.createConnectionRepository(anyString())).thenReturn(mockConnectionRepository);
 
         socialService = new SocialService(mockUsersConnectionRepository, authorityRepository,
-                passwordEncoder, userRepository, mockMailService, userSearchRepository);
+            passwordEncoder, userRepository, mockMailService, userSearchRepository);
     }
 
     @Test

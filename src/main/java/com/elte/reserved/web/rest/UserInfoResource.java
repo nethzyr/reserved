@@ -31,10 +31,8 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 @RequestMapping("/api")
 public class UserInfoResource {
 
-    private final Logger log = LoggerFactory.getLogger(UserInfoResource.class);
-
     private static final String ENTITY_NAME = "userInfo";
-
+    private final Logger log = LoggerFactory.getLogger(UserInfoResource.class);
     private final UserInfoRepository userInfoRepository;
 
     private final UserInfoSearchRepository userInfoSearchRepository;
@@ -136,7 +134,7 @@ public class UserInfoResource {
      * SEARCH  /_search/user-infos?query=:query : search for the userInfo corresponding
      * to the query.
      *
-     * @param query the query of the userInfo search
+     * @param query    the query of the userInfo search
      * @param pageable the pagination information
      * @return the result of the search
      */

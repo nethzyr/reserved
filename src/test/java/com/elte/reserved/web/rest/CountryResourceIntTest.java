@@ -1,12 +1,10 @@
 package com.elte.reserved.web.rest;
 
 import com.elte.reserved.ReservedApp;
-
 import com.elte.reserved.domain.Country;
 import com.elte.reserved.repository.CountryRepository;
 import com.elte.reserved.repository.search.CountrySearchRepository;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,6 +62,18 @@ public class CountryResourceIntTest {
 
     private Country country;
 
+    /**
+     * Create an entity for this test.
+     * <p>
+     * This is a static method, as tests for other entities might also need it,
+     * if they test an entity which requires the current entity.
+     */
+    public static Country createEntity(EntityManager em) {
+        Country country = new Country()
+            .name(DEFAULT_NAME);
+        return country;
+    }
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -73,18 +83,6 @@ public class CountryResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
-    }
-
-    /**
-     * Create an entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Country createEntity(EntityManager em) {
-        Country country = new Country()
-            .name(DEFAULT_NAME);
-        return country;
     }
 
     @Before

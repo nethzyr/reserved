@@ -1,12 +1,10 @@
 package com.elte.reserved.web.rest;
 
 import com.elte.reserved.ReservedApp;
-
 import com.elte.reserved.domain.Food;
 import com.elte.reserved.repository.FoodRepository;
 import com.elte.reserved.repository.search.FoodSearchRepository;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,6 +62,18 @@ public class FoodResourceIntTest {
 
     private Food food;
 
+    /**
+     * Create an entity for this test.
+     * <p>
+     * This is a static method, as tests for other entities might also need it,
+     * if they test an entity which requires the current entity.
+     */
+    public static Food createEntity(EntityManager em) {
+        Food food = new Food()
+            .type(DEFAULT_TYPE);
+        return food;
+    }
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -73,18 +83,6 @@ public class FoodResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
-    }
-
-    /**
-     * Create an entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Food createEntity(EntityManager em) {
-        Food food = new Food()
-            .type(DEFAULT_TYPE);
-        return food;
     }
 
     @Before

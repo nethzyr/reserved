@@ -1,13 +1,13 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { ReservedSharedModule } from '../../shared';
+import {ReservedSharedModule} from '../../shared';
 
 import {
     ElasticsearchReindexComponent,
     ElasticsearchReindexModalComponent,
-    ElasticsearchReindexService,
-    elasticsearchReindexRoute
+    elasticsearchReindexRoute,
+    ElasticsearchReindexService
 } from './';
 
 const ADMIN_ROUTES = [
@@ -17,7 +17,7 @@ const ADMIN_ROUTES = [
 @NgModule({
     imports: [
         ReservedSharedModule,
-        RouterModule.forRoot(ADMIN_ROUTES, { useHash: true })
+        RouterModule.forRoot(ADMIN_ROUTES, {useHash: true})
     ],
     declarations: [
         ElasticsearchReindexComponent,
@@ -32,4 +32,5 @@ const ADMIN_ROUTES = [
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
-export class ReservedElasticsearchReindexModule {}
+export class ReservedElasticsearchReindexModule {
+}

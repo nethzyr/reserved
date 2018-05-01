@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiDataUtils, JhiEventManager} from 'ng-jhipster';
 
-import { Picture } from './picture.model';
-import { PictureService } from './picture.service';
+import {Picture} from './picture.model';
+import {PictureService} from './picture.service';
 
 @Component({
     selector: 'jhi-picture-detail',
@@ -38,6 +38,7 @@ export class PictureDetailComponent implements OnInit, OnDestroy {
                 this.picture = pictureResponse.body;
             });
     }
+
     byteSize(field) {
         return this.dataUtils.byteSize(field);
     }
@@ -45,6 +46,7 @@ export class PictureDetailComponent implements OnInit, OnDestroy {
     openFile(contentType, field) {
         return this.dataUtils.openFile(contentType, field);
     }
+
     previousState() {
         window.history.back();
     }

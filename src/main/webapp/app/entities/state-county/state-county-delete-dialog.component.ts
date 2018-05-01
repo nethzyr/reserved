@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { StateCounty } from './state-county.model';
-import { StateCountyPopupService } from './state-county-popup.service';
-import { StateCountyService } from './state-county.service';
+import {StateCounty} from './state-county.model';
+import {StateCountyPopupService} from './state-county-popup.service';
+import {StateCountyService} from './state-county.service';
 
 @Component({
     selector: 'jhi-state-county-delete-dialog',
@@ -49,7 +49,8 @@ export class StateCountyDeletePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private stateCountyPopupService: StateCountyPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {

@@ -2,30 +2,16 @@ export interface GuinessCompatibleSpy extends jasmine.Spy {
     /** By chaining the spy with and.returnValue, all calls to the function will return a specific
      * value. */
     andReturn(val: any): void;
+
     /** By chaining the spy with and.callFake, all calls to the spy will delegate to the supplied
      * function. */
     andCallFake(fn: Function): GuinessCompatibleSpy;
+
     /** removes all recorded calls */
     reset();
 }
 
 export class SpyObject {
-    static stub(object = null, config = null, overrides = null) {
-        if (!(object instanceof SpyObject)) {
-            overrides = config;
-            config = object;
-            object = new SpyObject();
-        }
-
-        const m = {};
-        Object.keys(config).forEach((key) => m[key] = config[key]);
-        Object.keys(overrides).forEach((key) => m[key] = overrides[key]);
-        Object.keys(m).forEach((key) => {
-            object.spy(key).andReturn(m[key]);
-        });
-        return object;
-    }
-
     constructor(type = null) {
         if (type) {
             Object.keys(type.prototype).forEach((prop) => {
@@ -43,6 +29,22 @@ export class SpyObject {
                 }
             });
         }
+    }
+
+    static stub(object = null, config = null, overrides = null) {
+        if (!(object instanceof SpyObject)) {
+            overrides = config;
+            config = object;
+            object = new SpyObject();
+        }
+
+        const m = {};
+        Object.keys(config).forEach((key) => m[key] = config[key]);
+        Object.keys(overrides).forEach((key) => m[key] = overrides[key]);
+        Object.keys(m).forEach((key) => {
+            object.spy(key).andReturn(m[key]);
+        });
+        return object;
     }
 
     spy(name) {

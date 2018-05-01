@@ -23,8 +23,8 @@ describe('Component Tests', () => {
                     RestaurantService
                 ]
             })
-            .overrideTemplate(RestaurantDetailComponent, '')
-            .compileComponents();
+                .overrideTemplate(RestaurantDetailComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

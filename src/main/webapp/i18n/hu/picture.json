@@ -1,7 +1,6 @@
-
 {
     "reservedApp": {
-        "picture" : {
+        "picture": {
             "home": {
                 "title": "Képek",
                 "createLabel": "Egy új Kép létrehozása",

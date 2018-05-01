@@ -27,7 +27,8 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
         this.loadAll();
     }
 
-    ngOnDestroy() {}
+    ngOnDestroy() {
+    }
 
     ngOnChanges(changes) {
         this.loadAll();

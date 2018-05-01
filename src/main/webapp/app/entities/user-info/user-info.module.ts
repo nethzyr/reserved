@@ -50,4 +50,5 @@ const ENTITY_STATES = [
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ReservedUserInfoModule {}
+export class ReservedUserInfoModule {
+}

@@ -1,20 +1,19 @@
 package com.elte.reserved.web.rest;
 
-import com.elte.reserved.config.Constants;
 import com.elte.reserved.ReservedApp;
+import com.elte.reserved.config.Constants;
 import com.elte.reserved.domain.Authority;
 import com.elte.reserved.domain.User;
 import com.elte.reserved.repository.AuthorityRepository;
 import com.elte.reserved.repository.UserRepository;
 import com.elte.reserved.security.AuthoritiesConstants;
 import com.elte.reserved.service.MailService;
+import com.elte.reserved.service.UserService;
 import com.elte.reserved.service.dto.UserDTO;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
 import com.elte.reserved.web.rest.vm.KeyAndPasswordVM;
 import com.elte.reserved.web.rest.vm.ManagedUserVM;
-import com.elte.reserved.service.UserService;
 import org.apache.commons.lang3.RandomStringUtils;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,17 +29,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.Instant;
-import java.time.LocalDate;
 
-import java.util.*;
+import java.time.Instant;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**

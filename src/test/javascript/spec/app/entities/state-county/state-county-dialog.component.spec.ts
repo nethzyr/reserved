@@ -1,15 +1,15 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs/Observable';
-import { JhiEventManager } from 'ng-jhipster';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs/Observable';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ReservedTestModule } from '../../../test.module';
-import { StateCountyDialogComponent } from '../../../../../../main/webapp/app/entities/state-county/state-county-dialog.component';
-import { StateCountyService } from '../../../../../../main/webapp/app/entities/state-county/state-county.service';
-import { StateCounty } from '../../../../../../main/webapp/app/entities/state-county/state-county.model';
-import { CountryService } from '../../../../../../main/webapp/app/entities/country';
+import {ReservedTestModule} from '../../../test.module';
+import {StateCountyDialogComponent} from '../../../../../../main/webapp/app/entities/state-county/state-county-dialog.component';
+import {StateCountyService} from '../../../../../../main/webapp/app/entities/state-county/state-county.service';
+import {StateCounty} from '../../../../../../main/webapp/app/entities/state-county/state-county.model';
+import {CountryService} from '../../../../../../main/webapp/app/entities/country';
 
 describe('Component Tests', () => {
 
@@ -29,8 +29,8 @@ describe('Component Tests', () => {
                     StateCountyService
                 ]
             })
-            .overrideTemplate(StateCountyDialogComponent, '')
-            .compileComponents();
+                .overrideTemplate(StateCountyDialogComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {
@@ -56,7 +56,10 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.update).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'stateCountyListModification', content: 'OK'});
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({
+                            name: 'stateCountyListModification',
+                            content: 'OK'
+                        });
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )
@@ -76,7 +79,10 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.create).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'stateCountyListModification', content: 'OK'});
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({
+                            name: 'stateCountyListModification',
+                            content: 'OK'
+                        });
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )

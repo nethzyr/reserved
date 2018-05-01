@@ -277,11 +277,6 @@ public class WebConfigurerTest {
         }
 
         @Override
-        public void setRunAsRole(String roleName) {
-
-        }
-
-        @Override
         public void setAsyncSupported(boolean isAsyncSupported) {
 
         }
@@ -299,6 +294,11 @@ public class WebConfigurerTest {
         @Override
         public String getRunAsRole() {
             return null;
+        }
+
+        @Override
+        public void setRunAsRole(String roleName) {
+
         }
 
         @Override

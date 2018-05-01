@@ -1,7 +1,6 @@
 package com.elte.reserved.repository;
 
 import com.elte.reserved.domain.SocialUserConnection;
-
 import org.springframework.social.connect.*;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;

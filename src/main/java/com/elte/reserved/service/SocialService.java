@@ -4,9 +4,8 @@ import com.elte.reserved.domain.Authority;
 import com.elte.reserved.domain.User;
 import com.elte.reserved.repository.AuthorityRepository;
 import com.elte.reserved.repository.UserRepository;
-import com.elte.reserved.security.AuthoritiesConstants;
 import com.elte.reserved.repository.search.UserSearchRepository;
-
+import com.elte.reserved.security.AuthoritiesConstants;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -41,8 +40,8 @@ public class SocialService {
     private final UserSearchRepository userSearchRepository;
 
     public SocialService(UsersConnectionRepository usersConnectionRepository, AuthorityRepository authorityRepository,
-            PasswordEncoder passwordEncoder, UserRepository userRepository,
-            MailService mailService, UserSearchRepository userSearchRepository) {
+                         PasswordEncoder passwordEncoder, UserRepository userRepository,
+                         MailService mailService, UserSearchRepository userSearchRepository) {
 
         this.usersConnectionRepository = usersConnectionRepository;
         this.authorityRepository = authorityRepository;
@@ -118,7 +117,7 @@ public class SocialService {
 
     /**
      * @return login if provider manage a login like Twitter or GitHub otherwise email address.
-     *         Because provider like Google or Facebook didn't provide login or login like "12099388847393"
+     * Because provider like Google or Facebook didn't provide login or login like "12099388847393"
      */
     private String getLoginDependingOnProviderId(UserProfile userProfile, String providerId) {
         switch (providerId) {

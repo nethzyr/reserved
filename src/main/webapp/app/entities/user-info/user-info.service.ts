@@ -11,41 +11,42 @@ export type EntityResponseType = HttpResponse<UserInfo>;
 @Injectable()
 export class UserInfoService {
 
-    private resourceUrl =  SERVER_API_URL + 'api/user-infos';
+    private resourceUrl = SERVER_API_URL + 'api/user-infos';
     private resourceSearchUrl = SERVER_API_URL + 'api/_search/user-infos';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
     create(userInfo: UserInfo): Observable<EntityResponseType> {
         const copy = this.convert(userInfo);
-        return this.http.post<UserInfo>(this.resourceUrl, copy, { observe: 'response' })
+        return this.http.post<UserInfo>(this.resourceUrl, copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
     update(userInfo: UserInfo): Observable<EntityResponseType> {
         const copy = this.convert(userInfo);
-        return this.http.put<UserInfo>(this.resourceUrl, copy, { observe: 'response' })
+        return this.http.put<UserInfo>(this.resourceUrl, copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
     find(id: number): Observable<EntityResponseType> {
-        return this.http.get<UserInfo>(`${this.resourceUrl}/${id}`, { observe: 'response'})
+        return this.http.get<UserInfo>(`${this.resourceUrl}/${id}`, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<UserInfo[]>> {
         const options = createRequestOption(req);
-        return this.http.get<UserInfo[]>(this.resourceUrl, { params: options, observe: 'response' })
+        return this.http.get<UserInfo[]>(this.resourceUrl, {params: options, observe: 'response'})
             .map((res: HttpResponse<UserInfo[]>) => this.convertArrayResponse(res));
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
-        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
+        return this.http.delete<any>(`${this.resourceUrl}/${id}`, {observe: 'response'});
     }
 
     search(req?: any): Observable<HttpResponse<UserInfo[]>> {
         const options = createRequestOption(req);
-        return this.http.get<UserInfo[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
+        return this.http.get<UserInfo[]>(this.resourceSearchUrl, {params: options, observe: 'response'})
             .map((res: HttpResponse<UserInfo[]>) => this.convertArrayResponse(res));
     }
 

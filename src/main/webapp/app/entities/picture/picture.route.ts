@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../shared';
-import { PictureComponent } from './picture.component';
-import { PictureDetailComponent } from './picture-detail.component';
-import { PicturePopupComponent } from './picture-dialog.component';
-import { PictureDeletePopupComponent } from './picture-delete-dialog.component';
+import {UserRouteAccessService} from '../../shared';
+import {PictureComponent} from './picture.component';
+import {PictureDetailComponent} from './picture-detail.component';
+import {PicturePopupComponent} from './picture-dialog.component';
+import {PictureDeletePopupComponent} from './picture-delete-dialog.component';
 
 @Injectable()
 export class PictureResolvePagingParams implements Resolve<any> {
 
-    constructor(private paginationUtil: JhiPaginationUtil) {}
+    constructor(private paginationUtil: JhiPaginationUtil) {
+    }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
@@ -20,7 +21,7 @@ export class PictureResolvePagingParams implements Resolve<any> {
             page: this.paginationUtil.parsePage(page),
             predicate: this.paginationUtil.parsePredicate(sort),
             ascending: this.paginationUtil.parseAscending(sort)
-      };
+        };
     }
 }
 

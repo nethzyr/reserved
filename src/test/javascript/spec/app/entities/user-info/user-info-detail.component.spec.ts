@@ -23,8 +23,8 @@ describe('Component Tests', () => {
                     UserInfoService
                 ]
             })
-            .overrideTemplate(UserInfoDetailComponent, '')
-            .compileComponents();
+                .overrideTemplate(UserInfoDetailComponent, '')
+                .compileComponents();
         }));
 
         beforeEach(() => {

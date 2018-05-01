@@ -54,17 +54,29 @@ export class UserInfoDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.userService.query()
-            .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<User[]>) => {
+                this.users = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
         this.pictureService.query()
-            .subscribe((res: HttpResponse<Picture[]>) => { this.pictures = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<Picture[]>) => {
+                this.pictures = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
         this.cityService.query()
-            .subscribe((res: HttpResponse<City[]>) => { this.cities = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<City[]>) => {
+                this.cities = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
         this.restaurantService.query()
-            .subscribe((res: HttpResponse<Restaurant[]>) => { this.restaurants = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<Restaurant[]>) => {
+                this.restaurants = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
         this.kitchenService.query()
-            .subscribe((res: HttpResponse<Kitchen[]>) => { this.kitchens = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<Kitchen[]>) => {
+                this.kitchens = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
         this.foodService.query()
-            .subscribe((res: HttpResponse<Food[]>) => { this.foods = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<Food[]>) => {
+                this.foods = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -80,25 +92,6 @@ export class UserInfoDialogComponent implements OnInit {
             this.subscribeToSaveResponse(
                 this.userInfoService.create(this.userInfo));
         }
-    }
-
-    private subscribeToSaveResponse(result: Observable<HttpResponse<UserInfo>>) {
-        result.subscribe((res: HttpResponse<UserInfo>) =>
-            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
-    }
-
-    private onSaveSuccess(result: UserInfo) {
-        this.eventManager.broadcast({ name: 'userInfoListModification', content: 'OK'});
-        this.isSaving = false;
-        this.activeModal.dismiss(result);
-    }
-
-    private onSaveError() {
-        this.isSaving = false;
-    }
-
-    private onError(error: any) {
-        this.jhiAlertService.error(error.message, null, null);
     }
 
     trackUserById(index: number, item: User) {
@@ -135,6 +128,25 @@ export class UserInfoDialogComponent implements OnInit {
         }
         return option;
     }
+
+    private subscribeToSaveResponse(result: Observable<HttpResponse<UserInfo>>) {
+        result.subscribe((res: HttpResponse<UserInfo>) =>
+            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
+    }
+
+    private onSaveSuccess(result: UserInfo) {
+        this.eventManager.broadcast({name: 'userInfoListModification', content: 'OK'});
+        this.isSaving = false;
+        this.activeModal.dismiss(result);
+    }
+
+    private onSaveError() {
+        this.isSaving = false;
+    }
+
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
 }
 
 @Component({
@@ -148,11 +160,12 @@ export class UserInfoPopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private userInfoPopupService: UserInfoPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            if (params['id']) {
                 this.userInfoPopupService
                     .open(UserInfoDialogComponent as Component, params['id']);
             } else {

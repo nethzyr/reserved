@@ -1,6 +1,7 @@
 package com.elte.reserved.web.rest.vm;
 
 import com.elte.reserved.service.dto.UserDTO;
+
 import javax.validation.constraints.Size;
 
 /**

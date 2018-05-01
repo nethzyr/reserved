@@ -1,6 +1,7 @@
-import { browser, element, by } from 'protractor';
-import { NavBarPage } from './../page-objects/jhi-page-objects';
+import {browser, by, element} from 'protractor';
+import {NavBarPage} from './../page-objects/jhi-page-objects';
 import * as path from 'path';
+
 describe('Picture e2e test', () => {
 
     let navBarPage: NavBarPage;
@@ -69,34 +70,28 @@ export class PictureDialogPage {
     titleInput = element(by.css('input#field_title'));
     urlInput = element(by.css('input#field_url'));
     imgInput = element(by.css('input#file_img'));
+    setTitleInput = function (title) {
+        this.titleInput.sendKeys(title);
+    };
+    getTitleInput = function () {
+        return this.titleInput.getAttribute('value');
+    };
+    setUrlInput = function (url) {
+        this.urlInput.sendKeys(url);
+    };
+    getUrlInput = function () {
+        return this.urlInput.getAttribute('value');
+    };
+    setImgInput = function (img) {
+        this.imgInput.sendKeys(img);
+    };
+    getImgInput = function () {
+        return this.imgInput.getAttribute('value');
+    };
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
-
-    setTitleInput = function(title) {
-        this.titleInput.sendKeys(title);
-    };
-
-    getTitleInput = function() {
-        return this.titleInput.getAttribute('value');
-    };
-
-    setUrlInput = function(url) {
-        this.urlInput.sendKeys(url);
-    };
-
-    getUrlInput = function() {
-        return this.urlInput.getAttribute('value');
-    };
-
-    setImgInput = function(img) {
-        this.imgInput.sendKeys(img);
-    };
-
-    getImgInput = function() {
-        return this.imgInput.getAttribute('value');
-    };
 
     save() {
         this.saveButton.click();

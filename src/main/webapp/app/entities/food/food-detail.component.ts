@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Food } from './food.model';
-import { FoodService } from './food.service';
+import {Food} from './food.model';
+import {FoodService} from './food.service';
 
 @Component({
     selector: 'jhi-food-detail',
@@ -37,6 +37,7 @@ export class FoodDetailComponent implements OnInit, OnDestroy {
                 this.food = foodResponse.body;
             });
     }
+
     previousState() {
         window.history.back();
     }

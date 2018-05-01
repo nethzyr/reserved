@@ -37,6 +37,7 @@ export class UserInfoDetailComponent implements OnInit, OnDestroy {
                 this.userInfo = userInfoResponse.body;
             });
     }
+
     previousState() {
         window.history.back();
     }

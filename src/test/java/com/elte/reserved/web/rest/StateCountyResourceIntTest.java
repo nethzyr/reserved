@@ -1,13 +1,11 @@
 package com.elte.reserved.web.rest;
 
 import com.elte.reserved.ReservedApp;
-
-import com.elte.reserved.domain.StateCounty;
 import com.elte.reserved.domain.Country;
+import com.elte.reserved.domain.StateCounty;
 import com.elte.reserved.repository.StateCountyRepository;
 import com.elte.reserved.repository.search.StateCountySearchRepository;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,20 +63,9 @@ public class StateCountyResourceIntTest {
 
     private StateCounty stateCounty;
 
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final StateCountyResource stateCountyResource = new StateCountyResource(stateCountyRepository, stateCountySearchRepository);
-        this.restStateCountyMockMvc = MockMvcBuilders.standaloneSetup(stateCountyResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
-
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -91,6 +78,17 @@ public class StateCountyResourceIntTest {
         em.flush();
         stateCounty.setCountry(country);
         return stateCounty;
+    }
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        final StateCountyResource stateCountyResource = new StateCountyResource(stateCountyRepository, stateCountySearchRepository);
+        this.restStateCountyMockMvc = MockMvcBuilders.standaloneSetup(stateCountyResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
     }
 
     @Before
