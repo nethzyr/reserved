@@ -137,9 +137,14 @@ public class RestaurantResource {
     @Timed
     public ResponseEntity<Void> deleteRestaurant(@PathVariable Long id) {
         log.debug("REST request to delete Restaurant : {}", id);
-        restaurantRepository.delete(id);
-        restaurantSearchRepository.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        Restaurant restaurant = restaurantRepository.findOneWithEagerRelationships(id);
+        if (restaurant.getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().get()) || SecurityUtils.isCurrentUserInRole(ADMIN)) {
+            restaurantRepository.delete(id);
+            restaurantSearchRepository.delete(id);
+            return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        }
     }
 
     /**
