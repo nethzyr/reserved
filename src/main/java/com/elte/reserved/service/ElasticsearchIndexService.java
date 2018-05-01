@@ -129,7 +129,7 @@ public class ElasticsearchIndexService {
 
     @Async
     @Timed
-    @Scheduled(cron = "0 20 12 * * ?")
+    @Scheduled(cron = "0 0 3 * * ?")
     public void reindexAll() {
         if (reindexLock.tryLock()) {
             try {
