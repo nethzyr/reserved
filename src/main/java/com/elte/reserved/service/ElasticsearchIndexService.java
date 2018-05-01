@@ -1,10 +1,10 @@
 package com.elte.reserved.service;
 
 import com.codahale.metrics.annotation.Timed;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.elte.reserved.domain.*;
 import com.elte.reserved.repository.*;
 import com.elte.reserved.repository.search.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.elasticsearch.indices.IndexAlreadyExistsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +15,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -128,6 +129,7 @@ public class ElasticsearchIndexService {
 
     @Async
     @Timed
+    @Scheduled(cron = "0 20 12 * * ?")
     public void reindexAll() {
         if (reindexLock.tryLock()) {
             try {

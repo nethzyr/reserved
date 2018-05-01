@@ -9,8 +9,8 @@
                 "confirm": "Reindex"
             },
             "title": "Reindex Elasticsearch",
-            "instructions1": "Elküldhetjük a kérelmet, hogy az elsődleges adatforrásból származó összes adatot újraindexeljük az Elasticsearchbe. Ez megszünteti a hiányzó adatokat és leképezési problémákat, de az alkalmazásán kívül meghatározott összes ES-adat és leképezés elvész. Ezzel elküldjük a kérelmet, hogy az elsődleges adatforrásból származó összes adatot az Elasticsearch kifejezésre újraindítsa. Ez megszünteti a hiányzó adatokat és leképezési problémákat, de az alkalmazásán kívül meghatározott összes ES-adat és leképezés elvész. Ez a kérés azonnal visszatér, és az újraszerkesztés a háttérben fut. A befejeződésekor a \"Elasticsearch: sikeresen végrehajtott újraindexelés \" fog megjelenni.",
-            "instructions2": "Ez sokáig tarthat, és érzékeny lehet a konkurencia problémáira, így azt akkor kell végrehajtani, ha a felhasználók száma alacsony.",
+            "instructions1": "Elküldhetjük a kérelmet, hogy az elsődleges adatforrásból származó összes adatot újraindexeljük az Elasticsearchbe. Ez megszünteti a hiányzó adatokat és leképezési problémákat, de az alkalmazásán kívül meghatározott összes ES-adat és leképezés elvész. Ez a kérés azonnal visszatér, és az újraszerkesztés a háttérben fut.",
+            "instructions2": "Ez az újraindexelés automatikusan lefut a szerveren minden nap 3:00-kor. A folyamat sokáig is eltarthat, és érzékeny lehet a konkurencia problémáira, így azt akkor kell végrehajtani, ha a felhasználók száma alacsony.",
             "go": "Go"
         }
     }
