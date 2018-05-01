@@ -110,9 +110,13 @@ public class AccountResource {
     @GetMapping("/account")
     @Timed
     public UserDTO getAccount() {
-        return userService.getUserWithAuthorities()
-            .map(UserDTO::new)
-            .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+        if (SecurityUtils.isAuthenticated()) {
+            return userService.getUserWithAuthorities()
+                .map(UserDTO::new)
+                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+        } else {
+            return null;
+        }
     }
 
     /**
