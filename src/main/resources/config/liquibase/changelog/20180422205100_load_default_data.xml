@@ -90,10 +90,4 @@
                   separator=";"
                   tableName="reservation"/>
     </changeSet>
-    <changeSet id="20180422205100-14" author="rob">
-        <loadData encoding="UTF-8"
-                  file="config/liquibase/demo_fixtures/restaurant_picture.csv"
-                  separator=";"
-                  tableName="restaurant_picture"/>
-    </changeSet>
 </databaseChangeLog>
