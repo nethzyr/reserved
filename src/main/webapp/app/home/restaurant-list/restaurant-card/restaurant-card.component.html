@@ -11,14 +11,15 @@
                     <h4 class="card-title">
                         {{restaurant.name}}
                     </h4>
-                    <span class="btn btn-outline-" *ngFor="let kitchen of restaurant.kitchens">
+                    <div class="btn btn-outline-" *ngFor="let kitchen of restaurant.kitchens">
                         {{kitchen.type}}
-                    </span>
-                    <br>
-                    <jhi-reservation-modal [restaurant]="restaurant"></jhi-reservation-modal>
+                    </div>
+                    <div class="reservation-button">
+                        <jhi-reservation-modal [restaurant]="restaurant"></jhi-reservation-modal>
+                    </div>
                 </div>
                 <div class="card-read-more">
-                    <span>{{restaurant.postalCode}} {{restaurant.city.name}} {{restaurant.streetAddress}}</span>
+                    <span>{{restaurant.postalCode}} {{restaurant.city.name}}, {{restaurant.streetAddress}}</span>
                 </div>
             </div>
         </div>
