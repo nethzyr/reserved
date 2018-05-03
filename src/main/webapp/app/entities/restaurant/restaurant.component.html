@@ -41,6 +41,7 @@
             <th jhiSortBy="googlePlaceId"><span jhiTranslate="reservedApp.restaurant.googlePlaceId">Google Place Id</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="city.name"><span jhiTranslate="reservedApp.restaurant.city">City</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="user.login"><span jhiTranslate="reservedApp.restaurant.user">User</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="picture.title"><span jhiTranslate="reservedApp.restaurant.picture">Picture</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -64,11 +65,16 @@
                 <td>
                     {{restaurant.user?.login}}
                 </td>
+                <td>
+                    <div *ngIf="restaurant.picture">
+                        <a [routerLink]="['../picture', restaurant.picture?.id ]" >{{restaurant.picture?.title}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../restaurant', restaurant.id ]"
-                                class="btn btn-info">
+                                class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
@@ -76,7 +82,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'restaurant/'+ restaurant.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-primary">
+                                class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
@@ -84,7 +90,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'restaurant/'+ restaurant.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger">
+                                class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>

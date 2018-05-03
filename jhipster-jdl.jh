@@ -57,12 +57,12 @@ relationship ManyToOne {
     Reservation{user(login) required} to User
     
     UserInfo{picture(title)} to Picture
+    Restaurant{picture(title)} to Picture
 }
 
 relationship ManyToMany {
     Restaurant{kitchen(type)} to Kitchen
     Restaurant{food(type)} to Food
-    Restaurant{picture(title)} to Picture
     
     UserInfo{preferredCity(name)} to City
     UserInfo{favoriteRestaurant(name)} to Restaurant

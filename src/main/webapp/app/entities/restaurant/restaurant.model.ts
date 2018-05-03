@@ -14,9 +14,9 @@ export class Restaurant implements BaseEntity {
         public googlePlaceId?: string,
         public city?: BaseEntity,
         public user?: User,
+        public picture?: BaseEntity,
         public kitchens?: BaseEntity[],
         public foods?: BaseEntity[],
-        public pictures?: BaseEntity[],
     ) {
     }
 }

@@ -11,9 +11,9 @@ import {RestaurantPopupService} from './restaurant-popup.service';
 import {RestaurantService} from './restaurant.service';
 import {City, CityService} from '../city';
 import {User, UserService} from '../../shared';
+import {Picture, PictureService} from '../picture';
 import {Kitchen, KitchenService} from '../kitchen';
 import {Food, FoodService} from '../food';
-import {Picture, PictureService} from '../picture';
 
 @Component({
     selector: 'jhi-restaurant-dialog',
@@ -28,11 +28,11 @@ export class RestaurantDialogComponent implements OnInit {
 
     users: User[];
 
+    pictures: Picture[];
+
     kitchens: Kitchen[];
 
     foods: Food[];
-
-    pictures: Picture[];
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -40,9 +40,9 @@ export class RestaurantDialogComponent implements OnInit {
         private restaurantService: RestaurantService,
         private cityService: CityService,
         private userService: UserService,
+        private pictureService: PictureService,
         private kitchenService: KitchenService,
         private foodService: FoodService,
-        private pictureService: PictureService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -53,12 +53,12 @@ export class RestaurantDialogComponent implements OnInit {
             .subscribe((res: HttpResponse<City[]>) => { this.cities = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.userService.query()
             .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.pictureService.query()
+            .subscribe((res: HttpResponse<Picture[]>) => { this.pictures = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.kitchenService.queryAll()
             .subscribe((res: HttpResponse<Kitchen[]>) => { this.kitchens = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.foodService.query()
             .subscribe((res: HttpResponse<Food[]>) => { this.foods = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.pictureService.query()
-            .subscribe((res: HttpResponse<Picture[]>) => { this.pictures = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -103,15 +103,15 @@ export class RestaurantDialogComponent implements OnInit {
         return item.id;
     }
 
+    trackPictureById(index: number, item: Picture) {
+        return item.id;
+    }
+
     trackKitchenById(index: number, item: Kitchen) {
         return item.id;
     }
 
     trackFoodById(index: number, item: Food) {
-        return item.id;
-    }
-
-    trackPictureById(index: number, item: Picture) {
         return item.id;
     }
 

@@ -11,9 +11,9 @@ import {RestaurantService} from '../../../../../../main/webapp/app/entities/rest
 import {Restaurant} from '../../../../../../main/webapp/app/entities/restaurant/restaurant.model';
 import {CityService} from '../../../../../../main/webapp/app/entities/city';
 import {UserService} from '../../../../../../main/webapp/app/shared';
+import {PictureService} from '../../../../../../main/webapp/app/entities/picture';
 import {KitchenService} from '../../../../../../main/webapp/app/entities/kitchen';
 import {FoodService} from '../../../../../../main/webapp/app/entities/food';
-import {PictureService} from '../../../../../../main/webapp/app/entities/picture';
 
 describe('Component Tests', () => {
 
@@ -31,9 +31,9 @@ describe('Component Tests', () => {
                 providers: [
                     CityService,
                     UserService,
+                    PictureService,
                     KitchenService,
                     FoodService,
-                    PictureService,
                     RestaurantService
                 ]
             })

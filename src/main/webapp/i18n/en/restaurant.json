@@ -28,9 +28,9 @@
             "googlePlaceId": "Google Place Id",
             "city": "City",
             "user": "User",
+            "picture": "Picture",
             "kitchen": "Kitchen",
-            "food": "Food",
-            "picture": "Picture"
+            "food": "Food"
         }
     }
 }

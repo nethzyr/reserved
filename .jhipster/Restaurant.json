@@ -16,6 +16,12 @@
             "otherEntityField": "login"
         },
         {
+            "relationshipType": "many-to-one",
+            "relationshipName": "picture",
+            "otherEntityName": "picture",
+            "otherEntityField": "title"
+        },
+        {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "",
             "relationshipName": "kitchen",
@@ -29,14 +35,6 @@
             "relationshipName": "food",
             "otherEntityName": "food",
             "otherEntityField": "type",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "",
-            "relationshipName": "picture",
-            "otherEntityName": "picture",
-            "otherEntityField": "title",
             "ownerSide": true
         }
     ],

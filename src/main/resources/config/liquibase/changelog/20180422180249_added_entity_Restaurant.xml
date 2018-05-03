@@ -64,6 +64,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="picture_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
 
@@ -88,17 +92,6 @@
         </createTable>
 
         <addPrimaryKey columnNames="restaurants_id, foods_id" tableName="restaurant_food"/>
-
-        <createTable tableName="restaurant_picture">
-            <column name="pictures_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="restaurants_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="restaurants_id, pictures_id" tableName="restaurant_picture"/>
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

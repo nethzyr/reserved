@@ -62,6 +62,9 @@ public class Restaurant implements Serializable {
     @NotNull
     private User user;
 
+    @ManyToOne
+    private Picture picture;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "restaurant_kitchen",
@@ -75,13 +78,6 @@ public class Restaurant implements Serializable {
                joinColumns = @JoinColumn(name="restaurants_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="foods_id", referencedColumnName="id"))
     private Set<Food> foods = new HashSet<>();
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "restaurant_picture",
-               joinColumns = @JoinColumn(name="restaurants_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="pictures_id", referencedColumnName="id"))
-    private Set<Picture> pictures = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -235,6 +231,19 @@ public class Restaurant implements Serializable {
         this.user = user;
     }
 
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public Restaurant picture(Picture picture) {
+        this.picture = picture;
+        return this;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
+
     public Set<Kitchen> getKitchens() {
         return kitchens;
     }
@@ -279,29 +288,6 @@ public class Restaurant implements Serializable {
 
     public void setFoods(Set<Food> foods) {
         this.foods = foods;
-    }
-
-    public Set<Picture> getPictures() {
-        return pictures;
-    }
-
-    public Restaurant pictures(Set<Picture> pictures) {
-        this.pictures = pictures;
-        return this;
-    }
-
-    public Restaurant addPicture(Picture picture) {
-        this.pictures.add(picture);
-        return this;
-    }
-
-    public Restaurant removePicture(Picture picture) {
-        this.pictures.remove(picture);
-        return this;
-    }
-
-    public void setPictures(Set<Picture> pictures) {
-        this.pictures = pictures;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

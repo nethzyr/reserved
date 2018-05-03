@@ -53,9 +53,9 @@ describe('Restaurant e2e test', () => {
         expect(restaurantDialogPage.getGooglePlaceIdInput()).toMatch('googlePlaceId');
         restaurantDialogPage.citySelectLastOption();
         restaurantDialogPage.userSelectLastOption();
+        restaurantDialogPage.pictureSelectLastOption();
         // restaurantDialogPage.kitchenSelectLastOption();
         // restaurantDialogPage.foodSelectLastOption();
-        // restaurantDialogPage.pictureSelectLastOption();
         restaurantDialogPage.save();
         expect(restaurantDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });*/
@@ -93,9 +93,9 @@ export class RestaurantDialogPage {
     googlePlaceIdInput = element(by.css('input#field_googlePlaceId'));
     citySelect = element(by.css('select#field_city'));
     userSelect = element(by.css('select#field_user'));
+    pictureSelect = element(by.css('select#field_picture'));
     kitchenSelect = element(by.css('select#field_kitchen'));
     foodSelect = element(by.css('select#field_food'));
-    pictureSelect = element(by.css('select#field_picture'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -205,6 +205,22 @@ export class RestaurantDialogPage {
         return this.userSelect.element(by.css('option:checked')).getText();
     };
 
+    pictureSelectLastOption = function() {
+        this.pictureSelect.all(by.tagName('option')).last().click();
+    };
+
+    pictureSelectOption = function(option) {
+        this.pictureSelect.sendKeys(option);
+    };
+
+    getPictureSelect = function() {
+        return this.pictureSelect;
+    };
+
+    getPictureSelectedOption = function() {
+        return this.pictureSelect.element(by.css('option:checked')).getText();
+    };
+
     kitchenSelectLastOption = function() {
         this.kitchenSelect.all(by.tagName('option')).last().click();
     };
@@ -235,22 +251,6 @@ export class RestaurantDialogPage {
 
     getFoodSelectedOption = function() {
         return this.foodSelect.element(by.css('option:checked')).getText();
-    };
-
-    pictureSelectLastOption = function() {
-        this.pictureSelect.all(by.tagName('option')).last().click();
-    };
-
-    pictureSelectOption = function(option) {
-        this.pictureSelect.sendKeys(option);
-    };
-
-    getPictureSelect = function() {
-        return this.pictureSelect;
-    };
-
-    getPictureSelectedOption = function() {
-        return this.pictureSelect.element(by.css('option:checked')).getText();
     };
 
     save() {

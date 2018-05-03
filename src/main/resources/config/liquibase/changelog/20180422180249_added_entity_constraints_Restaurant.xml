@@ -20,6 +20,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="picture_id"
+                                 baseTableName="restaurant"
+                                 constraintName="fk_restaurant_picture_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="picture"/>
+
         <addForeignKeyConstraint baseColumnNames="restaurants_id"
                                  baseTableName="restaurant_kitchen"
                                  constraintName="fk_restaurant_kitchen_restaurants_id"
@@ -41,17 +47,6 @@
                                  constraintName="fk_restaurant_food_foods_id"
                                  referencedColumnNames="id"
                                  referencedTableName="food"/>
-        
-        <addForeignKeyConstraint baseColumnNames="restaurants_id"
-                                 baseTableName="restaurant_picture"
-                                 constraintName="fk_restaurant_picture_restaurants_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="restaurant"/>
-        <addForeignKeyConstraint baseColumnNames="pictures_id"
-                                 baseTableName="restaurant_picture"
-                                 constraintName="fk_restaurant_picture_pictures_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="picture"/>
         
     </changeSet>
 </databaseChangeLog>
