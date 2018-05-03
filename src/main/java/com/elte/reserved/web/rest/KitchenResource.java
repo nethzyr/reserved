@@ -96,10 +96,23 @@ public class KitchenResource {
     @GetMapping("/kitchens")
     @Timed
     public ResponseEntity<List<Kitchen>> getAllKitchens(Pageable pageable) {
-        log.debug("REST request to get a page of Kitchens");
+        log.debug("REST request to get a page of Kitchens {}", pageable.getPageSize());
         Page<Kitchen> page = kitchenRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/kitchens");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /kitchens/all : get all the kitchens.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of kitchens in body
+     */
+    @GetMapping("/kitchens/all")
+    @Timed
+    public ResponseEntity<List<Kitchen>> getAllKitchens() {
+        log.debug("REST request to get all Kitchens");
+        List<Kitchen> kitchens = kitchenRepository.findAll();
+        return new ResponseEntity<>(kitchens, HttpStatus.OK);
     }
 
     /**
