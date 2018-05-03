@@ -14,6 +14,10 @@ export class Principal {
     ) {
     }
 
+    getUserId() {
+        return this.userIdentity.id;
+    }
+
     authenticate(identity) {
         this.userIdentity = identity;
         this.authenticated = identity !== null;

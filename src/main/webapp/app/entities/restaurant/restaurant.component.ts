@@ -57,15 +57,21 @@ currentAccount: any;
                 query: this.currentSearch,
                 size: this.itemsPerPage,
                 sort: this.sort()}).subscribe(
-                    (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
+                    (res: HttpResponse<Restaurant[]>) => this.onSuccess(
+                        this.principal.hasAnyAuthorityDirect(['ROLE_ADMIN']) ?
+                            res.body :
+                            res.body.filter((restaurant) =>
+                                restaurant.user.id === this.principal.getUserId()),
+                        res.headers),
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
             return;
         }
-        this.restaurantService.query({
+        this.restaurantService.queryOwned({
             page: this.page - 1,
             size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
+            sort: this.sort()})
+            .subscribe(
                 (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
         );

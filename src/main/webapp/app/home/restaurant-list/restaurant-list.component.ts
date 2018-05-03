@@ -44,9 +44,8 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
             );
             return;
         }
-        this.restaurantService.search({
-            query: '*'
-        }).subscribe(
+        this.restaurantService.query()
+            .subscribe(
             (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
             (res: HttpErrorResponse) => this.onError(res.message)
         );

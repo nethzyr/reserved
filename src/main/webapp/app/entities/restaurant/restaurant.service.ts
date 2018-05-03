@@ -39,6 +39,12 @@ export class RestaurantService {
             .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
     }
 
+    queryOwned(req?: any): Observable<HttpResponse<Restaurant[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Restaurant[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }

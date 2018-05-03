@@ -100,17 +100,27 @@ public class RestaurantResource {
     @GetMapping("/restaurants")
     @Timed
     public ResponseEntity<List<Restaurant>> getAllRestaurants(Pageable pageable) {
-        if (SecurityUtils.isCurrentUserInRole(ADMIN)) {
-            log.debug("REST request to get a page of Restaurants");
-            Page<Restaurant> page = restaurantRepository.findAllWithEagerRelationships(pageable);
-            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants");
-            return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-        } else {
-            log.debug("REST request to get a page of Restaurants");
-            Page<Restaurant> page = restaurantRepository.findByUserIsCurrentUser(pageable);
-            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants");
-            return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-        }
+        log.debug("REST request to get a page of Restaurants");
+        Page<Restaurant> page = restaurantRepository.findAllWithEagerRelationships(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /restaurants : get all the restaurants.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of restaurants in body
+     */
+    @GetMapping("/my-restaurants")
+    @Timed
+    public ResponseEntity<List<Restaurant>> getAllMyRestaurants(Pageable pageable) {
+        log.debug("REST request to get a page of Restaurants");
+        Page<Restaurant> page = SecurityUtils.isCurrentUserInRole(ADMIN) ?
+            restaurantRepository.findAllWithEagerRelationships(pageable) :
+            restaurantRepository.findByUserIsCurrentUser(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
