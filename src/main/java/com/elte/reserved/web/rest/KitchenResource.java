@@ -103,19 +103,6 @@ public class KitchenResource {
     }
 
     /**
-     * GET  /kitchens/all : get all the kitchens.
-     *
-     * @return the ResponseEntity with status 200 (OK) and the list of kitchens in body
-     */
-    @GetMapping("/kitchens/all")
-    @Timed
-    public ResponseEntity<List<Kitchen>> getAllKitchens() {
-        log.debug("REST request to get all Kitchens");
-        List<Kitchen> kitchens = kitchenRepository.findAll();
-        return new ResponseEntity<>(kitchens, HttpStatus.OK);
-    }
-
-    /**
      * GET  /kitchens/:id : get the "id" kitchen.
      *
      * @param id the id of the kitchen to retrieve

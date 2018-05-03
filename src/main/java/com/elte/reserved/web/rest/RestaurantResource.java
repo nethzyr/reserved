@@ -102,7 +102,7 @@ public class RestaurantResource {
     public ResponseEntity<List<Restaurant>> getAllRestaurants(Pageable pageable) {
         if (SecurityUtils.isCurrentUserInRole(ADMIN)) {
             log.debug("REST request to get a page of Restaurants");
-            Page<Restaurant> page = restaurantRepository.findAll(pageable);
+            Page<Restaurant> page = restaurantRepository.findAllWithEagerRelationships(pageable);
             HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants");
             return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
         } else {

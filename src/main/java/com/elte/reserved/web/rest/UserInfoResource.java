@@ -96,7 +96,7 @@ public class UserInfoResource {
     @Timed
     public ResponseEntity<List<UserInfo>> getAllUserInfos(Pageable pageable) {
         log.debug("REST request to get a page of UserInfos");
-        Page<UserInfo> page = userInfoRepository.findAll(pageable);
+        Page<UserInfo> page = userInfoRepository.findAllWithEagerRelationships(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/user-infos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

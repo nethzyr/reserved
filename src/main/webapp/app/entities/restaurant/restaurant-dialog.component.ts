@@ -55,9 +55,9 @@ export class RestaurantDialogComponent implements OnInit {
             .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.pictureService.query()
             .subscribe((res: HttpResponse<Picture[]>) => { this.pictures = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.kitchenService.queryAll()
+        this.kitchenService.query({size: 2147483647 })
             .subscribe((res: HttpResponse<Kitchen[]>) => { this.kitchens = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.foodService.query()
+        this.foodService.query({size: 2147483647})
             .subscribe((res: HttpResponse<Food[]>) => { this.foods = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 

@@ -40,12 +40,6 @@ export class KitchenService {
             .map((res: HttpResponse<Kitchen[]>) => this.convertArrayResponse(res));
     }
 
-    queryAll(req?: any): Observable<HttpResponse<Kitchen[]>> {
-        const options = createRequestOption(req);
-        return this.http.get<Kitchen[]>(`${this.resourceUrl}/all`, {params: options, observe: 'response'})
-            .map((res: HttpResponse<Kitchen[]>) => this.convertArrayResponse(res));
-    }
-
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, {observe: 'response'});
     }
