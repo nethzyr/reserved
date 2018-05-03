@@ -74,7 +74,7 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../restaurant', restaurant.id ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-info">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
@@ -82,7 +82,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'restaurant/'+ restaurant.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-primary">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
@@ -90,7 +90,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'restaurant/'+ restaurant.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
+                                class="btn btn-danger">
                             <span class="fa fa-remove"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
