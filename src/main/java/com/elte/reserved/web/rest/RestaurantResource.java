@@ -107,7 +107,7 @@ public class RestaurantResource {
     }
 
     /**
-     * GET  /restaurants : get all the restaurants.
+     * GET  /restaurants-owned : get all owned the restaurants.
      *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of restaurants in body
@@ -119,7 +119,7 @@ public class RestaurantResource {
         Page<Restaurant> page = SecurityUtils.isCurrentUserInRole(ADMIN) ?
             restaurantRepository.findAllWithEagerRelationships(pageable) :
             restaurantRepository.findByUserIsCurrentUser(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants-owned");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
@@ -171,6 +171,26 @@ public class RestaurantResource {
         log.debug("REST request to search for a page of Restaurants for query {}", query);
         Page<Restaurant> page = restaurantSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/restaurants");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * SEARCH  /_search/restaurants-owned?query=:query : search for the restaurant corresponding
+     * to the query.
+     *
+     * @param query the query of the restaurant search
+     * @param pageable the pagination information
+     * @return the result of the search
+     */
+    @GetMapping("/_search/restaurants-owned")
+    @Timed
+    public ResponseEntity<List<Restaurant>> searchMyRestaurants(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of Restaurants for query {}", query);
+        QueryBuilder queryBuilder = QueryBuilders.boolQuery()
+            .must(QueryBuilders.queryStringQuery(query));
+        Page<Restaurant> page = restaurantSearchRepository.search(queryBuilder, pageable);
+
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/restaurants-owned");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
