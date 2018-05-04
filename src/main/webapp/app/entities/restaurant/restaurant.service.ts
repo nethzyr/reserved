@@ -55,6 +55,12 @@ export class RestaurantService {
             .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
     }
 
+    searchOwned(req?: any): Observable<HttpResponse<Restaurant[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Restaurant[]>(`${this.resourceSearchUrl}-owned`, { params: options, observe: 'response' })
+            .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
+    }
+
     private convertResponse(res: EntityResponseType): EntityResponseType {
         const body: Restaurant = this.convertItemFromServer(res.body);
         return res.clone({body});

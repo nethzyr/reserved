@@ -52,17 +52,12 @@ currentAccount: any;
 
     loadAll() {
         if (this.currentSearch) {
-            this.restaurantService.search({
+            this.restaurantService.searchOwned({
                 page: this.page - 1,
                 query: this.currentSearch,
                 size: this.itemsPerPage,
                 sort: this.sort()}).subscribe(
-                    (res: HttpResponse<Restaurant[]>) => this.onSuccess(
-                        this.principal.hasAnyAuthorityDirect(['ROLE_ADMIN']) ?
-                            res.body :
-                            res.body.filter((restaurant) =>
-                                restaurant.user.id === this.principal.getUserId()),
-                        res.headers),
+                    (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
             return;

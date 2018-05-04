@@ -9,8 +9,8 @@ import com.elte.reserved.web.rest.errors.BadRequestAlertException;
 import com.elte.reserved.web.rest.util.HeaderUtil;
 import com.elte.reserved.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.elte.reserved.security.AuthoritiesConstants.ADMIN;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Restaurant.
@@ -188,10 +188,12 @@ public class RestaurantResource {
     @Timed
     public ResponseEntity<List<Restaurant>> searchMyRestaurants(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Restaurants for query {}", query);
-        QueryBuilder queryBuilder = QueryBuilders.boolQuery()
-            .must(QueryBuilders.queryStringQuery(query));
+        QueryBuilder queryBuilder = boolQuery()
+            .must((queryStringQuery(query)));
+        if (!SecurityUtils.isCurrentUserInRole(ADMIN)){
+            ((BoolQueryBuilder) queryBuilder).must(matchQuery("user.login", SecurityUtils.getCurrentUserLogin()));
+        }
         Page<Restaurant> page = restaurantSearchRepository.search(queryBuilder, pageable);
-
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/restaurants-owned");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
