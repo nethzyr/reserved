@@ -8,6 +8,7 @@ import {RestaurantListComponent} from './restaurant-list/restaurant-list.compone
 import {RestaurantCardComponent} from './restaurant-list/restaurant-card/restaurant-card.component';
 import {RestaurantDetailComponent} from './restaurant-detail/restaurant-detail.component';
 import {ReservationComponent} from './reservation/reservation.component';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -22,7 +23,9 @@ import {ReservationComponent} from './reservation/reservation.component';
         ReservationComponent
     ],
     entryComponents: [],
-    providers: [],
+    providers: [
+        NgbActiveModal
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ReservedHomeModule {

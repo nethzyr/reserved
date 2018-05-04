@@ -1,4 +1,4 @@
-<ng-template #content let-c="close" let-d="dismiss">
+<ng-template #content let-c="close">
     <div class="modal-header">
         <h4 class="modal-title">{{restaurant.name}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
@@ -6,11 +6,11 @@
         </button>
     </div>
     <div class="modal-body" [ngSwitch]="isAuthenticated()">
-        <form class="form-inline">
+        <form class="form">
             <div class="form-group">
                 <div class="input-group">
                     <input class="form-control" placeholder="yyyy-mm-dd"
-                           name="dp" [(ngModel)]="dateModel" ngbDatepicker #d="ngbDatepicker">
+                           name="dp" id="dp" [(ngModel)]="dateModel" ngbDatepicker #d="ngbDatepicker">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -18,12 +18,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <div class="">
+                    <ngb-timepicker name="tp" id="tp" [(ngModel)]="timeModel" [minuteStep]="30"></ngb-timepicker>
+                </div>
+
+                <label for="ppl" class="form-label">Vendágek száma</label>
+
+                <input class="form-control col-2" type="number" name="ppl" id="ppl" [(ngModel)]="pplModel">
+            </div>
+
+            <div class="modal-footer" [ngSwitch]="isAuthenticated()">
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')" *ngSwitchCase="true">Close</button>
+                <button type="button" class="btn btn-outline-success" (click)="submit();c('Save click')" *ngSwitchCase="true">Foglalás!</button>
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')" *ngSwitchCase="false">Kérlek registrálj, vagy jelentkkzz be!</button>
+            </div>
         </form>
-        <ngb-timepicker [(ngModel)]="timeModel" [minuteStep]="30"></ngb-timepicker>
-    </div>
-    <div class="modal-footer" [ngSwitch]="isAuthenticated()">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-        <button type="button" class="btn btn-outline-success" *ngSwitchCase="true">Foglalás!</button>
     </div>
 </ng-template>
 

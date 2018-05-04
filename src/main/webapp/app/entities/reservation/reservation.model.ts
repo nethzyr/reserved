@@ -1,4 +1,5 @@
 import {BaseEntity, User} from './../../shared';
+import {Restaurant} from '../restaurant';
 
 export class Reservation implements BaseEntity {
     constructor(
@@ -6,7 +7,7 @@ export class Reservation implements BaseEntity {
         public time?: any,
         public people?: number,
         public confirmed?: boolean,
-        public restaurant?: BaseEntity,
+        public restaurant?: Restaurant,
         public user?: User,
     ) {
         this.confirmed = false;

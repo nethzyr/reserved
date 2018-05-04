@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ReservationService} from '../../entities/reservation';
+import {Reservation, ReservationService} from '../../entities/reservation';
 import {ModalDismissReasons, NgbDateStruct, NgbModal, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import {Restaurant} from '../../entities/restaurant';
 import {Principal} from '../../shared';
@@ -15,9 +15,11 @@ const now = new Date();
 })
 export class ReservationComponent implements OnInit {
     @Input() restaurant: Restaurant;
+    reservation: Reservation;
     closeResult: string;
     dateModel: NgbDateStruct;
     timeModel: NgbTimeStruct;
+    pplModel: number;
 
     constructor(
         private reservationService: ReservationService,
@@ -36,7 +38,6 @@ export class ReservationComponent implements OnInit {
     }
 
     open(content) {
-        console.log(this.restaurant);
         this.modalService.open(content).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
@@ -50,6 +51,7 @@ export class ReservationComponent implements OnInit {
 
     ngOnInit(): void {
         this.selectToday();
+        this.pplModel = 2;
     }
 
     private getDismissReason(reason: any): string {
@@ -60,6 +62,16 @@ export class ReservationComponent implements OnInit {
         } else {
             return `with: ${reason}`;
         }
+    }
+
+    submit() {
+        this.reservation = {
+            time: new Date(this.dateModel.year, this.dateModel.month - 1, this.dateModel.day, this.timeModel.hour, this.timeModel.minute, 0).toString(),
+            people: this.pplModel,
+            restaurant: this.restaurant,
+        };
+        this.reservationService.create(this.reservation);
+        //TODO MÜKÖDJ!
     }
 
 }

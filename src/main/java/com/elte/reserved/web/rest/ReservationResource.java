@@ -2,7 +2,9 @@ package com.elte.reserved.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.elte.reserved.domain.Reservation;
+import com.elte.reserved.domain.User;
 import com.elte.reserved.repository.ReservationRepository;
+import com.elte.reserved.repository.UserRepository;
 import com.elte.reserved.repository.search.ReservationSearchRepository;
 import com.elte.reserved.web.rest.errors.BadRequestAlertException;
 import com.elte.reserved.web.rest.util.HeaderUtil;
@@ -23,6 +25,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import static com.elte.reserved.security.SecurityUtils.getCurrentUserLogin;
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
@@ -35,12 +38,14 @@ public class ReservationResource {
     private static final String ENTITY_NAME = "reservation";
     private final Logger log = LoggerFactory.getLogger(ReservationResource.class);
     private final ReservationRepository reservationRepository;
+    private final UserRepository userRepository;
 
     private final ReservationSearchRepository reservationSearchRepository;
 
-    public ReservationResource(ReservationRepository reservationRepository, ReservationSearchRepository reservationSearchRepository) {
+    public ReservationResource(ReservationRepository reservationRepository, ReservationSearchRepository reservationSearchRepository, UserRepository userRepository) {
         this.reservationRepository = reservationRepository;
         this.reservationSearchRepository = reservationSearchRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -57,6 +62,8 @@ public class ReservationResource {
         if (reservation.getId() != null) {
             throw new BadRequestAlertException("A new reservation cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        Optional<User> user = userRepository.findOneByLogin(getCurrentUserLogin().get());
+        reservation.setUser(user.orElse(null));
         Reservation result = reservationRepository.save(reservation);
         reservationSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/reservations/" + result.getId()))
