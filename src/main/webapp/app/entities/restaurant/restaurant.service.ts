@@ -41,7 +41,7 @@ export class RestaurantService {
 
     queryOwned(req?: any): Observable<HttpResponse<Restaurant[]>> {
         const options = createRequestOption(req);
-        return this.http.get<Restaurant[]>(this.resourceUrl, { params: options, observe: 'response' })
+        return this.http.get<Restaurant[]>(`${this.resourceUrl}-owned`, { params: options, observe: 'response' })
             .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
     }
 

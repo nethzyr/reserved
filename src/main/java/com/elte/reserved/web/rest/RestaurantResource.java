@@ -112,7 +112,7 @@ public class RestaurantResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of restaurants in body
      */
-    @GetMapping("/my-restaurants")
+    @GetMapping("/restaurants-owned")
     @Timed
     public ResponseEntity<List<Restaurant>> getAllMyRestaurants(Pageable pageable) {
         log.debug("REST request to get a page of Restaurants");

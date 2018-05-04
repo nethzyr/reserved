@@ -29,8 +29,8 @@ export class ReservationComponent implements OnInit {
     selectToday() {
         this.dateModel = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
         this.timeModel = {
-            hour: now.getHours(),
-            minute: Math.ceil(now.getMinutes() / 30) * 30,
+            hour: now.getHours() + 1,
+            minute: now.getMinutes() > 30 ? 30 : 0,
             second: now.getSeconds()
         };
     }
