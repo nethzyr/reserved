@@ -33,6 +33,14 @@
         {
             "fieldName": "confirmed",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "confirmationKey",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 20
         }
     ],
     "changelogDate": "20180422180254",

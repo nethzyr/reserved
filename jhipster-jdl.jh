@@ -45,6 +45,7 @@ entity Reservation {
 	time Instant required
     people Integer required
     confirmed Boolean
+    confirmationKey String maxlength(20)
 }
 
 relationship ManyToOne {

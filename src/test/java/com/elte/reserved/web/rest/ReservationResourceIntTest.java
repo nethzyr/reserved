@@ -49,6 +49,9 @@ public class ReservationResourceIntTest {
     private static final Boolean DEFAULT_CONFIRMED = false;
     private static final Boolean UPDATED_CONFIRMED = true;
 
+    private static final String DEFAULT_CONFIRMATION_KEY = "AAAAAAAAAA";
+    private static final String UPDATED_CONFIRMATION_KEY = "BBBBBBBBBB";
+
     @Autowired
     private ReservationRepository reservationRepository;
 
@@ -92,7 +95,8 @@ public class ReservationResourceIntTest {
         Reservation reservation = new Reservation()
             .time(DEFAULT_TIME)
             .people(DEFAULT_PEOPLE)
-            .confirmed(DEFAULT_CONFIRMED);
+            .confirmed(DEFAULT_CONFIRMED)
+            .confirmationKey(DEFAULT_CONFIRMATION_KEY);
         // Add required entity
         Restaurant restaurant = RestaurantResourceIntTest.createEntity(em);
         em.persist(restaurant);
@@ -125,6 +129,7 @@ public class ReservationResourceIntTest {
         assertThat(testReservation.getTime()).isEqualTo(DEFAULT_TIME);
         assertThat(testReservation.getPeople()).isEqualTo(DEFAULT_PEOPLE);
         assertThat(testReservation.isConfirmed()).isEqualTo(DEFAULT_CONFIRMED);
+        assertThat(testReservation.getConfirmationKey()).isEqualTo(DEFAULT_CONFIRMATION_KEY);
 
         // Validate the Reservation in Elasticsearch
         Reservation reservationEs = reservationSearchRepository.findOne(testReservation.getId());
@@ -199,7 +204,8 @@ public class ReservationResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(reservation.getId().intValue())))
             .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
             .andExpect(jsonPath("$.[*].people").value(hasItem(DEFAULT_PEOPLE)))
-            .andExpect(jsonPath("$.[*].confirmed").value(hasItem(DEFAULT_CONFIRMED.booleanValue())));
+            .andExpect(jsonPath("$.[*].confirmed").value(hasItem(DEFAULT_CONFIRMED.booleanValue())))
+            .andExpect(jsonPath("$.[*].confirmationKey").value(hasItem(DEFAULT_CONFIRMATION_KEY.toString())));
     }
 
     @Test
@@ -215,7 +221,8 @@ public class ReservationResourceIntTest {
             .andExpect(jsonPath("$.id").value(reservation.getId().intValue()))
             .andExpect(jsonPath("$.time").value(DEFAULT_TIME.toString()))
             .andExpect(jsonPath("$.people").value(DEFAULT_PEOPLE))
-            .andExpect(jsonPath("$.confirmed").value(DEFAULT_CONFIRMED.booleanValue()));
+            .andExpect(jsonPath("$.confirmed").value(DEFAULT_CONFIRMED.booleanValue()))
+            .andExpect(jsonPath("$.confirmationKey").value(DEFAULT_CONFIRMATION_KEY.toString()));
     }
 
     @Test
@@ -241,7 +248,8 @@ public class ReservationResourceIntTest {
         updatedReservation
             .time(UPDATED_TIME)
             .people(UPDATED_PEOPLE)
-            .confirmed(UPDATED_CONFIRMED);
+            .confirmed(UPDATED_CONFIRMED)
+            .confirmationKey(UPDATED_CONFIRMATION_KEY);
 
         restReservationMockMvc.perform(put("/api/reservations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -255,6 +263,7 @@ public class ReservationResourceIntTest {
         assertThat(testReservation.getTime()).isEqualTo(UPDATED_TIME);
         assertThat(testReservation.getPeople()).isEqualTo(UPDATED_PEOPLE);
         assertThat(testReservation.isConfirmed()).isEqualTo(UPDATED_CONFIRMED);
+        assertThat(testReservation.getConfirmationKey()).isEqualTo(UPDATED_CONFIRMATION_KEY);
 
         // Validate the Reservation in Elasticsearch
         Reservation reservationEs = reservationSearchRepository.findOne(testReservation.getId());
@@ -315,7 +324,8 @@ public class ReservationResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(reservation.getId().intValue())))
             .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
             .andExpect(jsonPath("$.[*].people").value(hasItem(DEFAULT_PEOPLE)))
-            .andExpect(jsonPath("$.[*].confirmed").value(hasItem(DEFAULT_CONFIRMED.booleanValue())));
+            .andExpect(jsonPath("$.[*].confirmed").value(hasItem(DEFAULT_CONFIRMED.booleanValue())))
+            .andExpect(jsonPath("$.[*].confirmationKey").value(hasItem(DEFAULT_CONFIRMATION_KEY.toString())));
     }
 
     @Test
