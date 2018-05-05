@@ -40,8 +40,7 @@ public class Reservation implements Serializable {
     @NotNull
     private Restaurant restaurant;
 
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -57,26 +56,26 @@ public class Reservation implements Serializable {
         return time;
     }
 
-    public void setTime(Instant time) {
-        this.time = time;
-    }
-
     public Reservation time(Instant time) {
         this.time = time;
         return this;
+    }
+
+    public void setTime(Instant time) {
+        this.time = time;
     }
 
     public Integer getPeople() {
         return people;
     }
 
-    public void setPeople(Integer people) {
-        this.people = people;
-    }
-
     public Reservation people(Integer people) {
         this.people = people;
         return this;
+    }
+
+    public void setPeople(Integer people) {
+        this.people = people;
     }
 
     public Boolean isConfirmed() {
@@ -96,26 +95,26 @@ public class Reservation implements Serializable {
         return restaurant;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
     public Reservation restaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
         return this;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Reservation user(User user) {
         this.user = user;
         return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

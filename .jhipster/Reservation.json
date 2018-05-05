@@ -10,7 +10,6 @@
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipValidateRules": "required",
             "relationshipName": "user",
             "otherEntityName": "user",
             "otherEntityField": "login"

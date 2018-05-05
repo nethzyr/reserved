@@ -79,49 +79,61 @@ export class ReservationDialogPage {
     confirmedInput = element(by.css('input#field_confirmed'));
     restaurantSelect = element(by.css('select#field_restaurant'));
     userSelect = element(by.css('select#field_user'));
+
+    getModalTitle() {
+        return this.modalTitle.getAttribute('jhiTranslate');
+    }
+
     setTimeInput = function (time) {
         this.timeInput.sendKeys(time);
     };
+
     getTimeInput = function () {
         return this.timeInput.getAttribute('value');
     };
+
     setPeopleInput = function (people) {
         this.peopleInput.sendKeys(people);
     };
+
     getPeopleInput = function () {
         return this.peopleInput.getAttribute('value');
     };
+
     getConfirmedInput = function () {
         return this.confirmedInput;
     };
     restaurantSelectLastOption = function () {
         this.restaurantSelect.all(by.tagName('option')).last().click();
     };
+
     restaurantSelectOption = function (option) {
         this.restaurantSelect.sendKeys(option);
     };
+
     getRestaurantSelect = function () {
         return this.restaurantSelect;
     };
+
     getRestaurantSelectedOption = function () {
         return this.restaurantSelect.element(by.css('option:checked')).getText();
     };
+
     userSelectLastOption = function () {
         this.userSelect.all(by.tagName('option')).last().click();
     };
+
     userSelectOption = function (option) {
         this.userSelect.sendKeys(option);
     };
+
     getUserSelect = function () {
         return this.userSelect;
     };
+
     getUserSelectedOption = function () {
         return this.userSelect.element(by.css('option:checked')).getText();
     };
-
-    getModalTitle() {
-        return this.modalTitle.getAttribute('jhiTranslate');
-    }
 
     save() {
         this.saveButton.click();

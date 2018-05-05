@@ -75,7 +75,6 @@ export class ReservationComponent implements OnInit {
         };
         this.subscribeToSaveResponse(
             this.reservationService.create(this.reservation));
-        //TODO MÜKÖDJ!
     }
 
     subscribeToSaveResponse(result: Observable<HttpResponse<Reservation>>) {

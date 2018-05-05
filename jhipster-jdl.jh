@@ -54,7 +54,7 @@ relationship ManyToOne {
     Restaurant{user(login) required} to User
     
     Reservation{restaurant(name) required} to Restaurant
-    Reservation{user(login) required} to User
+    Reservation{user(login)} to User
     
     UserInfo{picture(title)} to Picture
     Restaurant{picture(title)} to Picture

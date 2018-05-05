@@ -3,7 +3,6 @@ package com.elte.reserved.web.rest;
 import com.elte.reserved.ReservedApp;
 import com.elte.reserved.domain.Reservation;
 import com.elte.reserved.domain.Restaurant;
-import com.elte.reserved.domain.User;
 import com.elte.reserved.repository.ReservationRepository;
 import com.elte.reserved.repository.search.ReservationSearchRepository;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
@@ -72,9 +71,20 @@ public class ReservationResourceIntTest {
 
     private Reservation reservation;
 
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        final ReservationResource reservationResource = new ReservationResource(reservationRepository, reservationSearchRepository);
+        this.restReservationMockMvc = MockMvcBuilders.standaloneSetup(reservationResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+    }
+
     /**
      * Create an entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -88,23 +98,7 @@ public class ReservationResourceIntTest {
         em.persist(restaurant);
         em.flush();
         reservation.setRestaurant(restaurant);
-        // Add required entity
-        User user = UserResourceIntTest.createEntity(em);
-        em.persist(user);
-        em.flush();
-        reservation.setUser(user);
         return reservation;
-    }
-
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final ReservationResource reservationResource = new ReservationResource(reservationRepository, reservationSearchRepository);
-        this.restReservationMockMvc = MockMvcBuilders.standaloneSetup(reservationResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
     }
 
     @Before
