@@ -46,6 +46,8 @@ describe('Reservation e2e test', () => {
                  expect(reservationDialogPage.getConfirmedInput().isSelected()).toBeTruthy();
              }
          });
+         reservationDialogPage.setConfirmationKeyInput('confirmationKey');
+         expect(reservationDialogPage.getConfirmationKeyInput()).toMatch('confirmationKey');
          reservationDialogPage.restaurantSelectLastOption();
          reservationDialogPage.userSelectLastOption();
          reservationDialogPage.save();
@@ -77,6 +79,7 @@ export class ReservationDialogPage {
     timeInput = element(by.css('input#field_time'));
     peopleInput = element(by.css('input#field_people'));
     confirmedInput = element(by.css('input#field_confirmed'));
+    confirmationKeyInput = element(by.css('input#field_confirmationKey'));
     restaurantSelect = element(by.css('select#field_restaurant'));
     userSelect = element(by.css('select#field_user'));
 
@@ -103,6 +106,14 @@ export class ReservationDialogPage {
     getConfirmedInput = function () {
         return this.confirmedInput;
     };
+    setConfirmationKeyInput = function (confirmationKey) {
+        this.confirmationKeyInput.sendKeys(confirmationKey);
+    };
+
+    getConfirmationKeyInput = function () {
+        return this.confirmationKeyInput.getAttribute('value');
+    };
+
     restaurantSelectLastOption = function () {
         this.restaurantSelect.all(by.tagName('option')).last().click();
     };

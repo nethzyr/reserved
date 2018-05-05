@@ -32,6 +32,10 @@
                 <constraints nullable="true"/>
             </column>
 
+            <column name="confirmation_key" type="varchar(20)">
+                <constraints nullable="true"/>
+            </column>
+
             <column name="restaurant_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
