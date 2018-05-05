@@ -2,11 +2,11 @@ package com.elte.reserved.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.elte.reserved.domain.Reservation;
-import com.elte.reserved.domain.User;
 import com.elte.reserved.repository.ReservationRepository;
 import com.elte.reserved.repository.UserRepository;
 import com.elte.reserved.repository.search.ReservationSearchRepository;
 import com.elte.reserved.web.rest.errors.BadRequestAlertException;
+import com.elte.reserved.web.rest.errors.InternalServerErrorException;
 import com.elte.reserved.web.rest.util.HeaderUtil;
 import com.elte.reserved.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -62,8 +62,9 @@ public class ReservationResource {
         if (reservation.getId() != null) {
             throw new BadRequestAlertException("A new reservation cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Optional<User> user = userRepository.findOneByLogin(getCurrentUserLogin().get());
-        reservation.setUser(user.orElse(null));
+        reservation.setUser(
+            userRepository.findOneByLogin(getCurrentUserLogin().get())
+                .orElseThrow(() -> new InternalServerErrorException("User could not be found")));
         Reservation result = reservationRepository.save(reservation);
         reservationSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/reservations/" + result.getId()))

@@ -3,6 +3,8 @@ import {Reservation, ReservationService} from '../../entities/reservation';
 import {ModalDismissReasons, NgbDateStruct, NgbModal, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import {Restaurant} from '../../entities/restaurant';
 import {Principal} from '../../shared';
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
 
 const now = new Date();
 
@@ -69,9 +71,16 @@ export class ReservationComponent implements OnInit {
             time: new Date(this.dateModel.year, this.dateModel.month - 1, this.dateModel.day, this.timeModel.hour, this.timeModel.minute, 0).toString(),
             people: this.pplModel,
             restaurant: this.restaurant,
+            user: null
         };
-        this.reservationService.create(this.reservation);
+        this.subscribeToSaveResponse(
+            this.reservationService.create(this.reservation));
         //TODO MÜKÖDJ!
+    }
+
+    subscribeToSaveResponse(result: Observable<HttpResponse<Reservation>>) {
+        result.subscribe((res: HttpResponse<Reservation>) =>
+            console.log(res.body), (res: HttpErrorResponse) => console.log(res));
     }
 
 }
