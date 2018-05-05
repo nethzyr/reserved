@@ -1,28 +1,44 @@
 id;jhi_type
-1;Bankett ételek
-2;Bár ételek
-3;Barbeque
-4;Burgerek
-5;Egészséges
-6;Fúziós konyha
-7;Gluténmentes alapanyagok
-8;Halal
-9;Halételek
-10;Hamburger
-11;Hús ételek
-12;Kóstoló Menü
-13;Lángos
-14;Mangalica
-15;Nyers
-16;Nyers ételek
-17;Paleo
-18;Pizza
-19;Rendelhető ételek
-20;Street Food
-21;Sushi
-22;Svédasztal
-23;Tapas
-24;Tatár steak
-25;Tengeri ételek
-26;Tészta
-27;Vadételek
+1;Baguette
+2;Bankett ételek
+3;Bár ételek
+4;Barbeque
+5;Burgerek
+6;Croissant
+7;Egészséges
+8;Egytáléltel
+9;Fúziós konyha
+10;Gluténmentes alapanyagok
+11;Grill ételek
+12;Halal
+13;Halételek
+14;Hamburger
+15;Hús ételek
+16;Kenyérlángos
+17;Kóstoló Menü
+18;Lángos
+19;Leves
+20;Mangalica
+21;Nyers
+22;Nyers ételek
+23;Orosz Specialitások
+24;Paleo
+25;Pizza
+26;Rendelhető ételek
+27;Ramen
+28;Reggeli
+29;Rizottó
+30;Rizskása
+31;Saláta
+32;Steak
+33;Street Food
+34;Sushi
+35;Szendvics
+36;Svédasztal
+37;Tapas
+38;Tatár steak
+39;Tengeri ételek
+40;Tészta
+41;Vadételek
+42;Vegetárináus
+43;Vegán
