@@ -81,8 +81,11 @@ export class ReservationService {
      */
     private convert(reservation: Reservation): Reservation {
         const copy: Reservation = Object.assign({}, reservation);
-
-        copy.time = this.dateUtils.toDate(reservation.time);
+        if (typeof reservation.time === 'string') {
+            copy.time = this.dateUtils.toDate(reservation.time);
+        } else {
+            copy.time = reservation.time;
+        }
         return copy;
     }
 }
