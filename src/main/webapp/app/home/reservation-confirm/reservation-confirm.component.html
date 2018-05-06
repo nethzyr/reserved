@@ -1,0 +1,22 @@
+<div *ngIf="success">
+    <p>
+        Az alábbi foglalást sikeresen visszaingazoltad:
+    </p>
+    <p>
+        Azonosító: {{reservation.id}}
+    </p>
+    <p>
+        Név: {{reservation.user.firstName}} {{reservation.user.lastName}}
+    </p>
+    <p>
+        Időpont: {{reservation.time}}
+    </p>
+    <p>
+        Vendégek száma: {{reservation.people}}
+    </p>
+</div>
+<div *ngIf="!success">
+    <p>
+        Ezt a foglalást már sikeresen visszaigazoltad.
+    </p>
+</div>

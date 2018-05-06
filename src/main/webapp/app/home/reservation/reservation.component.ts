@@ -79,7 +79,7 @@ export class ReservationComponent implements OnInit {
 
     subscribeToSaveResponse(result: Observable<HttpResponse<Reservation>>) {
         result.subscribe((res: HttpResponse<Reservation>) =>
-            console.log(res.body), (res: HttpErrorResponse) => console.log(res));
+            res.body, (res: HttpErrorResponse) => res);
     }
 
 }

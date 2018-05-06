@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {SERVER_API_URL} from '../../app.constants';
 
@@ -50,6 +50,13 @@ export class ReservationService {
         const options = createRequestOption(req);
         return this.http.get<Reservation[]>(this.resourceSearchUrl, {params: options, observe: 'response'})
             .map((res: HttpResponse<Reservation[]>) => this.convertArrayResponse(res));
+    }
+
+    confirm(key: any): Observable<HttpResponse<Reservation>> {
+        return this.http.get<Reservation>(this.resourceUrl + '/confirm', {
+            params: new HttpParams().set('key', key),
+            observe: 'response'
+        }).map((res: EntityResponseType) => this.convertResponse(res));
     }
 
     private convertResponse(res: EntityResponseType): EntityResponseType {
