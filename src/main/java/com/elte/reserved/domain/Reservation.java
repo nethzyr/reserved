@@ -1,5 +1,6 @@
 package com.elte.reserved.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -35,10 +36,11 @@ public class Reservation implements Serializable {
     private Integer people;
 
     @Column(name = "confirmed")
-    private Boolean confirmed;
+    private Boolean confirmed = false;
 
     @Size(max = 20)
     @Column(name = "confirmation_key", length = 20)
+    @JsonIgnore
     private String confirmationKey;
 
     @ManyToOne(optional = false)
