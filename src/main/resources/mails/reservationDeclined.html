@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="#{email.decline.title}">Reservation declined</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}"/>
 </head>
 <body>
-
+<p th:text="#{email.activation.greeting(${reservation.user.login})}">
+    Dear
+</p>
+<p th:text="#{email.decline.text1}">
+    Your reservation has been declined by the restaurant. Please find the details below.
+</p>
+<p th:text="#{email.created.restaurant(${reservation.restaurant.getName()})}">
+    Restaurant:
+</p>
+<p th:text="#{email.created.name(${reservation.user.getFirstName()}, ${reservation.user.getLastName()})}">
+    Name:
+</p>
+<p th:text="#{email.created.time(${reservation.time})}">
+    Date and time:
+</p>
+<p th:text="#{email.created.people(${reservation.people})}">
+    Number of guests:
+</p>
+<p>
+    <span th:text="#{email.activation.text2}">Regards, </span>
+    <br/>
+    <em th:text="#{email.signature}">reserved team.</em>
+</p>
 </body>
 </html>

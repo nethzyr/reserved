@@ -60,11 +60,14 @@ public class ReservationResource {
      */
     @GetMapping("/reservations/confirm")
     @Timed
-    public ResponseEntity<Reservation> confirmReservation(@RequestParam(value = "key") String key) throws URISyntaxException {
+    public ResponseEntity<Reservation> confirmReservation(
+        @RequestParam(value = "key") String key,
+        @RequestParam(value = "confirm") Boolean confirm
+    ) throws URISyntaxException {
         log.debug("Confirming reservation for activation key {}", key);
         Optional<Reservation> result = reservationRepository.findOneByConfirmationKey(key)
             .map(reservation -> {
-                reservation.setConfirmed(true);
+                reservation.setConfirmed(confirm);
                 reservation.setConfirmationKey(null);
                 reservationRepository.save(reservation);
                 log.debug("Confirmed reservation: {}", reservation);
@@ -74,6 +77,11 @@ public class ReservationResource {
             throw new InternalServerErrorException("No reservation was found for this reset key");
         }
         reservationSearchRepository.save(result.get());
+        if (confirm) {
+            mailService.sendReservationConfirmedEmail(result.get());
+        } else {
+            mailService.sendDeclinedReservationEmail(result.get());
+        }
         return ResponseEntity.created(new URI("/api/reservations/confirm/" + key))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.get().getId().toString()))
             .body(result.get());
@@ -99,7 +107,7 @@ public class ReservationResource {
         reservation.setConfirmationKey(RandomUtil.generateActivationKey());
         Reservation result = reservationRepository.save(reservation);
         reservationSearchRepository.save(result);
-        mailService.sendConfirmReservationEmail(result);
+        mailService.sendCreatedReservationEmail(result);
         return ResponseEntity.created(new URI("/api/reservations/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
