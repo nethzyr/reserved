@@ -39,7 +39,7 @@ import {FormsModule} from '@angular/forms';
         ReservedHomeModule,
         ReservedAdminModule,
         ReservedAccountModule,
-        ReservedEntityModule,
+        ReservedEntityModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [

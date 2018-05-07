@@ -1,11 +1,13 @@
 package com.elte.reserved.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -34,7 +36,12 @@ public class Reservation implements Serializable {
     private Integer people;
 
     @Column(name = "confirmed")
-    private Boolean confirmed;
+    private Boolean confirmed = false;
+
+    @Size(max = 20)
+    @Column(name = "confirmation_key", length = 20)
+    @JsonIgnore
+    private String confirmationKey;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -91,6 +98,19 @@ public class Reservation implements Serializable {
         this.confirmed = confirmed;
     }
 
+    public String getConfirmationKey() {
+        return confirmationKey;
+    }
+
+    public Reservation confirmationKey(String confirmationKey) {
+        this.confirmationKey = confirmationKey;
+        return this;
+    }
+
+    public void setConfirmationKey(String confirmationKey) {
+        this.confirmationKey = confirmationKey;
+    }
+
     public Restaurant getRestaurant() {
         return restaurant;
     }
@@ -145,6 +165,7 @@ public class Reservation implements Serializable {
             ", time='" + getTime() + "'" +
             ", people=" + getPeople() +
             ", confirmed='" + isConfirmed() + "'" +
+            ", confirmationKey='" + getConfirmationKey() + "'" +
             "}";
     }
 }

@@ -9,18 +9,20 @@ import {RestaurantCardComponent} from './restaurant-list/restaurant-card/restaur
 import {RestaurantDetailComponent} from './restaurant-detail/restaurant-detail.component';
 import {ReservationComponent} from './reservation/reservation.component';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {ReservationConfirmComponent} from './reservation-confirm/reservation-confirm.component';
 
 @NgModule({
     imports: [
         ReservedSharedModule,
-        RouterModule.forChild([HOME_ROUTE])
+        RouterModule.forChild([...HOME_ROUTE])
     ],
     declarations: [
         HomeComponent,
         RestaurantListComponent,
         RestaurantCardComponent,
         RestaurantDetailComponent,
-        ReservationComponent
+        ReservationComponent,
+        ReservationConfirmComponent
     ],
     entryComponents: [],
     providers: [
