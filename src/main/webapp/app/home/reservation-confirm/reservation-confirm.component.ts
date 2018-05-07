@@ -9,7 +9,9 @@ import {HttpResponse} from '@angular/common/http';
     styles: []
 })
 export class ReservationConfirmComponent implements OnInit {
+    loading = true;
     success: boolean;
+    confirm: boolean;
     reservation: Reservation;
 
     constructor(
@@ -20,11 +22,14 @@ export class ReservationConfirmComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams.subscribe((params) => {
-            this.reservationService.confirm(params['key']).subscribe((res: HttpResponse<Reservation>) => {
+            this.confirm = params['confirm'] !== '0';
+            this.reservationService.confirm(params['key'], params['confirm']).subscribe((res: HttpResponse<Reservation>) => {
                 this.success = true;
                 this.reservation = res.body;
+                this.loading = false;
             }, () => {
                 this.success = false;
+                this.loading = false;
             });
         });
     }

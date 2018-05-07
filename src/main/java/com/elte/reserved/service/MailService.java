@@ -127,13 +127,20 @@ public class MailService {
     }
 
     @Async
-    public void sendConfirmReservationEmail(Reservation reservation) {
+    public void sendCreatedReservationEmail(Reservation reservation) {
         log.debug("Sending activation email to '{}'", reservation.getRestaurant().getEmail());
-        sendEmailFromTemplate(reservation, "confirmReservation", "email.created.title");
+        sendEmailFromTemplate(reservation, "createdReservation", "email.created.title");
     }
 
-    public void sendReservationConfirmedEmail(User user) {
-        log.debug("Sending activation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "reservationConfirmed", "email.confirmed.title");
+    @Async
+    public void sendReservationConfirmedEmail(Reservation reservation) {
+        log.debug("Sending activation email to '{}'", reservation.getRestaurant().getEmail());
+        sendEmailFromTemplate(reservation, "reservationConfirmed", "email.confirmed.title");
+    }
+
+    @Async
+    public void sendDeclinedReservationEmail(Reservation reservation) {
+        log.debug("Sending activation email to '{}'", reservation.getRestaurant().getEmail());
+        sendEmailFromTemplate(reservation, "reservationDeclined", "email.decline.title");
     }
 }

@@ -12,6 +12,9 @@
 <p th:text="#{email.created.text1}">
     You have a new reservation request pending. Please find the details below.
 </p>
+<p th:text="#{email.created.restaurant(${reservation.restaurant.getName()})}">
+    Restaurant:
+</p>
 <p th:text="#{email.created.name(${reservation.user.getFirstName()}, ${reservation.user.getLastName()})}">
     Name:
 </p>
@@ -25,14 +28,14 @@
     Click here to
 </span>
 <span>
-    <a th:href="@{|${baseUrl}/#/reservation/confirm?key=${reservation.confirmationKey}|}"
+    <a th:href="@{|${baseUrl}/#/reservation/confirm?key=${reservation.confirmationKey}&amp;confirm=1|}"
        th:text="#{email.created.accept.link}">accept link</a>
 </span>
 <span th:text="#{email.created.decline.text}">
     or click here to
 </span>
 <span>
-    <a th:href="@{|${baseUrl}/#/reservation/delete/confirm?key=${reservation.confirmationKey}|}"
+    <a th:href="@{|${baseUrl}/#/reservation/confirm?key=${reservation.confirmationKey}&amp;confirm=0|}"
        th:text="#{email.created.decline.link}">decline link</a>
 </span>
 <p>

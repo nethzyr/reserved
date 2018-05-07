@@ -52,9 +52,9 @@ export class ReservationService {
             .map((res: HttpResponse<Reservation[]>) => this.convertArrayResponse(res));
     }
 
-    confirm(key: any): Observable<HttpResponse<Reservation>> {
+    confirm(key: any, confirm: any): Observable<HttpResponse<Reservation>> {
         return this.http.get<Reservation>(this.resourceUrl + '/confirm', {
-            params: new HttpParams().set('key', key),
+            params: new HttpParams().set('key', key).set('confirm', confirm),
             observe: 'response'
         }).map((res: EntityResponseType) => this.convertResponse(res));
     }
