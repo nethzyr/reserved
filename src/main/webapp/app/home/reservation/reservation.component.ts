@@ -5,6 +5,8 @@ import {Restaurant} from '../../entities/restaurant';
 import {Principal} from '../../shared';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
+import {debounceTime} from 'rxjs/operators';
 
 const now = new Date();
 
@@ -22,6 +24,8 @@ export class ReservationComponent implements OnInit {
     dateModel: NgbDateStruct;
     timeModel: NgbTimeStruct;
     pplModel: number;
+    private _success = new Subject<string>();
+    successMessage: string;
 
     constructor(
         private reservationService: ReservationService,
@@ -39,6 +43,15 @@ export class ReservationComponent implements OnInit {
         };
     }
 
+    ngOnInit(): void {
+        this.selectToday();
+        this.pplModel = 2;
+        this._success.subscribe((message) => this.successMessage = message);
+        this._success.pipe(
+            debounceTime(10000)
+        ).subscribe(() => this.successMessage = null);
+    }
+
     open(content) {
         this.modalService.open(content).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
@@ -49,11 +62,6 @@ export class ReservationComponent implements OnInit {
 
     isAuthenticated() {
         return this.principal.isAuthenticated();
-    }
-
-    ngOnInit(): void {
-        this.selectToday();
-        this.pplModel = 2;
     }
 
     private getDismissReason(reason: any): string {
@@ -73,8 +81,8 @@ export class ReservationComponent implements OnInit {
             restaurant: this.restaurant,
             user: null
         };
-        this.subscribeToSaveResponse(
-            this.reservationService.create(this.reservation));
+        this.subscribeToSaveResponse(this.reservationService.create(this.reservation));
+        this._success.next('Sikeres asztalfoglalás. Amint az étterem visszaigazolta a foglalásodat, küldünk egy emailt.');
     }
 
     subscribeToSaveResponse(result: Observable<HttpResponse<Reservation>>) {
