@@ -16,6 +16,8 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
 import javax.mail.internet.MimeMessage;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -28,7 +30,9 @@ public class MailService {
 
     private static final String USER = "user";
     private static final String RESERVATION = "reservation";
+    private static final String RESERVATION_DATE = "reservationDate";
     private static final String BASE_URL = "baseUrl";
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     private final Logger log = LoggerFactory.getLogger(MailService.class);
     private final JHipsterProperties jHipsterProperties;
 
@@ -88,6 +92,7 @@ public class MailService {
         Locale locale = Locale.forLanguageTag(reservation.getRestaurant().getUser().getLangKey());
         Context context = new Context(locale);
         context.setVariable(RESERVATION, reservation);
+        context.setVariable(RESERVATION_DATE, DATE_FORMAT.format(Date.from(reservation.getTime())));
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
