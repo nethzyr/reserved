@@ -39,3 +39,6 @@
 </ng-template>
 
 <button class="btn btn-lg btn-outline-success" (click)="open(content)">Asztalfoglalás</button>
+<ngb-alert class="card-alert" *ngIf="!!successMessage" type="success" (close)="successMessage = null">
+    {{successMessage}}
+</ngb-alert>
