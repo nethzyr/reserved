@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {NgForm} from '@angular/forms';
 import {JhiEventManager} from 'ng-jhipster';
 
 import {Account, LoginModalService, Principal} from '../shared';
@@ -16,8 +15,8 @@ import {Account, LoginModalService, Principal} from '../shared';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
+    searchInput: string;
     currentSearch: string;
-    isShowWelcome = true;
 
     constructor(
         private principal: Principal,
@@ -41,16 +40,16 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    isAuthenticated() {
-        return this.principal.isAuthenticated();
-    }
-
     login() {
         this.modalRef = this.loginModalService.open();
     }
 
-    onSubmit(form: NgForm) {
-        this.currentSearch = form.value.search;
-        this.isShowWelcome = false;
+    search() {
+        this.currentSearch = this.searchInput;
+    }
+
+    clear() {
+        this.currentSearch = '';
+        this.searchInput = '';
     }
 }
