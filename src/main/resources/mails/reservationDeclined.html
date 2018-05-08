@@ -19,7 +19,7 @@
     <li th:text="#{email.created.name(${reservation.user.getFirstName()}, ${reservation.user.getLastName()})}">
         Name:
     </li>
-    <li th:text="#{email.created.time(${reservation.time})}">
+    <li th:text="#{email.created.time(${reservationDate})}">
         Date and time:
     </li>
     <li th:text="#{email.created.people(${reservation.people})}">
