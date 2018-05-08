@@ -12,18 +12,20 @@
 <p th:text="#{email.decline.text1}">
     Your reservation has been declined by the restaurant. Please find the details below.
 </p>
-<p th:text="#{email.created.restaurant(${reservation.restaurant.getName()})}">
-    Restaurant:
-</p>
-<p th:text="#{email.created.name(${reservation.user.getFirstName()}, ${reservation.user.getLastName()})}">
-    Name:
-</p>
-<p th:text="#{email.created.time(${reservation.time})}">
-    Date and time:
-</p>
-<p th:text="#{email.created.people(${reservation.people})}">
-    Number of guests:
-</p>
+<ul>
+    <li th:text="#{email.created.restaurant(${reservation.restaurant.getName()})}">
+        Restaurant:
+    </li>
+    <li th:text="#{email.created.name(${reservation.user.getFirstName()}, ${reservation.user.getLastName()})}">
+        Name:
+    </li>
+    <li th:text="#{email.created.time(${reservation.time})}">
+        Date and time:
+    </li>
+    <li th:text="#{email.created.people(${reservation.people})}">
+        Number of guests:
+    </li>
+</ul>
 <p>
     <span th:text="#{email.activation.text2}">Regards, </span>
     <br/>
