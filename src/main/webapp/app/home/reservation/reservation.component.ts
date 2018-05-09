@@ -8,8 +8,6 @@ import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {debounceTime} from 'rxjs/operators';
 
-const now = new Date();
-
 @Component({
     selector: 'jhi-reservation-modal',
     templateUrl: './reservation.component.html',
@@ -26,6 +24,7 @@ export class ReservationComponent implements OnInit {
     pplModel: number;
     private _success = new Subject<string>();
     successMessage: string;
+    now: Date;
 
     constructor(
         private reservationService: ReservationService,
@@ -35,11 +34,12 @@ export class ReservationComponent implements OnInit {
     }
 
     selectToday() {
-        this.dateModel = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+        this.now = new Date;
+        this.dateModel = {year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate()};
         this.timeModel = {
-            hour: now.getHours() + 1,
-            minute: now.getMinutes() > 30 ? 30 : 0,
-            second: now.getSeconds()
+            hour: this.now.getHours() + 1,
+            minute: this.now.getMinutes() > 30 ? 30 : 0,
+            second: this.now.getSeconds()
         };
     }
 
