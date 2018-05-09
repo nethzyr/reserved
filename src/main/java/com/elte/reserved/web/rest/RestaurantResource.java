@@ -2,12 +2,15 @@ package com.elte.reserved.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.elte.reserved.domain.Restaurant;
-import com.elte.reserved.repository.RestaurantRepository;
-import com.elte.reserved.repository.search.RestaurantSearchRepository;
 import com.elte.reserved.security.SecurityUtils;
+import com.elte.reserved.service.RestaurantQueryService;
+import com.elte.reserved.service.RestaurantService;
+import com.elte.reserved.service.UserService;
+import com.elte.reserved.service.dto.RestaurantCriteria;
 import com.elte.reserved.web.rest.errors.BadRequestAlertException;
 import com.elte.reserved.web.rest.util.HeaderUtil;
 import com.elte.reserved.web.rest.util.PaginationUtil;
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -40,13 +43,16 @@ public class RestaurantResource {
 
     private static final String ENTITY_NAME = "restaurant";
 
-    private final RestaurantRepository restaurantRepository;
+    private final RestaurantService restaurantService;
 
-    private final RestaurantSearchRepository restaurantSearchRepository;
+    private final RestaurantQueryService restaurantQueryService;
 
-    public RestaurantResource(RestaurantRepository restaurantRepository, RestaurantSearchRepository restaurantSearchRepository) {
-        this.restaurantRepository = restaurantRepository;
-        this.restaurantSearchRepository = restaurantSearchRepository;
+    private final UserService userService;
+
+    public RestaurantResource(RestaurantService restaurantService, RestaurantQueryService restaurantQueryService, UserService userService) {
+        this.restaurantService = restaurantService;
+        this.restaurantQueryService = restaurantQueryService;
+        this.userService = userService;
     }
 
     /**
@@ -63,8 +69,7 @@ public class RestaurantResource {
         if (restaurant.getId() != null) {
             throw new BadRequestAlertException("A new restaurant cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Restaurant result = restaurantRepository.save(restaurant);
-        restaurantSearchRepository.save(result);
+        Restaurant result = restaurantService.save(restaurant);
         return ResponseEntity.created(new URI("/api/restaurants/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -86,8 +91,7 @@ public class RestaurantResource {
         if (restaurant.getId() == null) {
             return createRestaurant(restaurant);
         }
-        Restaurant result = restaurantRepository.save(restaurant);
-        restaurantSearchRepository.save(result);
+        Restaurant result = restaurantService.save(restaurant);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, restaurant.getId().toString()))
             .body(result);
@@ -97,13 +101,14 @@ public class RestaurantResource {
      * GET  /restaurants : get all the restaurants.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of restaurants in body
      */
     @GetMapping("/restaurants")
     @Timed
-    public ResponseEntity<List<Restaurant>> getAllRestaurants(Pageable pageable) {
-        log.debug("REST request to get a page of Restaurants");
-        Page<Restaurant> page = restaurantRepository.findAllWithEagerRelationships(pageable);
+    public ResponseEntity<List<Restaurant>> getAllRestaurants(RestaurantCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Restaurants by criteria: {}", criteria);
+        Page<Restaurant> page = restaurantQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -116,11 +121,13 @@ public class RestaurantResource {
      */
     @GetMapping("/restaurants-owned")
     @Timed
-    public ResponseEntity<List<Restaurant>> getAllMyRestaurants(Pageable pageable) {
+    public ResponseEntity<List<Restaurant>> getAllMyRestaurants(RestaurantCriteria criteria, Pageable pageable) {
+        criteria.setUserId((LongFilter) new LongFilter()
+            .setEquals(userService.getUserWithAuthorities().get().getId()));
         log.debug("REST request to get a page of Restaurants");
         Page<Restaurant> page = SecurityUtils.isCurrentUserInRole(ADMIN) ?
-            restaurantRepository.findAllWithEagerRelationships(pageable) :
-            restaurantRepository.findByUserIsCurrentUser(pageable);
+            restaurantQueryService.findByCriteria(criteria, pageable) :
+            restaurantQueryService.findByUserIsCurrentUser(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants-owned");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -135,7 +142,7 @@ public class RestaurantResource {
     @Timed
     public ResponseEntity<Restaurant> getRestaurant(@PathVariable Long id) {
         log.debug("REST request to get Restaurant : {}", id);
-        Restaurant restaurant = restaurantRepository.findOneWithEagerRelationships(id);
+        Restaurant restaurant = restaurantService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(restaurant));
     }
 
@@ -149,10 +156,9 @@ public class RestaurantResource {
     @Timed
     public ResponseEntity<Void> deleteRestaurant(@PathVariable Long id) {
         log.debug("REST request to delete Restaurant : {}", id);
-        Restaurant restaurant = restaurantRepository.findOneWithEagerRelationships(id);
+        Restaurant restaurant = restaurantService.findOne(id);
         if (restaurant.getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().get()) || SecurityUtils.isCurrentUserInRole(ADMIN)) {
-            restaurantRepository.delete(id);
-            restaurantSearchRepository.delete(id);
+            restaurantService.delete(id);
             return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
@@ -171,7 +177,7 @@ public class RestaurantResource {
     @Timed
     public ResponseEntity<List<Restaurant>> searchRestaurants(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Restaurants for query {}", query);
-        Page<Restaurant> page = restaurantSearchRepository.search(queryStringQuery(query), pageable);
+        Page<Restaurant> page = restaurantService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/restaurants");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -193,7 +199,7 @@ public class RestaurantResource {
         if (!SecurityUtils.isCurrentUserInRole(ADMIN)){
             ((BoolQueryBuilder) queryBuilder).must(matchQuery("user.login", SecurityUtils.getCurrentUserLogin()));
         }
-        Page<Restaurant> page = restaurantSearchRepository.search(queryBuilder, pageable);
+        Page<Restaurant> page = restaurantService.search(queryBuilder, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/restaurants-owned");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
