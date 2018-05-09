@@ -1,11 +1,11 @@
 package com.elte.reserved.web.rest;
 
 import com.elte.reserved.ReservedApp;
-import com.elte.reserved.domain.City;
-import com.elte.reserved.domain.Restaurant;
-import com.elte.reserved.domain.User;
+import com.elte.reserved.domain.*;
 import com.elte.reserved.repository.RestaurantRepository;
 import com.elte.reserved.repository.search.RestaurantSearchRepository;
+import com.elte.reserved.service.RestaurantQueryService;
+import com.elte.reserved.service.RestaurantService;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
@@ -70,7 +70,13 @@ public class RestaurantResourceIntTest {
     private RestaurantRepository restaurantRepository;
 
     @Autowired
+    private RestaurantService restaurantService;
+
+    @Autowired
     private RestaurantSearchRepository restaurantSearchRepository;
+
+    @Autowired
+    private RestaurantQueryService restaurantQueryService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -91,7 +97,7 @@ public class RestaurantResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final RestaurantResource restaurantResource = new RestaurantResource(restaurantRepository, restaurantSearchRepository);
+        final RestaurantResource restaurantResource = new RestaurantResource(restaurantService, restaurantQueryService);
         this.restRestaurantMockMvc = MockMvcBuilders.standaloneSetup(restaurantResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -248,6 +254,482 @@ public class RestaurantResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllRestaurantsByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where name equals to DEFAULT_NAME
+        defaultRestaurantShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the restaurantList where name equals to UPDATED_NAME
+        defaultRestaurantShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultRestaurantShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the restaurantList where name equals to UPDATED_NAME
+        defaultRestaurantShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where name is not null
+        defaultRestaurantShouldBeFound("name.specified=true");
+
+        // Get all the restaurantList where name is null
+        defaultRestaurantShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByStreetAddressIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where streetAddress equals to DEFAULT_STREET_ADDRESS
+        defaultRestaurantShouldBeFound("streetAddress.equals=" + DEFAULT_STREET_ADDRESS);
+
+        // Get all the restaurantList where streetAddress equals to UPDATED_STREET_ADDRESS
+        defaultRestaurantShouldNotBeFound("streetAddress.equals=" + UPDATED_STREET_ADDRESS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByStreetAddressIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where streetAddress in DEFAULT_STREET_ADDRESS or UPDATED_STREET_ADDRESS
+        defaultRestaurantShouldBeFound("streetAddress.in=" + DEFAULT_STREET_ADDRESS + "," + UPDATED_STREET_ADDRESS);
+
+        // Get all the restaurantList where streetAddress equals to UPDATED_STREET_ADDRESS
+        defaultRestaurantShouldNotBeFound("streetAddress.in=" + UPDATED_STREET_ADDRESS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByStreetAddressIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where streetAddress is not null
+        defaultRestaurantShouldBeFound("streetAddress.specified=true");
+
+        // Get all the restaurantList where streetAddress is null
+        defaultRestaurantShouldNotBeFound("streetAddress.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByPostalCodeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where postalCode equals to DEFAULT_POSTAL_CODE
+        defaultRestaurantShouldBeFound("postalCode.equals=" + DEFAULT_POSTAL_CODE);
+
+        // Get all the restaurantList where postalCode equals to UPDATED_POSTAL_CODE
+        defaultRestaurantShouldNotBeFound("postalCode.equals=" + UPDATED_POSTAL_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByPostalCodeIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where postalCode in DEFAULT_POSTAL_CODE or UPDATED_POSTAL_CODE
+        defaultRestaurantShouldBeFound("postalCode.in=" + DEFAULT_POSTAL_CODE + "," + UPDATED_POSTAL_CODE);
+
+        // Get all the restaurantList where postalCode equals to UPDATED_POSTAL_CODE
+        defaultRestaurantShouldNotBeFound("postalCode.in=" + UPDATED_POSTAL_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByPostalCodeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where postalCode is not null
+        defaultRestaurantShouldBeFound("postalCode.specified=true");
+
+        // Get all the restaurantList where postalCode is null
+        defaultRestaurantShouldNotBeFound("postalCode.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByInfoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where info equals to DEFAULT_INFO
+        defaultRestaurantShouldBeFound("info.equals=" + DEFAULT_INFO);
+
+        // Get all the restaurantList where info equals to UPDATED_INFO
+        defaultRestaurantShouldNotBeFound("info.equals=" + UPDATED_INFO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByInfoIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where info in DEFAULT_INFO or UPDATED_INFO
+        defaultRestaurantShouldBeFound("info.in=" + DEFAULT_INFO + "," + UPDATED_INFO);
+
+        // Get all the restaurantList where info equals to UPDATED_INFO
+        defaultRestaurantShouldNotBeFound("info.in=" + UPDATED_INFO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByInfoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where info is not null
+        defaultRestaurantShouldBeFound("info.specified=true");
+
+        // Get all the restaurantList where info is null
+        defaultRestaurantShouldNotBeFound("info.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByEmailIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where email equals to DEFAULT_EMAIL
+        defaultRestaurantShouldBeFound("email.equals=" + DEFAULT_EMAIL);
+
+        // Get all the restaurantList where email equals to UPDATED_EMAIL
+        defaultRestaurantShouldNotBeFound("email.equals=" + UPDATED_EMAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByEmailIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where email in DEFAULT_EMAIL or UPDATED_EMAIL
+        defaultRestaurantShouldBeFound("email.in=" + DEFAULT_EMAIL + "," + UPDATED_EMAIL);
+
+        // Get all the restaurantList where email equals to UPDATED_EMAIL
+        defaultRestaurantShouldNotBeFound("email.in=" + UPDATED_EMAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByEmailIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where email is not null
+        defaultRestaurantShouldBeFound("email.specified=true");
+
+        // Get all the restaurantList where email is null
+        defaultRestaurantShouldNotBeFound("email.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByPhoneIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where phone equals to DEFAULT_PHONE
+        defaultRestaurantShouldBeFound("phone.equals=" + DEFAULT_PHONE);
+
+        // Get all the restaurantList where phone equals to UPDATED_PHONE
+        defaultRestaurantShouldNotBeFound("phone.equals=" + UPDATED_PHONE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByPhoneIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where phone in DEFAULT_PHONE or UPDATED_PHONE
+        defaultRestaurantShouldBeFound("phone.in=" + DEFAULT_PHONE + "," + UPDATED_PHONE);
+
+        // Get all the restaurantList where phone equals to UPDATED_PHONE
+        defaultRestaurantShouldNotBeFound("phone.in=" + UPDATED_PHONE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByPhoneIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where phone is not null
+        defaultRestaurantShouldBeFound("phone.specified=true");
+
+        // Get all the restaurantList where phone is null
+        defaultRestaurantShouldNotBeFound("phone.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByWebsiteIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where website equals to DEFAULT_WEBSITE
+        defaultRestaurantShouldBeFound("website.equals=" + DEFAULT_WEBSITE);
+
+        // Get all the restaurantList where website equals to UPDATED_WEBSITE
+        defaultRestaurantShouldNotBeFound("website.equals=" + UPDATED_WEBSITE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByWebsiteIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where website in DEFAULT_WEBSITE or UPDATED_WEBSITE
+        defaultRestaurantShouldBeFound("website.in=" + DEFAULT_WEBSITE + "," + UPDATED_WEBSITE);
+
+        // Get all the restaurantList where website equals to UPDATED_WEBSITE
+        defaultRestaurantShouldNotBeFound("website.in=" + UPDATED_WEBSITE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByWebsiteIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where website is not null
+        defaultRestaurantShouldBeFound("website.specified=true");
+
+        // Get all the restaurantList where website is null
+        defaultRestaurantShouldNotBeFound("website.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByFacebookIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where facebook equals to DEFAULT_FACEBOOK
+        defaultRestaurantShouldBeFound("facebook.equals=" + DEFAULT_FACEBOOK);
+
+        // Get all the restaurantList where facebook equals to UPDATED_FACEBOOK
+        defaultRestaurantShouldNotBeFound("facebook.equals=" + UPDATED_FACEBOOK);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByFacebookIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where facebook in DEFAULT_FACEBOOK or UPDATED_FACEBOOK
+        defaultRestaurantShouldBeFound("facebook.in=" + DEFAULT_FACEBOOK + "," + UPDATED_FACEBOOK);
+
+        // Get all the restaurantList where facebook equals to UPDATED_FACEBOOK
+        defaultRestaurantShouldNotBeFound("facebook.in=" + UPDATED_FACEBOOK);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByFacebookIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where facebook is not null
+        defaultRestaurantShouldBeFound("facebook.specified=true");
+
+        // Get all the restaurantList where facebook is null
+        defaultRestaurantShouldNotBeFound("facebook.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByGooglePlaceIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where googlePlaceId equals to DEFAULT_GOOGLE_PLACE_ID
+        defaultRestaurantShouldBeFound("googlePlaceId.equals=" + DEFAULT_GOOGLE_PLACE_ID);
+
+        // Get all the restaurantList where googlePlaceId equals to UPDATED_GOOGLE_PLACE_ID
+        defaultRestaurantShouldNotBeFound("googlePlaceId.equals=" + UPDATED_GOOGLE_PLACE_ID);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByGooglePlaceIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where googlePlaceId in DEFAULT_GOOGLE_PLACE_ID or UPDATED_GOOGLE_PLACE_ID
+        defaultRestaurantShouldBeFound("googlePlaceId.in=" + DEFAULT_GOOGLE_PLACE_ID + "," + UPDATED_GOOGLE_PLACE_ID);
+
+        // Get all the restaurantList where googlePlaceId equals to UPDATED_GOOGLE_PLACE_ID
+        defaultRestaurantShouldNotBeFound("googlePlaceId.in=" + UPDATED_GOOGLE_PLACE_ID);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByGooglePlaceIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where googlePlaceId is not null
+        defaultRestaurantShouldBeFound("googlePlaceId.specified=true");
+
+        // Get all the restaurantList where googlePlaceId is null
+        defaultRestaurantShouldNotBeFound("googlePlaceId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByCityIsEqualToSomething() throws Exception {
+        // Initialize the database
+        City city = CityResourceIntTest.createEntity(em);
+        em.persist(city);
+        em.flush();
+        restaurant.setCity(city);
+        restaurantRepository.saveAndFlush(restaurant);
+        Long cityId = city.getId();
+
+        // Get all the restaurantList where city equals to cityId
+        defaultRestaurantShouldBeFound("cityId.equals=" + cityId);
+
+        // Get all the restaurantList where city equals to cityId + 1
+        defaultRestaurantShouldNotBeFound("cityId.equals=" + (cityId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        User user = UserResourceIntTest.createEntity(em);
+        em.persist(user);
+        em.flush();
+        restaurant.setUser(user);
+        restaurantRepository.saveAndFlush(restaurant);
+        Long userId = user.getId();
+
+        // Get all the restaurantList where user equals to userId
+        defaultRestaurantShouldBeFound("userId.equals=" + userId);
+
+        // Get all the restaurantList where user equals to userId + 1
+        defaultRestaurantShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByPictureIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Picture picture = PictureResourceIntTest.createEntity(em);
+        em.persist(picture);
+        em.flush();
+        restaurant.setPicture(picture);
+        restaurantRepository.saveAndFlush(restaurant);
+        Long pictureId = picture.getId();
+
+        // Get all the restaurantList where picture equals to pictureId
+        defaultRestaurantShouldBeFound("pictureId.equals=" + pictureId);
+
+        // Get all the restaurantList where picture equals to pictureId + 1
+        defaultRestaurantShouldNotBeFound("pictureId.equals=" + (pictureId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByKitchenIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Kitchen kitchen = KitchenResourceIntTest.createEntity(em);
+        em.persist(kitchen);
+        em.flush();
+        restaurant.addKitchen(kitchen);
+        restaurantRepository.saveAndFlush(restaurant);
+        Long kitchenId = kitchen.getId();
+
+        // Get all the restaurantList where kitchen equals to kitchenId
+        defaultRestaurantShouldBeFound("kitchenId.equals=" + kitchenId);
+
+        // Get all the restaurantList where kitchen equals to kitchenId + 1
+        defaultRestaurantShouldNotBeFound("kitchenId.equals=" + (kitchenId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByFoodIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Food food = FoodResourceIntTest.createEntity(em);
+        em.persist(food);
+        em.flush();
+        restaurant.addFood(food);
+        restaurantRepository.saveAndFlush(restaurant);
+        Long foodId = food.getId();
+
+        // Get all the restaurantList where food equals to foodId
+        defaultRestaurantShouldBeFound("foodId.equals=" + foodId);
+
+        // Get all the restaurantList where food equals to foodId + 1
+        defaultRestaurantShouldNotBeFound("foodId.equals=" + (foodId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultRestaurantShouldBeFound(String filter) throws Exception {
+        restRestaurantMockMvc.perform(get("/api/restaurants?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(restaurant.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].streetAddress").value(hasItem(DEFAULT_STREET_ADDRESS.toString())))
+            .andExpect(jsonPath("$.[*].postalCode").value(hasItem(DEFAULT_POSTAL_CODE.toString())))
+            .andExpect(jsonPath("$.[*].info").value(hasItem(DEFAULT_INFO.toString())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
+            .andExpect(jsonPath("$.[*].website").value(hasItem(DEFAULT_WEBSITE.toString())))
+            .andExpect(jsonPath("$.[*].facebook").value(hasItem(DEFAULT_FACEBOOK.toString())))
+            .andExpect(jsonPath("$.[*].googlePlaceId").value(hasItem(DEFAULT_GOOGLE_PLACE_ID.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultRestaurantShouldNotBeFound(String filter) throws Exception {
+        restRestaurantMockMvc.perform(get("/api/restaurants?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
+
+    @Test
+    @Transactional
     public void getNonExistingRestaurant() throws Exception {
         // Get the restaurant
         restRestaurantMockMvc.perform(get("/api/restaurants/{id}", Long.MAX_VALUE))
@@ -258,8 +740,8 @@ public class RestaurantResourceIntTest {
     @Transactional
     public void updateRestaurant() throws Exception {
         // Initialize the database
-        restaurantRepository.saveAndFlush(restaurant);
-        restaurantSearchRepository.save(restaurant);
+        restaurantService.save(restaurant);
+
         int databaseSizeBeforeUpdate = restaurantRepository.findAll().size();
 
         // Update the restaurant
@@ -323,8 +805,8 @@ public class RestaurantResourceIntTest {
     @Transactional
     public void deleteRestaurant() throws Exception {
         // Initialize the database
-        restaurantRepository.saveAndFlush(restaurant);
-        restaurantSearchRepository.save(restaurant);
+        restaurantService.save(restaurant);
+
         int databaseSizeBeforeDelete = restaurantRepository.findAll().size();
 
         // Get the restaurant
@@ -345,8 +827,7 @@ public class RestaurantResourceIntTest {
     @Transactional
     public void searchRestaurant() throws Exception {
         // Initialize the database
-        restaurantRepository.saveAndFlush(restaurant);
-        restaurantSearchRepository.save(restaurant);
+        restaurantService.save(restaurant);
 
         // Search the restaurant
         restRestaurantMockMvc.perform(get("/api/_search/restaurants?query=id:" + restaurant.getId()))

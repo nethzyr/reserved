@@ -2,6 +2,8 @@ package com.elte.reserved.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -66,6 +68,7 @@ public class Restaurant implements Serializable {
     private Picture picture;
 
     @ManyToMany
+    @Fetch(FetchMode.JOIN)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "restaurant_kitchen",
                joinColumns = @JoinColumn(name="restaurants_id", referencedColumnName="id"),
@@ -73,6 +76,7 @@ public class Restaurant implements Serializable {
     private Set<Kitchen> kitchens = new HashSet<>();
 
     @ManyToMany
+    @Fetch(FetchMode.JOIN)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "restaurant_food",
                joinColumns = @JoinColumn(name="restaurants_id", referencedColumnName="id"),
