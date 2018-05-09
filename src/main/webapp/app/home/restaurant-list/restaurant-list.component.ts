@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Restaurant, RestaurantService} from '../../entities/restaurant';
 import {JhiAlertService, JhiParseLinks} from 'ng-jhipster';
@@ -10,7 +10,7 @@ import {JhiAlertService, JhiParseLinks} from 'ng-jhipster';
         'restaurant-list.scss'
     ]
 })
-export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
+export class RestaurantListComponent implements OnDestroy, OnChanges {
     @Input() currentSearch: string;
     restaurants: Restaurant[];
     totalItems: any;
@@ -21,10 +21,6 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService
     ) {
-    }
-
-    ngOnInit() {
-        this.loadAll();
     }
 
     ngOnDestroy() {
