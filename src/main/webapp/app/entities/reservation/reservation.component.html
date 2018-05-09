@@ -31,7 +31,8 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th *jhiHasAnyAuthority="'ROLE_ADMIN'" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
+                    <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="time"><span jhiTranslate="reservedApp.reservation.time">Time</span> <span
                     class="fa fa-sort"></span></th>
                 <th jhiSortBy="people"><span jhiTranslate="reservedApp.reservation.people">People</span> <span
@@ -49,7 +50,8 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
                    [infiniteScrollDistance]="0">
             <tr *ngFor="let reservation of reservations ;trackBy: trackId">
-                <td><a [routerLink]="['../reservation', reservation.id ]">{{reservation.id}}</a></td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['../reservation', reservation.id ]">{{reservation.id}}</a>
+                </td>
                 <td>{{reservation.time | date:'medium'}}</td>
                 <td>{{reservation.people}}</td>
                 <td>{{reservation.confirmed}}</td>

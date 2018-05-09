@@ -91,10 +91,14 @@ public class RestaurantResource {
         if (restaurant.getId() == null) {
             return createRestaurant(restaurant);
         }
-        Restaurant result = restaurantService.save(restaurant);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, restaurant.getId().toString()))
-            .body(result);
+        if (restaurant.getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().get()) || SecurityUtils.isCurrentUserInRole(ADMIN)) {
+            Restaurant result = restaurantService.save(restaurant);
+            return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, restaurant.getId().toString()))
+                .body(result);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(restaurant);
+        }
     }
 
     /**
@@ -161,7 +165,7 @@ public class RestaurantResource {
             restaurantService.delete(id);
             return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
