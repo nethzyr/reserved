@@ -9,7 +9,7 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" [hidden]="!picture.id">
+        <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group" [hidden]="!picture.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="picture.id" readonly/>

@@ -7,7 +7,7 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" [hidden]="!restaurant.id">
+        <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group" [hidden]="!restaurant.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="restaurant.id" readonly />
@@ -22,6 +22,21 @@
                    This field is required.
                 </small>
             </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.city" for="field_city">City</label>
+            <select class="form-control" id="field_city" name="city" [(ngModel)]="restaurant.city" required>
+                <option *ngIf="!editForm.value.city" [ngValue]="null" selected></option>
+                <option [ngValue]="cityOption.id === restaurant.city?.id ? restaurant.city : cityOption"
+                        *ngFor="let cityOption of cities; trackBy: trackCityById">{{cityOption.name}}
+                </option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.city?.dirty && editForm.controls.city?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.city?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.streetAddress" for="field_streetAddress">Street Address</label>
@@ -63,21 +78,7 @@
             <input type="text" class="form-control" name="googlePlaceId" id="field_googlePlaceId"
                 [(ngModel)]="restaurant.googlePlaceId" />
         </div>
-
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.city" for="field_city">City</label>
-            <select class="form-control" id="field_city" name="city" [(ngModel)]="restaurant.city"  required>
-                <option *ngIf="!editForm.value.city" [ngValue]="null" selected></option>
-                <option [ngValue]="cityOption.id === restaurant.city?.id ? restaurant.city : cityOption" *ngFor="let cityOption of cities; trackBy: trackCityById">{{cityOption.name}}</option>
-            </select>
-        </div>
-        <div [hidden]="!(editForm.controls.city?.dirty && editForm.controls.city?.invalid)">
-            <small class="form-text text-danger"
-                [hidden]="!editForm.controls.city?.errors?.required" jhiTranslate="entity.validation.required">
-                This field is required.
-            </small>
-        </div>
-        <div class="form-group">
+        <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.user" for="field_user">User</label>
             <select class="form-control" id="field_user" name="user" [(ngModel)]="restaurant.user"  required>
                 <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>

@@ -31,10 +31,9 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th *jhiHasAnyAuthority="'ROLE_ADMIN'" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
+                    <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="title"><span jhiTranslate="reservedApp.picture.title">Title</span> <span
-                    class="fa fa-sort"></span></th>
-                <th jhiSortBy="url"><span jhiTranslate="reservedApp.picture.url">Url</span> <span
                     class="fa fa-sort"></span></th>
                 <th jhiSortBy="img"><span jhiTranslate="reservedApp.picture.img">Img</span> <span
                     class="fa fa-sort"></span></th>
@@ -43,9 +42,9 @@
             </thead>
             <tbody>
             <tr *ngFor="let picture of pictures ;trackBy: trackId">
-                <td><a [routerLink]="['../picture', picture.id ]">{{picture.id}}</a></td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['../picture', picture.id ]">{{picture.id}}</a>
+                </td>
                 <td>{{picture.title}}</td>
-                <td>{{picture.url}}</td>
                 <td>
                     <a *ngIf="picture.img" (click)="openFile(picture.imgContentType, picture.img)">
                         <img [src]="'data:' + picture.imgContentType + ';base64,' + picture.img"
