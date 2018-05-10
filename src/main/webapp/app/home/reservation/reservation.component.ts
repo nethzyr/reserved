@@ -37,8 +37,8 @@ export class ReservationComponent implements OnInit {
         this.now = new Date;
         this.dateModel = {year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate()};
         this.timeModel = {
-            hour: this.now.getHours() + 1,
-            minute: this.now.getMinutes() > 30 ? 30 : 0,
+            hour: this.now.getHours() + this.now.getMinutes() > 30 ? 2 : 1,
+            minute: this.now.getMinutes() > 30 ? 0 : 30,
             second: this.now.getSeconds()
         };
     }
