@@ -36,7 +36,13 @@ export class KitchenService {
 
     query(req?: any): Observable<HttpResponse<Kitchen[]>> {
         const options = createRequestOption(req);
-        return this.http.get<Kitchen[]>(this.resourceUrl, {params: options, observe: 'response'})
+        return this.http.get<Kitchen[]>(`${this.resourceUrl}?isList=0`, {params: options, observe: 'response'})
+            .map((res: HttpResponse<Kitchen[]>) => this.convertArrayResponse(res));
+    }
+
+    list(req?: any): Observable<HttpResponse<Kitchen[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Kitchen[]>(`${this.resourceUrl}?isList=1`, {params: options, observe: 'response'})
             .map((res: HttpResponse<Kitchen[]>) => this.convertArrayResponse(res));
     }
 
