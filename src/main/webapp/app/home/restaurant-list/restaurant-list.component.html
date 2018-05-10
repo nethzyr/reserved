@@ -1,4 +1,21 @@
 <div class="row">
+    <div class="col-4">
+        <label for="typeahead-city" jhiTranslate="restaurant-list.search.city">Search by city:</label>
+        <input id="typeahead-city" type="text" class="form-control" [(ngModel)]="cityModel"
+               [ngbTypeahead]="searchCity"/>
+    </div>
+    <div class="col-4">
+        <label for="typeahead-kitchen" jhiTranslate="restaurant-list.search.kitchen">Search by kitchen type:</label>
+        <input id="typeahead-kitchen" type="text" class="form-control" [(ngModel)]="kitchenModel"
+               [ngbTypeahead]="searchKitchen"/>
+    </div>
+    <div class="col-4">
+        <label for="typeahead-food" jhiTranslate="restaurant-list.search.food">Search by food type:</label>
+        <input id="typeahead-food" type="text" class="form-control" [(ngModel)]="foodModel"
+               [ngbTypeahead]="searchFood"/>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-12 col-lg-6 cards" *ngFor="let restaurant of restaurants; trackById">
         <jhi-restaurant-card [restaurant]="restaurant"></jhi-restaurant-card>
     </div>
