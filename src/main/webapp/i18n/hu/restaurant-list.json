@@ -1,0 +1,9 @@
+{
+    "restaurant-list": {
+        "search": {
+            "city": "Keresés város alapján:",
+            "kitchen": "Keresés konyha alapján:",
+            "food": "Keresés étel alapján:"
+        }
+    }
+}

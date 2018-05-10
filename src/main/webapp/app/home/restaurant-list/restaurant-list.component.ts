@@ -6,6 +6,8 @@ import {Kitchen, KitchenService} from '../../entities/kitchen';
 import {Food, FoodService} from '../../entities/food';
 import {City, CityService} from '../../entities/city';
 import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 
 @Component({
     selector: 'jhi-restaurant-list',
@@ -17,9 +19,12 @@ import {Subscription} from 'rxjs/Subscription';
 export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
     @Input() currentSearch: string;
     restaurants: Restaurant[];
-    kitchens: Kitchen[];
-    foods: Food[];
-    cities: City[];
+    kitchens: String[] = [];
+    foods: String[] = [];
+    cities: String[] = [];
+    kitchenModel: any;
+    foodModel: any;
+    cityModel: any;
     totalItems: any;
     links: any;
     subscriptions = new Subscription();
@@ -46,17 +51,41 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
         this.loadAll();
     }
 
+    searchCity = (text$: Observable<string>) =>
+        text$.pipe(
+            debounceTime(200),
+            distinctUntilChanged(),
+            map((term) => term.length < 2 ? []
+                : this.cities.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+        )
+
+    searchKitchen = (text$: Observable<string>) =>
+        text$.pipe(
+            debounceTime(200),
+            distinctUntilChanged(),
+            map((term) => term.length < 2 ? []
+                : this.kitchens.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+        )
+
+    searchFood = (text$: Observable<string>) =>
+        text$.pipe(
+            debounceTime(200),
+            distinctUntilChanged(),
+            map((term) => term.length < 2 ? []
+                : this.foods.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+        )
+
     loadFilterData() {
         this.subscriptions.add(this.kitchenService.list().subscribe(
-            (res: HttpResponse<Kitchen[]>) => this.kitchens = res.body,
+            (res: HttpResponse<Kitchen[]>) => res.body.forEach((kitchen) => this.kitchens.push(kitchen.type)),
             (res: HttpErrorResponse) => this.onError(res.message)
         ));
         this.subscriptions.add(this.foodService.list().subscribe(
-            (res: HttpResponse<Kitchen[]>) => this.foods = res.body,
+            (res: HttpResponse<Food[]>) => res.body.forEach((food) => this.foods.push(food.type)),
             (res: HttpErrorResponse) => this.onError(res.message)
         ));
         this.subscriptions.add(this.cityService.list().subscribe(
-            (res: HttpResponse<Kitchen[]>) => this.cities = res.body,
+            (res: HttpResponse<City[]>) => res.body.forEach((city) => this.cities.push(city.name)),
             (res: HttpErrorResponse) => this.onError(res.message)
         ));
     }
