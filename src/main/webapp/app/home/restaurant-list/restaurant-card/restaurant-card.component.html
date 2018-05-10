@@ -3,9 +3,13 @@
         <div class="content">
             <div class="card">
                 <div class="img-card">
-                    <img class="card-img img-fluid"
+                    <!--img class="card-img img-fluid"
                          [src]="restaurant.picture?.url || 'https://www.emyspot.com/medias/images/page404.png'"
-                         alt="picture">
+                         alt="picture"-->
+                    <img [src]="restaurant.picture?.img ?
+                         'data:' + restaurant.picture?.imgContentType + ';base64,' + restaurant.picture?.img :
+                         restaurant.picture?.url || 'https://www.emyspot.com/medias/images/page404.png'"
+                         alt="picture image"/>
                 </div>
                 <div class="card-content">
                     <h4 class="card-title">
