@@ -36,7 +36,13 @@ export class CityService {
 
     query(req?: any): Observable<HttpResponse<City[]>> {
         const options = createRequestOption(req);
-        return this.http.get<City[]>(this.resourceUrl, {params: options, observe: 'response'})
+        return this.http.get<City[]>(`${this.resourceUrl}?isList=0`, {params: options, observe: 'response'})
+            .map((res: HttpResponse<City[]>) => this.convertArrayResponse(res));
+    }
+
+    list(req?: any): Observable<HttpResponse<City[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<City[]>(`${this.resourceUrl}?isList=1`, {params: options, observe: 'response'})
             .map((res: HttpResponse<City[]>) => this.convertArrayResponse(res));
     }
 

@@ -95,11 +95,17 @@ public class FoodResource {
      */
     @GetMapping("/foods")
     @Timed
-    public ResponseEntity<List<Food>> getAllFoods(Pageable pageable) {
-        log.debug("REST request to get a page of Foods");
-        Page<Food> page = foodRepository.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/foods");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    public ResponseEntity<List<Food>> getAllFoods(@RequestParam(value = "isList") Boolean isList, Pageable pageable) {
+        if (isList) {
+            log.debug("REST request to get the full list of Foods");
+            List<Food> list = foodRepository.findAll();
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } else {
+            log.debug("REST request to get a page of Foods");
+            Page<Food> page = foodRepository.findAll(pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/foods");
+            return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        }
     }
 
     /**

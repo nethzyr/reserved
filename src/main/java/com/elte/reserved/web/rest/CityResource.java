@@ -95,11 +95,17 @@ public class CityResource {
      */
     @GetMapping("/cities")
     @Timed
-    public ResponseEntity<List<City>> getAllCities(Pageable pageable) {
-        log.debug("REST request to get a page of Cities");
-        Page<City> page = cityRepository.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cities");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    public ResponseEntity<List<City>> getAllCities(@RequestParam(value = "isList") Boolean isList, Pageable pageable) {
+        if (isList) {
+            log.debug("REST request to get the full list of Cities");
+            List<City> list = cityRepository.findAll();
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } else {
+            log.debug("REST request to get a page of Cities");
+            Page<City> page = cityRepository.findAll(pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cities");
+            return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        }
     }
 
     /**

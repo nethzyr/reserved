@@ -36,7 +36,13 @@ export class FoodService {
 
     query(req?: any): Observable<HttpResponse<Food[]>> {
         const options = createRequestOption(req);
-        return this.http.get<Food[]>(this.resourceUrl, {params: options, observe: 'response'})
+        return this.http.get<Food[]>(`${this.resourceUrl}?isList=0`, {params: options, observe: 'response'})
+            .map((res: HttpResponse<Food[]>) => this.convertArrayResponse(res));
+    }
+
+    list(req?: any): Observable<HttpResponse<Food[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Food[]>(`${this.resourceUrl}?isList=1`, {params: options, observe: 'response'})
             .map((res: HttpResponse<Food[]>) => this.convertArrayResponse(res));
     }
 

@@ -49,15 +49,15 @@ export class RestaurantDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.cityService.query()
+        this.cityService.list()
             .subscribe((res: HttpResponse<City[]>) => { this.cities = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.userService.query()
             .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.pictureService.query()
             .subscribe((res: HttpResponse<Picture[]>) => { this.pictures = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.kitchenService.query({size: 2147483647 })
+        this.kitchenService.list()
             .subscribe((res: HttpResponse<Kitchen[]>) => { this.kitchens = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.foodService.query({size: 2147483647})
+        this.foodService.list()
             .subscribe((res: HttpResponse<Food[]>) => { this.foods = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 

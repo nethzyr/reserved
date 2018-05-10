@@ -2,6 +2,9 @@ import {Component, Input, OnChanges, OnDestroy} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Restaurant, RestaurantService} from '../../entities/restaurant';
 import {JhiAlertService, JhiParseLinks} from 'ng-jhipster';
+import {Kitchen, KitchenService} from '../../entities/kitchen';
+import {Food, FoodService} from '../../entities/food';
+import {City, CityService} from "../../entities/city";
 
 @Component({
     selector: 'jhi-restaurant-list',
@@ -13,11 +16,17 @@ import {JhiAlertService, JhiParseLinks} from 'ng-jhipster';
 export class RestaurantListComponent implements OnDestroy, OnChanges {
     @Input() currentSearch: string;
     restaurants: Restaurant[];
+    kitchens: Kitchen[];
+    foods: Food[];
+    cities: City[];
     totalItems: any;
     links: any;
 
     constructor(
         private restaurantService: RestaurantService,
+        private kitchenService: KitchenService,
+        private cityService: CityService,
+        private foodService: FoodService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService
     ) {
@@ -28,6 +37,23 @@ export class RestaurantListComponent implements OnDestroy, OnChanges {
 
     ngOnChanges(changes) {
         this.loadAll();
+        this.loadFilterData();
+
+    }
+
+    loadFilterData() {
+        this.kitchenService.list().subscribe(
+            (res: HttpResponse<Kitchen[]>) => this.kitchens = res.body,
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.foodService.list().subscribe(
+            (res: HttpResponse<Kitchen[]>) => this.foods = res.body,
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.cityService.list().subscribe(
+            (res: HttpResponse<Kitchen[]>) => this.cities = res.body,
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     loadAll() {
