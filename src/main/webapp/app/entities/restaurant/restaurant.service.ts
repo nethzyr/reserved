@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {SERVER_API_URL} from '../../app.constants';
 
 import {Restaurant} from './restaurant.model';
 import {createRequestOption} from '../../shared';
+import {City} from "../city";
+import {Kitchen} from "../kitchen";
+import {Food} from "../food";
 
 export type EntityResponseType = HttpResponse<Restaurant>;
 
@@ -36,6 +39,21 @@ export class RestaurantService {
     query(req?: any): Observable<HttpResponse<Restaurant[]>> {
         const options = createRequestOption(req);
         return this.http.get<Restaurant[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
+    }
+
+    filter(cityFilter: Set<City>, kitchenFilter: Set<Kitchen>, foodFilter: Set<Food>): Observable<HttpResponse<Restaurant[]>> {
+        let cityIds: string = '';
+        let kitchenIds: string = '';
+        let foodIds: string = '';
+        cityFilter.forEach((filter) => (cityIds += filter.id + ','));
+        kitchenFilter.forEach((filter) => (kitchenIds += filter.id + ','));
+        foodFilter.forEach((filter) => (foodIds += filter.id + ','));
+        return this.http.get<Restaurant[]>(this.resourceUrl + '/filter', {
+            params: new HttpParams().set('cityIds', cityIds)
+                .set('kitchenIds', kitchenIds)
+                .set('foodIds', foodIds), observe: 'response'
+        })
             .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
     }
 

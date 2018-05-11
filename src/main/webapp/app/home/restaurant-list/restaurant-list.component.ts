@@ -7,7 +7,6 @@ import {Food, FoodService} from '../../entities/food';
 import {City, CityService} from '../../entities/city';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
-import {forkJoin} from 'rxjs/observable/forkJoin';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 
 @Component({
@@ -58,82 +57,17 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
 
     formatter = (x: any) => x.type || x.name;
 
-    compareRestaurant(a: Restaurant, b: Restaurant) {
-        if (a.name > b.name) {
-            return -1;
-        }
-        if (a.name < b.name) {
-            return 1;
-        }
-        return 0;
-    }
-
     applyFilters() {
-        while (this.restaurants.length > 0) {
-            this.restaurants.pop();
+        if (this.cityFilter.size === 0 && this.kitchenFilter.size === 0 && this.foodFilter.size === 0) {
+            this.loadAll();
         }
-
-        let filteredByCities: Set<Restaurant> = new Set<Restaurant>();
-        let cityFilters: Observable<HttpResponse<Restaurant[]>>[] = [];
-
-        this.cityFilter.forEach((filter) => {
-            cityFilters.push(this.restaurantService.query({
-                'cityId.equals': filter.id
-            }))
-        });
-
-        let filteredByKitchens: Set<Restaurant> = new Set<Restaurant>();
-        let kitchenFilters: Observable<HttpResponse<Restaurant[]>>[] = [];
-
-        this.kitchenFilter.forEach((filter) => {
-            kitchenFilters.push(this.restaurantService.query({
-                'kitchenId.equals': filter.id
-            }))
-        });
-
-        let filteredByFoods: Set<Restaurant> = new Set<Restaurant>();
-        let foodFilters: Observable<HttpResponse<Restaurant[]>>[] = [];
-
-        this.foodFilter.forEach((filter) => {
-            foodFilters.push(this.restaurantService.query({
-                'foodId.equals': filter.id
-            }))
-        });
-
-        forkJoin(...cityFilters, ...kitchenFilters, ...foodFilters).subscribe((observablesArray) => {
-            observablesArray.forEach((restaurantsArray, i) => {
-                if (i < cityFilters.length) {
-                    restaurantsArray.body.forEach((restaurant) => (
-                        filteredByCities.add(restaurant)
-                    ));
-                    this.restaurants = Array.from(filteredByCities);
-                } else if (i < cityFilters.length + kitchenFilters.length) {
-                    restaurantsArray.body.forEach((restaurant) => (
-                        filteredByKitchens.add(restaurant)
-                    ));
-                    if (this.restaurants.length > 0) {
-                        this.restaurants
-                    } else {
-                        this.restaurants = Array.from(filteredByKitchens);
-                    }
-                } else if (i < cityFilters.length + kitchenFilters.length + foodFilters.length) {
-                    restaurantsArray.body.forEach((restaurant) => (
-                        filteredByFoods.add(restaurant)
-                    ));
-                    if (this.restaurants.length > 0) {
-                        this.restaurants.filter((x) => (filteredByFoods.has(x)));
-                    } else {
-                        this.restaurants = Array.from(filteredByFoods);
-                    }
-                }
-                console.log(i);
-                console.log(observablesArray[i].body);
-                console.log(this.restaurants);
-            });
-        });
-    }
-
-    x() {
+        {
+            this.subscriptions.add(this.restaurantService.filter(this.cityFilter, this.kitchenFilter, this.foodFilter)
+                .subscribe(
+                    (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                ));
+        }
     }
 
     addFilter(array: any, model: string, filter: Set<any>) {
@@ -142,15 +76,13 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
             this.cityModel = '';
             this.kitchenModel = '';
             this.foodModel = '';
-            //this.applyFilters();
-            this.x();
+            this.applyFilters();
         }
     }
 
     removeFilter(element: any, filter: Set<any>) {
         filter.delete(element);
-        //this.applyFilters();
-        this.x();
+        this.applyFilters();
     }
 
     searchCity = (text$: Observable<string>) =>
@@ -207,6 +139,10 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
             (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
             (res: HttpErrorResponse) => this.onError(res.message)
             ));
+    }
+
+    delete(event) {
+        event.stopPropagation();
     }
 
     private onSuccess(data, headers) {
