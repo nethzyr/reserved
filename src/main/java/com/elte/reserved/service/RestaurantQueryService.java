@@ -6,15 +6,20 @@ import com.elte.reserved.repository.RestaurantRepository;
 import com.elte.reserved.repository.search.RestaurantSearchRepository;
 import com.elte.reserved.service.dto.RestaurantCriteria;
 import io.github.jhipster.service.QueryService;
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -55,6 +60,62 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
         return restaurantRepository.findAll(specification);
     }
 
+
+    /**
+     * Get all the restaurants.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public Page<Restaurant> findMultiFilter(List<String> cityArray, List<String> kitchenArray, List<String> foodArray, Pageable pageable) {
+        RestaurantCriteria criteria = new RestaurantCriteria();
+        List<Restaurant> cityList = new ArrayList<>();
+        Set<Restaurant> kitchenList = new LinkedHashSet<>();
+        Set<Restaurant> foodList = new LinkedHashSet<>();
+
+        for (String i : cityArray) {
+            criteria.setCityId((LongFilter) new LongFilter()
+                .setEquals(Long.parseLong(i)));
+            cityList.addAll(findByCriteria(criteria));
+        }
+        criteria = new RestaurantCriteria();
+        for (String i : kitchenArray) {
+            criteria.setKitchenId((LongFilter) new LongFilter()
+                .setEquals(Long.parseLong(i)));
+            kitchenList.addAll(findByCriteria(criteria));
+        }
+        if (!kitchenArray.isEmpty()) {
+            if (!cityArray.isEmpty()) {
+                cityList.retainAll(kitchenList);
+            } else {
+                cityList.addAll(kitchenList);
+            }
+        }
+        criteria = new RestaurantCriteria();
+        for (int i = 0; i < foodArray.size(); i++) {
+            log.debug("bementem a null arraybe geci {} ", foodArray.size() + " " + foodArray.isEmpty());
+            try {
+                Long x = Long.parseLong(foodArray.get(i));
+                criteria.setFoodId((LongFilter) new LongFilter()
+                    .setEquals(x));
+                foodList.addAll(findByCriteria(criteria));
+            } catch (NumberFormatException e) {
+                System.out.println(e);
+            }
+        }
+        if (!foodArray.isEmpty()) {
+            if (!cityArray.isEmpty() && !kitchenArray.isEmpty()) {
+                cityList.retainAll(foodList);
+            } else {
+                cityList.addAll(foodList);
+            }
+        }
+
+        log.debug("Request to get all Restaurants");
+        return new PageImpl<>(cityList, pageable, cityList.size());
+    }
+
     /**
      * Return a {@link Page} of {@link Restaurant} which matches the criteria from the database
      *
@@ -66,21 +127,6 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
     public Page<Restaurant> findByCriteria(RestaurantCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specifications<Restaurant> specification = createSpecification(criteria);
-        return restaurantRepository.findAll(specification, page);
-    }
-
-    /**
-     * Return a {@link Page} of {@link Restaurant} which matches the criteria from the database
-     *
-     * @param criteria The object which holds all the filters, which the entities should match.
-     * @param page     The page, which should be returned.
-     * @return the matching entities.
-     */
-    @Transactional(readOnly = true)
-    public Page<Restaurant> findByUserIsCurrentUser(RestaurantCriteria criteria, Pageable page) {
-        log.debug("find by criteria : {}, page: {}", criteria, page);
-        final Long userId = userService.getUserWithAuthorities().get().getId();
-        Specifications<Restaurant> specification = createSpecification(criteria);
         return restaurantRepository.findAll(specification, page);
     }
 
