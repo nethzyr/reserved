@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpResponse} from '@angular/common/http';
 import {Restaurant, RestaurantService} from '../../entities/restaurant';
 import {ActivatedRoute} from '@angular/router';
@@ -10,7 +10,7 @@ import {JhiEventManager} from 'ng-jhipster';
     templateUrl: './restaurant-detail.component.html',
     styles: []
 })
-export class RestaurantDetailComponent implements OnInit {
+export class RestaurantDetailComponent implements OnInit, OnDestroy {
 
     restaurant: Restaurant;
     private subscription: Subscription;
