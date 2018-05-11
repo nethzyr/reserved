@@ -18,7 +18,7 @@
                     <div class="btn btn-outline-" *ngFor="let kitchen of restaurant.kitchens">
                         {{kitchen.type}}
                     </div>
-                    <div class="reservation-button">
+                    <div class="reservation-button" (click)="delete($event)">
                         <jhi-reservation-modal [restaurant]="restaurant"></jhi-reservation-modal>
                     </div>
                 </div>
