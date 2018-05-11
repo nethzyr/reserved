@@ -17,4 +17,8 @@ export class RestaurantCardComponent implements OnInit {
     ngOnInit() {
     }
 
+    delete(event) {
+        event.stopPropagation();
+    }
+
 }
