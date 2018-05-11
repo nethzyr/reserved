@@ -120,7 +120,7 @@ public class RestaurantResource {
     }
 
     /**
-     * GET  /restaurants : get all filtered restaurants.
+     * GET  /restaurants/filter : get all filtered restaurants.
      *
      * @param cityIds    the cityIds
      * @param kitchenIds the kitchenIds

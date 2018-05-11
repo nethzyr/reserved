@@ -1,6 +1,7 @@
 <div class="row filter">
     <div class="col-4">
-        <div (click)="addFilter(cities, cityModel, cityFilter)">
+        <div (click)="addFilter(cities, cityModel, cityFilter)"
+             (keyup.enter)="addFilter(cities, cityModel, cityFilter)">
             <label for="typeahead" jhiTranslate="restaurant-list.search.city">Search by:</label>
             <input id="typeahead" type="text" class="form-control" [(ngModel)]="cityModel"
                    [ngbTypeahead]="searchCity" [resultFormatter]="formatter"/>
@@ -13,7 +14,8 @@
         </div>
     </div>
     <div class="col-4">
-        <div (click)="addFilter(kitchens, kitchenModel, kitchenFilter)">
+        <div (click)="addFilter(kitchens, kitchenModel, kitchenFilter)"
+             (keyup.enter)="addFilter(kitchens, kitchenModel, kitchenFilter)">
             <label for="typeahead-kitchen" jhiTranslate="restaurant-list.search.kitchen">Search by kitchen type:</label>
             <input id="typeahead-kitchen" type="text" class="form-control" [(ngModel)]="kitchenModel"
                    [ngbTypeahead]="searchKitchen" [resultFormatter]="formatter"/>
@@ -26,7 +28,7 @@
         </div>
     </div>
     <div class="col-4">
-        <div (click)="addFilter(foods, foodModel, foodFilter)">
+        <div (click)="addFilter(foods, foodModel, foodFilter)" (keyup.enter)="addFilter(foods, foodModel, foodFilter)">
             <label for="typeahead-food" jhiTranslate="restaurant-list.search.food">Search by food type:</label>
             <input id="typeahead-food" type="text" class="form-control" [(ngModel)]="foodModel"
                    [ngbTypeahead]="searchFood" [resultFormatter]="formatter"/>
