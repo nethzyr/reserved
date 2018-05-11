@@ -5,9 +5,9 @@ import {SERVER_API_URL} from '../../app.constants';
 
 import {Restaurant} from './restaurant.model';
 import {createRequestOption} from '../../shared';
-import {City} from "../city";
-import {Kitchen} from "../kitchen";
-import {Food} from "../food";
+import {City} from '../city';
+import {Kitchen} from '../kitchen';
+import {Food} from '../food';
 
 export type EntityResponseType = HttpResponse<Restaurant>;
 
@@ -43,9 +43,9 @@ export class RestaurantService {
     }
 
     filter(cityFilter: Set<City>, kitchenFilter: Set<Kitchen>, foodFilter: Set<Food>): Observable<HttpResponse<Restaurant[]>> {
-        let cityIds: string = '';
-        let kitchenIds: string = '';
-        let foodIds: string = '';
+        let cityIds = '';
+        let kitchenIds = '';
+        let foodIds = '';
         cityFilter.forEach((filter) => (cityIds += filter.id + ','));
         kitchenFilter.forEach((filter) => (kitchenIds += filter.id + ','));
         foodFilter.forEach((filter) => (foodIds += filter.id + ','));
