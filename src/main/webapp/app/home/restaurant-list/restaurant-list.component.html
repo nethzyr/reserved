@@ -1,22 +1,49 @@
-<div class="row">
+<div class="row filter">
     <div class="col-4">
-        <label for="typeahead-city" jhiTranslate="restaurant-list.search.city">Search by city:</label>
-        <input id="typeahead-city" type="text" class="form-control" [(ngModel)]="cityModel"
-               [ngbTypeahead]="searchCity"/>
+        <div (click)="addFilter(cities, cityModel, cityFilter)">
+            <label for="typeahead" jhiTranslate="restaurant-list.search.city">Search by:</label>
+            <input id="typeahead" type="text" class="form-control" [(ngModel)]="cityModel"
+                   [ngbTypeahead]="searchCity" [resultFormatter]="formatter"/>
+        </div>
+        <div *ngFor="let i of cityFilter">
+            <button class="btn btn-primary btn-lg" (click)="removeFilter(i, cityFilter)">
+                <i class="fa fa-times"></i>
+                {{i.name}}
+            </button>
+        </div>
     </div>
     <div class="col-4">
-        <label for="typeahead-kitchen" jhiTranslate="restaurant-list.search.kitchen">Search by kitchen type:</label>
-        <input id="typeahead-kitchen" type="text" class="form-control" [(ngModel)]="kitchenModel"
-               [ngbTypeahead]="searchKitchen"/>
+        <div (click)="addFilter(kitchens, kitchenModel, kitchenFilter)">
+            <label for="typeahead-kitchen" jhiTranslate="restaurant-list.search.kitchen">Search by kitchen type:</label>
+            <input id="typeahead-kitchen" type="text" class="form-control" [(ngModel)]="kitchenModel"
+                   [ngbTypeahead]="searchKitchen" [resultFormatter]="formatter"/>
+        </div>
+        <div *ngFor="let i of kitchenFilter">
+            <button class="btn btn-primary btn-lg" (click)="removeFilter(i, kitchenFilter)">
+                <i class="fa fa-times"></i>
+                {{i.type}}
+            </button>
+        </div>
     </div>
     <div class="col-4">
-        <label for="typeahead-food" jhiTranslate="restaurant-list.search.food">Search by food type:</label>
-        <input id="typeahead-food" type="text" class="form-control" [(ngModel)]="foodModel"
-               [ngbTypeahead]="searchFood"/>
+        <div (click)="addFilter(foods, foodModel, foodFilter)">
+            <label for="typeahead-food" jhiTranslate="restaurant-list.search.food">Search by food type:</label>
+            <input id="typeahead-food" type="text" class="form-control" [(ngModel)]="foodModel"
+                   [ngbTypeahead]="searchFood" [resultFormatter]="formatter"/>
+        </div>
+        <div *ngFor="let i of foodFilter">
+            <button class="btn btn-primary btn-lg" (click)="removeFilter(i, foodFilter)">
+                <i class="fa fa-times"></i>
+                {{i.type}}
+            </button>
+        </div>
     </div>
 </div>
+
+</div>
 <div class="row">
-    <div class="col-md-12 col-lg-6 cards" *ngFor="let restaurant of restaurants; trackById">
+    <div class="col-md-12 col-lg-6 cards"
+         *ngFor="let restaurant of restaurants; trackById">
         <jhi-restaurant-card [restaurant]="restaurant"></jhi-restaurant-card>
     </div>
 </div>

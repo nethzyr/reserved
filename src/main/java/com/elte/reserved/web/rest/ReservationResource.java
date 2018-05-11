@@ -2,19 +2,26 @@ package com.elte.reserved.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.elte.reserved.domain.Reservation;
+import com.elte.reserved.domain.Restaurant;
 import com.elte.reserved.repository.ReservationRepository;
 import com.elte.reserved.repository.UserRepository;
 import com.elte.reserved.repository.search.ReservationSearchRepository;
+import com.elte.reserved.security.SecurityUtils;
 import com.elte.reserved.service.MailService;
+import com.elte.reserved.service.RestaurantQueryService;
+import com.elte.reserved.service.UserService;
+import com.elte.reserved.service.dto.RestaurantCriteria;
 import com.elte.reserved.service.util.RandomUtil;
 import com.elte.reserved.web.rest.errors.BadRequestAlertException;
 import com.elte.reserved.web.rest.errors.InternalServerErrorException;
 import com.elte.reserved.web.rest.util.HeaderUtil;
 import com.elte.reserved.web.rest.util.PaginationUtil;
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,9 +31,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import static com.elte.reserved.security.AuthoritiesConstants.ADMIN;
+import static com.elte.reserved.security.AuthoritiesConstants.MANAGER;
 import static com.elte.reserved.security.SecurityUtils.getCurrentUserLogin;
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
@@ -42,14 +50,18 @@ public class ReservationResource {
     private final ReservationRepository reservationRepository;
     private final UserRepository userRepository;
     private final MailService mailService;
+    private final RestaurantQueryService restaurantQueryService;
+    private final UserService userService;
 
     private final ReservationSearchRepository reservationSearchRepository;
 
-    public ReservationResource(ReservationRepository reservationRepository, ReservationSearchRepository reservationSearchRepository, UserRepository userRepository, MailService mailService) {
+    public ReservationResource(ReservationRepository reservationRepository, ReservationSearchRepository reservationSearchRepository, UserRepository userRepository, MailService mailService, RestaurantQueryService restaurantQueryService, UserService userService) {
         this.reservationRepository = reservationRepository;
         this.reservationSearchRepository = reservationSearchRepository;
         this.userRepository = userRepository;
         this.mailService = mailService;
+        this.restaurantQueryService = restaurantQueryService;
+        this.userService = userService;
     }
 
     /**
@@ -146,7 +158,28 @@ public class ReservationResource {
     @Timed
     public ResponseEntity<List<Reservation>> getAllReservations(Pageable pageable) {
         log.debug("REST request to get a page of Reservations");
-        Page<Reservation> page = reservationRepository.findAll(pageable);
+        Page<Reservation> page;
+        if (SecurityUtils.isCurrentUserInRole(ADMIN)) {
+            page = reservationRepository.findAll(pageable);
+        } else if (SecurityUtils.isCurrentUserInRole(MANAGER)) {
+            RestaurantCriteria criteria = new RestaurantCriteria();
+            criteria.setUserId((LongFilter) new LongFilter()
+                .setEquals(userService.getUserWithAuthorities().get().getId()));
+            List<Restaurant> myRestaurants = restaurantQueryService.findByCriteria(criteria);
+            List<Reservation> myReservations = new ArrayList<>();
+            for (Restaurant i : myRestaurants) {
+                List<Reservation> j = reservationRepository.findByRestaurant(i);
+                myReservations.addAll(j);
+            }
+            myReservations.addAll(reservationRepository.findByUserIsCurrentUser());
+            Set<Reservation> hs = new LinkedHashSet<>();
+            hs.addAll(myReservations);
+            myReservations.clear();
+            myReservations.addAll(hs);
+            page = new PageImpl<>(myReservations, pageable, myReservations.size());
+        } else {
+            page = reservationRepository.findByUserIsCurrentUser(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/reservations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

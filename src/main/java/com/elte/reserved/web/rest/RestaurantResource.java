@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,6 +120,39 @@ public class RestaurantResource {
     }
 
     /**
+     * GET  /restaurants : get all filtered restaurants.
+     *
+     * @param cityIds    the cityIds
+     * @param kitchenIds the kitchenIds
+     * @param foodIds    the foodIds
+     * @return the ResponseEntity with status 200 (OK) and the list of restaurants in body
+     */
+    @GetMapping("/restaurants/filter")
+    @Timed
+    public ResponseEntity<List<Restaurant>> getFilteredRestaurants(
+        @RequestParam(value = "cityIds") String cityIds,
+        @RequestParam(value = "kitchenIds") String kitchenIds,
+        @RequestParam(value = "foodIds") String foodIds,
+        Pageable pageable) {
+        List<String> cityArray = new ArrayList<>(Arrays.asList(cityIds.split(",")));
+        if (cityIds.length() == 0) {
+            cityArray.clear();
+        }
+        List<String> kitchenArray = new ArrayList<>(Arrays.asList(kitchenIds.split(",")));
+        if (kitchenIds.length() == 0) {
+            kitchenArray.clear();
+        }
+        List<String> foodArray = new ArrayList<>(Arrays.asList(foodIds.split(",")));
+        if (foodIds.length() == 0) {
+            foodArray.clear();
+        }
+        log.debug("REST request to get Restaurants by criteria: {}", cityIds + " " + kitchenIds + " " + foodIds);
+        Page<Restaurant> page = restaurantQueryService.findMultiFilter(cityArray, kitchenArray, foodArray, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
      * GET  /restaurants-owned : get all owned the restaurants.
      *
      * @param pageable the pagination information
@@ -126,12 +161,12 @@ public class RestaurantResource {
     @GetMapping("/restaurants-owned")
     @Timed
     public ResponseEntity<List<Restaurant>> getAllMyRestaurants(RestaurantCriteria criteria, Pageable pageable) {
-        criteria.setUserId((LongFilter) new LongFilter()
-            .setEquals(userService.getUserWithAuthorities().get().getId()));
+        if (!SecurityUtils.isCurrentUserInRole(ADMIN)) {
+            criteria.setUserId((LongFilter) new LongFilter()
+                .setEquals(userService.getUserWithAuthorities().get().getId()));
+        }
         log.debug("REST request to get a page of Restaurants");
-        Page<Restaurant> page = SecurityUtils.isCurrentUserInRole(ADMIN) ?
-            restaurantQueryService.findByCriteria(criteria, pageable) :
-            restaurantQueryService.findByUserIsCurrentUser(criteria, pageable);
+        Page<Restaurant> page = restaurantQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/restaurants-owned");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
