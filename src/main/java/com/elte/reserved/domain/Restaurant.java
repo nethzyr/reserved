@@ -44,6 +44,7 @@ public class Restaurant implements Serializable {
     @Column(name = "info", length = 1000)
     private String info;
 
+    @NotNull
     @Email
     @Column(name = "email")
     private String email;

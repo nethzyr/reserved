@@ -61,7 +61,7 @@
                                jhiTranslate="global.messages.validate.email.required">
                             Your email is required.
                         </small>
-                        <small class="form-text text-danger" *ngIf="email.errors.invalid"
+                        <small class="form-text text-danger" [hidden]="email.errors.invalid"
                                jhiTranslate="global.messages.validate.email.invalid">
                             Your email is invalid.
                         </small>

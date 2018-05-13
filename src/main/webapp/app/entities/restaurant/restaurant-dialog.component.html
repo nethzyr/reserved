@@ -55,8 +55,18 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.email" for="field_email">Email</label>
-            <input type="text" class="form-control" name="email" id="field_email"
-                [(ngModel)]="restaurant.email" />
+            <input type="email" class="form-control" name="email" id="field_email"
+                   [(ngModel)]="restaurant.email" required email/>
+            <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+                <small class="form-text text-danger" [hidden]="!editForm.controls.email?.invalid"
+                       jhiTranslate="entity.validation.email">
+                    Helytelen email cím formátum.
+                </small>
+            </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.phone" for="field_phone">Phone</label>

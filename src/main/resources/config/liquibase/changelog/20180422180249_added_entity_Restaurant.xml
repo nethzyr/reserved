@@ -37,7 +37,7 @@
             </column>
 
             <column name="email" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="phone" type="varchar(255)">
