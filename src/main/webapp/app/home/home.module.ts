@@ -26,7 +26,7 @@ import {ReservationConfirmComponent} from './reservation-confirm/reservation-con
     ],
     entryComponents: [],
     providers: [
-        NgbActiveModal
+        NgbActiveModal,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

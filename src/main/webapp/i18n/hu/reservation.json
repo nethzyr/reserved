@@ -20,7 +20,21 @@
             "people": "Fő",
             "confirmed": "Visszaigazolt",
             "restaurant": "Étterem",
-            "user": "User"
+            "user": "Felhasználó"
+        }
+    },
+    "reservation": {
+        "modal": {
+            "datePicker": "Dátum:",
+            "timePicker": "Időpont:",
+            "ppl": "Vengégek száma:",
+            "button": {
+                "open": "Asztalfoglalás",
+                "close": "Bezár",
+                "reserve": "Foglalás!",
+                "login": "Kérlek jelentkezz be, vagy regisztrálj!"
+            },
+            "notification": "Sikeres asztalfoglalás. Amint az étterem visszaigazolta a foglalásodat, küldünk egy emailt."
         }
     }
 }
