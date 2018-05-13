@@ -4,11 +4,14 @@ import {Restaurant, RestaurantService} from '../../entities/restaurant';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {JhiEventManager} from 'ng-jhipster';
+import {Title} from '@angular/platform-browser';
 
 @Component({
     selector: 'jhi-restaurant-detail',
     templateUrl: './restaurant-detail.component.html',
-    styles: []
+    styleUrls: [
+        'restaurant-detail.scss'
+    ]
 })
 export class RestaurantDetailComponent implements OnInit, OnDestroy {
 
@@ -19,7 +22,8 @@ export class RestaurantDetailComponent implements OnInit, OnDestroy {
     constructor(
         private eventManager: JhiEventManager,
         private restaurantService: RestaurantService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private titleService: Title
     ) {
     }
 
@@ -34,6 +38,7 @@ export class RestaurantDetailComponent implements OnInit, OnDestroy {
         this.restaurantService.find(id)
             .subscribe((restaurantResponse: HttpResponse<Restaurant>) => {
                 this.restaurant = restaurantResponse.body;
+                this.titleService.setTitle(this.restaurant.name);
             });
     }
 

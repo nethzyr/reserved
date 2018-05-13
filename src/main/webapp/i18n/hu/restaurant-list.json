@@ -4,6 +4,12 @@
             "city": "Keresés város alapján:",
             "kitchen": "Keresés konyha alapján:",
             "food": "Keresés étel alapján:"
+        },
+        "detail": {
+            "kitchen": "Konyhák:",
+            "food": "Ételek:",
+            "contact": "Elérhetőségek:",
+            "website": "Weboldal"
         }
     }
 }

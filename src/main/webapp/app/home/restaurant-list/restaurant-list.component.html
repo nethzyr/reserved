@@ -50,4 +50,8 @@
          [routerLink]="['../restaurant', restaurant.id ]">
         <jhi-restaurant-card [restaurant]="restaurant"></jhi-restaurant-card>
     </div>
+    <div class="pagination">
+        <ngb-pagination [pageSize]="6" [collectionSize]="totalItems" [(page)]="page" [boundaryLinks]="true"
+                        (pageChange)="loadAll()"></ngb-pagination>
+    </div>
 </div>

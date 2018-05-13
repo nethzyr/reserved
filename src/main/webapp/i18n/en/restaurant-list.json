@@ -4,6 +4,12 @@
             "city": "Search by city:",
             "kitchen": "Search by kitchen type:",
             "food": "Search by food type:"
+        },
+        "detail": {
+            "kitchen": "Kitchen:",
+            "food": "Food:",
+            "contact": "Contact:",
+            "website": "Website"
         }
     }
 }

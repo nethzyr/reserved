@@ -62,8 +62,11 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
 
 
     /**
-     * Get all the restaurants.
+     * Get all filtered restaurants.
      *
+     * @param cityArray String list of cities to filter
+     * @param kitchenArray String list of kitchens to filter
+     * @param foodArray String list of foods to filter
      * @param pageable the pagination information
      * @return the list of entities
      */
@@ -112,8 +115,10 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
             }
         }
 
-        log.debug("Request to get all Restaurants");
-        return new PageImpl<>(cityList, pageable, cityList.size());
+        log.debug("Request to get all filtered Restaurants: {}", pageable);
+        int start = pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > cityList.size() ? cityList.size() : (start + pageable.getPageSize());
+        return new PageImpl<>(cityList.subList(start, end), pageable, cityList.size());
     }
 
     /**
