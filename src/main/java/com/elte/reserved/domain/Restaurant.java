@@ -38,7 +38,8 @@ public class Restaurant implements Serializable {
     @Column(name = "postal_code")
     private String postalCode;
 
-    @Column(name = "info")
+    @Size(max = 1000)
+    @Column(name = "info", length = 1000)
     private String info;
 
     @Column(name = "email")
