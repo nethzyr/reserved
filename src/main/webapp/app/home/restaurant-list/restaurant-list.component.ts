@@ -28,6 +28,7 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
     foods: Food[] = [];
     foodModel: any;
     foodFilter: Set<Food> = new Set<Food>();
+    page = 1;
 
     totalItems: any;
     links: any;
@@ -60,10 +61,11 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
     applyFilters() {
         if (this.cityFilter.size === 0 && this.kitchenFilter.size === 0 && this.foodFilter.size === 0) {
             this.loadAll();
-        }
-        {
-            this.subscriptions.add(this.restaurantService.filter(this.cityFilter, this.kitchenFilter, this.foodFilter)
-                .subscribe(
+        } else {
+            this.subscriptions.add(this.restaurantService.filter(this.cityFilter, this.kitchenFilter, this.foodFilter, {
+                size: 6,
+                page: this.page - 1
+            }).subscribe(
                     (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
                     (res: HttpErrorResponse) => this.onError(res.message)
                 ));
@@ -127,15 +129,19 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
     loadAll() {
         if (this.currentSearch) {
             this.subscriptions.add(this.restaurantService.search({
-                query: this.currentSearch
+                query: this.currentSearch,
+                size: 6,
+                page: this.page - 1
             }).subscribe(
                 (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             ));
             return;
         }
-        this.subscriptions.add(this.restaurantService.query()
-            .subscribe(
+        this.subscriptions.add(this.restaurantService.query({
+            size: 6,
+            page: this.page - 1
+        }).subscribe(
             (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
             (res: HttpErrorResponse) => this.onError(res.message)
             ));

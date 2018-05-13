@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {SERVER_API_URL} from '../../app.constants';
 
@@ -42,17 +42,20 @@ export class RestaurantService {
             .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
     }
 
-    filter(cityFilter: Set<City>, kitchenFilter: Set<Kitchen>, foodFilter: Set<Food>): Observable<HttpResponse<Restaurant[]>> {
+    filter(cityFilter: Set<City>, kitchenFilter: Set<Kitchen>, foodFilter: Set<Food>, req?: any): Observable<HttpResponse<Restaurant[]>> {
         let cityIds = '';
         let kitchenIds = '';
         let foodIds = '';
+        const options = createRequestOption(req);
         cityFilter.forEach((filter) => (cityIds += filter.id + ','));
         kitchenFilter.forEach((filter) => (kitchenIds += filter.id + ','));
         foodFilter.forEach((filter) => (foodIds += filter.id + ','));
         return this.http.get<Restaurant[]>(this.resourceUrl + '/filter', {
-            params: new HttpParams().set('cityIds', cityIds)
-                .set('kitchenIds', kitchenIds)
-                .set('foodIds', foodIds), observe: 'response'
+            params: options
+                .set('cityIds', cityIds.slice(0, -1))
+                .set('kitchenIds', kitchenIds.slice(0, -1))
+                .set('foodIds', foodIds.slice(0, -1)),
+            observe: 'response'
         })
             .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
     }

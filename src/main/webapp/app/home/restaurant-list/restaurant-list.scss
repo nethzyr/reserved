@@ -11,3 +11,9 @@
     margin-top: 0.5em;
     width: 100%;
 }
+
+.pagination {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
