@@ -8,11 +8,13 @@
     <div class="modal-body" [ngSwitch]="isAuthenticated()">
         <form class="form">
             <div class="form-group">
+                <label for="dp" class="form-label" jhiTranslate="reservation.modal.datePicker">Dátum:</label>
                 <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd"
+                    <input class="form-control" placeholder="yyyy-mm-dd" [disabled]="!isAuthenticated()"
                            name="dp" id="dp" [(ngModel)]="dateModel" ngbDatepicker #d="ngbDatepicker">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"
+                                [disabled]="!isAuthenticated()">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -20,25 +22,36 @@
             </div>
 
             <div class="form-group">
-                <div class="">
-                    <ngb-timepicker name="tp" id="tp" [(ngModel)]="timeModel" [minuteStep]="30"></ngb-timepicker>
-                </div>
+                <label for="tp" class="form-label" jhiTranslate="reservation.modal.timePicker">Időpont:</label>
+                <ngb-timepicker name="tp" id="tp" [(ngModel)]="timeModel" [minuteStep]="30"
+                                [disabled]="!isAuthenticated()"></ngb-timepicker>
 
-                <label for="ppl" class="form-label">Vendágek száma</label>
-
-                <input class="form-control col-2" type="number" name="ppl" id="ppl" [(ngModel)]="pplModel">
+                <label for="ppl" class="form-label" jhiTranslate="reservation.modal.ppl">Vendégek száma:</label>
+                <input class="form-control col-2" type="number" name="ppl" id="ppl" [(ngModel)]="pplModel"
+                       [disabled]="!isAuthenticated()">
             </div>
 
-            <div class="modal-footer" [ngSwitch]="isAuthenticated()">
-                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')" *ngSwitchCase="true">Close</button>
-                <button type="button" class="btn btn-outline-success" (click)="submit();c('Save click')" *ngSwitchCase="true">Foglalás!</button>
-                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')" *ngSwitchCase="false">Kérlek registrálj, vagy jelentkkzz be!</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')" *ngSwitchCase="true"
+                        jhiTranslate="reservation.modal.button.close">Close
+                </button>
+
+                <button type="button" class="btn btn-outline-success" (click)="submit();c('Save click')"
+                        *ngSwitchCase="true" jhiTranslate="reservation.modal.button.reserve">Foglalás!
+                </button>
+
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')" *ngSwitchCase="false"
+                        jhiTranslate="reservation.modal.button.login">Kérlek registrálj, vagy jelentkkzz be!
+                </button>
             </div>
         </form>
     </div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-success" (click)="open(content)">Asztalfoglalás</button>
+<button class="btn btn-lg btn-outline-success" (click)="open(content)" jhiTranslate="reservation.modal.button.open">
+    Asztalfoglalás
+</button>
+
 <ngb-alert class="card-alert" *ngIf="!!successMessage" type="success" (close)="successMessage = null">
-    {{successMessage}}
+    {{successMessage | translate}}
 </ngb-alert>

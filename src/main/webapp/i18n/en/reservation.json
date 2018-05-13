@@ -22,5 +22,19 @@
             "restaurant": "Restaurant",
             "user": "User"
         }
+    },
+    "reservation": {
+        "modal": {
+            "datePicker": "Date:",
+            "timePicker": "Time:",
+            "ppl": "Number of guests:",
+            "button": {
+                "open": "Reservation",
+                "close": "Close",
+                "reserve": "Reserve!",
+                "login": "Please log in, or register!"
+            },
+            "notification": "Successful reservation. We'll send you an email once the restaurant has confirmed your reservation."
+        }
     }
 }

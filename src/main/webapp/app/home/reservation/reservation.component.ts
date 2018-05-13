@@ -29,7 +29,7 @@ export class ReservationComponent implements OnInit {
     constructor(
         private reservationService: ReservationService,
         private modalService: NgbModal,
-        private principal: Principal
+        private principal: Principal,
     ) {
     }
 
@@ -82,7 +82,7 @@ export class ReservationComponent implements OnInit {
             user: null
         };
         this.subscribeToSaveResponse(this.reservationService.create(this.reservation));
-        this._success.next('Sikeres asztalfoglalás. Amint az étterem visszaigazolta a foglalásodat, küldünk egy emailt.');
+        this._success.next('reservation.modal.notification');
     }
 
     subscribeToSaveResponse(result: Observable<HttpResponse<Reservation>>) {
