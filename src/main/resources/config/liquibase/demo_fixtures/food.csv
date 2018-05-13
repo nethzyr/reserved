@@ -1,44 +1,44 @@
-id;jhi_type
-1;Baguette
-2;Bankett ételek
-3;Bár ételek
-4;Barbeque
-5;Burgerek
-6;Croissant
-7;Egészséges
-8;Egytáléltel
-9;Fúziós konyha
-10;Gluténmentes alapanyagok
-11;Grill ételek
-12;Halal
-13;Halételek
-14;Hamburger
-15;Hús ételek
-16;Kenyérlángos
-17;Kóstoló Menü
-18;Lángos
-19;Leves
-20;Mangalica
-21;Nyers
-22;Nyers ételek
-23;Orosz Specialitások
-24;Paleo
-25;Pizza
-26;Rendelhető ételek
-27;Ramen
-28;Reggeli
-29;Rizottó
-30;Rizskása
-31;Saláta
-32;Steak
-33;Street Food
-34;Sushi
-35;Szendvics
-36;Svédasztal
-37;Tapas
-38;Tatár steak
-39;Tengeri ételek
-40;Tészta
-41;Vadételek
-42;Vegetárináus
-43;Vegán
+id;jhi_type_hun;jhi_type_eng
+1;Baguette;Baguette
+2;Bankett ételek;Banquette food
+3;Bár ételek; Bar Food
+4;Barbeque;Barbeque
+5;Burgerek;Burgers
+6;Croissant;Croissant
+7;Egészséges;Healthy
+8;Egytáléltel;One-Pot Dishes
+9;Fúziós konyha;Fusion Kitchen
+10;Gluténmentes alapanyagok;Gluten-free
+11;Grill ételek;Grilled Dishes
+12;Halal;Halal
+13;Halételek;Fish Dishes
+14;Hamburger;Hamburgers
+15;Hús ételek;Meat Dishes
+16;Kenyérlángos;Focaccia
+17;Kóstoló Menü;Tasting Menu
+18;Lángos;Scone
+19;Leves;Soup
+20;Mangalica;Pork
+21;Nyers hal;Raw Fish
+22;Nyers hús;Raw Meat
+23;Orosz Specialitások;Russian Specialties
+24;Paleo;Paleo
+25;Pizza;Pizza
+26;Rendelhető ételek;Delivery&Take Away
+27;Ramen;Ramen
+28;Reggeli;Breakfast
+29;Rizottó;Risotto
+30;Rizskása;Porridge
+31;Saláta;Salad
+32;Steak;Steak
+33;Street Food;Street Food
+34;Sushi;Sushi
+35;Szendvics;Sandwich
+36;Svédasztal;Buffet
+37;Tapas;Tapas
+38;Tatár steak;Tatar Beefsteak
+39;Tengeri ételek;Seafood
+40;Tészta;Pasta
+41;Vadételek;Game Dishes
+42;Vegetárináus;Vegetarian
+43;Vegán;Vegan
