@@ -125,7 +125,8 @@
             "maxbytes": "Ennek a mezőnek a megengedett maximum értéke {{max}} bytes.",
             "pattern": "Ennek a mezőnek meg kell felelni a {{pattern}} mintának.",
             "number": "Ennek a mezőnek számnak kell lennie.",
-            "datetimelocal": "Ennek a mezőnek dátumnak vagy időpontnak kell lennie."
+            "datetimelocal": "Ennek a mezőnek dátumnak vagy időpontnak kell lennie.",
+            "email": "Helytelen email cím formátum"
         }
     },
     "error": {

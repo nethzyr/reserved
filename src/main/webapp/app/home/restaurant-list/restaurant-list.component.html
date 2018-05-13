@@ -47,7 +47,7 @@
 <div class="row">
     <div class="col-md-12 col-lg-6 cards"
          *ngFor="let restaurant of restaurants; trackById"
-         [routerLink]="['../restaurant', restaurant.id ]">
+         [routerLink]="['../restaurant-detail', restaurant.id ]">
         <jhi-restaurant-card [restaurant]="restaurant"></jhi-restaurant-card>
     </div>
     <div class="pagination">

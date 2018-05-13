@@ -22,7 +22,7 @@ export const HOME_ROUTE: Routes = [
         }
     },
     {
-        path: 'restaurant/:id',
+        path: 'restaurant-detail/:id',
         component: RestaurantDetailComponent
     }
 ];
