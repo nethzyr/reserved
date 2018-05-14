@@ -1,10 +1,13 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {DatePipe} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AgmCoreModule} from '@agm/core';
 
 import {
     AccountService,
     AuthServerProvider,
     CSRFService,
+    GooglePlaceIdFinderComponent,
     HasAnyAuthorityDirective,
     JhiLoginModalComponent,
     JhiSocialComponent,
@@ -21,12 +24,19 @@ import {
 @NgModule({
     imports: [
         ReservedSharedLibsModule,
-        ReservedSharedCommonModule
+        ReservedSharedCommonModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'GOOGLE_MAPS_API',
+            libraries: ['places']
+        }),
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         JhiSocialComponent,
         JhiLoginModalComponent,
-        HasAnyAuthorityDirective
+        HasAnyAuthorityDirective,
+        GooglePlaceIdFinderComponent
     ],
     providers: [
         LoginService,
@@ -46,7 +56,8 @@ import {
         JhiSocialComponent,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
-        DatePipe
+        DatePipe,
+        GooglePlaceIdFinderComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

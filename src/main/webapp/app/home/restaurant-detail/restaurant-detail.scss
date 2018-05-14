@@ -30,6 +30,10 @@
         cursor: default;
     }
 
+    .btn:not(:disabled):not(.disabled) {
+        cursor: default;
+    }
+
     .contact p {
         margin-left: 1em;
     }

@@ -8,6 +8,10 @@ body, h1, h2, h3, h4 {
     font-weight: 300;
 }
 
+.tab-content {
+    margin-top: 1em;
+}
+
 .custom-select {
     background: none;
 }
@@ -23,8 +27,8 @@ a:hover {
 }
 
 .btn-primary {
-    background-color: #4c4c4c;
-    border-color: #4c4c4c;
+    background-color: #286396;
+    border-color: #286396;
 }
 
 .btn-lg {
@@ -37,6 +41,10 @@ h2 .btn {
 
 .alert-warning {
     background-color: #1a66b2;
+}
+
+.pac-container {
+    z-index: 1051 !important;
 }
 
 /* ==========================================================================
@@ -65,7 +73,7 @@ Generic styles
 /* other generic styles */
 
 .jh-card {
-    background-color: #fdffdb;
+    background-color: #ffffff;
     padding: 1.5%;
     margin-top: 20px;
     border: none;
@@ -96,10 +104,6 @@ Generic styles
 .readonly {
     background-color: #eee;
     opacity: 1;
-}
-
-.footer {
-    border-top: 1px solid rgba(0, 0, 0, .125);
 }
 
 /* ==========================================================================

@@ -13,7 +13,7 @@
                     <input class="form-control" placeholder="yyyy-mm-dd" [disabled]="!isAuthenticated()"
                            name="dp" id="dp" [(ngModel)]="dateModel" ngbDatepicker #d="ngbDatepicker">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"
+                        <button class="btn btn-outline-primary" (click)="d.toggle()" type="button"
                                 [disabled]="!isAuthenticated()">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                         </button>
@@ -32,7 +32,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')" *ngSwitchCase="true"
+                <button type="button" class="btn btn-outline-primary" (click)="c('Close click')" *ngSwitchCase="true"
                         jhiTranslate="reservation.modal.button.close">Close
                 </button>
 
@@ -40,7 +40,7 @@
                         *ngSwitchCase="true" jhiTranslate="reservation.modal.button.reserve">Foglalás!
                 </button>
 
-                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')" *ngSwitchCase="false"
+                <button type="button" class="btn btn-outline-primary" (click)="c('Close click')" *ngSwitchCase="false"
                         jhiTranslate="reservation.modal.button.login">Kérlek registrálj, vagy jelentkkzz be!
                 </button>
             </div>
@@ -48,7 +48,7 @@
     </div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-success" (click)="open(content)" jhiTranslate="reservation.modal.button.open">
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)" jhiTranslate="reservation.modal.button.open">
     Asztalfoglalás
 </button>
 

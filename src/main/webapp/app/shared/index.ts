@@ -1,3 +1,4 @@
+export * from './google-place-id-finder/google-place-id-finder.component';
 export * from './constants/error.constants';
 export * from './constants/pagination.constants';
 export * from './alert/alert.component';
