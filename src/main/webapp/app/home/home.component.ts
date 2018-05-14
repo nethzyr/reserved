@@ -15,8 +15,6 @@ import {JhiEventManager} from 'ng-jhipster';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
-    searchInput: string;
-    currentSearch: string;
 
     constructor(
         private principal: Principal,
@@ -42,14 +40,5 @@ export class HomeComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
-    }
-
-    search() {
-        this.currentSearch = this.searchInput;
-    }
-
-    clear() {
-        this.currentSearch = '';
-        this.searchInput = '';
     }
 }

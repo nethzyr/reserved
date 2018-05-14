@@ -1,11 +1,11 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-
     <div class="modal-header">
         <h4 class="modal-title" id="myRestaurantLabel" jhiTranslate="reservedApp.restaurant.home.createOrEditLabel">Create or edit a Restaurant</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
+        <jhi-google-place-id-finder></jhi-google-place-id-finder>
         <jhi-alert-error></jhi-alert-error>
         <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group" [hidden]="!restaurant.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>

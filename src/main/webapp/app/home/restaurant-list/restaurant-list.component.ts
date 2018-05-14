@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Restaurant, RestaurantService} from '../../entities/restaurant';
 import {JhiAlertService, JhiParseLinks} from 'ng-jhipster';
@@ -8,16 +8,19 @@ import {City, CityService} from '../../entities/city';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'jhi-restaurant-list',
     templateUrl: './restaurant-list.component.html',
+    providers: [NgbTabsetConfig],
     styleUrls: [
         'restaurant-list.scss'
     ]
 })
 export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
-    @Input() currentSearch: string;
+    searchInput: string;
+    currentSearch: string;
     restaurants: Restaurant[];
     cities: City[] = [];
     cityModel: string;
@@ -40,12 +43,16 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
         private kitchenService: KitchenService,
         private foodService: FoodService,
         private parseLinks: JhiParseLinks,
-        private jhiAlertService: JhiAlertService
+        private jhiAlertService: JhiAlertService,
+        private config: NgbTabsetConfig
     ) {
+        config.justify = 'center';
+        config.type = 'pills';
     }
 
     ngOnInit() {
         this.loadFilterData();
+        this.loadAll();
     }
 
     ngOnDestroy() {
@@ -53,7 +60,6 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnChanges(changes) {
-        this.loadAll();
     }
 
     formatter = (x: any) => x.type || x.name;
@@ -149,6 +155,17 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
 
     delete(event) {
         event.stopPropagation();
+    }
+
+    search() {
+        this.currentSearch = this.searchInput;
+        this.loadAll();
+    }
+
+    clear() {
+        this.currentSearch = '';
+        this.searchInput = '';
+        this.loadAll();
     }
 
     private onSuccess(data, headers) {

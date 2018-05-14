@@ -5,7 +5,10 @@
         "title2": "Dinner with friends? Family gathering?",
         "title3": "Where would like to you eat?",
         "search": "Search",
+        "clear": "Clear",
         "searchph": "eg. city, restaurant",
+        "simplesearch": "Simple search",
+        "detailedsearch": "Detailed search",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
         },
