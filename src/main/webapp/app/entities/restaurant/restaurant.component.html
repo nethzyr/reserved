@@ -29,8 +29,6 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <th *jhiHasAnyAuthority="'ROLE_ADMIN'" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
-                    <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="reservedApp.restaurant.name">Name</span> <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="city.name"><span jhiTranslate="reservedApp.restaurant.city">City</span> <span
                     class="fa fa-sort"></span></th>
@@ -43,8 +41,6 @@
             </thead>
             <tbody>
             <tr *ngFor="let restaurant of restaurants ;trackBy: trackId">
-                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['../restaurant', restaurant.id ]">{{restaurant.id}}</a>
-                </td>
                 <td>{{restaurant.name}}</td>
                 <td>
                     <div *ngIf="restaurant.city">

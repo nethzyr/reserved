@@ -31,8 +31,6 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <th *jhiHasAnyAuthority="'ROLE_ADMIN'" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
-                    <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="title"><span jhiTranslate="reservedApp.picture.title">Title</span> <span
                     class="fa fa-sort"></span></th>
                 <th jhiSortBy="img"><span jhiTranslate="reservedApp.picture.img">Img</span> <span
@@ -42,8 +40,6 @@
             </thead>
             <tbody>
             <tr *ngFor="let picture of pictures ;trackBy: trackId">
-                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['../picture', picture.id ]">{{picture.id}}</a>
-                </td>
                 <td>{{picture.title}}</td>
                 <td>
                     <a *ngIf="picture.img" (click)="openFile(picture.imgContentType, picture.img)">
@@ -51,6 +47,7 @@
                              style="max-height: 30px;" alt="picture image"/>
                     </a>
                     <span *ngIf="picture.img">{{picture.imgContentType}}, {{byteSize(picture.img)}}</span>
+                    <img *ngIf="!picture.img" [src]="picture.url"/>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
