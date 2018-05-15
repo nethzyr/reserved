@@ -7,11 +7,6 @@
     <div class="modal-body">
         <jhi-google-place-id-finder></jhi-google-place-id-finder>
         <jhi-alert-error></jhi-alert-error>
-        <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group" [hidden]="!restaurant.id">
-            <label for="id" jhiTranslate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                   [(ngModel)]="restaurant.id" readonly />
-        </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.name" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"

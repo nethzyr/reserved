@@ -31,7 +31,6 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="name"><span jhiTranslate="reservedApp.city.name">Name</span> <span
                     class="fa fa-sort"></span></th>
                 <th jhiSortBy="stateCounty.name"><span jhiTranslate="reservedApp.city.stateCounty">State County</span>
@@ -42,7 +41,6 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
                    [infiniteScrollDistance]="0">
             <tr *ngFor="let city of cities ;trackBy: trackId">
-                <td><a [routerLink]="['../city', city.id ]">{{city.id}}</a></td>
                 <td>{{city.name}}</td>
                 <td>
                     <div *ngIf="city.stateCounty">
