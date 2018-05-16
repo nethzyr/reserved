@@ -1,9 +1,11 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-
-import {ReservedSharedModule} from '../../shared';
 import {ReservedAdminModule} from '../../admin/admin.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AgmCoreModule} from '@agm/core';
+import {ReservedSharedModule} from '../../shared';
 import {
+    GooglePlaceIdFinderComponent,
     RestaurantComponent,
     RestaurantDeleteDialogComponent,
     RestaurantDeletePopupComponent,
@@ -14,7 +16,7 @@ import {
     RestaurantPopupService,
     RestaurantResolvePagingParams,
     restaurantRoute,
-    RestaurantService,
+    RestaurantService
 } from './';
 
 const ENTITY_STATES = [
@@ -26,7 +28,13 @@ const ENTITY_STATES = [
     imports: [
         ReservedSharedModule,
         ReservedAdminModule,
-        RouterModule.forChild(ENTITY_STATES)
+        RouterModule.forChild(ENTITY_STATES),
+        AgmCoreModule.forRoot({
+            apiKey: 'GOOGLE_MAPS_API_KEY',
+            libraries: ['places']
+        }),
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         RestaurantComponent,
@@ -35,6 +43,7 @@ const ENTITY_STATES = [
         RestaurantDeleteDialogComponent,
         RestaurantPopupComponent,
         RestaurantDeletePopupComponent,
+        GooglePlaceIdFinderComponent
     ],
     entryComponents: [
         RestaurantComponent,
@@ -42,6 +51,7 @@ const ENTITY_STATES = [
         RestaurantPopupComponent,
         RestaurantDeleteDialogComponent,
         RestaurantDeletePopupComponent,
+        GooglePlaceIdFinderComponent
     ],
     providers: [
         RestaurantService,
