@@ -47,6 +47,10 @@ h2 .btn {
     z-index: 1051 !important;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #286396;
+}
+
 /* ==========================================================================
 Browser Upgrade Prompt
 ========================================================================== */
