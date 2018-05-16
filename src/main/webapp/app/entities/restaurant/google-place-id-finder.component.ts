@@ -1,7 +1,7 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {MapsAPILoader} from '@agm/core';
 import {FormControl} from '@angular/forms';
-import {Restaurant} from '../../entities/restaurant';
+import {Restaurant} from './restaurant.model';
 
 @Component({
     selector: 'jhi-google-place-id-finder',
@@ -11,7 +11,7 @@ import {Restaurant} from '../../entities/restaurant';
     ]
 })
 export class GooglePlaceIdFinderComponent implements OnInit {
-    restaurant: Restaurant;
+    restaurant: Restaurant = new Restaurant();
     public latitude: number;
     public longitude: number;
     public searchControl: FormControl;
@@ -52,7 +52,7 @@ export class GooglePlaceIdFinderComponent implements OnInit {
                     }
 
                     // set latitude, longitude and zoom
-                    /*this.latitude = place.geometry.location.lat();
+                    this.latitude = place.geometry.location.lat();
                     this.longitude = place.geometry.location.lng();
                     this.zoom = 12;
                     console.log(place);
@@ -66,7 +66,7 @@ export class GooglePlaceIdFinderComponent implements OnInit {
 
                         }
                     });
-                    console.log(this.restaurant);*/
+                    console.log(this.restaurant);
 
                 });
             });
