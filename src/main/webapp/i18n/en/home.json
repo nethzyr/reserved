@@ -5,7 +5,7 @@
         "title2": "Dinner with friends? Family gathering?",
         "title3": "Where would like to you eat?",
         "search": "Search",
-        "clear": "Clear",
+        "clear": "Reset filters",
         "searchph": "eg. city, restaurant",
         "simplesearch": "Simple search",
         "detailedsearch": "Detailed search",
@@ -21,6 +21,7 @@
             "follow": "follow @java_hipster on Twitter"
         },
         "like": "If you like JHipster, don't forget to give us a star on",
-        "github": "GitHub"
+        "github": "GitHub",
+        "googleMapsAuto": "Find your restaurant, and we'll fill the details!"
     }
 }

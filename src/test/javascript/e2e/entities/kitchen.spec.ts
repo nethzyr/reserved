@@ -33,8 +33,10 @@ describe('Kitchen e2e test', () => {
 
     it('should create and save Kitchens', () => {
         kitchenComponentsPage.clickOnCreateButton();
-        kitchenDialogPage.setTypeInput('type');
-        expect(kitchenDialogPage.getTypeInput()).toMatch('type');
+        kitchenDialogPage.setTypeEngInput('typeEng');
+        expect(kitchenDialogPage.getTypeEngInput()).toMatch('typeEng');
+        kitchenDialogPage.setTypeHunInput('typeHun');
+        expect(kitchenDialogPage.getTypeHunInput()).toMatch('typeHun');
         kitchenDialogPage.save();
         expect(kitchenDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -61,17 +63,28 @@ export class KitchenDialogPage {
     modalTitle = element(by.css('h4#myKitchenLabel'));
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
-    typeInput = element(by.css('input#field_type'));
-    setTypeInput = function (type) {
-        this.typeInput.sendKeys(type);
-    };
-    getTypeInput = function () {
-        return this.typeInput.getAttribute('value');
-    };
+    typeEngInput = element(by.css('input#field_typeEng'));
+    typeHunInput = element(by.css('input#field_typeHun'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
+
+    setTypeEngInput = function (typeEng) {
+        this.typeEngInput.sendKeys(typeEng);
+    };
+
+    getTypeEngInput = function () {
+        return this.typeEngInput.getAttribute('value');
+    };
+
+    setTypeHunInput = function (typeHun) {
+        this.typeHunInput.sendKeys(typeHun);
+    };
+
+    getTypeHunInput = function () {
+        return this.typeHunInput.getAttribute('value');
+    };
 
     save() {
         this.saveButton.click();

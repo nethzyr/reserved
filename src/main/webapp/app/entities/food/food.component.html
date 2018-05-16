@@ -31,7 +31,10 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-                <th jhiSortBy="type"><span jhiTranslate="reservedApp.food.type">Type</span> <span
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="typeEng"><span jhiTranslate="reservedApp.food.typeEng">Type Eng</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="typeHun"><span jhiTranslate="reservedApp.food.typeHun">Type Hun</span> <span
                     class="fa fa-sort"></span></th>
                 <th></th>
             </tr>
@@ -39,12 +42,14 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
                    [infiniteScrollDistance]="0">
             <tr *ngFor="let food of foods ;trackBy: trackId">
-                <td>{{food.type}}</td>
+                <td><a [routerLink]="['../food', food.id ]">{{food.id}}</a></td>
+                <td>{{food.typeEng}}</td>
+                <td>{{food.typeHun}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../food', food.id ]"
-                                class="btn btn-info ">
+                                class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
@@ -52,7 +57,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'food/'+ food.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-primary ">
+                                class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
@@ -60,7 +65,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'food/'+ food.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger ">
+                                class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>

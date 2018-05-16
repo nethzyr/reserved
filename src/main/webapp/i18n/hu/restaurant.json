@@ -26,6 +26,8 @@
             "website": "Weboldal",
             "facebook": "Facebook",
             "googlePlaceId": "Google Place Id",
+            "rating": "Értékelés",
+            "comment": "Visszajelzés",
             "city": "Város",
             "user": "Felhasználó",
             "picture": "Kép",

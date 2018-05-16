@@ -2,6 +2,13 @@
     "fluentMethods": true,
     "relationships": [
         {
+            "relationshipType": "one-to-many",
+            "relationshipValidateRules": "required",
+            "relationshipName": "comment",
+            "otherEntityName": "comment",
+            "otherEntityRelationshipName": "restaurant"
+        },
+        {
             "relationshipType": "many-to-one",
             "relationshipValidateRules": "required",
             "relationshipName": "city",
@@ -55,12 +62,27 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "info",
-            "fieldType": "String"
+            "fieldName": "infoEng",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1000
+        },
+        {
+            "fieldName": "infoHun",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1000
         },
         {
             "fieldName": "email",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "phone",
@@ -77,6 +99,10 @@
         {
             "fieldName": "googlePlaceId",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "rating",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20180422180249",

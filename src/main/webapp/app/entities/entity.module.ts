@@ -9,6 +9,7 @@ import {ReservedKitchenModule} from './kitchen/kitchen.module';
 import {ReservedFoodModule} from './food/food.module';
 import {ReservedUserInfoModule} from './user-info/user-info.module';
 import {ReservedReservationModule} from './reservation/reservation.module';
+import {ReservedCommentModule} from './comment/comment.module';
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
@@ -23,6 +24,7 @@ import {ReservedReservationModule} from './reservation/reservation.module';
         ReservedFoodModule,
         ReservedUserInfoModule,
         ReservedReservationModule,
+        ReservedCommentModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

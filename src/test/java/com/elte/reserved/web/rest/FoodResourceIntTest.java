@@ -37,8 +37,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = ReservedApp.class)
 public class FoodResourceIntTest {
 
-    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_TYPE = "BBBBBBBBBB";
+    private static final String DEFAULT_TYPE_ENG = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE_ENG = "BBBBBBBBBB";
+
+    private static final String DEFAULT_TYPE_HUN = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE_HUN = "BBBBBBBBBB";
 
     @Autowired
     private FoodRepository foodRepository;
@@ -62,18 +65,6 @@ public class FoodResourceIntTest {
 
     private Food food;
 
-    /**
-     * Create an entity for this test.
-     * <p>
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Food createEntity(EntityManager em) {
-        Food food = new Food()
-            .type(DEFAULT_TYPE);
-        return food;
-    }
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -83,6 +74,19 @@ public class FoodResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
+    }
+
+    /**
+     * Create an entity for this test.
+     * <p>
+     * This is a static method, as tests for other entities might also need it,
+     * if they test an entity which requires the current entity.
+     */
+    public static Food createEntity(EntityManager em) {
+        Food food = new Food()
+            .typeEng(DEFAULT_TYPE_ENG)
+            .typeHun(DEFAULT_TYPE_HUN);
+        return food;
     }
 
     @Before
@@ -106,7 +110,8 @@ public class FoodResourceIntTest {
         List<Food> foodList = foodRepository.findAll();
         assertThat(foodList).hasSize(databaseSizeBeforeCreate + 1);
         Food testFood = foodList.get(foodList.size() - 1);
-        assertThat(testFood.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testFood.getTypeEng()).isEqualTo(DEFAULT_TYPE_ENG);
+        assertThat(testFood.getTypeHun()).isEqualTo(DEFAULT_TYPE_HUN);
 
         // Validate the Food in Elasticsearch
         Food foodEs = foodSearchRepository.findOne(testFood.getId());
@@ -134,10 +139,28 @@ public class FoodResourceIntTest {
 
     @Test
     @Transactional
-    public void checkTypeIsRequired() throws Exception {
+    public void checkTypeEngIsRequired() throws Exception {
         int databaseSizeBeforeTest = foodRepository.findAll().size();
         // set the field null
-        food.setType(null);
+        food.setTypeEng(null);
+
+        // Create the Food, which fails.
+
+        restFoodMockMvc.perform(post("/api/foods")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(food)))
+            .andExpect(status().isBadRequest());
+
+        List<Food> foodList = foodRepository.findAll();
+        assertThat(foodList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkTypeHunIsRequired() throws Exception {
+        int databaseSizeBeforeTest = foodRepository.findAll().size();
+        // set the field null
+        food.setTypeHun(null);
 
         // Create the Food, which fails.
 
@@ -161,7 +184,8 @@ public class FoodResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(food.getId().intValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].typeEng").value(hasItem(DEFAULT_TYPE_ENG.toString())))
+            .andExpect(jsonPath("$.[*].typeHun").value(hasItem(DEFAULT_TYPE_HUN.toString())));
     }
 
     @Test
@@ -175,7 +199,8 @@ public class FoodResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(food.getId().intValue()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
+            .andExpect(jsonPath("$.typeEng").value(DEFAULT_TYPE_ENG.toString()))
+            .andExpect(jsonPath("$.typeHun").value(DEFAULT_TYPE_HUN.toString()));
     }
 
     @Test
@@ -199,7 +224,8 @@ public class FoodResourceIntTest {
         // Disconnect from session so that the updates on updatedFood are not directly saved in db
         em.detach(updatedFood);
         updatedFood
-            .type(UPDATED_TYPE);
+            .typeEng(UPDATED_TYPE_ENG)
+            .typeHun(UPDATED_TYPE_HUN);
 
         restFoodMockMvc.perform(put("/api/foods")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -210,7 +236,8 @@ public class FoodResourceIntTest {
         List<Food> foodList = foodRepository.findAll();
         assertThat(foodList).hasSize(databaseSizeBeforeUpdate);
         Food testFood = foodList.get(foodList.size() - 1);
-        assertThat(testFood.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testFood.getTypeEng()).isEqualTo(UPDATED_TYPE_ENG);
+        assertThat(testFood.getTypeHun()).isEqualTo(UPDATED_TYPE_HUN);
 
         // Validate the Food in Elasticsearch
         Food foodEs = foodSearchRepository.findOne(testFood.getId());
@@ -269,7 +296,8 @@ public class FoodResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(food.getId().intValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].typeEng").value(hasItem(DEFAULT_TYPE_ENG.toString())))
+            .andExpect(jsonPath("$.[*].typeHun").value(hasItem(DEFAULT_TYPE_HUN.toString())));
     }
 
     @Test

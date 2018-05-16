@@ -1,3 +1,4 @@
+
 {
     "reservedApp": {
         "kitchen": {
@@ -16,7 +17,8 @@
             "detail": {
                 "title": "Konyha"
             },
-            "type": "Konyha"
+            "typeEng": "Konyha (Angol)",
+            "typeHun": "Konyha (Magyar)"
         }
     }
 }

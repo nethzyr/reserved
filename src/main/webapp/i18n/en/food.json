@@ -1,3 +1,4 @@
+
 {
     "reservedApp": {
         "food": {
@@ -16,7 +17,8 @@
             "detail": {
                 "title": "Food"
             },
-            "type": "Type"
+            "typeEng": "Type Eng",
+            "typeHun": "Type Hun"
         }
     }
 }

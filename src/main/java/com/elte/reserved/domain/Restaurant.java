@@ -1,5 +1,6 @@
 package com.elte.reserved.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
@@ -41,12 +42,16 @@ public class Restaurant implements Serializable {
     private String postalCode;
 
     @Size(max = 1000)
-    @Column(name = "info", length = 1000)
-    private String info;
+    @Column(name = "info_eng", length = 1000)
+    private String infoEng;
+
+    @Size(max = 1000)
+    @Column(name = "info_hun", length = 1000)
+    private String infoHun;
 
     @NotNull
     @Email
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "phone")
@@ -60,6 +65,14 @@ public class Restaurant implements Serializable {
 
     @Column(name = "google_place_id")
     private String googlePlaceId;
+
+    @Column(name = "rating")
+    private Integer rating;
+
+    @OneToMany(mappedBy = "restaurant")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Comment> comments = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
@@ -136,17 +149,30 @@ public class Restaurant implements Serializable {
         this.postalCode = postalCode;
     }
 
-    public String getInfo() {
-        return info;
+    public String getInfoEng() {
+        return infoEng;
     }
 
-    public Restaurant info(String info) {
-        this.info = info;
+    public Restaurant infoEng(String infoEng) {
+        this.infoEng = infoEng;
         return this;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setInfoEng(String infoEng) {
+        this.infoEng = infoEng;
+    }
+
+    public String getInfoHun() {
+        return infoHun;
+    }
+
+    public Restaurant infoHun(String infoHun) {
+        this.infoHun = infoHun;
+        return this;
+    }
+
+    public void setInfoHun(String infoHun) {
+        this.infoHun = infoHun;
     }
 
     public String getEmail() {
@@ -212,6 +238,44 @@ public class Restaurant implements Serializable {
 
     public void setGooglePlaceId(String googlePlaceId) {
         this.googlePlaceId = googlePlaceId;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public Restaurant rating(Integer rating) {
+        this.rating = rating;
+        return this;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public Restaurant comments(Set<Comment> comments) {
+        this.comments = comments;
+        return this;
+    }
+
+    public Restaurant addComment(Comment comment) {
+        this.comments.add(comment);
+        comment.setRestaurant(this);
+        return this;
+    }
+
+    public Restaurant removeComment(Comment comment) {
+        this.comments.remove(comment);
+        comment.setRestaurant(null);
+        return this;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     public City getCity() {
@@ -327,12 +391,14 @@ public class Restaurant implements Serializable {
             ", name='" + getName() + "'" +
             ", streetAddress='" + getStreetAddress() + "'" +
             ", postalCode='" + getPostalCode() + "'" +
-            ", info='" + getInfo() + "'" +
+            ", infoEng='" + getInfoEng() + "'" +
+            ", infoHun='" + getInfoHun() + "'" +
             ", email='" + getEmail() + "'" +
             ", phone='" + getPhone() + "'" +
             ", website='" + getWebsite() + "'" +
             ", facebook='" + getFacebook() + "'" +
             ", googlePlaceId='" + getGooglePlaceId() + "'" +
+            ", rating=" + getRating() +
             "}";
     }
 }
