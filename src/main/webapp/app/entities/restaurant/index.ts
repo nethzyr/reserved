@@ -1,3 +1,4 @@
+export * from './google-place-id-finder.component';
 export * from './restaurant.model';
 export * from './restaurant-popup.service';
 export * from './restaurant.service';
