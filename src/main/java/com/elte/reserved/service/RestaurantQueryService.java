@@ -39,17 +39,13 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
 
     private final RestaurantSearchRepository restaurantSearchRepository;
 
-    private final UserService userService;
-
-    public RestaurantQueryService(RestaurantRepository restaurantRepository, RestaurantSearchRepository restaurantSearchRepository, UserService userService) {
+    public RestaurantQueryService(RestaurantRepository restaurantRepository, RestaurantSearchRepository restaurantSearchRepository) {
         this.restaurantRepository = restaurantRepository;
         this.restaurantSearchRepository = restaurantSearchRepository;
-        this.userService = userService;
     }
 
     /**
      * Return a {@link List} of {@link Restaurant} which matches the criteria from the database
-     *
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -123,9 +119,8 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
 
     /**
      * Return a {@link Page} of {@link Restaurant} which matches the criteria from the database
-     *
      * @param criteria The object which holds all the filters, which the entities should match.
-     * @param page     The page, which should be returned.
+     * @param page The page, which should be returned.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
@@ -153,8 +148,11 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
             if (criteria.getPostalCode() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getPostalCode(), Restaurant_.postalCode));
             }
-            if (criteria.getInfo() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getInfo(), Restaurant_.info));
+            if (criteria.getInfoEng() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getInfoEng(), Restaurant_.infoEng));
+            }
+            if (criteria.getInfoHun() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getInfoHun(), Restaurant_.infoHun));
             }
             if (criteria.getEmail() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getEmail(), Restaurant_.email));
@@ -170,6 +168,12 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
             }
             if (criteria.getGooglePlaceId() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGooglePlaceId(), Restaurant_.googlePlaceId));
+            }
+            if (criteria.getRating() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getRating(), Restaurant_.rating));
+            }
+            if (criteria.getCommentId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCommentId(), Restaurant_.comments, Comment_.id));
             }
             if (criteria.getCityId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCityId(), Restaurant_.city, City_.id));

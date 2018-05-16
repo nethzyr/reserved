@@ -5,7 +5,7 @@
         "title2": "Baráti összejövetel? Családi vacsora?",
         "title3": "Hol ennétek?",
         "search": "Keresés",
-        "clear": "Törlés",
+        "clear": "Szűrés törlése",
         "searchph": "pl. város, étterem",
         "simplesearch": "Egyszerű keresés",
         "detailedsearch": "Részletes keresés",
@@ -21,6 +21,7 @@
             "follow": "lépjen kapcsolatba @java_hipster -rel a Twitter-en"
         },
         "like": "Ha tetszik a JHipster, ne feledjen csillagot adni a",
-        "github": "GitHub-on"
+        "github": "GitHub-on",
+        "googleMapsAuto": "Keresd meg az éttermed, és mi kitöltjük az adatokat!"
     }
 }

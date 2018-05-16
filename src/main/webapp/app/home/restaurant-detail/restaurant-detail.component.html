@@ -6,17 +6,19 @@
              alt="picture image"/>
     </div>
     <h2>{{restaurant.name}}</h2>
-    <div class="card-content">
-        <p>{{restaurant.info}}</p>
+    <div class="card-content" [ngSwitch]="languageService.currentLang">
+        <p>{{restaurant.infoHun}}</p>
         <hr>
         <h5 jhiTranslate="restaurant-list.detail.kitchen">Konyhák:</h5>
         <div class="btn btn-outline-" *ngFor="let kitchen of restaurant.kitchens">
-            {{kitchen.type}}
+            <span *ngSwitchCase="'en'">{{kitchen.typeEng}}</span>
+            <span *ngSwitchCase="'hu'">{{kitchen.typeHun}}</span>
         </div>
         <hr>
         <h5 jhiTranslate="restaurant-list.detail.food">Ételek:</h5>
         <div class="btn btn-outline-" *ngFor="let food of restaurant.foods">
-            {{food.type}}
+            <span *ngSwitchCase="'en'">{{food.typeEng}}</span>
+            <span *ngSwitchCase="'hu'">{{food.typeHun}}</span>
         </div>
         <hr>
         <div class="contact">

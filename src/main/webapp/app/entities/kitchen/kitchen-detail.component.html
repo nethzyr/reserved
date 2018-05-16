@@ -1,11 +1,16 @@
+
 <div *ngIf="kitchen">
     <h2><span jhiTranslate="reservedApp.kitchen.detail.title">Kitchen</span> {{kitchen.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="reservedApp.kitchen.type">Type</span></dt>
+        <dt><span jhiTranslate="reservedApp.kitchen.typeEng">Type Eng</span></dt>
         <dd>
-            <span>{{kitchen.type}}</span>
+            <span>{{kitchen.typeEng}}</span>
+        </dd>
+        <dt><span jhiTranslate="reservedApp.kitchen.typeHun">Type Hun</span></dt>
+        <dd>
+            <span>{{kitchen.typeHun}}</span>
         </dd>
     </dl>
 

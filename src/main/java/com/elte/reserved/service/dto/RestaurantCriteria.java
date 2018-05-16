@@ -1,6 +1,7 @@
 package com.elte.reserved.service.dto;
 
 import io.github.jhipster.service.filter.Filter;
+import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
@@ -27,7 +28,9 @@ public class RestaurantCriteria implements Serializable {
 
     private StringFilter postalCode;
 
-    private StringFilter info;
+    private StringFilter infoEng;
+
+    private StringFilter infoHun;
 
     private StringFilter email;
 
@@ -38,6 +41,10 @@ public class RestaurantCriteria implements Serializable {
     private StringFilter facebook;
 
     private StringFilter googlePlaceId;
+
+    private IntegerFilter rating;
+
+    private LongFilter commentId;
 
     private LongFilter cityId;
 
@@ -84,12 +91,20 @@ public class RestaurantCriteria implements Serializable {
         this.postalCode = postalCode;
     }
 
-    public StringFilter getInfo() {
-        return info;
+    public StringFilter getInfoEng() {
+        return infoEng;
     }
 
-    public void setInfo(StringFilter info) {
-        this.info = info;
+    public void setInfoEng(StringFilter infoEng) {
+        this.infoEng = infoEng;
+    }
+
+    public StringFilter getInfoHun() {
+        return infoHun;
+    }
+
+    public void setInfoHun(StringFilter infoHun) {
+        this.infoHun = infoHun;
     }
 
     public StringFilter getEmail() {
@@ -130,6 +145,22 @@ public class RestaurantCriteria implements Serializable {
 
     public void setGooglePlaceId(StringFilter googlePlaceId) {
         this.googlePlaceId = googlePlaceId;
+    }
+
+    public IntegerFilter getRating() {
+        return rating;
+    }
+
+    public void setRating(IntegerFilter rating) {
+        this.rating = rating;
+    }
+
+    public LongFilter getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(LongFilter commentId) {
+        this.commentId = commentId;
     }
 
     public LongFilter getCityId() {
@@ -179,12 +210,15 @@ public class RestaurantCriteria implements Serializable {
             (name != null ? "name=" + name + ", " : "") +
             (streetAddress != null ? "streetAddress=" + streetAddress + ", " : "") +
             (postalCode != null ? "postalCode=" + postalCode + ", " : "") +
-            (info != null ? "info=" + info + ", " : "") +
+            (infoEng != null ? "infoEng=" + infoEng + ", " : "") +
+            (infoHun != null ? "infoHun=" + infoHun + ", " : "") +
             (email != null ? "email=" + email + ", " : "") +
             (phone != null ? "phone=" + phone + ", " : "") +
             (website != null ? "website=" + website + ", " : "") +
             (facebook != null ? "facebook=" + facebook + ", " : "") +
             (googlePlaceId != null ? "googlePlaceId=" + googlePlaceId + ", " : "") +
+            (rating != null ? "rating=" + rating + ", " : "") +
+            (commentId != null ? "commentId=" + commentId + ", " : "") +
             (cityId != null ? "cityId=" + cityId + ", " : "") +
             (userId != null ? "userId=" + userId + ", " : "") +
             (pictureId != null ? "pictureId=" + pictureId + ", " : "") +

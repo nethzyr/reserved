@@ -1,3 +1,4 @@
+
 {
     "reservedApp": {
         "food": {
@@ -16,7 +17,8 @@
             "detail": {
                 "title": "Étel"
             },
-            "type": "Étel"
+            "typeEng": "Étel (Angol)",
+            "typeHun": "Étel (Magyar)"
         }
     }
 }

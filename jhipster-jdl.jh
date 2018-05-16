@@ -10,16 +10,23 @@ entity City {
 	name String required
 }
 
+entity Comment {
+	authorName String required
+    text String required
+}
+
 entity Restaurant {
 	name String required,
     streetAddress String,
     postalCode String,
-    info String,
-    email String,
+    infoEng String maxlength(1000),
+    infoHun String maxlength(1000),
+    email String required,
     phone String,
     website String,
     facebook String,
     googlePlaceId String
+    rating Integer
 }
 
 entity Picture {
@@ -29,16 +36,13 @@ entity Picture {
 }
 
 entity Kitchen {
-	type String required
+	typeEng String required
+	typeHun String required
 }
 
 entity Food {
-	type String required
-}
-
-entity UserInfo {
-    facebook String,
-    phone String
+	typeEng String required
+	typeHun String required
 }
 
 entity Reservation {
@@ -57,24 +61,20 @@ relationship ManyToOne {
     Reservation{restaurant(name) required} to Restaurant
     Reservation{user(login)} to User
     
-    UserInfo{picture(title)} to Picture
     Restaurant{picture(title)} to Picture
 }
 
 relationship ManyToMany {
     Restaurant{kitchen(type)} to Kitchen
     Restaurant{food(type)} to Food
-    
-    UserInfo{preferredCity(name)} to City
-    UserInfo{favoriteRestaurant(name)} to Restaurant
-    UserInfo{favoriteKitchen(type)} to Kitchen
-    UserInfo{favoriteFood(type)} to Food
 }
 
-relationship OneToOne {
-    UserInfo{user(login)} to User
+relationship OneToMany {
+	Restaurant{comment required} to Comment
 }
 
 // Set pagination options
+service Restaurant with serviceClass
+filter Restaurant
 paginate Country, StateCounty, City, Kitchen, Food, Reservation with infinite-scroll
-paginate Restaurant, Picture, UserInfo with pagination
+paginate Restaurant, Picture with pagination

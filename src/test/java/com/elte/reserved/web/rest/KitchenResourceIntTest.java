@@ -37,8 +37,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = ReservedApp.class)
 public class KitchenResourceIntTest {
 
-    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_TYPE = "BBBBBBBBBB";
+    private static final String DEFAULT_TYPE_ENG = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE_ENG = "BBBBBBBBBB";
+
+    private static final String DEFAULT_TYPE_HUN = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE_HUN = "BBBBBBBBBB";
 
     @Autowired
     private KitchenRepository kitchenRepository;
@@ -62,18 +65,6 @@ public class KitchenResourceIntTest {
 
     private Kitchen kitchen;
 
-    /**
-     * Create an entity for this test.
-     * <p>
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Kitchen createEntity(EntityManager em) {
-        Kitchen kitchen = new Kitchen()
-            .type(DEFAULT_TYPE);
-        return kitchen;
-    }
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -83,6 +74,19 @@ public class KitchenResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
+    }
+
+    /**
+     * Create an entity for this test.
+     * <p>
+     * This is a static method, as tests for other entities might also need it,
+     * if they test an entity which requires the current entity.
+     */
+    public static Kitchen createEntity(EntityManager em) {
+        Kitchen kitchen = new Kitchen()
+            .typeEng(DEFAULT_TYPE_ENG)
+            .typeHun(DEFAULT_TYPE_HUN);
+        return kitchen;
     }
 
     @Before
@@ -106,7 +110,8 @@ public class KitchenResourceIntTest {
         List<Kitchen> kitchenList = kitchenRepository.findAll();
         assertThat(kitchenList).hasSize(databaseSizeBeforeCreate + 1);
         Kitchen testKitchen = kitchenList.get(kitchenList.size() - 1);
-        assertThat(testKitchen.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testKitchen.getTypeEng()).isEqualTo(DEFAULT_TYPE_ENG);
+        assertThat(testKitchen.getTypeHun()).isEqualTo(DEFAULT_TYPE_HUN);
 
         // Validate the Kitchen in Elasticsearch
         Kitchen kitchenEs = kitchenSearchRepository.findOne(testKitchen.getId());
@@ -134,10 +139,28 @@ public class KitchenResourceIntTest {
 
     @Test
     @Transactional
-    public void checkTypeIsRequired() throws Exception {
+    public void checkTypeEngIsRequired() throws Exception {
         int databaseSizeBeforeTest = kitchenRepository.findAll().size();
         // set the field null
-        kitchen.setType(null);
+        kitchen.setTypeEng(null);
+
+        // Create the Kitchen, which fails.
+
+        restKitchenMockMvc.perform(post("/api/kitchens")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(kitchen)))
+            .andExpect(status().isBadRequest());
+
+        List<Kitchen> kitchenList = kitchenRepository.findAll();
+        assertThat(kitchenList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkTypeHunIsRequired() throws Exception {
+        int databaseSizeBeforeTest = kitchenRepository.findAll().size();
+        // set the field null
+        kitchen.setTypeHun(null);
 
         // Create the Kitchen, which fails.
 
@@ -161,7 +184,8 @@ public class KitchenResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(kitchen.getId().intValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].typeEng").value(hasItem(DEFAULT_TYPE_ENG.toString())))
+            .andExpect(jsonPath("$.[*].typeHun").value(hasItem(DEFAULT_TYPE_HUN.toString())));
     }
 
     @Test
@@ -175,7 +199,8 @@ public class KitchenResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(kitchen.getId().intValue()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
+            .andExpect(jsonPath("$.typeEng").value(DEFAULT_TYPE_ENG.toString()))
+            .andExpect(jsonPath("$.typeHun").value(DEFAULT_TYPE_HUN.toString()));
     }
 
     @Test
@@ -199,7 +224,8 @@ public class KitchenResourceIntTest {
         // Disconnect from session so that the updates on updatedKitchen are not directly saved in db
         em.detach(updatedKitchen);
         updatedKitchen
-            .type(UPDATED_TYPE);
+            .typeEng(UPDATED_TYPE_ENG)
+            .typeHun(UPDATED_TYPE_HUN);
 
         restKitchenMockMvc.perform(put("/api/kitchens")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -210,7 +236,8 @@ public class KitchenResourceIntTest {
         List<Kitchen> kitchenList = kitchenRepository.findAll();
         assertThat(kitchenList).hasSize(databaseSizeBeforeUpdate);
         Kitchen testKitchen = kitchenList.get(kitchenList.size() - 1);
-        assertThat(testKitchen.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testKitchen.getTypeEng()).isEqualTo(UPDATED_TYPE_ENG);
+        assertThat(testKitchen.getTypeHun()).isEqualTo(UPDATED_TYPE_HUN);
 
         // Validate the Kitchen in Elasticsearch
         Kitchen kitchenEs = kitchenSearchRepository.findOne(testKitchen.getId());
@@ -269,7 +296,8 @@ public class KitchenResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(kitchen.getId().intValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].typeEng").value(hasItem(DEFAULT_TYPE_ENG.toString())))
+            .andExpect(jsonPath("$.[*].typeHun").value(hasItem(DEFAULT_TYPE_HUN.toString())));
     }
 
     @Test
