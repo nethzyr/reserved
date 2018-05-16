@@ -8,12 +8,13 @@
                          restaurant.picture?.url || 'https://cdn.dribbble.com/users/366584/screenshots/2527274/404_1.gif'"
                          alt="picture image"/>
                 </div>
-                <div class="card-content">
+                <div class="card-content" [ngSwitch]="languageService.currentLang">
                     <h4 class="card-title">
                         {{restaurant.name}}
                     </h4>
                     <div class="btn btn-outline-" *ngFor="let kitchen of restaurant.kitchens">
-                        {{kitchen.type}}
+                        <span *ngSwitchCase="'en'">{{kitchen.typeEng}}</span>
+                        <span *ngSwitchCase="'hu'">{{kitchen.typeHun}}</span>
                     </div>
                     <div class="reservation-button" (click)="delete($event)">
                         <jhi-reservation-modal [restaurant]="restaurant"></jhi-reservation-modal>

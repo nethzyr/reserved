@@ -32,7 +32,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="info" type="varchar(1000)">
+            <column name="info_eng" type="varchar(1000)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="info_hun" type="varchar(1000)">
                 <constraints nullable="true" />
             </column>
 
@@ -54,6 +58,10 @@
 
             <column name="google_place_id" type="varchar(255)">
                 <constraints nullable="true" />
+            </column>
+
+            <column name="rating" type="integer">
+                <constraints nullable="true"/>
             </column>
 
             <column name="city_id" type="bigint">

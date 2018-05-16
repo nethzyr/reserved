@@ -1,12 +1,13 @@
 <div class="tabset">
-    <ngb-tabset>
+    <ngb-tabset (tabChange)="resetFilters()">
         <ngb-tab title="{{'home.simplesearch' | translate}}">
             <ng-template ngbTabContent>
                 <div class="row">
                     <div class="col-6">
                         <input [(ngModel)]="searchInput" type="text" name="search" class="form-control form-control-lg"
                                placeholder="{{'home.searchph' | translate}}" ngModel (keydown.enter)="search()"
-                               (keydown.esc)="clear()" (keydown.delete)="clear()">
+                               (keydown.esc)="resetFilters()" (keydown.delete)="resetFilters()"
+                               (click)="$event.target.select()">
                     </div>
                     <div class="col-6">
                         <div class="row">
@@ -17,7 +18,7 @@
                                 </button>
                             </div>
                             <div class="col-6">
-                                <button class="btn btn-danger btn-lg" (click)="clear()" *ngIf="searchInput">
+                                <button class="btn btn-danger btn-lg" (click)="resetFilters()">
                                     <i class="fa fa-trash-o"></i>
                                     <span jhiTranslate="home.clear">Törlés</span>
                                 </button>
@@ -29,6 +30,10 @@
         </ngb-tab>
         <ngb-tab title="{{'home.detailedsearch' | translate}}">
             <ng-template ngbTabContent>
+                <button class="btn btn-danger" (click)="resetFilters()">
+                    <i class="fa fa-trash-o"></i>
+                    <span jhiTranslate="home.clear">Törlés</span>
+                </button>
                 <div class="row">
                     <div class="col-4">
                         <div
@@ -57,9 +62,11 @@
                                    (keyup.enter)="addFilter(kitchens, kitchenModel, kitchenFilter)"/>
                         </div>
                         <div *ngFor="let i of kitchenFilter">
-                            <button class="btn btn-primary btn-lg" (click)="removeFilter(i, kitchenFilter)">
+                            <button class="btn btn-primary btn-lg" (click)="removeFilter(i, kitchenFilter)"
+                                    [ngSwitch]="languageService.currentLang">
                                 <i class="fa fa-times"></i>
-                                {{i.type}}
+                                <span *ngSwitchCase="'en'">{{i.typeEng}}</span>
+                                <span *ngSwitchCase="'hu'">{{i.typeHun}}</span>
                             </button>
                         </div>
                     </div>
@@ -73,9 +80,11 @@
                                    (keyup.enter)="addFilter(foods, foodModel, foodFilter)"/>
                         </div>
                         <div *ngFor="let i of foodFilter">
-                            <button class="btn btn-primary btn-lg" (click)="removeFilter(i, foodFilter)">
+                            <button class="btn btn-primary btn-lg" (click)="removeFilter(i, foodFilter)"
+                                    [ngSwitch]="languageService.currentLang">
                                 <i class="fa fa-times"></i>
-                                {{i.type}}
+                                <span *ngSwitchCase="'en'">{{i.typeEng}}</span>
+                                <span *ngSwitchCase="'hu'">{{i.typeHun}}</span>
                             </button>
                         </div>
                     </div>

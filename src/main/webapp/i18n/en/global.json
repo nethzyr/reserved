@@ -16,6 +16,7 @@
                 "food": "Food",
                 "userInfo": "User Info",
                 "reservation": "Reservation",
+                "comment": "Comment",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

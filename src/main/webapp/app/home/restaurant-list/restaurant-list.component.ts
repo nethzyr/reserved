@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Restaurant, RestaurantService} from '../../entities/restaurant';
-import {JhiAlertService, JhiParseLinks} from 'ng-jhipster';
+import {JhiAlertService, JhiLanguageService, JhiParseLinks} from 'ng-jhipster';
 import {Kitchen, KitchenService} from '../../entities/kitchen';
 import {Food, FoodService} from '../../entities/food';
 import {City, CityService} from '../../entities/city';
@@ -44,10 +44,20 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
         private foodService: FoodService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
-        private config: NgbTabsetConfig
+        private config: NgbTabsetConfig,
+        private languageService: JhiLanguageService
     ) {
         config.justify = 'center';
         config.type = 'pills';
+    }
+
+    public resetFilters() {
+        this.cityFilter.clear();
+        this.kitchenFilter.clear();
+        this.foodFilter.clear();
+        this.searchInput = '';
+        this.currentSearch = '';
+        this.loadAll();
     }
 
     ngOnInit() {
@@ -62,7 +72,7 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
     ngOnChanges(changes) {
     }
 
-    formatter = (x: any) => x.type || x.name;
+    formatter = (x: any) => (this.languageService.currentLang === 'en' ? x.typeEng : x.typeHun) || x.name;
 
     applyFilters() {
         if (this.cityFilter.size === 0 && this.kitchenFilter.size === 0 && this.foodFilter.size === 0) {
@@ -106,7 +116,7 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
             debounceTime(200),
             distinctUntilChanged(),
             map((term) => term.length < 2 ? []
-                : this.kitchens.filter((v) => v.type.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+                : this.kitchens.filter((v) => (this.languageService.currentLang === 'en' ? v.typeEng : v.typeHun).toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
         )
 
     searchFood = (text$: Observable<string>) =>
@@ -114,7 +124,7 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
             debounceTime(200),
             distinctUntilChanged(),
             map((term) => term.length < 2 ? []
-                : this.foods.filter((v) => v.type.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+                : this.foods.filter((v) => (this.languageService.currentLang === 'en' ? v.typeEng : v.typeHun).toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
         )
 
     loadFilterData() {
@@ -159,12 +169,6 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
 
     search() {
         this.currentSearch = this.searchInput;
-        this.loadAll();
-    }
-
-    clear() {
-        this.currentSearch = '';
-        this.searchInput = '';
         this.loadAll();
     }
 

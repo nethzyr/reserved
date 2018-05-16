@@ -1,6 +1,4 @@
 import {BaseEntity, User} from './../../shared';
-import {Picture} from '../picture';
-import {City} from '../city';
 
 export class Restaurant implements BaseEntity {
     constructor(
@@ -8,15 +6,18 @@ export class Restaurant implements BaseEntity {
         public name?: string,
         public streetAddress?: string,
         public postalCode?: string,
-        public info?: string,
+        public infoEng?: string,
+        public infoHun?: string,
         public email?: string,
         public phone?: string,
         public website?: string,
         public facebook?: string,
         public googlePlaceId?: string,
-        public city?: City,
+        public rating?: number,
+        public comments?: BaseEntity[],
+        public city?: BaseEntity,
         public user?: User,
-        public picture?: Picture,
+        public picture?: BaseEntity,
         public kitchens?: BaseEntity[],
         public foods?: BaseEntity[],
     ) {

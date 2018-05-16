@@ -9,13 +9,33 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!kitchen.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="kitchen.id" readonly/>
+        </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.kitchen.type" for="field_type">Type</label>
-            <input type="text" class="form-control" name="type" id="field_type"
-                   [(ngModel)]="kitchen.type" required/>
-            <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+            <label class="form-control-label" jhiTranslate="reservedApp.kitchen.typeEng" for="field_typeEng">Type
+                Eng</label>
+            <input type="text" class="form-control" name="typeEng" id="field_typeEng"
+                   [(ngModel)]="kitchen.typeEng" required/>
+            <div [hidden]="!(editForm.controls.typeEng?.dirty && editForm.controls.typeEng?.invalid)">
                 <small class="form-text text-danger"
-                       [hidden]="!editForm.controls.type?.errors?.required" jhiTranslate="entity.validation.required">
+                       [hidden]="!editForm.controls.typeEng?.errors?.required"
+                       jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="reservedApp.kitchen.typeHun" for="field_typeHun">Type
+                Hun</label>
+            <input type="text" class="form-control" name="typeHun" id="field_typeHun"
+                   [(ngModel)]="kitchen.typeHun" required/>
+            <div [hidden]="!(editForm.controls.typeHun?.dirty && editForm.controls.typeHun?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.typeHun?.errors?.required"
+                       jhiTranslate="entity.validation.required">
                     This field is required.
                 </small>
             </div>

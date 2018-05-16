@@ -32,8 +32,10 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 @RequestMapping("/api")
 public class FoodResource {
 
-    private static final String ENTITY_NAME = "food";
     private final Logger log = LoggerFactory.getLogger(FoodResource.class);
+
+    private static final String ENTITY_NAME = "food";
+
     private final FoodRepository foodRepository;
 
     private final FoodSearchRepository foodSearchRepository;
@@ -141,7 +143,7 @@ public class FoodResource {
      * SEARCH  /_search/foods?query=:query : search for the food corresponding
      * to the query.
      *
-     * @param query    the query of the food search
+     * @param query the query of the food search
      * @param pageable the pagination information
      * @return the result of the search
      */

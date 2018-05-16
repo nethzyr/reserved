@@ -32,8 +32,10 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 @RequestMapping("/api")
 public class KitchenResource {
 
-    private static final String ENTITY_NAME = "kitchen";
     private final Logger log = LoggerFactory.getLogger(KitchenResource.class);
+
+    private static final String ENTITY_NAME = "kitchen";
+
     private final KitchenRepository kitchenRepository;
 
     private final KitchenSearchRepository kitchenSearchRepository;
@@ -141,7 +143,7 @@ public class KitchenResource {
      * SEARCH  /_search/kitchens?query=:query : search for the kitchen corresponding
      * to the query.
      *
-     * @param query    the query of the kitchen search
+     * @param query the query of the kitchen search
      * @param pageable the pagination information
      * @return the result of the search
      */

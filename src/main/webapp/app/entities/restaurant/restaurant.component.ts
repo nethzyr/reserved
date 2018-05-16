@@ -65,8 +65,8 @@ currentAccount: any;
         this.restaurantService.queryOwned({
             page: this.page - 1,
             size: this.itemsPerPage,
-            sort: this.sort()})
-            .subscribe(
+            sort: this.sort()
+        }).subscribe(
                 (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
         );

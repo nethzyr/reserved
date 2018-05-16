@@ -39,8 +39,10 @@ describe('Restaurant e2e test', () => {
         expect(restaurantDialogPage.getStreetAddressInput()).toMatch('streetAddress');
         restaurantDialogPage.setPostalCodeInput('postalCode');
         expect(restaurantDialogPage.getPostalCodeInput()).toMatch('postalCode');
-        restaurantDialogPage.setInfoInput('info');
-        expect(restaurantDialogPage.getInfoInput()).toMatch('info');
+        restaurantDialogPage.setInfoEngInput('infoEng');
+        expect(restaurantDialogPage.getInfoEngInput()).toMatch('infoEng');
+        restaurantDialogPage.setInfoHunInput('infoHun');
+        expect(restaurantDialogPage.getInfoHunInput()).toMatch('infoHun');
         restaurantDialogPage.setEmailInput('email');
         expect(restaurantDialogPage.getEmailInput()).toMatch('email');
         restaurantDialogPage.setPhoneInput('phone');
@@ -51,6 +53,8 @@ describe('Restaurant e2e test', () => {
         expect(restaurantDialogPage.getFacebookInput()).toMatch('facebook');
         restaurantDialogPage.setGooglePlaceIdInput('googlePlaceId');
         expect(restaurantDialogPage.getGooglePlaceIdInput()).toMatch('googlePlaceId');
+        restaurantDialogPage.setRatingInput('5');
+        expect(restaurantDialogPage.getRatingInput()).toMatch('5');
         restaurantDialogPage.citySelectLastOption();
         restaurantDialogPage.userSelectLastOption();
         restaurantDialogPage.pictureSelectLastOption();
@@ -85,12 +89,14 @@ export class RestaurantDialogPage {
     nameInput = element(by.css('input#field_name'));
     streetAddressInput = element(by.css('input#field_streetAddress'));
     postalCodeInput = element(by.css('input#field_postalCode'));
-    infoInput = element(by.css('input#field_info'));
+    infoEngInput = element(by.css('input#field_infoEng'));
+    infoHunInput = element(by.css('input#field_infoHun'));
     emailInput = element(by.css('input#field_email'));
     phoneInput = element(by.css('input#field_phone'));
     websiteInput = element(by.css('input#field_website'));
     facebookInput = element(by.css('input#field_facebook'));
     googlePlaceIdInput = element(by.css('input#field_googlePlaceId'));
+    ratingInput = element(by.css('input#field_rating'));
     citySelect = element(by.css('select#field_city'));
     userSelect = element(by.css('select#field_user'));
     pictureSelect = element(by.css('select#field_picture'));
@@ -125,12 +131,20 @@ export class RestaurantDialogPage {
         return this.postalCodeInput.getAttribute('value');
     };
 
-    setInfoInput = function(info) {
-        this.infoInput.sendKeys(info);
+    setInfoEngInput = function (infoEng) {
+        this.infoEngInput.sendKeys(infoEng);
     };
 
-    getInfoInput = function() {
-        return this.infoInput.getAttribute('value');
+    getInfoEngInput = function () {
+        return this.infoEngInput.getAttribute('value');
+    };
+
+    setInfoHunInput = function (infoHun) {
+        this.infoHunInput.sendKeys(infoHun);
+    };
+
+    getInfoHunInput = function () {
+        return this.infoHunInput.getAttribute('value');
     };
 
     setEmailInput = function(email) {
@@ -171,6 +185,14 @@ export class RestaurantDialogPage {
 
     getGooglePlaceIdInput = function() {
         return this.googlePlaceIdInput.getAttribute('value');
+    };
+
+    setRatingInput = function (rating) {
+        this.ratingInput.sendKeys(rating);
+    };
+
+    getRatingInput = function () {
+        return this.ratingInput.getAttribute('value');
     };
 
     citySelectLastOption = function() {

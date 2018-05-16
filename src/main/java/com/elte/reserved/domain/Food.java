@@ -25,8 +25,12 @@ public class Food implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "jhi_type", nullable = false)
-    private String type;
+    @Column(name = "type_eng", nullable = false)
+    private String typeEng;
+
+    @NotNull
+    @Column(name = "type_hun", nullable = false)
+    private String typeHun;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -37,17 +41,30 @@ public class Food implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getTypeEng() {
+        return typeEng;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Food type(String type) {
-        this.type = type;
+    public Food typeEng(String typeEng) {
+        this.typeEng = typeEng;
         return this;
+    }
+
+    public void setTypeEng(String typeEng) {
+        this.typeEng = typeEng;
+    }
+
+    public String getTypeHun() {
+        return typeHun;
+    }
+
+    public Food typeHun(String typeHun) {
+        this.typeHun = typeHun;
+        return this;
+    }
+
+    public void setTypeHun(String typeHun) {
+        this.typeHun = typeHun;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -75,7 +92,8 @@ public class Food implements Serializable {
     public String toString() {
         return "Food{" +
             "id=" + getId() +
-            ", type='" + getType() + "'" +
+            ", typeEng='" + getTypeEng() + "'" +
+            ", typeHun='" + getTypeHun() + "'" +
             "}";
     }
 }

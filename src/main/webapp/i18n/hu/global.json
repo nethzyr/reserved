@@ -10,12 +10,13 @@
                 "country": "Országok",
                 "stateCounty": "Megyék",
                 "city": "Városok",
-                "restaurant": "Éttermek",
                 "picture": "Képek",
-                "kitchen": "Konyhák",
-                "food": "Ételek",
                 "userInfo": "User Info",
                 "reservation": "Foglalások",
+                "restaurant": "Éttermek",
+                "kitchen": "Konyhák",
+                "food": "Ételek",
+                "comment": "Visszajelzések",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

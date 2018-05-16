@@ -3,7 +3,14 @@
     "relationships": [],
     "fields": [
         {
-            "fieldName": "type",
+            "fieldName": "typeEng",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "typeHun",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

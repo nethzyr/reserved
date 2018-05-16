@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Restaurant} from '../../../entities/restaurant';
+import {JhiLanguageService} from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-restaurant-card',
@@ -11,7 +12,7 @@ import {Restaurant} from '../../../entities/restaurant';
 export class RestaurantCardComponent implements OnInit {
     @Input() restaurant: Restaurant;
 
-    constructor() {
+    constructor(private languageService: JhiLanguageService) {
     }
 
     ngOnInit() {
