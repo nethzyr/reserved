@@ -4,7 +4,7 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
+import {JhiAlertService, JhiEventManager, JhiLanguageService} from 'ng-jhipster';
 
 import {Restaurant} from './restaurant.model';
 import {RestaurantPopupService} from './restaurant-popup.service';
@@ -22,6 +22,7 @@ import {Food, FoodService} from '../food';
 export class RestaurantDialogComponent implements OnInit {
 
     restaurant: Restaurant;
+    savedRestaurant = new Restaurant();
     isSaving: boolean;
 
     cities: City[];
@@ -43,11 +44,17 @@ export class RestaurantDialogComponent implements OnInit {
         private pictureService: PictureService,
         private kitchenService: KitchenService,
         private foodService: FoodService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private languageService: JhiLanguageService
     ) {
     }
 
+    resetFields() {
+        Object.assign(this.restaurant, this.savedRestaurant);
+    }
+
     ngOnInit() {
+        Object.assign(this.savedRestaurant, this.restaurant);
         this.isSaving = false;
         this.cityService.list()
             .subscribe((res: HttpResponse<City[]>) => { this.cities = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));

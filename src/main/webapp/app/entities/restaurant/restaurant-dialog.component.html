@@ -5,19 +5,97 @@
                 (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
-        <jhi-google-place-id-finder></jhi-google-place-id-finder>
-        <jhi-alert-error></jhi-alert-error>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                [(ngModel)]="restaurant.name" required/>
-            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
-        </div>
+        <ngb-tabset type="pills" (tabChange)="resetFields()">
+            <ngb-tab title="Manuális">
+                <ng-template ngbTabContent>
+                    <jhi-alert-error></jhi-alert-error>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="reservedApp.restaurant.name" for="field_name">Name</label>
+                        <input type="text" class="form-control" name="name" id="field_name"
+                               [(ngModel)]="restaurant.name" required/>
+                        <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.name?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="reservedApp.restaurant.phone" for="field_phone">Phone</label>
+                        <input type="text" class="form-control" name="phone" id="field_phone"
+                               [(ngModel)]="restaurant.phone"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="reservedApp.restaurant.website"
+                               for="field_website">Website</label>
+                        <input type="text" class="form-control" name="website" id="field_website"
+                               [(ngModel)]="restaurant.website"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="reservedApp.restaurant.streetAddress"
+                               for="field_streetAddress">Street Address</label>
+                        <input type="text" class="form-control" name="streetAddress" id="field_streetAddress"
+                               [(ngModel)]="restaurant.streetAddress"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="reservedApp.restaurant.postalCode"
+                               for="field_postalCode">Postal Code</label>
+                        <input type="text" class="form-control" name="postalCode" id="field_postalCode"
+                               [(ngModel)]="restaurant.postalCode"/>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Google Place">
+                <ng-template ngbTabContent>
+                    <jhi-alert-error></jhi-alert-error>
+                    <jhi-google-place-id-finder [(restaurant)]="restaurant"></jhi-google-place-id-finder>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="reservedApp.restaurant.googlePlaceId"
+                               for="field_googlePlaceId_disabled">Google Place Id</label>
+                        <input type="text" class="form-control" name="googlePlaceId" id="field_googlePlaceId_disabled"
+                               [(ngModel)]="restaurant.googlePlaceId" [disabled]="true"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="reservedApp.restaurant.name"
+                               for="field_name_disabled">Name</label>
+                        <input type="text" class="form-control" name="name" id="field_name_disabled"
+                               [(ngModel)]="restaurant.name" required [disabled]="true"/>
+                        <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.name?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="reservedApp.restaurant.phone"
+                               for="field_phone_disabled">Phone</label>
+                        <input type="text" class="form-control" name="phone" id="field_phone_disabled"
+                               [(ngModel)]="restaurant.phone"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="reservedApp.restaurant.website"
+                               for="field_website_disabled">Website</label>
+                        <input type="text" class="form-control" name="website" id="field_website_disabled"
+                               [(ngModel)]="restaurant.website"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="reservedApp.restaurant.streetAddress"
+                               for="field_streetAddress_disabled">Street Address</label>
+                        <input type="text" class="form-control" name="streetAddress" id="field_streetAddress_disabled"
+                               [(ngModel)]="restaurant.streetAddress" [disabled]="true"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="reservedApp.restaurant.postalCode"
+                               for="field_postalCode_disabled">Postal Code</label>
+                        <input type="text" class="form-control" name="postalCode" id="field_postalCode_disabled"
+                               [(ngModel)]="restaurant.postalCode" [disabled]="true"/>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.city" for="field_city">City</label>
             <select class="form-control" id="field_city" name="city" [(ngModel)]="restaurant.city" required>
@@ -34,19 +112,16 @@
             </small>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.streetAddress" for="field_streetAddress">Street Address</label>
-            <input type="text" class="form-control" name="streetAddress" id="field_streetAddress"
-                [(ngModel)]="restaurant.streetAddress" />
+            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.infoEng"
+                   for="field_info_eng">Info</label>
+            <input type="text" class="form-control" name="info" id="field_info_eng"
+                   [(ngModel)]="restaurant.infoEng"/>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.postalCode" for="field_postalCode">Postal Code</label>
-            <input type="text" class="form-control" name="postalCode" id="field_postalCode"
-                [(ngModel)]="restaurant.postalCode" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.info" for="field_info">Info</label>
-            <input type="text" class="form-control" name="info" id="field_info"
-                [(ngModel)]="restaurant.info" />
+            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.infoHun"
+                   for="field_info_hun">Info</label>
+            <input type="text" class="form-control" name="info" id="field_info_hun"
+                   [(ngModel)]="restaurant.infoHun"/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.email" for="field_email">Email</label>
@@ -64,24 +139,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.phone" for="field_phone">Phone</label>
-            <input type="text" class="form-control" name="phone" id="field_phone"
-                [(ngModel)]="restaurant.phone" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.website" for="field_website">Website</label>
-            <input type="text" class="form-control" name="website" id="field_website"
-                [(ngModel)]="restaurant.website" />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.facebook" for="field_facebook">Facebook</label>
             <input type="text" class="form-control" name="facebook" id="field_facebook"
                 [(ngModel)]="restaurant.facebook" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.googlePlaceId" for="field_googlePlaceId">Google Place Id</label>
-            <input type="text" class="form-control" name="googlePlaceId" id="field_googlePlaceId"
-                [(ngModel)]="restaurant.googlePlaceId" />
         </div>
         <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.user" for="field_user">User</label>
@@ -103,17 +163,44 @@
                 <option [ngValue]="pictureOption.id === restaurant.picture?.id ? restaurant.picture : pictureOption" *ngFor="let pictureOption of pictures; trackBy: trackPictureById">{{pictureOption.title}}</option>
             </select>
         </div>
-        <div class="form-group">
-            <label jhiTranslate="reservedApp.restaurant.kitchen" for="field_kitchen">Kitchen</label>
-            <select class="form-control" id="field_kitchen" multiple name="kitchen" [(ngModel)]="restaurant.kitchens">
-                <option [ngValue]="getSelected(restaurant.kitchens, kitchenOption)" *ngFor="let kitchenOption of kitchens; trackBy: trackKitchenById">{{kitchenOption.type}}</option>
-            </select>
+        <div class="form-group" [ngSwitch]="languageService.currentLang">
+            <div *ngSwitchCase="'en'">
+                <label jhiTranslate="reservedApp.restaurant.kitchen" for="field_kitchen_eng">Kitchen</label>
+                <select class="form-control" id="field_kitchen_eng" multiple name="kitchen"
+                        [(ngModel)]="restaurant.kitchens">
+                    <option [ngValue]="getSelected(restaurant.kitchens, kitchenOption)"
+                            *ngFor="let kitchenOption of kitchens; trackBy: trackKitchenById">{{kitchenOption.typeEng}}
+                    </option>
+                </select>
+
+            </div>
+            <div *ngSwitchCase="'hu'">
+                <label jhiTranslate="reservedApp.restaurant.kitchen" for="field_kitchen_eng">Kitchen</label>
+                <select class="form-control" id="field_kitchen_hun" multiple name="kitchen"
+                        [(ngModel)]="restaurant.kitchens">
+                    <option [ngValue]="getSelected(restaurant.kitchens, kitchenOption)"
+                            *ngFor="let kitchenOption of kitchens; trackBy: trackKitchenById">{{kitchenOption.typeHun}}
+                    </option>
+                </select>
+            </div>
         </div>
-        <div class="form-group">
-            <label jhiTranslate="reservedApp.restaurant.food" for="field_food">Food</label>
-            <select class="form-control" id="field_food" multiple name="food" [(ngModel)]="restaurant.foods">
-                <option [ngValue]="getSelected(restaurant.foods, foodOption)" *ngFor="let foodOption of foods; trackBy: trackFoodById">{{foodOption.type}}</option>
-            </select>
+        <div class="form-group" [ngSwitch]="languageService.currentLang">
+            <div *ngSwitchCase="'en'">
+                <label jhiTranslate="reservedApp.restaurant.food" for="field_food_eng">Food</label>
+                <select class="form-control" id="field_food_eng" multiple name="food" [(ngModel)]="restaurant.foods">
+                    <option [ngValue]="getSelected(restaurant.foods, foodOption)"
+                            *ngFor="let foodOption of foods; trackBy: trackFoodById">{{foodOption.typeEng}}
+                    </option>
+                </select>
+            </div>
+            <div *ngSwitchCase="'hu'">
+                <label jhiTranslate="reservedApp.restaurant.food" for="field_food_hun">Food</label>
+                <select class="form-control" id="field_food_hun" multiple name="food" [(ngModel)]="restaurant.foods">
+                    <option [ngValue]="getSelected(restaurant.foods, foodOption)"
+                            *ngFor="let foodOption of foods; trackBy: trackFoodById">{{foodOption.typeHun}}
+                    </option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="modal-footer">

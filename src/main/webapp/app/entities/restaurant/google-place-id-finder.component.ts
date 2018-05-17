@@ -1,4 +1,4 @@
-import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import {MapsAPILoader} from '@agm/core';
 import {FormControl} from '@angular/forms';
 import {Restaurant} from './restaurant.model';
@@ -11,7 +11,7 @@ import {Restaurant} from './restaurant.model';
     ]
 })
 export class GooglePlaceIdFinderComponent implements OnInit {
-    restaurant: Restaurant = new Restaurant();
+    @Input() restaurant: Restaurant;
     public latitude: number;
     public longitude: number;
     public searchControl: FormControl;
@@ -55,19 +55,23 @@ export class GooglePlaceIdFinderComponent implements OnInit {
                     this.latitude = place.geometry.location.lat();
                     this.longitude = place.geometry.location.lng();
                     this.zoom = 12;
-                    console.log(place);
                     this.restaurant.name = place.name;
                     this.restaurant.googlePlaceId = place.place_id;
                     this.restaurant.website = place.website;
                     this.restaurant.phone = place.international_phone_number;
                     this.restaurant.rating = place.rating * 10;
+                    let street_number = '';
+                    let route = '';
                     place.address_components.forEach((line) => {
-                        if (line.types.includes('')) {
-
+                        if (line.types.includes('street_number')) {
+                            street_number = line.long_name;
+                        } else if (line.types.includes('route')) {
+                            route = line.long_name;
+                        } else if (line.types.includes('postal_code')) {
+                            this.restaurant.postalCode = line.long_name;
                         }
                     });
-                    console.log(this.restaurant);
-
+                    this.restaurant.streetAddress = route + ' ' + street_number + '.';
                 });
             });
         });
