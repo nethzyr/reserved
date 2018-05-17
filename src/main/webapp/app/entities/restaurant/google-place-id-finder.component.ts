@@ -59,7 +59,6 @@ export class GooglePlaceIdFinderComponent implements OnInit {
                     this.restaurant.googlePlaceId = place.place_id;
                     this.restaurant.website = place.website;
                     this.restaurant.phone = place.international_phone_number;
-                    this.restaurant.rating = place.rating * 10;
                     let street_number = '';
                     let route = '';
                     place.address_components.forEach((line) => {
