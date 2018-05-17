@@ -3,21 +3,21 @@
         <ngb-tab title="{{'home.simplesearch' | translate}}">
             <ng-template ngbTabContent>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <input [(ngModel)]="searchInput" type="text" name="search" class="form-control form-control-lg"
                                placeholder="{{'home.searchph' | translate}}" ngModel (keydown.enter)="search()"
                                (keydown.esc)="resetFilters()" (keydown.delete)="resetFilters()"
                                (click)="$event.target.select()">
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <button type="submit" class="btn btn-primary btn-lg" (click)="search()">
                                     <i class="fa fa-search"></i>
                                     <span jhiTranslate="home.search">Keresés</span>
                                 </button>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <button class="btn btn-danger btn-lg" (click)="resetFilters()">
                                     <i class="fa fa-trash-o"></i>
                                     <span jhiTranslate="home.clear">Törlés</span>
@@ -35,7 +35,7 @@
                     <span jhiTranslate="home.clear">Törlés</span>
                 </button>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-md-4">
                         <div
                             (click)="addFilter(cities, cityModel, cityFilter)">
                             <label for="typeahead" jhiTranslate="restaurant-list.search.city">Search by:</label>
@@ -51,7 +51,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-4">
                         <div (click)="addFilter(kitchens, kitchenModel, kitchenFilter)">
                             <label for="typeahead-kitchen" jhiTranslate="restaurant-list.search.kitchen">Search by
                                 kitchen
@@ -70,7 +70,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-4">
                         <div (click)="addFilter(foods, foodModel, foodFilter)">
                             <label for="typeahead-food" jhiTranslate="restaurant-list.search.food">Search by food
                                 type:</label>
