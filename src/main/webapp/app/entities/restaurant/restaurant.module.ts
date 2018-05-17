@@ -56,7 +56,7 @@ const ENTITY_STATES = [
     providers: [
         RestaurantService,
         RestaurantPopupService,
-        RestaurantResolvePagingParams,
+        RestaurantResolvePagingParams
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
