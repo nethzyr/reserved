@@ -1,6 +1,7 @@
 package com.elte.reserved.service;
 
 import com.elte.reserved.domain.Restaurant;
+import com.elte.reserved.repository.CommentRepository;
 import com.elte.reserved.repository.RestaurantRepository;
 import com.elte.reserved.repository.search.RestaurantSearchRepository;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -8,8 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
@@ -26,9 +30,18 @@ public class RestaurantService {
 
     private final RestaurantSearchRepository restaurantSearchRepository;
 
-    public RestaurantService(RestaurantRepository restaurantRepository, RestaurantSearchRepository restaurantSearchRepository) {
+    private final PlacesService placesService;
+
+    private final CommentRepository commentRepository;
+
+    private final RestaurantQueryService restaurantQueryService;
+
+    public RestaurantService(RestaurantRepository restaurantRepository, RestaurantSearchRepository restaurantSearchRepository, PlacesService placesService, CommentRepository commentRepository, RestaurantQueryService restaurantQueryService) {
         this.restaurantRepository = restaurantRepository;
         this.restaurantSearchRepository = restaurantSearchRepository;
+        this.placesService = placesService;
+        this.commentRepository = commentRepository;
+        this.restaurantQueryService = restaurantQueryService;
     }
 
     /**
@@ -38,10 +51,30 @@ public class RestaurantService {
      * @return the persisted entity
      */
     public Restaurant save(Restaurant restaurant) {
-        log.debug("Request to save Restaurant : {}", restaurant);
+        restaurant = PlacesService.details(restaurant);
+        if (restaurant != null) {
+            commentRepository.save(restaurant.getComments());
+        }
         Restaurant result = restaurantRepository.save(restaurant);
+        log.debug("Request to save Restaurant : {}", restaurant);
         restaurantSearchRepository.save(result);
         return result;
+    }
+
+    /**
+     * Update restaurant google details.
+     */
+    @Scheduled(cron = "1 * * * * ?")
+    public void updateGoogleDetails() {
+        List<Restaurant> restaurantList = restaurantRepository.findAll();
+        for (Restaurant restaurant : restaurantList) {
+            if (restaurant.getGooglePlaceId().length() > 0) {
+                restaurant = PlacesService.details(restaurant);
+                log.debug("Request to save Restaurant : {}", restaurant);
+                commentRepository.deleteByRestaurant(restaurant.getId());
+                commentRepository.save(restaurant.getComments());
+            }
+        }
     }
 
     /**

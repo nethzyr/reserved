@@ -54,6 +54,7 @@ export class RestaurantDialogComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.restaurant);
         Object.assign(this.savedRestaurant, this.restaurant);
         this.isSaving = false;
         this.cityService.list()
