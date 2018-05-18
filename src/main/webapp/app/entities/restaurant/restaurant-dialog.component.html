@@ -114,14 +114,14 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.infoEng"
                    for="field_info_eng">Info</label>
-            <input type="text" class="form-control" name="info" id="field_info_eng"
-                   [(ngModel)]="restaurant.infoEng"/>
+            <textarea rows="7" type="text" class="form-control" name="info" id="field_info_eng"
+                      [(ngModel)]="restaurant.infoEng"></textarea>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.infoHun"
                    for="field_info_hun">Info</label>
-            <input type="text" class="form-control" name="info" id="field_info_hun"
-                   [(ngModel)]="restaurant.infoHun"/>
+            <textarea rows="7" type="text" class="form-control" name="info" id="field_info_hun"
+                      [(ngModel)]="restaurant.infoHun"></textarea>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.email" for="field_email">Email</label>
@@ -157,11 +157,27 @@
             </small>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reservedApp.restaurant.picture" for="field_picture">Picture</label>
-            <select class="form-control" id="field_picture" name="picture" [(ngModel)]="restaurant.picture" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="pictureOption.id === restaurant.picture?.id ? restaurant.picture : pictureOption" *ngFor="let pictureOption of pictures; trackBy: trackPictureById">{{pictureOption.title}}</option>
-            </select>
+            <label class="form-control-label" jhiTranslate="reservedApp.picture.img" for="field_img">Img</label>
+            <div>
+                <img [src]="'data:' + picture.imgContentType + ';base64,' + picture.img" style="max-height: 100px;"
+                     *ngIf="picture.img" alt="picture image"/>
+                <img [src]="'data:' + deletePicture.imgContentType + ';base64,' + deletePicture.img"
+                     style="max-height: 100px;"
+                     *ngIf="!picture.img && deletePicture.img" alt="picture image"/>
+                <div *ngIf="picture.img" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{picture.imgContentType}}, {{byteSize(picture.img)}}</span>
+                    <button type="button" (click)="clearInputImage('img', 'imgContentType', 'fileImage')"
+                            class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_img" (change)="setFileData($event, picture, 'img', true)" accept="image/*"
+                       jhiTranslate="entity.action.addimage"/>
+            </div>
+            <input type="hidden" class="form-control" name="img" id="field_img"
+                   [(ngModel)]="picture.img"/>
+            <input type="hidden" class="form-control" name="imgContentType" id="field_imgContentType"
+                   [(ngModel)]="picture.imgContentType"/>
         </div>
         <div class="form-group" [ngSwitch]="languageService.currentLang">
             <div *ngSwitchCase="'en'">
@@ -201,6 +217,12 @@
                     </option>
                 </select>
             </div>
+        </div>
+        <div class="form-check">
+            <input [(ngModel)]="restaurant.visible" type="checkbox" name="visible" class="form-check-input"
+                   id="visibleCheck">
+            <label class="form-check-label" for="visibleCheck"
+                   jhiTranslate="reservedApp.restaurant.visible">Visible</label>
         </div>
     </div>
     <div class="modal-footer">

@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {JhiAlertService, JhiEventManager, JhiLanguageService} from 'ng-jhipster';
+import {JhiAlertService, JhiDataUtils, JhiEventManager, JhiLanguageService} from 'ng-jhipster';
 
 import {Restaurant} from './restaurant.model';
 import {RestaurantPopupService} from './restaurant-popup.service';
@@ -24,6 +24,8 @@ export class RestaurantDialogComponent implements OnInit {
     restaurant: Restaurant;
     savedRestaurant = new Restaurant();
     isSaving: boolean;
+    picture: Picture = new Picture();
+    deletePicture: Picture = new Picture();
 
     cities: City[];
 
@@ -45,8 +47,23 @@ export class RestaurantDialogComponent implements OnInit {
         private kitchenService: KitchenService,
         private foodService: FoodService,
         private eventManager: JhiEventManager,
+        private dataUtils: JhiDataUtils,
+        private elementRef: ElementRef,
         private languageService: JhiLanguageService
     ) {
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    clearInputImage(field: string, fieldContentType: string, idInput: string) {
+        this.dataUtils.clearInputImage(this.picture, this.elementRef, field, fieldContentType, idInput);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
+        this.picture.title = this.restaurant.name;
     }
 
     resetFields() {
@@ -54,8 +71,8 @@ export class RestaurantDialogComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.restaurant);
         Object.assign(this.savedRestaurant, this.restaurant);
+        Object.assign(this.deletePicture, this.restaurant.picture);
         this.isSaving = false;
         this.cityService.list()
             .subscribe((res: HttpResponse<City[]>) => { this.cities = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
@@ -76,20 +93,44 @@ export class RestaurantDialogComponent implements OnInit {
     save() {
         this.isSaving = true;
         if (this.restaurant.id !== undefined) {
-            this.subscribeToSaveResponse(
-                this.restaurantService.update(this.restaurant));
+            if (this.picture.img !== undefined) {
+                this.pictureService.create(this.picture).subscribe((res: HttpResponse<Picture>) => {
+                    this.restaurant.picture = res.body;
+                    this.subscribeToSaveResponse(
+                        this.restaurantService.update(this.restaurant), true);
+                });
+            } else {
+                this.subscribeToSaveResponse(
+                    this.restaurantService.update(this.restaurant), false);
+            }
         } else {
-            this.subscribeToSaveResponse(
-                this.restaurantService.create(this.restaurant));
+            if (this.picture.img !== undefined) {
+                this.pictureService.create(this.picture).subscribe((res: HttpResponse<Picture>) => {
+                    this.restaurant.picture = res.body;
+                    this.subscribeToSaveResponse(
+                        this.restaurantService.create(this.restaurant), true);
+                });
+            } else {
+                this.subscribeToSaveResponse(
+                    this.restaurantService.create(this.restaurant), false);
+            }
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<Restaurant>>) {
+    private subscribeToSaveResponse(result: Observable<HttpResponse<Restaurant>>, isDeletePic: boolean) {
         result.subscribe((res: HttpResponse<Restaurant>) =>
-            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
+            this.onSaveSuccess(res.body, isDeletePic), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess(result: Restaurant) {
+    private onSaveSuccess(result: Restaurant, isDeletePic: boolean) {
+        if (isDeletePic) {
+            this.pictureService.delete(this.deletePicture.id).subscribe((response) => {
+                this.eventManager.broadcast({
+                    name: 'pictureListModification',
+                    content: 'Deleted an picture'
+                });
+            });
+        }
         this.eventManager.broadcast({ name: 'restaurantListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);

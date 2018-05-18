@@ -10,11 +10,15 @@ import {RestaurantDetailComponent} from './restaurant-detail/restaurant-detail.c
 import {ReservationComponent} from './reservation/reservation.component';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {ReservationConfirmComponent} from './reservation-confirm/reservation-confirm.component';
+import {AgmCoreModule} from '@agm/core';
 
 @NgModule({
     imports: [
         ReservedSharedModule,
-        RouterModule.forChild([...HOME_ROUTE])
+        RouterModule.forChild([...HOME_ROUTE]),
+        AgmCoreModule.forRoot({
+            apiKey: 'GOOGLE_MAPS_API_KEY'
+        })
     ],
     declarations: [
         HomeComponent,

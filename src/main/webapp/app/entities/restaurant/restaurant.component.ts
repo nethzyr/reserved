@@ -29,6 +29,7 @@ currentAccount: any;
     predicate: any;
     previousPage: any;
     reverse: any;
+    disableButtons = false;
 
     constructor(
         private restaurantService: RestaurantService,
@@ -48,6 +49,12 @@ currentAccount: any;
         });
         this.currentSearch = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search'] ?
             this.activatedRoute.snapshot.params['search'] : '';
+    }
+
+    setVisibility(restaurant: Restaurant, isVisible: boolean) {
+        restaurant.visible = isVisible;
+        this.disableButtons = true;
+        this.restaurantService.update(restaurant).subscribe((res: HttpResponse<Restaurant>) => (this.disableButtons = false));
     }
 
     loadAll() {

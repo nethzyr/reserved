@@ -47,7 +47,7 @@
                              style="max-height: 30px;" alt="picture image"/>
                     </a>
                     <span *ngIf="picture.img">{{picture.imgContentType}}, {{byteSize(picture.img)}}</span>
-                    <img *ngIf="!picture.img" [src]="picture.url"/>
+                    <img *ngIf="!picture.img" [src]="picture.url" style="max-height: 30px"/>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

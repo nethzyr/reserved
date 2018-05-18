@@ -222,6 +222,26 @@ public class RestaurantResource {
     }
 
     /**
+     * SEARCH  /_search/restaurants-visible?query=:query : search for the restaurant corresponding
+     * to the query.
+     *
+     * @param query    the query of the restaurant search
+     * @param pageable the pagination information
+     * @return the result of the search
+     */
+    @GetMapping("/_search/restaurants-visible")
+    @Timed
+    public ResponseEntity<List<Restaurant>> searchVisibleRestaurants(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of Restaurants for query {}", query);
+        QueryBuilder queryBuilder = boolQuery()
+            .must((queryStringQuery(query)))
+            .must(matchQuery("visible", true));
+        Page<Restaurant> page = restaurantService.search(queryBuilder, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/restaurants-owned");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
      * SEARCH  /_search/restaurants-owned?query=:query : search for the restaurant corresponding
      * to the query.
      *

@@ -230,7 +230,6 @@ export class RestaurantDialogPage {
     getVisibleInput = function () {
         return this.visibleInput;
     };
-
     citySelectLastOption = function() {
         this.citySelect.all(by.tagName('option')).last().click();
     };

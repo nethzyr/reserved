@@ -6,6 +6,7 @@ import com.elte.reserved.repository.RestaurantRepository;
 import com.elte.reserved.repository.search.RestaurantSearchRepository;
 import com.elte.reserved.service.dto.RestaurantCriteria;
 import io.github.jhipster.service.QueryService;
+import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +70,7 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
     @Transactional(readOnly = true)
     public Page<Restaurant> findMultiFilter(List<String> cityArray, List<String> kitchenArray, List<String> foodArray, Pageable pageable) {
         RestaurantCriteria criteria = new RestaurantCriteria();
+        criteria.setVisible((BooleanFilter) new BooleanFilter().setEquals(true));
         List<Restaurant> cityList = new ArrayList<>();
         Set<Restaurant> kitchenList = new LinkedHashSet<>();
         Set<Restaurant> foodList = new LinkedHashSet<>();
@@ -79,6 +81,7 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
             cityList.addAll(findByCriteria(criteria));
         }
         criteria = new RestaurantCriteria();
+        criteria.setVisible((BooleanFilter) new BooleanFilter().setEquals(true));
         for (String i : kitchenArray) {
             criteria.setKitchenId((LongFilter) new LongFilter()
                 .setEquals(Long.parseLong(i)));
@@ -92,6 +95,7 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
             }
         }
         criteria = new RestaurantCriteria();
+        criteria.setVisible((BooleanFilter) new BooleanFilter().setEquals(true));
         for (int i = 0; i < foodArray.size(); i++) {
             log.debug("bementem a null arraybe geci {} ", foodArray.size() + " " + foodArray.isEmpty());
             try {

@@ -32,6 +32,11 @@
         <div class="contact">
             <h5 jhiTranslate="restaurant-list.detail.contact">Elérhetőségek:</h5>
             <p>{{restaurant.postalCode}} {{restaurant.city.name}}, {{restaurant.streetAddress}}</p>
+            <div class="map" *ngIf="restaurant.lat && restaurant.lng">
+                <agm-map [zoom]="13" [latitude]="restaurant.lat" [longitude]="restaurant.lng">
+                    <agm-marker [latitude]="restaurant.lat" [longitude]="restaurant.lng"></agm-marker>
+                </agm-map>
+            </div>
             <p><a [href]="'mailto:' + restaurant.email">{{restaurant.email}}</a></p>
             <p><a [href]="'tel:' + restaurant.phone">{{restaurant.phone}}</a></p>
             <p><a target="_blank" [href]="restaurant.website" jhiTranslate="restaurant-list.detail.website">Weboldal</a>

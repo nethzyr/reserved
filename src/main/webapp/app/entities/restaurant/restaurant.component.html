@@ -29,14 +29,19 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="name"><span jhiTranslate="reservedApp.restaurant.name">Name</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="name"><span jhiTranslate="reservedApp.restaurant.name">Name</span> <span
+                    class="fa fa-sort"></span></th>
                 <th jhiSortBy="city.name"><span jhiTranslate="reservedApp.restaurant.city">City</span> <span
                     class="fa fa-sort"></span></th>
-            <th jhiSortBy="streetAddress"><span jhiTranslate="reservedApp.restaurant.streetAddress">Street Address</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="postalCode"><span jhiTranslate="reservedApp.restaurant.postalCode">Postal Code</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="streetAddress"><span
+                    jhiTranslate="reservedApp.restaurant.streetAddress">Street Address</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="postalCode"><span jhiTranslate="reservedApp.restaurant.postalCode">Postal Code</span>
+                    <span class="fa fa-sort"></span></th>
                 <th *jhiHasAnyAuthority="'ROLE_ADMIN'" jhiSortBy="user.login"><span
                     jhiTranslate="reservedApp.restaurant.user">User</span> <span class="fa fa-sort"></span></th>
-            <th></th>
+                <th jhiSortBy="visible"><span jhiTranslate="reservedApp.restaurant.visible">Visible</span><span
+                    class="fa fa-sort"></span></th>
             </tr>
             </thead>
             <tbody>
@@ -50,12 +55,13 @@
                 <td>{{restaurant.streetAddress}}</td>
                 <td>{{restaurant.postalCode}}</td>
                 <td *jhiHasAnyAuthority="'ROLE_ADMIN'">{{restaurant.user?.login}}</td>
+                <td>{{restaurant.visible}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../restaurant', restaurant.id ]"
                                 class="btn btn-info">
-                            <span class="fa fa-eye"></span>
+                            <span class="fa fa-book"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
@@ -67,12 +73,18 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'restaurant/'+ restaurant.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
+                                (click)="setVisibility(restaurant, false)"
+                                *ngIf="restaurant.visible"
                                 class="btn btn-danger">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            <span class="fa fa-eye-slash"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.hide">Hide</span>
+                        </button>
+                        <button type="submit"
+                                (click)="setVisibility(restaurant, true)"
+                                *ngIf="!restaurant.visible"
+                                class="btn btn-info">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.show">Show</span>
                         </button>
                     </div>
                 </td>

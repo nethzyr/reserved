@@ -41,9 +41,9 @@ public class RestaurantCriteria implements Serializable {
 
     private IntegerFilter rating;
 
-    private FloatFilter lat;
+    private DoubleFilter lat;
 
-    private FloatFilter lng;
+    private DoubleFilter lng;
 
     private BooleanFilter visible;
 
@@ -158,19 +158,19 @@ public class RestaurantCriteria implements Serializable {
         this.rating = rating;
     }
 
-    public FloatFilter getLat() {
+    public DoubleFilter getLat() {
         return lat;
     }
 
-    public void setLat(FloatFilter lat) {
+    public void setLat(DoubleFilter lat) {
         this.lat = lat;
     }
 
-    public FloatFilter getLng() {
+    public DoubleFilter getLng() {
         return lng;
     }
 
-    public void setLng(FloatFilter lng) {
+    public void setLng(DoubleFilter lng) {
         this.lng = lng;
     }
 
