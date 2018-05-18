@@ -71,6 +71,26 @@ public class PlacesService {
             JSONObject jsonObj = new JSONObject(jsonResults.toString()).getJSONObject("result");
 
             restaurant.setRating((int) (jsonObj.getDouble("rating") * 10));
+        } catch (JSONException e) {
+            log.debug("Error processing JSON results", e);
+        }
+
+        try {
+            // Create a JSON object hierarchy from the results
+            JSONObject jsonObj = new JSONObject(jsonResults.toString()).getJSONObject("result");
+            JSONObject location = jsonObj.getJSONObject("geometry").getJSONObject("location");
+
+            restaurant.setLat((float) location.getDouble("lat"));
+            restaurant.setLng((float) location.getDouble("lng"));
+        } catch (JSONException e) {
+            log.debug("Error processing JSON results", e);
+        }
+
+        try {
+            // Create a JSON object hierarchy from the results
+            JSONObject jsonObj = new JSONObject(jsonResults.toString()).getJSONObject("result");
+
+            restaurant.setRating((int) (jsonObj.getDouble("rating") * 10));
 
             Set<Comment> commentSet = new LinkedHashSet<>();
             JSONArray jsonArray = jsonObj.getJSONArray("reviews");

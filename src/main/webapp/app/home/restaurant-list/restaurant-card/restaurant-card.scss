@@ -24,16 +24,20 @@
     cursor: pointer;
 
     .card-title {
-        .fa-star {
-            color: yellow;
-            -webkit-text-stroke-width: 1px;
-            -webkit-text-stroke-color: black;
-        }
+        margin-top: 0;
+        font-weight: 700;
+        font-size: 1.65em;
+
         .restaurant-name {
             margin: 0 1em 0 1em;
         }
         .restaurant-rating {
             margin: 0 1em 0 1em;
+            .fa-star {
+                color: yellow;
+                -webkit-text-stroke-width: 1px;
+                -webkit-text-stroke-color: black;
+            }
         }
     }
 }
@@ -72,12 +76,6 @@
     .btn.btn-outline- {
         padding: 0.6em;
     }
-}
-
-.card-title {
-    margin-top: 0;
-    font-weight: 700;
-    font-size: 1.65em;
 }
 
 .card-read-more {

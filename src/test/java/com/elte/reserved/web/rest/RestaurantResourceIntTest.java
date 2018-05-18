@@ -6,6 +6,7 @@ import com.elte.reserved.repository.RestaurantRepository;
 import com.elte.reserved.repository.search.RestaurantSearchRepository;
 import com.elte.reserved.service.RestaurantQueryService;
 import com.elte.reserved.service.RestaurantService;
+import com.elte.reserved.service.UserService;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
@@ -85,6 +86,9 @@ public class RestaurantResourceIntTest {
     private RestaurantQueryService restaurantQueryService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -103,7 +107,7 @@ public class RestaurantResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final RestaurantResource restaurantResource = new RestaurantResource(restaurantService, restaurantQueryService);
+        final RestaurantResource restaurantResource = new RestaurantResource(restaurantService, restaurantQueryService, userService);
         this.restRestaurantMockMvc = MockMvcBuilders.standaloneSetup(restaurantResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

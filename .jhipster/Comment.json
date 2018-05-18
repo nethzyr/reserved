@@ -20,8 +20,10 @@
             "fieldName": "text",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required"
-            ]
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1000
         }
     ],
     "changelogDate": "20180516185120",

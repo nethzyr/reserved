@@ -7,7 +7,7 @@
         Added the constraints for entity Restaurant.
     -->
     <changeSet id="20180422180249-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="city_id"
                                  baseTableName="restaurant"
                                  constraintName="fk_restaurant_city_id"
@@ -36,7 +36,7 @@
                                  constraintName="fk_restaurant_kitchen_kitchens_id"
                                  referencedColumnNames="id"
                                  referencedTableName="kitchen"/>
-        
+
         <addForeignKeyConstraint baseColumnNames="restaurants_id"
                                  baseTableName="restaurant_food"
                                  constraintName="fk_restaurant_food_restaurants_id"
@@ -47,6 +47,6 @@
                                  constraintName="fk_restaurant_food_foods_id"
                                  referencedColumnNames="id"
                                  referencedTableName="food"/>
-        
+
     </changeSet>
 </databaseChangeLog>

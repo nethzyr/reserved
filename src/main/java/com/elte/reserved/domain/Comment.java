@@ -31,7 +31,7 @@ public class Comment implements Serializable {
 
     @NotNull
     @Size(max = 1000)
-    @Column(name = "text", nullable = false, length = 1000)
+    @Column(name = "text", length = 1000, nullable = false)
     private String text;
 
     @ManyToOne

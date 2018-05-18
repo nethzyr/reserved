@@ -1,9 +1,6 @@
 package com.elte.reserved.service.dto;
 
-import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.IntegerFilter;
-import io.github.jhipster.service.filter.LongFilter;
-import io.github.jhipster.service.filter.StringFilter;
+import io.github.jhipster.service.filter.*;
 
 import java.io.Serializable;
 
@@ -43,6 +40,12 @@ public class RestaurantCriteria implements Serializable {
     private StringFilter googlePlaceId;
 
     private IntegerFilter rating;
+
+    private FloatFilter lat;
+
+    private FloatFilter lng;
+
+    private BooleanFilter visible;
 
     private LongFilter commentId;
 
@@ -155,6 +158,30 @@ public class RestaurantCriteria implements Serializable {
         this.rating = rating;
     }
 
+    public FloatFilter getLat() {
+        return lat;
+    }
+
+    public void setLat(FloatFilter lat) {
+        this.lat = lat;
+    }
+
+    public FloatFilter getLng() {
+        return lng;
+    }
+
+    public void setLng(FloatFilter lng) {
+        this.lng = lng;
+    }
+
+    public BooleanFilter getVisible() {
+        return visible;
+    }
+
+    public void setVisible(BooleanFilter visible) {
+        this.visible = visible;
+    }
+
     public LongFilter getCommentId() {
         return commentId;
     }
@@ -218,6 +245,9 @@ public class RestaurantCriteria implements Serializable {
             (facebook != null ? "facebook=" + facebook + ", " : "") +
             (googlePlaceId != null ? "googlePlaceId=" + googlePlaceId + ", " : "") +
             (rating != null ? "rating=" + rating + ", " : "") +
+            (lat != null ? "lat=" + lat + ", " : "") +
+            (lng != null ? "lng=" + lng + ", " : "") +
+            (visible != null ? "visible=" + visible + ", " : "") +
             (commentId != null ? "commentId=" + commentId + ", " : "") +
             (cityId != null ? "cityId=" + cityId + ", " : "") +
             (userId != null ? "userId=" + userId + ", " : "") +

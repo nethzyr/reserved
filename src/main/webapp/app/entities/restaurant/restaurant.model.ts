@@ -14,6 +14,9 @@ export class Restaurant implements BaseEntity {
         public facebook?: string,
         public googlePlaceId?: string,
         public rating?: number,
+        public lat?: number,
+        public lng?: number,
+        public visible?: boolean,
         public comments?: BaseEntity[],
         public city?: BaseEntity,
         public user?: User,
@@ -21,5 +24,6 @@ export class Restaurant implements BaseEntity {
         public kitchens?: BaseEntity[],
         public foods?: BaseEntity[],
     ) {
+        this.visible = false;
     }
 }

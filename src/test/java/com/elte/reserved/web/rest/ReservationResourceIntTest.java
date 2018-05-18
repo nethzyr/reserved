@@ -4,7 +4,11 @@ import com.elte.reserved.ReservedApp;
 import com.elte.reserved.domain.Reservation;
 import com.elte.reserved.domain.Restaurant;
 import com.elte.reserved.repository.ReservationRepository;
+import com.elte.reserved.repository.UserRepository;
 import com.elte.reserved.repository.search.ReservationSearchRepository;
+import com.elte.reserved.service.MailService;
+import com.elte.reserved.service.RestaurantQueryService;
+import com.elte.reserved.service.UserService;
 import com.elte.reserved.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,6 +63,18 @@ public class ReservationResourceIntTest {
     private ReservationSearchRepository reservationSearchRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private MailService mailService;
+
+    @Autowired
+    private RestaurantQueryService restaurantQueryService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -77,7 +93,7 @@ public class ReservationResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ReservationResource reservationResource = new ReservationResource(reservationRepository, reservationSearchRepository);
+        final ReservationResource reservationResource = new ReservationResource(reservationRepository, reservationSearchRepository, userRepository, mailService, restaurantQueryService, userService);
         this.restReservationMockMvc = MockMvcBuilders.standaloneSetup(reservationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

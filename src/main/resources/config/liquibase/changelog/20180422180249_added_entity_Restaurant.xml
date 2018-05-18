@@ -64,6 +64,17 @@
                 <constraints nullable="true"/>
             </column>
 
+            <column name="lat" type="${floatType}">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="lng" type="${floatType}">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="visible" type="bit">
+                <constraints nullable="true"/>
+            </column>
             <column name="city_id" type="bigint">
                 <constraints nullable="false" />
             </column>

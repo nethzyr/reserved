@@ -55,6 +55,19 @@ describe('Restaurant e2e test', () => {
         expect(restaurantDialogPage.getGooglePlaceIdInput()).toMatch('googlePlaceId');
         restaurantDialogPage.setRatingInput('5');
         expect(restaurantDialogPage.getRatingInput()).toMatch('5');
+        restaurantDialogPage.setLatInput('5');
+        expect(restaurantDialogPage.getLatInput()).toMatch('5');
+        restaurantDialogPage.setLngInput('5');
+        expect(restaurantDialogPage.getLngInput()).toMatch('5');
+        restaurantDialogPage.getVisibleInput().isSelected().then((selected) => {
+            if (selected) {
+                restaurantDialogPage.getVisibleInput().click();
+                expect(restaurantDialogPage.getVisibleInput().isSelected()).toBeFalsy();
+            } else {
+                restaurantDialogPage.getVisibleInput().click();
+                expect(restaurantDialogPage.getVisibleInput().isSelected()).toBeTruthy();
+            }
+        });
         restaurantDialogPage.citySelectLastOption();
         restaurantDialogPage.userSelectLastOption();
         restaurantDialogPage.pictureSelectLastOption();
@@ -97,6 +110,9 @@ export class RestaurantDialogPage {
     facebookInput = element(by.css('input#field_facebook'));
     googlePlaceIdInput = element(by.css('input#field_googlePlaceId'));
     ratingInput = element(by.css('input#field_rating'));
+    latInput = element(by.css('input#field_lat'));
+    lngInput = element(by.css('input#field_lng'));
+    visibleInput = element(by.css('input#field_visible'));
     citySelect = element(by.css('select#field_city'));
     userSelect = element(by.css('select#field_user'));
     pictureSelect = element(by.css('select#field_picture'));
@@ -193,6 +209,26 @@ export class RestaurantDialogPage {
 
     getRatingInput = function () {
         return this.ratingInput.getAttribute('value');
+    };
+
+    setLatInput = function (lat) {
+        this.latInput.sendKeys(lat);
+    };
+
+    getLatInput = function () {
+        return this.latInput.getAttribute('value');
+    };
+
+    setLngInput = function (lng) {
+        this.lngInput.sendKeys(lng);
+    };
+
+    getLngInput = function () {
+        return this.lngInput.getAttribute('value');
+    };
+
+    getVisibleInput = function () {
+        return this.visibleInput;
     };
 
     citySelectLastOption = function() {
