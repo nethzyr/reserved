@@ -26,8 +26,19 @@
         cursor: default;
     }
 
-    .contact p {
-        margin-left: 1em;
+    .contact {
+        p {
+            margin-left: 1em;
+        }
+
+        agm-map {
+            height: 300px;
+            width: 300px;
+        }
+
+        .map {
+            margin-bottom: 1em;
+        }
     }
 
     .comment-content {

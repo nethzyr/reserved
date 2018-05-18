@@ -70,10 +70,10 @@ public class Restaurant implements Serializable {
     private Integer rating;
 
     @Column(name = "lat")
-    private Float lat;
+    private Double lat;
 
     @Column(name = "lng")
-    private Float lng;
+    private Double lng;
 
     @Column(name = "visible")
     private Boolean visible;
@@ -262,29 +262,29 @@ public class Restaurant implements Serializable {
         this.rating = rating;
     }
 
-    public Float getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public Restaurant lat(Float lat) {
+    public Restaurant lat(Double lat) {
         this.lat = lat;
         return this;
     }
 
-    public void setLat(Float lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public Float getLng() {
+    public Double getLng() {
         return lng;
     }
 
-    public Restaurant lng(Float lng) {
+    public Restaurant lng(Double lng) {
         this.lng = lng;
         return this;
     }
 
-    public void setLng(Float lng) {
+    public void setLng(Double lng) {
         this.lng = lng;
     }
 

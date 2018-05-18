@@ -107,7 +107,9 @@
             "edit": "Szerkesztés",
             "open": "Megnyitás",
             "save": "Mentés",
-            "view": "Nézet"
+            "view": "Nézet",
+            "show": "Show",
+            "hide": "Hide"
         },
         "detail": {
             "field": "Mező",

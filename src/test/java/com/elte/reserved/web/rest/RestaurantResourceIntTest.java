@@ -73,6 +73,15 @@ public class RestaurantResourceIntTest {
     private static final Integer DEFAULT_RATING = 1;
     private static final Integer UPDATED_RATING = 2;
 
+    private static final Double DEFAULT_LAT = 1D;
+    private static final Double UPDATED_LAT = 2D;
+
+    private static final Double DEFAULT_LNG = 1D;
+    private static final Double UPDATED_LNG = 2D;
+
+    private static final Boolean DEFAULT_VISIBLE = false;
+    private static final Boolean UPDATED_VISIBLE = true;
+
     @Autowired
     private RestaurantRepository restaurantRepository;
 
@@ -133,12 +142,10 @@ public class RestaurantResourceIntTest {
             .website(DEFAULT_WEBSITE)
             .facebook(DEFAULT_FACEBOOK)
             .googlePlaceId(DEFAULT_GOOGLE_PLACE_ID)
-            .rating(DEFAULT_RATING);
-        // Add required entity
-        Comment comment = CommentResourceIntTest.createEntity(em);
-        em.persist(comment);
-        em.flush();
-        restaurant.getComments().add(comment);
+            .rating(DEFAULT_RATING)
+            .lat(DEFAULT_LAT)
+            .lng(DEFAULT_LNG)
+            .visible(DEFAULT_VISIBLE);
         // Add required entity
         City city = CityResourceIntTest.createEntity(em);
         em.persist(city);
@@ -184,6 +191,9 @@ public class RestaurantResourceIntTest {
         assertThat(testRestaurant.getFacebook()).isEqualTo(DEFAULT_FACEBOOK);
         assertThat(testRestaurant.getGooglePlaceId()).isEqualTo(DEFAULT_GOOGLE_PLACE_ID);
         assertThat(testRestaurant.getRating()).isEqualTo(DEFAULT_RATING);
+        assertThat(testRestaurant.getLat()).isEqualTo(DEFAULT_LAT);
+        assertThat(testRestaurant.getLng()).isEqualTo(DEFAULT_LNG);
+        assertThat(testRestaurant.isVisible()).isEqualTo(DEFAULT_VISIBLE);
 
         // Validate the Restaurant in Elasticsearch
         Restaurant restaurantEs = restaurantSearchRepository.findOne(testRestaurant.getId());
@@ -266,7 +276,10 @@ public class RestaurantResourceIntTest {
             .andExpect(jsonPath("$.[*].website").value(hasItem(DEFAULT_WEBSITE.toString())))
             .andExpect(jsonPath("$.[*].facebook").value(hasItem(DEFAULT_FACEBOOK.toString())))
             .andExpect(jsonPath("$.[*].googlePlaceId").value(hasItem(DEFAULT_GOOGLE_PLACE_ID.toString())))
-            .andExpect(jsonPath("$.[*].rating").value(hasItem(DEFAULT_RATING)));
+            .andExpect(jsonPath("$.[*].rating").value(hasItem(DEFAULT_RATING)))
+            .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.doubleValue())))
+            .andExpect(jsonPath("$.[*].lng").value(hasItem(DEFAULT_LNG.doubleValue())))
+            .andExpect(jsonPath("$.[*].visible").value(hasItem(DEFAULT_VISIBLE.booleanValue())));
     }
 
     @Test
@@ -290,7 +303,10 @@ public class RestaurantResourceIntTest {
             .andExpect(jsonPath("$.website").value(DEFAULT_WEBSITE.toString()))
             .andExpect(jsonPath("$.facebook").value(DEFAULT_FACEBOOK.toString()))
             .andExpect(jsonPath("$.googlePlaceId").value(DEFAULT_GOOGLE_PLACE_ID.toString()))
-            .andExpect(jsonPath("$.rating").value(DEFAULT_RATING));
+            .andExpect(jsonPath("$.rating").value(DEFAULT_RATING))
+            .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.doubleValue()))
+            .andExpect(jsonPath("$.lng").value(DEFAULT_LNG.doubleValue()))
+            .andExpect(jsonPath("$.visible").value(DEFAULT_VISIBLE.booleanValue()));
     }
 
     @Test
@@ -751,6 +767,123 @@ public class RestaurantResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllRestaurantsByLatIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where lat equals to DEFAULT_LAT
+        defaultRestaurantShouldBeFound("lat.equals=" + DEFAULT_LAT);
+
+        // Get all the restaurantList where lat equals to UPDATED_LAT
+        defaultRestaurantShouldNotBeFound("lat.equals=" + UPDATED_LAT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByLatIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where lat in DEFAULT_LAT or UPDATED_LAT
+        defaultRestaurantShouldBeFound("lat.in=" + DEFAULT_LAT + "," + UPDATED_LAT);
+
+        // Get all the restaurantList where lat equals to UPDATED_LAT
+        defaultRestaurantShouldNotBeFound("lat.in=" + UPDATED_LAT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByLatIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where lat is not null
+        defaultRestaurantShouldBeFound("lat.specified=true");
+
+        // Get all the restaurantList where lat is null
+        defaultRestaurantShouldNotBeFound("lat.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByLngIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where lng equals to DEFAULT_LNG
+        defaultRestaurantShouldBeFound("lng.equals=" + DEFAULT_LNG);
+
+        // Get all the restaurantList where lng equals to UPDATED_LNG
+        defaultRestaurantShouldNotBeFound("lng.equals=" + UPDATED_LNG);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByLngIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where lng in DEFAULT_LNG or UPDATED_LNG
+        defaultRestaurantShouldBeFound("lng.in=" + DEFAULT_LNG + "," + UPDATED_LNG);
+
+        // Get all the restaurantList where lng equals to UPDATED_LNG
+        defaultRestaurantShouldNotBeFound("lng.in=" + UPDATED_LNG);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByLngIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where lng is not null
+        defaultRestaurantShouldBeFound("lng.specified=true");
+
+        // Get all the restaurantList where lng is null
+        defaultRestaurantShouldNotBeFound("lng.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByVisibleIsEqualToSomething() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where visible equals to DEFAULT_VISIBLE
+        defaultRestaurantShouldBeFound("visible.equals=" + DEFAULT_VISIBLE);
+
+        // Get all the restaurantList where visible equals to UPDATED_VISIBLE
+        defaultRestaurantShouldNotBeFound("visible.equals=" + UPDATED_VISIBLE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByVisibleIsInShouldWork() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where visible in DEFAULT_VISIBLE or UPDATED_VISIBLE
+        defaultRestaurantShouldBeFound("visible.in=" + DEFAULT_VISIBLE + "," + UPDATED_VISIBLE);
+
+        // Get all the restaurantList where visible equals to UPDATED_VISIBLE
+        defaultRestaurantShouldNotBeFound("visible.in=" + UPDATED_VISIBLE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRestaurantsByVisibleIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        restaurantRepository.saveAndFlush(restaurant);
+
+        // Get all the restaurantList where visible is not null
+        defaultRestaurantShouldBeFound("visible.specified=true");
+
+        // Get all the restaurantList where visible is null
+        defaultRestaurantShouldNotBeFound("visible.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllRestaurantsByCommentIsEqualToSomething() throws Exception {
         // Initialize the database
         Comment comment = CommentResourceIntTest.createEntity(em);
@@ -880,7 +1013,10 @@ public class RestaurantResourceIntTest {
             .andExpect(jsonPath("$.[*].website").value(hasItem(DEFAULT_WEBSITE.toString())))
             .andExpect(jsonPath("$.[*].facebook").value(hasItem(DEFAULT_FACEBOOK.toString())))
             .andExpect(jsonPath("$.[*].googlePlaceId").value(hasItem(DEFAULT_GOOGLE_PLACE_ID.toString())))
-            .andExpect(jsonPath("$.[*].rating").value(hasItem(DEFAULT_RATING)));
+            .andExpect(jsonPath("$.[*].rating").value(hasItem(DEFAULT_RATING)))
+            .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.doubleValue())))
+            .andExpect(jsonPath("$.[*].lng").value(hasItem(DEFAULT_LNG.doubleValue())))
+            .andExpect(jsonPath("$.[*].visible").value(hasItem(DEFAULT_VISIBLE.booleanValue())));
     }
 
     /**
@@ -926,7 +1062,10 @@ public class RestaurantResourceIntTest {
             .website(UPDATED_WEBSITE)
             .facebook(UPDATED_FACEBOOK)
             .googlePlaceId(UPDATED_GOOGLE_PLACE_ID)
-            .rating(UPDATED_RATING);
+            .rating(UPDATED_RATING)
+            .lat(UPDATED_LAT)
+            .lng(UPDATED_LNG)
+            .visible(UPDATED_VISIBLE);
 
         restRestaurantMockMvc.perform(put("/api/restaurants")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -948,6 +1087,9 @@ public class RestaurantResourceIntTest {
         assertThat(testRestaurant.getFacebook()).isEqualTo(UPDATED_FACEBOOK);
         assertThat(testRestaurant.getGooglePlaceId()).isEqualTo(UPDATED_GOOGLE_PLACE_ID);
         assertThat(testRestaurant.getRating()).isEqualTo(UPDATED_RATING);
+        assertThat(testRestaurant.getLat()).isEqualTo(UPDATED_LAT);
+        assertThat(testRestaurant.getLng()).isEqualTo(UPDATED_LNG);
+        assertThat(testRestaurant.isVisible()).isEqualTo(UPDATED_VISIBLE);
 
         // Validate the Restaurant in Elasticsearch
         Restaurant restaurantEs = restaurantSearchRepository.findOne(testRestaurant.getId());
@@ -1015,7 +1157,10 @@ public class RestaurantResourceIntTest {
             .andExpect(jsonPath("$.[*].website").value(hasItem(DEFAULT_WEBSITE.toString())))
             .andExpect(jsonPath("$.[*].facebook").value(hasItem(DEFAULT_FACEBOOK.toString())))
             .andExpect(jsonPath("$.[*].googlePlaceId").value(hasItem(DEFAULT_GOOGLE_PLACE_ID.toString())))
-            .andExpect(jsonPath("$.[*].rating").value(hasItem(DEFAULT_RATING)));
+            .andExpect(jsonPath("$.[*].rating").value(hasItem(DEFAULT_RATING)))
+            .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.doubleValue())))
+            .andExpect(jsonPath("$.[*].lng").value(hasItem(DEFAULT_LNG.doubleValue())))
+            .andExpect(jsonPath("$.[*].visible").value(hasItem(DEFAULT_VISIBLE.booleanValue())));
     }
 
     @Test

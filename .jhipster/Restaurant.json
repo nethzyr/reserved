@@ -105,11 +105,11 @@
         },
         {
             "fieldName": "lat",
-            "fieldType": "Float"
+            "fieldType": "Double"
         },
         {
             "fieldName": "lng",
-            "fieldType": "Float"
+            "fieldType": "Double"
         },
         {
             "fieldName": "visible",

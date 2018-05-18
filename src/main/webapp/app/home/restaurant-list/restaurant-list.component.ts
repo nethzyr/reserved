@@ -145,7 +145,7 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
 
     loadAll() {
         if (this.currentSearch) {
-            this.subscriptions.add(this.restaurantService.search({
+            this.subscriptions.add(this.restaurantService.searchVisible({
                 query: this.currentSearch,
                 size: 6,
                 page: this.page - 1,
@@ -157,6 +157,7 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
             return;
         }
         this.subscriptions.add(this.restaurantService.query({
+            'visible.equals': true,
             size: 6,
             page: this.page - 1,
             sort: ['rating,desc', 'name,asc']

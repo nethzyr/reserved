@@ -76,6 +76,12 @@ export class RestaurantService {
             .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
     }
 
+    searchVisible(req?: any): Observable<HttpResponse<Restaurant[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Restaurant[]>(`${this.resourceSearchUrl}-visible`, {params: options, observe: 'response'})
+            .map((res: HttpResponse<Restaurant[]>) => this.convertArrayResponse(res));
+    }
+
     searchOwned(req?: any): Observable<HttpResponse<Restaurant[]>> {
         const options = createRequestOption(req);
         return this.http.get<Restaurant[]>(`${this.resourceSearchUrl}-owned`, { params: options, observe: 'response' })
