@@ -2,23 +2,23 @@
     "reservedApp": {
         "comment": {
             "home": {
-                "title": "Comments",
-                "createLabel": "Egy új Comment létrehozása",
-                "createOrEditLabel": "Hozzon létre, vagy módosítson Commentt",
-                "search": "Comment keresése"
+                "title": "Visszajelzések",
+                "createLabel": "Egy új Visszajelzés létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Visszajelzést",
+                "search": "Visszajelzés keresése"
             },
-            "created": "Egy új Comment lett létrehozva {{ param }} azonosítóval",
-            "updated": "A Comment módosítva lett {{ param }} azonosítóval",
-            "deleted": "A Comment törölve lett {{ param }} azonosítóval",
+            "created": "Egy új Visszajelzés lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Visszajelzés módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Visszajelzés törölve lett {{ param }} azonosítóval",
             "delete": {
-                "question": "Biztos benne, hogy törölni szeretné az Commentt {{ id }} azonosítóval?"
+                "question": "Biztos benne, hogy törölni szeretné az Visszajelzést {{ id }} azonosítóval?"
             },
             "detail": {
-                "title": "Comment"
+                "title": "Visszajelzés"
             },
-            "authorName": "Author Name",
-            "text": "Text",
-            "restaurant": "Restaurant"
+            "authorName": "Beküldő",
+            "text": "Szöveg",
+            "restaurant": "Étterem"
         }
     }
 }

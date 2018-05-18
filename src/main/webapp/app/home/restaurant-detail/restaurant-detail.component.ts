@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {JhiEventManager, JhiLanguageService} from 'ng-jhipster';
 import {Title} from '@angular/platform-browser';
+import {Comment, CommentService} from '../../entities/comment';
 
 @Component({
     selector: 'jhi-restaurant-detail',
@@ -16,6 +17,7 @@ import {Title} from '@angular/platform-browser';
 export class RestaurantDetailComponent implements OnInit, OnDestroy {
 
     restaurant: Restaurant;
+    comments: Comment[];
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
@@ -24,6 +26,7 @@ export class RestaurantDetailComponent implements OnInit, OnDestroy {
         private restaurantService: RestaurantService,
         private route: ActivatedRoute,
         private titleService: Title,
+        private commentService: CommentService,
         private languageService: JhiLanguageService
     ) {
     }
@@ -40,6 +43,9 @@ export class RestaurantDetailComponent implements OnInit, OnDestroy {
             .subscribe((restaurantResponse: HttpResponse<Restaurant>) => {
                 this.restaurant = restaurantResponse.body;
                 this.titleService.setTitle(this.restaurant.name);
+                this.commentService.findByRestaurantId(this.restaurant.id).subscribe((commentResponse: HttpResponse<Comment[]>) => (
+                    this.comments = commentResponse.body
+                ));
             });
     }
 

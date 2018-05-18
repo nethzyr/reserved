@@ -5,7 +5,15 @@
                              restaurant.picture?.url || 'https://cdn.dribbble.com/users/366584/screenshots/2527274/404_1.gif'"
              alt="picture image"/>
     </div>
-    <h2>{{restaurant.name}}</h2>
+    <div class="row justify-content-center card-title">
+        <span class="restaurant-name">
+            {{restaurant.name}}
+        </span>
+        <span class="restaurant-rating" *ngIf="restaurant.rating">
+            <i class="fa fa-star"></i>
+            {{restaurant.rating / 10}}
+        </span>
+    </div>
     <div class="card-content" [ngSwitch]="languageService.currentLang">
         <p>{{restaurant.infoHun}}</p>
         <hr>
@@ -29,13 +37,22 @@
             <p><a target="_blank" [href]="restaurant.website" jhiTranslate="restaurant-list.detail.website">Weboldal</a>
             </p>
             <p><a target="_blank" [href]="restaurant.facebook">Facebook</a></p>
-            <p>
-                <button type="submit"
-                        (click)="previousState()"
-                        class="btn btn-info">
-                    <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-                </button>
-            </p>
         </div>
+        <div class="comments" *ngIf="comments">
+            <h5 jhiTranslate="restaurant-list.detail.review">Értékelések:</h5>
+            <div class="row comment-content" *ngFor="let comment of comments">
+                <span class="col-12">
+                    {{comment.text}}
+                </span>
+                <span class="author">
+                    {{comment.authorName}}
+                </span>
+            </div>
+        </div>
+        <button type="submit"
+                (click)="previousState()"
+                class="btn btn-info">
+            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+        </button>
     </div>
 </div>

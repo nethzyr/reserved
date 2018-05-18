@@ -34,6 +34,11 @@ export class CommentService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
+    findByRestaurantId(id: number): Observable<HttpResponse<Comment[]>> {
+        return this.http.get<Comment[]>(`${this.resourceUrl}-restaurant/${id}`, {observe: 'response'})
+            .map((res: HttpResponse<Comment[]>) => this.convertArrayResponse(res));
+    }
+
     query(req?: any): Observable<HttpResponse<Comment[]>> {
         const options = createRequestOption(req);
         return this.http.get<Comment[]>(this.resourceUrl, {params: options, observe: 'response'})

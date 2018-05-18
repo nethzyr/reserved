@@ -64,15 +64,17 @@ public class RestaurantService {
     /**
      * Update restaurant google details.
      */
-    @Scheduled(cron = "1 * * * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void updateGoogleDetails() {
         List<Restaurant> restaurantList = restaurantRepository.findAll();
         for (Restaurant restaurant : restaurantList) {
             if (restaurant.getGooglePlaceId().length() > 0) {
                 restaurant = PlacesService.details(restaurant);
                 log.debug("Request to save Restaurant : {}", restaurant);
-                commentRepository.deleteByRestaurant(restaurant.getId());
-                commentRepository.save(restaurant.getComments());
+                if (restaurant != null) {
+                    commentRepository.deleteByRestaurant(restaurant.getId());
+                    commentRepository.save(restaurant.getComments());
+                }
             }
         }
     }
