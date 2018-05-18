@@ -24,7 +24,7 @@ import {ReservedCommentModule} from './comment/comment.module';
         ReservedFoodModule,
         ReservedUserInfoModule,
         ReservedReservationModule,
-        ReservedCommentModule,
+        ReservedCommentModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

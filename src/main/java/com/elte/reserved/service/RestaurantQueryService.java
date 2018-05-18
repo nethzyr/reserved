@@ -172,6 +172,15 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
             if (criteria.getRating() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getRating(), Restaurant_.rating));
             }
+            if (criteria.getLat() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLat(), Restaurant_.lat));
+            }
+            if (criteria.getLng() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLng(), Restaurant_.lng));
+            }
+            if (criteria.getVisible() != null) {
+                specification = specification.and(buildSpecification(criteria.getVisible(), Restaurant_.visible));
+            }
             if (criteria.getCommentId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCommentId(), Restaurant_.comments, Comment_.id));
             }

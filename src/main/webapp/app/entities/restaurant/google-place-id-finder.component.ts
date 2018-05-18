@@ -71,6 +71,7 @@ export class GooglePlaceIdFinderComponent implements OnInit {
                         }
                     });
                     this.restaurant.streetAddress = route + ' ' + street_number + '.';
+                    console.log(place);
                 });
             });
         });

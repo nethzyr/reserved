@@ -68,7 +68,7 @@ class RestaurantGatlingTest extends Simulation {
             .exec(http("Create new restaurant")
             .post("/api/restaurants")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "streetAddress":"SAMPLE_TEXT", "postalCode":"SAMPLE_TEXT", "infoEng":"SAMPLE_TEXT", "infoHun":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "phone":"SAMPLE_TEXT", "website":"SAMPLE_TEXT", "facebook":"SAMPLE_TEXT", "googlePlaceId":"SAMPLE_TEXT", "rating":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "streetAddress":"SAMPLE_TEXT", "postalCode":"SAMPLE_TEXT", "infoEng":"SAMPLE_TEXT", "infoHun":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "phone":"SAMPLE_TEXT", "website":"SAMPLE_TEXT", "facebook":"SAMPLE_TEXT", "googlePlaceId":"SAMPLE_TEXT", "rating":"0", "lat":null, "lng":null, "visible":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_restaurant_url"))).exitHereIfFailed
             .pause(10)

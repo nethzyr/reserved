@@ -12,7 +12,7 @@ entity City {
 
 entity Comment {
 	authorName String required
-    text String required
+    text String required maxlength(1000)
 }
 
 entity Restaurant {
@@ -27,6 +27,9 @@ entity Restaurant {
     facebook String,
     googlePlaceId String
     rating Integer
+    lat Float
+    lng Float
+    visible Boolean
 }
 
 entity Picture {
@@ -57,10 +60,10 @@ relationship ManyToOne {
     City{stateCounty(name) required} to StateCounty
     StateCounty{country(name) required} to Country
     Restaurant{user(login) required} to User
-    
+
     Reservation{restaurant(name) required} to Restaurant
     Reservation{user(login)} to User
-    
+
     Restaurant{picture(title)} to Picture
 }
 
@@ -70,7 +73,7 @@ relationship ManyToMany {
 }
 
 relationship OneToMany {
-	Restaurant{comment required} to Comment
+	Restaurant{comment} to Comment
 }
 
 // Set pagination options

@@ -69,6 +69,15 @@ public class Restaurant implements Serializable {
     @Column(name = "rating")
     private Integer rating;
 
+    @Column(name = "lat")
+    private Float lat;
+
+    @Column(name = "lng")
+    private Float lng;
+
+    @Column(name = "visible")
+    private Boolean visible;
+
     @OneToMany(mappedBy = "restaurant")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -253,6 +262,45 @@ public class Restaurant implements Serializable {
         this.rating = rating;
     }
 
+    public Float getLat() {
+        return lat;
+    }
+
+    public Restaurant lat(Float lat) {
+        this.lat = lat;
+        return this;
+    }
+
+    public void setLat(Float lat) {
+        this.lat = lat;
+    }
+
+    public Float getLng() {
+        return lng;
+    }
+
+    public Restaurant lng(Float lng) {
+        this.lng = lng;
+        return this;
+    }
+
+    public void setLng(Float lng) {
+        this.lng = lng;
+    }
+
+    public Boolean isVisible() {
+        return visible;
+    }
+
+    public Restaurant visible(Boolean visible) {
+        this.visible = visible;
+        return this;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
+
     public Set<Comment> getComments() {
         return comments;
     }
@@ -399,6 +447,9 @@ public class Restaurant implements Serializable {
             ", facebook='" + getFacebook() + "'" +
             ", googlePlaceId='" + getGooglePlaceId() + "'" +
             ", rating=" + getRating() +
+            ", lat=" + getLat() +
+            ", lng=" + getLng() +
+            ", visible='" + isVisible() + "'" +
             "}";
     }
 }

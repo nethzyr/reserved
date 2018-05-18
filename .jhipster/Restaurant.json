@@ -3,7 +3,6 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipValidateRules": "required",
             "relationshipName": "comment",
             "otherEntityName": "comment",
             "otherEntityRelationshipName": "restaurant"
@@ -103,6 +102,18 @@
         {
             "fieldName": "rating",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "lat",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "lng",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "visible",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20180422180249",
