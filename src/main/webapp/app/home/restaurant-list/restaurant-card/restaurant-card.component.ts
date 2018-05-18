@@ -20,19 +20,19 @@ export class RestaurantCardComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.restaurant.googlePlaceId.length > 0) {
-            this.mapsAPILoader.load().then(() => {
-                const service = new google.maps.places.PlacesService(new google.maps.Map(document.createElement('div')));
-                service.getDetails({
-                    placeId: this.restaurant.googlePlaceId
-                }, (place, status) => {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        this.restaurant.rating = place.rating;
-                        console.log(place);
-                    }
-                });
-            });
-        }
+        /* if (this.restaurant.googlePlaceId.length > 0) {
+             this.mapsAPILoader.load().then(() => {
+                 const service = new google.maps.places.PlacesService(new google.maps.Map(document.createElement('div')));
+                 service.getDetails({
+                     placeId: this.restaurant.googlePlaceId
+                 }, (place, status) => {
+                     if (status === google.maps.places.PlacesServiceStatus.OK) {
+                         this.restaurant.rating = place.rating;
+                         console.log(place);
+                     }
+                 });
+             });
+         }*/
     }
 
     delete(event) {

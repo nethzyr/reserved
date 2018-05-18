@@ -99,6 +99,19 @@ public class CommentResource {
     }
 
     /**
+     * GET  /comments/:restaurantId : get the "restaurantId" comment.
+     *
+     * @param restaurantId the restaurantId of the restaurant from the comments
+     * @return the ResponseEntity with status 200 (OK) and with body the comment, or with status 404 (Not Found)
+     */
+    @GetMapping("/comments-restaurant/{restaurantId}")
+    @Timed
+    public List<Comment> getCommentsByRestaurant(@PathVariable Long restaurantId) {
+        log.debug("REST request to get Comments for a restaurantId: {}", restaurantId);
+        return commentRepository.findAllByRestaurantId(restaurantId);
+    }
+
+    /**
      * GET  /comments/:id : get the "id" comment.
      *
      * @param id the id of the comment to retrieve

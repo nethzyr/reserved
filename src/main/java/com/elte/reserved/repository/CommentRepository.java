@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 /**
  * Spring Data JPA repository for the Comment entity.
@@ -18,4 +20,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @Modifying
     @Query("delete from Comment comment where comment.restaurant.id = :id")
     void deleteByRestaurant(@Param("id") Long id);
+
+    List<Comment> findAllByRestaurantId(Long id);
 }
