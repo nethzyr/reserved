@@ -80,7 +80,8 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
         } else {
             this.subscriptions.add(this.restaurantService.filter(this.cityFilter, this.kitchenFilter, this.foodFilter, {
                 size: 6,
-                page: this.page - 1
+                page: this.page - 1,
+                sort: ['rating,desc']
             }).subscribe(
                     (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
                     (res: HttpErrorResponse) => this.onError(res.message)
@@ -147,7 +148,8 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
             this.subscriptions.add(this.restaurantService.search({
                 query: this.currentSearch,
                 size: 6,
-                page: this.page - 1
+                page: this.page - 1,
+                sort: ['rating,desc']
             }).subscribe(
                 (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
@@ -156,7 +158,8 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
         }
         this.subscriptions.add(this.restaurantService.query({
             size: 6,
-            page: this.page - 1
+            page: this.page - 1,
+            sort: ['rating,desc']
         }).subscribe(
             (res: HttpResponse<Restaurant[]>) => this.onSuccess(res.body, res.headers),
             (res: HttpErrorResponse) => this.onError(res.message)
