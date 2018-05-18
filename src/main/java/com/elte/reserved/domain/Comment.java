@@ -6,6 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -29,7 +30,8 @@ public class Comment implements Serializable {
     private String authorName;
 
     @NotNull
-    @Column(name = "text", nullable = false)
+    @Size(max = 1000)
+    @Column(name = "text", nullable = false, length = 1000)
     private String text;
 
     @ManyToOne
