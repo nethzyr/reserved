@@ -55,7 +55,8 @@
                 <td>{{restaurant.streetAddress}}</td>
                 <td>{{restaurant.postalCode}}</td>
                 <td *jhiHasAnyAuthority="'ROLE_ADMIN'">{{restaurant.user?.login}}</td>
-                <td>{{restaurant.visible}}</td>
+                <td *ngIf="restaurant.visible"><i class="fa fa-check fa-2x" aria-hidden="true"></i></td>
+                <td *ngIf="!restaurant.visible"><i class="fa fa-times fa-2x" aria-hidden="true"></i></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

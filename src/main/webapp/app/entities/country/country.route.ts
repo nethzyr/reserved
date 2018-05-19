@@ -11,7 +11,7 @@ export const countryRoute: Routes = [
         path: 'country',
         component: CountryComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.country.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -19,7 +19,7 @@ export const countryRoute: Routes = [
         path: 'country/:id',
         component: CountryDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.country.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -31,7 +31,7 @@ export const countryPopupRoute: Routes = [
         path: 'country-new',
         component: CountryPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.country.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -41,7 +41,7 @@ export const countryPopupRoute: Routes = [
         path: 'country/:id/edit',
         component: CountryPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.country.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -51,7 +51,7 @@ export const countryPopupRoute: Routes = [
         path: 'country/:id/delete',
         component: CountryDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.country.home.title'
         },
         canActivate: [UserRouteAccessService],

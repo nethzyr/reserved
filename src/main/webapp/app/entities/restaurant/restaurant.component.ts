@@ -10,7 +10,10 @@ import {ITEMS_PER_PAGE, Principal} from '../../shared';
 
 @Component({
     selector: 'jhi-restaurant',
-    templateUrl: './restaurant.component.html'
+    templateUrl: './restaurant.component.html',
+    styleUrls: [
+        'restaurant.scss'
+    ]
 })
 export class RestaurantComponent implements OnInit, OnDestroy {
 

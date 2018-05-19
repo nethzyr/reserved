@@ -11,7 +11,7 @@ export const cityRoute: Routes = [
         path: 'city',
         component: CityComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.city.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -19,7 +19,7 @@ export const cityRoute: Routes = [
         path: 'city/:id',
         component: CityDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.city.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -31,7 +31,7 @@ export const cityPopupRoute: Routes = [
         path: 'city-new',
         component: CityPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.city.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -41,7 +41,7 @@ export const cityPopupRoute: Routes = [
         path: 'city/:id/edit',
         component: CityPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.city.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -51,7 +51,7 @@ export const cityPopupRoute: Routes = [
         path: 'city/:id/delete',
         component: CityDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.city.home.title'
         },
         canActivate: [UserRouteAccessService],

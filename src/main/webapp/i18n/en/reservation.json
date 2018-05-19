@@ -28,13 +28,23 @@
             "datePicker": "Date:",
             "timePicker": "Time:",
             "ppl": "Number of guests:",
+            "notification": "Successful reservation. We'll send you an email once the restaurant has confirmed your reservation.",
             "button": {
                 "open": "Reservation",
                 "close": "Close",
                 "reserve": "Reserve!",
                 "login": "Please log in, or register!"
-            },
-            "notification": "Successful reservation. We'll send you an email once the restaurant has confirmed your reservation."
+            }
+        },
+        "confirm": {
+            "success": "The reservation below has been confirmed successfully:",
+            "noSuccess": "The reservation below has been declined successfully:",
+            "restaurant": "Restaurant:",
+            "name": "Name:",
+            "email": "Email:",
+            "date": "Date and Time:",
+            "people": "Number of guests:",
+            "linkUsed": "This reservation has already been confirmed or declined."
         }
     }
 }

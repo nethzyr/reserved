@@ -28,13 +28,23 @@
             "datePicker": "Dátum:",
             "timePicker": "Időpont:",
             "ppl": "Vengégek száma:",
+            "notification": "Sikeres asztalfoglalás. Amint az étterem visszaigazolta a foglalásodat, küldünk egy emailt.",
             "button": {
                 "open": "Asztalfoglalás",
                 "close": "Bezár",
                 "reserve": "Foglalás!",
                 "login": "Kérlek jelentkezz be, vagy regisztrálj!"
-            },
-            "notification": "Sikeres asztalfoglalás. Amint az étterem visszaigazolta a foglalásodat, küldünk egy emailt."
+            }
+        },
+        "confirm": {
+            "success": "Az alábbi foglalást sikeresen visszaigazoltad:",
+            "noSuccess": "Az alábbi foglalást sikeresen elutasítottad:",
+            "restaurant": "Étterem:",
+            "name": "Név:",
+            "email": "Email:",
+            "date": "Dátum és Idő:",
+            "people": "Vendégek száma:",
+            "linkUsed": "Ez a foglalás már elfogadásra vagy elutasításra került."
         }
     }
 }

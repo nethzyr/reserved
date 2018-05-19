@@ -32,7 +32,7 @@ export const restaurantRoute: Routes = [
             'pagingParams': RestaurantResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_MANAGER', 'ROLE_ADMIN'],
             pageTitle: 'reservedApp.restaurant.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -40,7 +40,7 @@ export const restaurantRoute: Routes = [
         path: 'restaurant/:id',
         component: RestaurantDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_MANAGER', 'ROLE_ADMIN'],
             pageTitle: 'reservedApp.restaurant.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -52,7 +52,7 @@ export const restaurantPopupRoute: Routes = [
         path: 'restaurant-new',
         component: RestaurantPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_MANAGER', 'ROLE_ADMIN'],
             pageTitle: 'reservedApp.restaurant.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -62,7 +62,7 @@ export const restaurantPopupRoute: Routes = [
         path: 'restaurant/:id/edit',
         component: RestaurantPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_MANAGER', 'ROLE_ADMIN'],
             pageTitle: 'reservedApp.restaurant.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -72,7 +72,7 @@ export const restaurantPopupRoute: Routes = [
         path: 'restaurant/:id/delete',
         component: RestaurantDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_MANAGER', 'ROLE_ADMIN'],
             pageTitle: 'reservedApp.restaurant.home.title'
         },
         canActivate: [UserRouteAccessService],

@@ -11,7 +11,7 @@ export const kitchenRoute: Routes = [
         path: 'kitchen',
         component: KitchenComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.kitchen.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -19,7 +19,7 @@ export const kitchenRoute: Routes = [
         path: 'kitchen/:id',
         component: KitchenDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.kitchen.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -31,7 +31,7 @@ export const kitchenPopupRoute: Routes = [
         path: 'kitchen-new',
         component: KitchenPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.kitchen.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -41,7 +41,7 @@ export const kitchenPopupRoute: Routes = [
         path: 'kitchen/:id/edit',
         component: KitchenPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.kitchen.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -51,7 +51,7 @@ export const kitchenPopupRoute: Routes = [
         path: 'kitchen/:id/delete',
         component: KitchenDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.kitchen.home.title'
         },
         canActivate: [UserRouteAccessService],
