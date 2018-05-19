@@ -37,7 +37,6 @@ export class CommentDetailComponent implements OnInit, OnDestroy {
                 this.comment = commentResponse.body;
             });
     }
-
     previousState() {
         window.history.back();
     }

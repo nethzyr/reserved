@@ -13,6 +13,7 @@ export class CommentPopupService {
         private modalService: NgbModal,
         private router: Router,
         private commentService: CommentService
+
     ) {
         this.ngbModalRef = null;
     }

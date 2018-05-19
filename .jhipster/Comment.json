@@ -29,7 +29,7 @@
     "changelogDate": "20180516185120",
     "entityTableName": "comment",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "infinite-scroll",
     "service": "no",
     "jpaMetamodelFiltering": false
 }

@@ -79,5 +79,5 @@ relationship OneToMany {
 // Set pagination options
 service Restaurant with serviceClass
 filter Restaurant
-paginate Country, StateCounty, City, Kitchen, Food, Reservation with infinite-scroll
+paginate Country, StateCounty, City, Kitchen, Food, Reservation, Comment with infinite-scroll
 paginate Restaurant, Picture with pagination

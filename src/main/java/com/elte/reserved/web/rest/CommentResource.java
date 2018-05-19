@@ -6,9 +6,14 @@ import com.elte.reserved.repository.CommentRepository;
 import com.elte.reserved.repository.search.CommentSearchRepository;
 import com.elte.reserved.web.rest.errors.BadRequestAlertException;
 import com.elte.reserved.web.rest.util.HeaderUtil;
+import com.elte.reserved.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +22,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
@@ -89,13 +92,16 @@ public class CommentResource {
     /**
      * GET  /comments : get all the comments.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of comments in body
      */
     @GetMapping("/comments")
     @Timed
-    public List<Comment> getAllComments() {
-        log.debug("REST request to get all Comments");
-        return commentRepository.findAll();
+    public ResponseEntity<List<Comment>> getAllComments(Pageable pageable) {
+        log.debug("REST request to get a page of Comments");
+        Page<Comment> page = commentRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comments");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
@@ -145,15 +151,16 @@ public class CommentResource {
      * to the query.
      *
      * @param query the query of the comment search
+     * @param pageable the pagination information
      * @return the result of the search
      */
     @GetMapping("/_search/comments")
     @Timed
-    public List<Comment> searchComments(@RequestParam String query) {
-        log.debug("REST request to search Comments for query {}", query);
-        return StreamSupport
-            .stream(commentSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+    public ResponseEntity<List<Comment>> searchComments(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of Comments for query {}", query);
+        Page<Comment> page = commentSearchRepository.search(queryStringQuery(query), pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/comments");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 }
