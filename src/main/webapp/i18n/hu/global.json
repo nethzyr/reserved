@@ -58,11 +58,11 @@
             "info": {
                 "authenticated": {
                     "prefix": "Ha be akar ",
-                    "link": "lépni",
+                    "link": "lépjen be",
                     "suffix": ", kipróbálás céljából használható felhasználók:<br/>- Adminisztrátor (azonosító=\"admin\" és a jelszó=\"admin\") <br/>- Felhasználó (azonosító=\"user\" és jelszó=\"user\")."
                 },
                 "register": {
-                    "noaccount": "Nincs még hozzáférése?",
+                    "noaccount": "Még nem regisztrált?",
                     "link": "Regisztráljon"
                 }
             },
