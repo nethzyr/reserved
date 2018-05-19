@@ -3,6 +3,7 @@ package com.elte.reserved.service;
 import com.elte.reserved.domain.Restaurant;
 import com.elte.reserved.repository.CommentRepository;
 import com.elte.reserved.repository.RestaurantRepository;
+import com.elte.reserved.repository.search.CommentSearchRepository;
 import com.elte.reserved.repository.search.RestaurantSearchRepository;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.slf4j.Logger;
@@ -34,13 +35,16 @@ public class RestaurantService {
 
     private final CommentRepository commentRepository;
 
+    private final CommentSearchRepository commentSearchRepositoryRepository;
+
     private final RestaurantQueryService restaurantQueryService;
 
-    public RestaurantService(RestaurantRepository restaurantRepository, RestaurantSearchRepository restaurantSearchRepository, PlacesService placesService, CommentRepository commentRepository, RestaurantQueryService restaurantQueryService) {
+    public RestaurantService(RestaurantRepository restaurantRepository, RestaurantSearchRepository restaurantSearchRepository, PlacesService placesService, CommentRepository commentRepository, CommentSearchRepository commentSearchRepositoryRepository, RestaurantQueryService restaurantQueryService) {
         this.restaurantRepository = restaurantRepository;
         this.restaurantSearchRepository = restaurantSearchRepository;
         this.placesService = placesService;
         this.commentRepository = commentRepository;
+        this.commentSearchRepositoryRepository = commentSearchRepositoryRepository;
         this.restaurantQueryService = restaurantQueryService;
     }
 
@@ -54,6 +58,7 @@ public class RestaurantService {
         restaurant = PlacesService.details(restaurant);
         if (restaurant != null) {
             commentRepository.save(restaurant.getComments());
+            commentSearchRepositoryRepository.save(restaurant.getComments());
         }
         Restaurant result = restaurantRepository.save(restaurant);
         log.debug("Request to save Restaurant : {}", restaurant);
@@ -72,9 +77,10 @@ public class RestaurantService {
                 restaurant = PlacesService.details(restaurant);
                 log.debug("Request to save Restaurant : {}", restaurant);
                 if (restaurant != null) {
-                    commentRepository.deleteByRestaurant(restaurant.getId());
-                    commentRepository.save(restaurant.getComments());
+                    commentRepository.deleteByRestaurantId(restaurant.getId());
+                    commentSearchRepositoryRepository.deleteByRestaurantId(restaurant.getId());
                 }
+                save(restaurant);
             }
         }
     }
