@@ -33,7 +33,7 @@ export const pictureRoute: Routes = [
             'pagingParams': PictureResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.picture.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -41,7 +41,7 @@ export const pictureRoute: Routes = [
         path: 'picture/:id',
         component: PictureDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.picture.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -53,7 +53,7 @@ export const picturePopupRoute: Routes = [
         path: 'picture-new',
         component: PicturePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.picture.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -63,7 +63,7 @@ export const picturePopupRoute: Routes = [
         path: 'picture/:id/edit',
         component: PicturePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.picture.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -73,7 +73,7 @@ export const picturePopupRoute: Routes = [
         path: 'picture/:id/delete',
         component: PictureDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.picture.home.title'
         },
         canActivate: [UserRouteAccessService],

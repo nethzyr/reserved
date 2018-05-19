@@ -1,13 +1,6 @@
 <div>
     <h2>
         <span jhiTranslate="reservedApp.reservation.home.title">Reservations</span>
-        <button class="btn btn-primary float-right jh-create-entity create-reservation"
-                [routerLink]="['/', { outlets: { popup: ['reservation-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span class="hidden-sm-down" jhiTranslate="reservedApp.reservation.home.createLabel">
-            Create new Reservation
-            </span>
-        </button>
     </h2>
     <jhi-alert></jhi-alert>
     <div class="row">
@@ -40,7 +33,8 @@
                 <th jhiSortBy="restaurant.name"><span
                     jhiTranslate="reservedApp.reservation.restaurant">Restaurant</span> <span class="fa fa-sort"></span>
                 </th>
-                <th jhiSortBy="user.login"><span jhiTranslate="reservedApp.reservation.user">User</span> <span
+                <th *jhiHasAnyAuthority="'ROLE_MANAGER'" jhiSortBy="user.login"><span
+                    jhiTranslate="reservedApp.reservation.user">User</span> <span
                     class="fa fa-sort"></span></th>
                 <th></th>
             </tr>
@@ -50,38 +44,24 @@
             <tr *ngFor="let reservation of reservations ;trackBy: trackId">
                 <td>{{reservation.time | date:'medium'}}</td>
                 <td>{{reservation.people}}</td>
-                <td>{{reservation.confirmed}}</td>
+                <td *ngIf="reservation.confirmed"><i class="fa fa-check fa-2x" aria-hidden="true"></i></td>
+                <td *ngIf="!reservation.confirmed"><i class="fa fa-times fa-2x" aria-hidden="true"></i></td>
                 <td>
                     <div *ngIf="reservation.restaurant">
                         <a [routerLink]="['../restaurant', reservation.restaurant?.id ]">{{reservation.restaurant?.name}}</a>
                     </div>
                 </td>
-                <td>
+                <td *jhiHasAnyAuthority="'ROLE_MANAGER'">
                     {{reservation.user?.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../reservation', reservation.id ]"
-                                class="btn btn-info">
+                                class="btn btn-info"
+                                *jhiHasAnyAuthority="'ROLE_MANAGER'">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'reservation/'+ reservation.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-primary">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'reservation/'+ reservation.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </td>

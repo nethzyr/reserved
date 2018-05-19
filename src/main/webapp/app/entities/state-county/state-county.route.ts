@@ -11,7 +11,7 @@ export const stateCountyRoute: Routes = [
         path: 'state-county',
         component: StateCountyComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.stateCounty.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -19,7 +19,7 @@ export const stateCountyRoute: Routes = [
         path: 'state-county/:id',
         component: StateCountyDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.stateCounty.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -31,7 +31,7 @@ export const stateCountyPopupRoute: Routes = [
         path: 'state-county-new',
         component: StateCountyPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.stateCounty.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -41,7 +41,7 @@ export const stateCountyPopupRoute: Routes = [
         path: 'state-county/:id/edit',
         component: StateCountyPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.stateCounty.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -51,7 +51,7 @@ export const stateCountyPopupRoute: Routes = [
         path: 'state-county/:id/delete',
         component: StateCountyDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.stateCounty.home.title'
         },
         canActivate: [UserRouteAccessService],

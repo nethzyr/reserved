@@ -11,7 +11,7 @@ export const foodRoute: Routes = [
         path: 'food',
         component: FoodComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.food.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -19,7 +19,7 @@ export const foodRoute: Routes = [
         path: 'food/:id',
         component: FoodDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.food.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -31,7 +31,7 @@ export const foodPopupRoute: Routes = [
         path: 'food-new',
         component: FoodPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.food.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -41,7 +41,7 @@ export const foodPopupRoute: Routes = [
         path: 'food/:id/edit',
         component: FoodPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.food.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -51,7 +51,7 @@ export const foodPopupRoute: Routes = [
         path: 'food/:id/delete',
         component: FoodDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'reservedApp.food.home.title'
         },
         canActivate: [UserRouteAccessService],

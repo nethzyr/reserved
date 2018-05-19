@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpResponse} from '@angular/common/http';
 import {Subscription} from 'rxjs/Subscription';
-import {JhiEventManager} from 'ng-jhipster';
+import {JhiEventManager, JhiLanguageService} from 'ng-jhipster';
 
 import {Restaurant} from './restaurant.model';
 import {RestaurantService} from './restaurant.service';
@@ -20,7 +20,8 @@ export class RestaurantDetailComponent implements OnInit, OnDestroy {
     constructor(
         private eventManager: JhiEventManager,
         private restaurantService: RestaurantService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private languageService: JhiLanguageService
     ) {
     }
 

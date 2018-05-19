@@ -4,20 +4,25 @@
 
 <div *ngIf="!loading">
     <div *ngIf="success">
-        <h4 *ngIf="confirm">Az alábbi foglalást sikeresen visszaigazoltad:</h4>
-        <h4 *ngIf="!confirm">Az alábbi foglalást sikeresen elutasítottad:</h4>
+        <h4 *ngIf="confirm" jhiTranslate="reservation.confirm.success">Az alábbi foglalást sikeresen
+            visszaigazoltad:</h4>
+        <h4 *ngIf="!confirm" jhiTranslate="reservation.confirm.noSuccess">Az alábbi foglalást sikeresen
+            elutasítottad:</h4>
         <ul>
-            <li>Azonosító: {{reservation.id}}</li>
-            <li>Étterem: {{reservation.restaurant.name}}</li>
-            <li>Név: {{reservation.user.firstName}} {{reservation.user.lastName}}</li>
-            <li>Időpont: {{reservation.time | date:'yyyy-MM-dd hh:mm'}}</li>
-            <li>Vendégek száma: {{reservation.people}}</li>
+            <li><span jhiTranslate="reservation.confirm.restaurant">Étterem:</span> {{reservation.restaurant.name}}</li>
+            <li><span jhiTranslate="reservation.confirm.name">Név:</span> {{reservation.user.firstName}}
+                {{reservation.user.lastName}}
+            </li>
+            <li><span jhiTranslate="reservation.confirm.email">Email:</span> {{reservation.user.email}}</li>
+            <li><span jhiTranslate="reservation.confirm.date">Időpont:</span> {{reservation.time | date:'yyyy-MM-dd
+                hh:mm'}}
+            </li>
+            <li><span jhiTranslate="reservation.confirm.people">Vendégek száma:</span> {{reservation.people}}</li>
         </ul>
     </div>
 
     <div *ngIf="!success">
-        <div *ngIf="confirm">
-            <p>Ezt a foglalást már sikeresen visszaigazoltad vagy elutasítottad.</p>
-        </div>
+        <p jhiTranslate="reservation.confirm.linkUsed">Ezt a foglalást már sikeresen visszaigazoltad vagy
+            elutasítottad.</p>
     </div>
 </div>

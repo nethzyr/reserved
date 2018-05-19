@@ -10,7 +10,10 @@ import {ITEMS_PER_PAGE, Principal} from '../../shared';
 
 @Component({
     selector: 'jhi-reservation',
-    templateUrl: './reservation.component.html'
+    templateUrl: './reservation.component.html',
+    styleUrls: [
+        'reservation.scss'
+    ]
 })
 export class ReservationComponent implements OnInit, OnDestroy {
 
