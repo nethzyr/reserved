@@ -3,4 +3,7 @@ id;login;password_hash;first_name;last_name;email;image_url;activated;lang_key;c
 2;anonymoususer;$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO;Anonymous;User;anonymous@localhost;;true;hu;system;system
 3;admin;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Administrator;Administrator;admin@localhost;;true;hu;system;system
 4;manager;$2a$10$F9axBV0f4R5PVILuCoKXjOwxfDQ3jzE2phsaOCMAIRudtagB6KxEq;Manager;Manager;manager@localhost;;true;hu;system;system
-5;user;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;User;User;user@localhost;;true;hu;system;system
+5;user1;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;User;User;user1@localhost;;true;hu;system;system
+6;user2;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;User;User;user2@localhost;;true;hu;system;system
+7;user3;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;User;User;user3@localhost;;true;hu;system;system
+8;user4;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;User;User;user4@localhost;;true;hu;system;system
