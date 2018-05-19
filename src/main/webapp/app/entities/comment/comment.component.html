@@ -24,13 +24,12 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-                <th jhiSortBy="authorName"><span jhiTranslate="reservedApp.comment.authorName">Author Name</span> <span
+                <th jhiSortBy="authorName"><span jhiTranslate="reservedApp.comment.authorName">AuthorName</span> <span
                     class="fa fa-sort"></span></th>
                 <th jhiSortBy="text"><span jhiTranslate="reservedApp.comment.text">Text</span> <span
                     class="fa fa-sort"></span></th>
-                <th jhiSortBy="restaurant.id"><span jhiTranslate="reservedApp.comment.restaurant">Restaurant</span>
+                <th jhiSortBy="restaurant.name"><span jhiTranslate="reservedApp.comment.restaurant">Restaurant</span>
                     <span class="fa fa-sort"></span></th>
-                <th></th>
             </tr>
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"

@@ -44,6 +44,10 @@ public class ElasticsearchIndexService {
 
     private final CitySearchRepository citySearchRepository;
 
+    private final CommentRepository commentRepository;
+
+    private final CommentSearchRepository commentSearchRepository;
+
     private final CountryRepository countryRepository;
 
     private final CountrySearchRepository countrySearchRepository;
@@ -87,6 +91,8 @@ public class ElasticsearchIndexService {
         UserSearchRepository userSearchRepository,
         CityRepository cityRepository,
         CitySearchRepository citySearchRepository,
+        CommentRepository commentRepository,
+        CommentSearchRepository commentSearchRepository,
         CountryRepository countryRepository,
         CountrySearchRepository countrySearchRepository,
         FoodRepository foodRepository,
@@ -108,6 +114,8 @@ public class ElasticsearchIndexService {
         this.userSearchRepository = userSearchRepository;
         this.cityRepository = cityRepository;
         this.citySearchRepository = citySearchRepository;
+        this.commentRepository = commentRepository;
+        this.commentSearchRepository = commentSearchRepository;
         this.countryRepository = countryRepository;
         this.countrySearchRepository = countrySearchRepository;
         this.foodRepository = foodRepository;
@@ -134,6 +142,7 @@ public class ElasticsearchIndexService {
         if (reindexLock.tryLock()) {
             try {
                 reindexForClass(City.class, cityRepository, citySearchRepository);
+                reindexForClass(Comment.class, commentRepository, commentSearchRepository);
                 reindexForClass(Country.class, countryRepository, countrySearchRepository);
                 reindexForClass(Food.class, foodRepository, foodSearchRepository);
                 reindexForClass(Kitchen.class, kitchenRepository, kitchenSearchRepository);
