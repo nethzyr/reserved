@@ -20,12 +20,17 @@ import java.util.stream.Collectors;
 @Component
 public class TokenProvider {
 
-    private static final String AUTHORITIES_KEY = "auth";
     private final Logger log = LoggerFactory.getLogger(TokenProvider.class);
-    private final JHipsterProperties jHipsterProperties;
+
+    private static final String AUTHORITIES_KEY = "auth";
+
     private String secretKey;
+
     private long tokenValidityInMilliseconds;
+
     private long tokenValidityInMillisecondsForRememberMe;
+
+    private final JHipsterProperties jHipsterProperties;
 
     public TokenProvider(JHipsterProperties jHipsterProperties) {
         this.jHipsterProperties = jHipsterProperties;

@@ -206,7 +206,7 @@ dependencies {
         exclude module: 'mapstruct'
     }
     compile "io.springfox:springfox-bean-validators"
-    compile "mysql:mysql-connector-java"
+    compile "org.postgresql:postgresql"
     compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}"
     compile "org.apache.httpcomponents:httpclient"
     compile "org.springframework.social:spring-social-security"
