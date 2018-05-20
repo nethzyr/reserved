@@ -49,7 +49,7 @@ export class RestaurantDialogComponent implements OnInit {
         private eventManager: JhiEventManager,
         private dataUtils: JhiDataUtils,
         private elementRef: ElementRef,
-        private languageService: JhiLanguageService
+        public languageService: JhiLanguageService
     ) {
     }
 
