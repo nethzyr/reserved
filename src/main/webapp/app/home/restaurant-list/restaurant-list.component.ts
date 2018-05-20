@@ -91,6 +91,7 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
 
     addFilter(array: any, model: string, filter: Set<any>) {
         if (array.includes(model)) {
+            this.page = 1;
             filter.add(model);
             this.cityModel = '';
             this.kitchenModel = '';
@@ -100,6 +101,7 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     removeFilter(element: any, filter: Set<any>) {
+        this.page = 1;
         filter.delete(element);
         this.applyFilters();
     }

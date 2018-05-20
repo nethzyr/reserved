@@ -1,6 +1,6 @@
 import {BaseEntity, User} from './../../shared';
 import {Picture} from '../picture';
-import {City} from "../city";
+import {City} from '../city';
 
 export class Restaurant implements BaseEntity {
     constructor(
