@@ -52,7 +52,9 @@
         <loadData encoding="UTF-8"
                   file="config/liquibase/demo_fixtures/restaurant.csv"
                   separator=";"
-                  tableName="restaurant"/>
+                  tableName="restaurant">
+            <column name="visible" type="boolean"/>
+        </loadData>
     </changeSet>
     <changeSet id="20180422205100-8" author="rob">
         <loadData encoding="UTF-8"
@@ -70,6 +72,8 @@
         <loadData encoding="UTF-8"
                   file="config/liquibase/demo_fixtures/reservation.csv"
                   separator=";"
-                  tableName="reservation"/>
+                  tableName="reservation">
+            <column name="confirmed" type="boolean"/>
+        </loadData>
     </changeSet>
 </databaseChangeLog>
