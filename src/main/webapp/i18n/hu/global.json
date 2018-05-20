@@ -35,11 +35,11 @@
                 "metrics": "Metrikák",
                 "health": "Akalmazás állapota",
                 "configuration": "Konfiguráció",
-                "logs": "Naplók",
+                "logs": "Naplózás",
                 "audits": "Nyomkövetés",
                 "apidocs": "API dokumentáció",
                 "database": "Adatbázis",
-                "elasticsearch-reindex": "Reindex Elasticsearch",
+                "elasticsearch-reindex": "Elasticsearch újraindexelés",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
             "language": "Nyelvek"
@@ -108,8 +108,8 @@
             "open": "Megnyitás",
             "save": "Mentés",
             "view": "Nézet",
-            "show": "Show",
-            "hide": "Hide"
+            "show": "Mutat",
+            "hide": "Elrejt"
         },
         "detail": {
             "field": "Mező",
