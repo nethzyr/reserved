@@ -80,8 +80,8 @@ public class PlacesService {
             JSONObject jsonObj = new JSONObject(jsonResults.toString()).getJSONObject("result");
             JSONObject location = jsonObj.getJSONObject("geometry").getJSONObject("location");
 
-            restaurant.setLat((float) location.getDouble("lat"));
-            restaurant.setLng((float) location.getDouble("lng"));
+            restaurant.setLat(location.getDouble("lat"));
+            restaurant.setLng(location.getDouble("lng"));
         } catch (JSONException e) {
             log.debug("Error processing JSON results", e);
         }

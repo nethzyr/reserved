@@ -6,15 +6,15 @@ services:
             - SPRING_PROFILES_ACTIVE=prod,swagger
             - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
             - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
-            - SPRING_DATASOURCE_URL=jdbc:mysql://reserved-mysql:3306/reserved?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://reserved-postgresql:5432/reserved
             - JHIPSTER_SLEEP=30 # gives time for the JHipster Registry to boot before the application
             - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=reserved-elasticsearch:9300
         ports:
             - 8080:8080
-    reserved-mysql:
+    reserved-postgresql:
         extends:
-            file: mysql.yml
-            service: reserved-mysql
+            file: postgresql.yml
+            service: reserved-postgresql
     reserved-elasticsearch:
         extends:
             file: elasticsearch.yml
