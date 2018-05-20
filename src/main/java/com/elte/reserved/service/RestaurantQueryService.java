@@ -91,29 +91,31 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
             if (!cityArray.isEmpty()) {
                 cityList.retainAll(kitchenList);
             } else {
-                cityList.addAll(kitchenList);
+                cityList.addAll(new LinkedHashSet<>(kitchenList));
             }
         }
         criteria = new RestaurantCriteria();
         criteria.setVisible((BooleanFilter) new BooleanFilter().setEquals(true));
-        for (int i = 0; i < foodArray.size(); i++) {
-            log.debug("bementem a null arraybe geci {} ", foodArray.size() + " " + foodArray.isEmpty());
-            try {
-                Long x = Long.parseLong(foodArray.get(i));
-                criteria.setFoodId((LongFilter) new LongFilter()
-                    .setEquals(x));
-                foodList.addAll(findByCriteria(criteria));
-            } catch (NumberFormatException e) {
-                System.out.println(e);
-            }
+        for (String i : foodArray) {
+            criteria.setFoodId((LongFilter) new LongFilter()
+                .setEquals(Long.parseLong(i)));
+            foodList.addAll(findByCriteria(criteria));
         }
         if (!foodArray.isEmpty()) {
-            if (!cityArray.isEmpty() && !kitchenArray.isEmpty()) {
+            if (!cityArray.isEmpty() || !kitchenArray.isEmpty()) {
                 cityList.retainAll(foodList);
             } else {
-                cityList.addAll(foodList);
+                cityList.addAll(new LinkedHashSet<>(foodList));
             }
         }
+
+        cityList.sort((lhs, rhs) -> {
+            if (lhs.getRating().equals(rhs.getRating())) {
+                return lhs.getName().compareTo(rhs.getName());
+            } else {
+                return rhs.getRating().compareTo(lhs.getRating());
+            }
+        });
 
         log.debug("Request to get all filtered Restaurants: {}", pageable);
         int start = pageable.getOffset();
