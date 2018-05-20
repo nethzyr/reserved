@@ -110,7 +110,15 @@ public class RestaurantQueryService extends QueryService<Restaurant> {
         }
 
         cityList.sort((lhs, rhs) -> {
-            if (lhs.getRating().equals(rhs.getRating())) {
+            if (lhs.getRating() == null || rhs.getRating() == null) {
+                if (lhs.getRating() == null && rhs.getRating() == null) {
+                    return lhs.getName().compareTo(rhs.getName());
+                } else if (lhs.getRating() == null) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            } else if (lhs.getRating().equals(rhs.getRating())) {
                 return lhs.getName().compareTo(rhs.getName());
             } else {
                 return rhs.getRating().compareTo(lhs.getRating());

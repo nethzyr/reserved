@@ -1,6 +1,6 @@
 {
     "login": {
-        "title": "Hitelesítés",
+        "title": "Bejelentkezés",
         "form": {
             "password": "Jelszó",
             "password.placeholder": "Az Ön jelszava",
