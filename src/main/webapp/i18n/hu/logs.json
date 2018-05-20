@@ -1,6 +1,6 @@
 {
     "logs": {
-        "title": "Naplók",
+        "title": "Naplózás",
         "nbloggers": "{{ total }} naplózó található.",
         "filter": "Szűrő",
         "table": {
