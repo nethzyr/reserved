@@ -55,13 +55,13 @@ public class RestaurantService {
      * @return the persisted entity
      */
     public Restaurant save(Restaurant restaurant) {
+        log.debug("Request to save Restaurant : {}", restaurant);
         restaurant = PlacesService.details(restaurant);
-        if (restaurant != null) {
+        if (restaurant != null && restaurant.getComments().size() > 0) {
             commentRepository.save(restaurant.getComments());
             commentSearchRepositoryRepository.save(restaurant.getComments());
         }
         Restaurant result = restaurantRepository.save(restaurant);
-        log.debug("Request to save Restaurant : {}", restaurant);
         restaurantSearchRepository.save(result);
         return result;
     }

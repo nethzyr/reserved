@@ -55,8 +55,8 @@ public class RestaurantResourceIntTest {
     private static final String DEFAULT_INFO_HUN = "AAAAAAAAAA";
     private static final String UPDATED_INFO_HUN = "BBBBBBBBBB";
 
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
+    private static final String DEFAULT_EMAIL = "john.doe@jhipster.com";
+    private static final String UPDATED_EMAIL = "updated@jhipster.com";
 
     private static final String DEFAULT_PHONE = "AAAAAAAAAA";
     private static final String UPDATED_PHONE = "BBBBBBBBBB";

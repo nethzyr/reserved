@@ -10,7 +10,7 @@ import {Restaurant} from './restaurant.model';
 import {RestaurantPopupService} from './restaurant-popup.service';
 import {RestaurantService} from './restaurant.service';
 import {City, CityService} from '../city';
-import {User, UserService} from '../../shared';
+import {Principal, User, UserService} from '../../shared';
 import {Picture, PictureService} from '../picture';
 import {Kitchen, KitchenService} from '../kitchen';
 import {Food, FoodService} from '../food';
@@ -49,7 +49,8 @@ export class RestaurantDialogComponent implements OnInit {
         private eventManager: JhiEventManager,
         private dataUtils: JhiDataUtils,
         private elementRef: ElementRef,
-        public languageService: JhiLanguageService
+        public languageService: JhiLanguageService,
+        private principal: Principal
     ) {
     }
 
@@ -91,6 +92,9 @@ export class RestaurantDialogComponent implements OnInit {
     }
 
     save() {
+        if (!this.restaurant.user) {
+            this.restaurant.user = this.principal.getIdentity();
+        }
         this.isSaving = true;
         if (this.restaurant.id !== undefined) {
             if (this.picture.img !== undefined) {

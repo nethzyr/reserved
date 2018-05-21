@@ -180,7 +180,7 @@ public class FoodResourceIntTest {
         foodRepository.saveAndFlush(food);
 
         // Get all the foodList
-        restFoodMockMvc.perform(get("/api/foods?sort=id,desc"))
+        restFoodMockMvc.perform(get("/api/foods?sort=id,desc&isList=true"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(food.getId().intValue())))
