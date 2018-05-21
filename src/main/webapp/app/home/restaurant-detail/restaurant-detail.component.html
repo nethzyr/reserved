@@ -59,5 +59,8 @@
                 class="btn btn-info">
             <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
         </button>
+        <div class="reservation-button" (click)="delete($event)">
+            <jhi-reservation-modal [restaurant]="restaurant"></jhi-reservation-modal>
+        </div>
     </div>
 </div>

@@ -70,4 +70,10 @@
             -webkit-text-stroke-color: black;
         }
     }
+
+    .card-content {
+        .reservation-button {
+            display: inline-flex;
+        }
+    }
 }

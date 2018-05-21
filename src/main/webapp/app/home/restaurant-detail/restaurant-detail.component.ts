@@ -38,6 +38,10 @@ export class RestaurantDetailComponent implements OnInit, OnDestroy {
         this.registerChangeInRestaurants();
     }
 
+    delete(event) {
+        event.stopPropagation();
+    }
+
     load(id) {
         this.restaurantService.find(id)
             .subscribe((restaurantResponse: HttpResponse<Restaurant>) => {
