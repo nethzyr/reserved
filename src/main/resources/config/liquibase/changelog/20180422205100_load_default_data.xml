@@ -15,7 +15,7 @@
         <loadData encoding="UTF-8"
                   file="config/liquibase/demo_fixtures/country.csv"
                   separator=";"
-                  tableName="Country"/>
+                  tableName="country"/>
     </changeSet>
     <changeSet id="20180422205100-2" author="rob">
         <loadData encoding="UTF-8"

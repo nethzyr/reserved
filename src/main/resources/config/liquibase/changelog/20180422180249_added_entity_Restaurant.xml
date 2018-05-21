@@ -71,7 +71,7 @@
                 <constraints nullable="true"/>
             </column>
 
-            <column name="visible" type="bit">
+            <column name="visible" type="boolean">
                 <constraints nullable="true"/>
             </column>
 

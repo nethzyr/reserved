@@ -18,20 +18,17 @@
              relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422180254_added_entity_Reservation.xml"
              relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180422180249_added_entity_Restaurant.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180516185120_added_entity_Comment.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180422180247_added_entity_constraints_StateCounty.xml"
              relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422180248_added_entity_constraints_City.xml"
              relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180422180249_added_entity_constraints_Restaurant.xml"
-             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180422180249_added_entity_constraints_Restaurant.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422180253_added_entity_constraints_UserInfo.xml"
              relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422180254_added_entity_constraints_Reservation.xml"
              relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180422180249_added_entity_constraints_Restaurant.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180516185120_added_entity_constraints_Comment.xml"
              relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

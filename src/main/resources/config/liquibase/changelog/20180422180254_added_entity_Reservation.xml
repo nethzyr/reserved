@@ -8,6 +8,9 @@
 
     <property name="now" value="current_timestamp" dbms="postgresql"/>
 
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
     <!--
         Added the entity Reservation.
     -->
@@ -24,7 +27,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="confirmed" type="bit">
+            <column name="confirmed" type="boolean">
                 <constraints nullable="true"/>
             </column>
 
