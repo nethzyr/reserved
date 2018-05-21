@@ -92,9 +92,6 @@ export class RestaurantDialogComponent implements OnInit {
     }
 
     save() {
-        if (!this.restaurant.user) {
-            this.restaurant.user = this.principal.getIdentity();
-        }
         this.isSaving = true;
         if (this.restaurant.id !== undefined) {
             if (this.picture.img !== undefined) {

@@ -68,7 +68,7 @@ public class Restaurant implements Serializable {
     private String googlePlaceId;
 
     @Column(name = "rating")
-    private Integer rating;
+    private Integer rating = 0;
 
     @Column(name = "lat")
     private Double lat;
@@ -77,7 +77,7 @@ public class Restaurant implements Serializable {
     private Double lng;
 
     @Column(name = "visible")
-    private Boolean visible;
+    private Boolean visible = false;
 
     @OneToMany(mappedBy = "restaurant")
     @JsonIgnore
@@ -88,8 +88,7 @@ public class Restaurant implements Serializable {
     @NotNull
     private City city;
 
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne
     private User user;
 
     @ManyToOne
