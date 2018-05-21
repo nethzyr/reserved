@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.elte.reserved.security.AuthoritiesConstants.ADMIN;
+import static com.elte.reserved.security.AuthoritiesConstants.MANAGER;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -70,6 +71,9 @@ public class RestaurantResource {
         log.debug("REST request to save Restaurant : {}", restaurant);
         if (restaurant.getId() != null) {
             throw new BadRequestAlertException("A new restaurant cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if (SecurityUtils.isCurrentUserInRole(MANAGER) || restaurant.getUser() == null) {
+            restaurant.setUser(userService.getUserWithAuthorities().get());
         }
         Restaurant result = restaurantService.save(restaurant);
         return ResponseEntity.created(new URI("/api/restaurants/" + result.getId()))

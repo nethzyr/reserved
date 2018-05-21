@@ -180,7 +180,7 @@ public class KitchenResourceIntTest {
         kitchenRepository.saveAndFlush(kitchen);
 
         // Get all the kitchenList
-        restKitchenMockMvc.perform(get("/api/kitchens?sort=id,desc"))
+        restKitchenMockMvc.perform(get("/api/kitchens?sort=id,desc&isList=true"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(kitchen.getId().intValue())))

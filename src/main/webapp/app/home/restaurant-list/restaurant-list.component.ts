@@ -7,7 +7,7 @@ import {Food, FoodService} from '../../entities/food';
 import {City, CityService} from '../../entities/city';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
-import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import {distinctUntilChanged, map} from 'rxjs/operators';
 import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -108,7 +108,6 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
 
     searchCity = (text$: Observable<string>) =>
         text$.pipe(
-            debounceTime(200),
             distinctUntilChanged(),
             map((term) => term.length < 2 ? []
                 : this.cities.filter((v) => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
@@ -116,7 +115,6 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
 
     searchKitchen = (text$: Observable<string>) =>
         text$.pipe(
-            debounceTime(200),
             distinctUntilChanged(),
             map((term) => term.length < 2 ? []
                 : this.kitchens.filter((v) => (this.languageService.currentLang === 'en' ? v.typeEng : v.typeHun).toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
@@ -124,7 +122,6 @@ export class RestaurantListComponent implements OnInit, OnDestroy, OnChanges {
 
     searchFood = (text$: Observable<string>) =>
         text$.pipe(
-            debounceTime(200),
             distinctUntilChanged(),
             map((term) => term.length < 2 ? []
                 : this.foods.filter((v) => (this.languageService.currentLang === 'en' ? v.typeEng : v.typeHun).toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))

@@ -163,7 +163,7 @@ public class CityResourceIntTest {
         cityRepository.saveAndFlush(city);
 
         // Get all the cityList
-        restCityMockMvc.perform(get("/api/cities?sort=id,desc"))
+        restCityMockMvc.perform(get("/api/cities?sort=id,desc&isList=true"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(city.getId().intValue())))

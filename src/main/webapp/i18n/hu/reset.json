@@ -14,7 +14,7 @@
         "finish": {
             "title": "Jelszó állítás",
             "form": {
-                "button": "Ellenőrizze új jelszavát"
+                "button": "Küldés"
             },
             "messages": {
                 "info": "Válasszon új jelszót",

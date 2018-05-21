@@ -20,6 +20,10 @@ export class Principal {
         this.authenticationState.next(this.userIdentity);
     }
 
+    getIdentity() {
+        return this.userIdentity;
+    }
+
     hasAnyAuthority(authorities: string[]): Promise<boolean> {
         return Promise.resolve(this.hasAnyAuthorityDirect(authorities));
     }

@@ -145,7 +145,7 @@
         </div>
         <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group">
             <label class="form-control-label" jhiTranslate="reservedApp.restaurant.user" for="field_user">User</label>
-            <select class="form-control" id="field_user" name="user" [(ngModel)]="restaurant.user"  required>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="restaurant.user">
                 <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>
                 <option [ngValue]="userOption.id === restaurant.user?.id ? restaurant.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
             </select>
