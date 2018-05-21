@@ -1,19 +1,19 @@
 id;type_hun;type_eng
 1;Baguette;Baguette
-2;Bankett ételek;Banquette food
-3;Bár ételek; Bar Food
+2;Bankett;Banquette
+3;Bár;Bar
 4;Barbeque;Barbeque
 5;Burgerek;Burgers
 6;Croissant;Croissant
 7;Egészséges;Healthy
-8;Egytáléltel;One-Pot Dishes
+8;Egytáléltel;One-Pot
 9;Fúziós konyha;Fusion Kitchen
 10;Gluténmentes alapanyagok;Gluten-free
-11;Grill ételek;Grilled Dishes
+11;Grill;Grilled
 12;Halal;Halal
-13;Halételek;Fish Dishes
+13;Halételek;Fish
 14;Hamburger;Hamburgers
-15;Hús ételek;Meat Dishes
+15;Hús;Meat
 16;Kenyérlángos;Focaccia
 17;Kóstoló Menü;Tasting Menu
 18;Lángos;Scone
@@ -24,7 +24,7 @@ id;type_hun;type_eng
 23;Orosz Specialitások;Russian Specialties
 24;Paleo;Paleo
 25;Pizza;Pizza
-26;Rendelhető ételek;Delivery&Take Away
+26;Rendelhető;Delivery&Take Away
 27;Ramen;Ramen
 28;Reggeli;Breakfast
 29;Rizottó;Risotto
@@ -37,8 +37,8 @@ id;type_hun;type_eng
 36;Svédasztal;Buffet
 37;Tapas;Tapas
 38;Tatár steak;Tatar Beefsteak
-39;Tengeri ételek;Seafood
+39;Tengeri;Seafood
 40;Tészta;Pasta
-41;Vadételek;Game Dishes
+41;Vadételek;Game
 42;Vegetárináus;Vegetarian
 43;Vegán;Vegan
