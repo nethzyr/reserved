@@ -72,7 +72,7 @@ public class RestaurantResource {
         if (restaurant.getId() != null) {
             throw new BadRequestAlertException("A new restaurant cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        if (SecurityUtils.isCurrentUserInRole(MANAGER) || restaurant.getUser() == null) {
+        if (SecurityUtils.isCurrentUserInRole(MANAGER) && !SecurityUtils.isCurrentUserInRole(ADMIN) || restaurant.getUser() == null) {
             restaurant.setUser(userService.getUserWithAuthorities().get());
         }
         Restaurant result = restaurantService.save(restaurant);
@@ -98,6 +98,9 @@ public class RestaurantResource {
             return createRestaurant(restaurant);
         }
         if (restaurant.getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().get()) || SecurityUtils.isCurrentUserInRole(ADMIN)) {
+            if (restaurant.getUser() == null) {
+                restaurant.setUser(userService.getUserWithAuthorities().get());
+            }
             Restaurant result = restaurantService.save(restaurant);
             return ResponseEntity.ok()
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, restaurant.getId().toString()))

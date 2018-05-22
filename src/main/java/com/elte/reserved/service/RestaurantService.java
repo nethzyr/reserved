@@ -73,7 +73,7 @@ public class RestaurantService {
     public void updateGoogleDetails() {
         List<Restaurant> restaurantList = restaurantRepository.findAll();
         for (Restaurant restaurant : restaurantList) {
-            if (restaurant.getGooglePlaceId().length() > 0) {
+            if (restaurant.getGooglePlaceId() != null) {
                 restaurant = PlacesService.details(restaurant);
                 log.debug("Request to save Restaurant : {}", restaurant);
                 if (restaurant != null) {

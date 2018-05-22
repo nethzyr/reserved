@@ -36,7 +36,6 @@
                 <th *jhiHasAnyAuthority="'ROLE_MANAGER'" jhiSortBy="user.login"><span
                     jhiTranslate="reservedApp.reservation.user">User</span> <span
                     class="fa fa-sort"></span></th>
-                <th></th>
             </tr>
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
