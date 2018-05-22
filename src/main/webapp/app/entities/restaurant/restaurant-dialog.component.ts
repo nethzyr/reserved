@@ -50,7 +50,7 @@ export class RestaurantDialogComponent implements OnInit {
         private dataUtils: JhiDataUtils,
         private elementRef: ElementRef,
         public languageService: JhiLanguageService,
-        private principal: Principal
+        private pricipal: Principal
     ) {
     }
 
@@ -77,8 +77,12 @@ export class RestaurantDialogComponent implements OnInit {
         this.isSaving = false;
         this.cityService.list()
             .subscribe((res: HttpResponse<City[]>) => { this.cities = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.userService.query()
-            .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        if (this.pricipal.hasAuthority('ROLE_ADMIN')) {
+            this.userService.query()
+                .subscribe((res: HttpResponse<User[]>) => {
+                    this.users = res.body;
+                }, (res: HttpErrorResponse) => this.onError(res.message));
+        }
         this.pictureService.query()
             .subscribe((res: HttpResponse<Picture[]>) => { this.pictures = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.kitchenService.list()
