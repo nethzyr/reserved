@@ -84,11 +84,10 @@ public class MailService {
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
-
     }
 
     @Async
-    public void sendEmailFromTemplate(Reservation reservation, String templateName, String titleKey) {
+    public void sendEmailFromTemplate(Reservation reservation, String email, String templateName, String titleKey) {
         Locale locale = Locale.forLanguageTag(reservation.getRestaurant().getUser().getLangKey());
         Context context = new Context(locale);
         context.setVariable(RESERVATION, reservation);
@@ -96,8 +95,7 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
-        sendEmail(reservation.getRestaurant().getEmail(), subject, content, false, true);
-
+        sendEmail(email, subject, content, false, true);
     }
 
     @Async
@@ -134,18 +132,18 @@ public class MailService {
     @Async
     public void sendCreatedReservationEmail(Reservation reservation) {
         log.debug("Sending activation email to '{}'", reservation.getRestaurant().getEmail());
-        sendEmailFromTemplate(reservation, "createdReservation", "email.created.title");
+        sendEmailFromTemplate(reservation, reservation.getRestaurant().getEmail(), "createdReservation", "email.created.title");
     }
 
     @Async
     public void sendReservationConfirmedEmail(Reservation reservation) {
-        log.debug("Sending activation email to '{}'", reservation.getRestaurant().getEmail());
-        sendEmailFromTemplate(reservation, "reservationConfirmed", "email.confirmed.title");
+        log.debug("Sending activation email to '{}'", reservation.getUser().getEmail());
+        sendEmailFromTemplate(reservation, reservation.getUser().getEmail(), "reservationConfirmed", "email.confirmed.title");
     }
 
     @Async
     public void sendDeclinedReservationEmail(Reservation reservation) {
-        log.debug("Sending activation email to '{}'", reservation.getRestaurant().getEmail());
-        sendEmailFromTemplate(reservation, "reservationDeclined", "email.decline.title");
+        log.debug("Sending activation email to '{}'", reservation.getUser().getEmail());
+        sendEmailFromTemplate(reservation, reservation.getUser().getEmail(), "reservationDeclined", "email.decline.title");
     }
 }
