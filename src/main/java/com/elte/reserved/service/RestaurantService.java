@@ -69,7 +69,7 @@ public class RestaurantService {
     /**
      * Update restaurant google details.
      */
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0 0 * * ?")
     public void updateGoogleDetails() {
         List<Restaurant> restaurantList = restaurantRepository.findAll();
         for (Restaurant restaurant : restaurantList) {
